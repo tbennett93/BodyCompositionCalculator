@@ -1,0 +1,89 @@
+﻿@using System.Activities.Expressions
+@using System.Web.UI.WebControls
+@model BodyCompositionCalculator.Models.UserProfile
+
+@{
+    Layout = null;
+}
+
+
+<h2>Create Profile</h2>
+
+@*Without using the using keyword, the form (which is html form type) would remain open as it's not automatically closed.*@
+@using (Html.BeginForm("Create", "Profile"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors:")
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.LastName)
+    </div>
+    <div class="form-group">
+        <label>Date of Birth</label>
+        @Html.TextBoxFor(m => m.DateOfBirth, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.DateOfBirth)
+    </div>
+    <div class="form-group">
+        <label>Sex</label>
+        @Html.TextBoxFor(m => m.Sex, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Sex)
+    </div>
+    <div class="form-group">
+        <label>Height Unit</label>
+        @Html.TextBoxFor(m => m.HeightUnit, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.HeightUnit)
+    </div>
+    <div class="form-group">
+        <label>Weight Unit</label>
+        @Html.TextBoxFor(m => m.WeightUnit, new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(c => c.WeightUnit)
+    </div>
+    //TODO Add option for feet and inches
+    <div class="form-group">
+        <label>Height In Cm</label>
+        @Html.TextBoxFor(m => m.HeightInCm, new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(c => c.HeightInCm)
+    </div>
+    <div class="form-group">
+        <label>Activity Level</label>
+        @Html.TextBoxFor(m => m.ActivityLevel, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.HeightInCm)
+    </div>
+
+
+
+@*<div class="form-group">
+        <label>Membership Type</label>
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, //Doesn't seem to matter what is put here
+            new SelectList(Model.MembershipTypes, "Id", "Name"), //list of items for dropdown list
+            "Select Membership Type",
+            new { @class = "form-control" }
+            )
+        @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId)
+    </div>
+
+
+
+
+
+
+    <div class="checkbox">
+
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribed to Newsletter?
+        </label>
+    </div>
+
+    @Html.HiddenFor(m => m.Customer.Id)
+
+    @Html.AntiForgeryToken();*@
+
+<button type="submit" class="btn btn-primary">Save</button>
+}
