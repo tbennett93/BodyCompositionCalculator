@@ -3,7 +3,8 @@
 @model BodyCompositionCalculator.Models.UserProfile
 
 @{
-    Layout = null;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -58,32 +59,42 @@
     </div>
 
 
-
-@*<div class="form-group">
-        <label>Membership Type</label>
-        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, //Doesn't seem to matter what is put here
-            new SelectList(Model.MembershipTypes, "Id", "Name"), //list of items for dropdown list
-            "Select Membership Type",
-            new { @class = "form-control" }
-            )
-        @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId)
-    </div>
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ApplicationUserId)
 
 
+    @*<div class="form-group">
+            <label>Membership Type</label>
+            @Html.DropDownListFor(m => m.Customer.MembershipTypeId, //Doesn't seem to matter what is put here
+                new SelectList(Model.MembershipTypes, "Id", "Name"), //list of items for dropdown list
+                "Select Membership Type",
+                new { @class = "form-control" }
+                )
+            @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId)
+        </div>
 
 
 
 
-    <div class="checkbox">
 
-        <label>
-            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribed to Newsletter?
-        </label>
-    </div>
 
-    @Html.HiddenFor(m => m.Customer.Id)
+        <div class="checkbox">
 
-    @Html.AntiForgeryToken();*@
+            <label>
+                @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribed to Newsletter?
+            </label>
+        </div>
 
-<button type="submit" class="btn btn-primary">Save</button>
+
+
+        @Html.AntiForgeryToken();*@
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+
 }

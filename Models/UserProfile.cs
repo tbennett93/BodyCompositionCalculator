@@ -27,14 +27,16 @@ namespace BodyCompositionCalculator.Models
 
         //Create a foreign key to link back to the user
         //This foreign key will be populated with the ApplicationUser Id Pk column value when a new user is submitted by getting the active user id
+        [Required]
         public string ApplicationUserId { get; set; }
-        [Required] 
         [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
 
 
         //Body Comp data
         //Make a goal optional but make the goal fields mandatory
+        public int? GoalId { get; set; }
+        [ForeignKey("GoalId")]
         public Goal Goal { get; set; }
         public double ActivityLevel { get; set; }
         

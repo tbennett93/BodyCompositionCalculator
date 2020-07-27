@@ -190,6 +190,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper_Classes\UserHelpers.cs" />
     <Compile Include="Migrations\202007261429289_InitialBuild.cs" />
     <Compile Include="Migrations\202007261429289_InitialBuild.designer.cs">
       <DependentUpon>202007261429289_InitialBuild.cs</DependentUpon>
@@ -217,6 +218,22 @@
     <Compile Include="Migrations\202007262037488_AddApplicationUserFkToUserProfile.cs" />
     <Compile Include="Migrations\202007262037488_AddApplicationUserFkToUserProfile.designer.cs">
       <DependentUpon>202007262037488_AddApplicationUserFkToUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007262118182_RemoveBmrFromUserProfile.cs" />
+    <Compile Include="Migrations\202007262118182_RemoveBmrFromUserProfile.designer.cs">
+      <DependentUpon>202007262118182_RemoveBmrFromUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007262312087_RemoveNonNullRequirementOnApplicationUserInUserProfile.cs" />
+    <Compile Include="Migrations\202007262312087_RemoveNonNullRequirementOnApplicationUserInUserProfile.designer.cs">
+      <DependentUpon>202007262312087_RemoveNonNullRequirementOnApplicationUserInUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007271823577_AddGoalIdPropertyToUserProfile.cs" />
+    <Compile Include="Migrations\202007271823577_AddGoalIdPropertyToUserProfile.designer.cs">
+      <DependentUpon>202007271823577_AddGoalIdPropertyToUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007271927199_UpdatesToModelProperites.cs" />
+    <Compile Include="Migrations\202007271927199_UpdatesToModelProperites.designer.cs">
+      <DependentUpon>202007271927199_UpdatesToModelProperites.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -289,8 +306,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\NewGoal.cshtml" />
-    <Content Include="Views\Profile\Create.cshtml" />
+    <Content Include="Views\Home\NewGoalForm.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Home\HomeNoGoal.cshtml" />
+    <Content Include="Views\Home\HomeWithGoal.cshtml" />
+    <Content Include="Views\Home\HomeNoLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -329,6 +349,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007262037488_AddApplicationUserFkToUserProfile.resx">
       <DependentUpon>202007262037488_AddApplicationUserFkToUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007262118182_RemoveBmrFromUserProfile.resx">
+      <DependentUpon>202007262118182_RemoveBmrFromUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007262312087_RemoveNonNullRequirementOnApplicationUserInUserProfile.resx">
+      <DependentUpon>202007262312087_RemoveNonNullRequirementOnApplicationUserInUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007271823577_AddGoalIdPropertyToUserProfile.resx">
+      <DependentUpon>202007271823577_AddGoalIdPropertyToUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007271927199_UpdatesToModelProperites.resx">
+      <DependentUpon>202007271927199_UpdatesToModelProperites.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

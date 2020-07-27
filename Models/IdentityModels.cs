@@ -26,8 +26,8 @@ namespace BodyCompositionCalculator.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Goal> Goals { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Goal> Goals { get; set; }
 
 
         public ApplicationDbContext()
