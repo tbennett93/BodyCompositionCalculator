@@ -317,6 +317,7 @@
     <Content Include="Views\Home\HomeNoLogin.cshtml" />
     <Content Include="Views\Home\HomeNoProfile.cshtml" />
     <Content Include="Views\Home\HomeEndedGoal.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

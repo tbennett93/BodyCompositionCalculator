@@ -78,6 +78,7 @@ namespace BodyCompositionCalculator.Controllers
         public ActionResult AddNewGoal(Goal newGoal)
         {
 
+           
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
 
@@ -94,12 +95,15 @@ namespace BodyCompositionCalculator.Controllers
                 return RedirectToAction("Index", new { controller = "Home" });
             }
 
-            //User has an existing goal. Update it
-            var currentGoal = _context.Goals.SingleOrDefault(g=>g.UserProfileId == userProfileId);
-            currentGoal = newGoal;
+
+            //Update the existing Goal record
+            _context.Entry(_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId))
+                .CurrentValues
+                .SetValues(newGoal);
             _context.SaveChanges();
             return RedirectToAction("Index", new { controller = "Home" });
         }
+
 
 
         public ActionResult NewGoalForm()

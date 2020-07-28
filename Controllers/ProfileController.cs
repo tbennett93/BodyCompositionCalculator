@@ -36,7 +36,7 @@ namespace BodyCompositionCalculator.Controllers
         // POST: Profile/Create
         //TODO can only be accessed if logged in
         [HttpPost]
-        public ActionResult Create(UserProfile userProfile)
+        public ActionResult Create(UserProfile newUserProfile)
         {
 
             //Return the same page with erro 
@@ -50,13 +50,25 @@ namespace BodyCompositionCalculator.Controllers
                     System.Diagnostics.Debug.WriteLine(VARIABLE.ErrorMessage);
 
                 }
-                return View("Edit", userProfile);
+                return View("Edit", newUserProfile);
             }
 
             
-            _context.UserProfiles.Add(userProfile);
+
+            if(Helper_Classes.UserHelpers.GetUserProfile()==null)
+                _context.UserProfiles.Add(newUserProfile);
+            else
+            {
+                var userProfleId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+                var currentUserProfile = _context.UserProfiles.SingleOrDefault(u=>u.Id == userProfleId) ;
+
+                _context.Entry(_context.UserProfiles.SingleOrDefault(u => u.Id == userProfleId)).CurrentValues.SetValues(newUserProfile);
+                _context.SaveChanges();
+                currentUserProfile = newUserProfile;
+
+            }
             _context.SaveChanges();
-            return RedirectToAction("Index", new { controller = "Home" });
+            return RedirectToAction("Index");
         }
 
 
@@ -66,14 +78,19 @@ namespace BodyCompositionCalculator.Controllers
         //TODO can only be accessed if logged in
         public ActionResult Edit()
         {
-            UserProfile viewModel = new UserProfile
-            {
-                ApplicationUserId = User.Identity.GetUserId()
-                //,
-                //ApplicationUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId())
+            UserProfile viewModel;
+            if (Helper_Classes.UserHelpers.GetUserProfile() == null)
+                viewModel = new UserProfile
+                {
+                    ApplicationUserId = User.Identity.GetUserId()
+                    //,
+                    //ApplicationUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId())
+                };
+            else
+                viewModel = Helper_Classes.UserHelpers.GetUserProfile();
 
-            };
-            return View(viewModel);
+
+                return View(viewModel);
         }
 
         // POST: Profile/Edit/5
