@@ -33,11 +33,6 @@ namespace BodyCompositionCalculator.Models
         public ApplicationUser ApplicationUser { get; set; }
 
 
-        //Body Comp data
-        //Make a goal optional but make the goal fields mandatory
-        public int? GoalId { get; set; }
-        [ForeignKey("GoalId")]
-        public Goal Goal { get; set; }
         public double ActivityLevel { get; set; }
         
         //Other

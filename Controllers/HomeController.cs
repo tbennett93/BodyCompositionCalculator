@@ -38,32 +38,32 @@ namespace BodyCompositionCalculator.Controllers
         public ActionResult Index()
         {
 
+            currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
 
+            //Home page - returns different pages based on whether logged in/profile created/goal set
             if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                //userId = User.Identity.GetUserId();
-                //userId = Helper_Classes.UserHelpers.GetUserId();
-                //currentUserProfile =
-                //    _context.UserProfiles.SingleOrDefault(u => u.ApplicationUserId == userId)
-                currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
 
-                //If Goal ID Fk is populated, it may be for an end dated goal
-                //Goal Id FK will not remove on end dating a goal, it will only update on adding a new goal
-                //TODO - clicking New Goal whilst already mid-goal should prompt the user to end the current goal
-                if (!currentUserProfile.GoalId.HasValue)
+                if (Helper_Classes.UserHelpers.GetUserProfile() == null)
                 {
+                    return View("HomeNoProfile");
+                }
+  
+                
+
+                //No goal exists for current user
+                //TODO - clicking New Goal whilst already mid-goal should prompt the user to end the current goal
+                if (_context.Goals.SingleOrDefault(g=>g.UserProfileId == currentUserProfile.Id) == null)
                     //Return view where no goal has been set and no previous goal has been saved
                     return View("HomeNoGoal");
+                
 
-
-                }
-
-                if (_context.Goals.SingleOrDefault(g => g.Id == currentUserProfile.GoalId.Value).EndDate == null ||
-                    _context.Goals.SingleOrDefault(g => g.Id == currentUserProfile.GoalId.Value).EndDate < DateTime.Today)
+                //Goal exists for current user, if the ETD is less than today, return No Goal and populate the page with New Goal button and previous summary
+                if (_context.Goals.SingleOrDefault(g => g.UserProfileId == currentUserProfile.Id).EndDate < DateTime.Today)
                 {
-                    //Return view with prompt to set a new goal and have last goal summary underneath
-                    return View("HomeNoGoal");
+                    return View("HomeEndedGoal");
                 }
+
                 //Goal must be active - return view with current goal summary
                 return View("HomeWithGoal");
             }
@@ -75,12 +75,45 @@ namespace BodyCompositionCalculator.Controllers
         }
 
      
-        public ActionResult NewGoal()
+        public ActionResult AddNewGoal(Goal newGoal)
         {
-            return View();
+
+            currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
+            var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+
+            //TODO check if goal already exists, if so prompt to delete, if not or expired, overwrite.
+            //TODO latest checking always updates final weight
+
+            //No Goal Id on user profile. Add it
+            if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
+            {
+
+                newGoal.UserProfileId = userProfileId;
+                _context.Goals.Add(newGoal);
+                _context.SaveChanges();
+                return RedirectToAction("Index", new { controller = "Home" });
+            }
+
+            //User has an existing goal. Update it
+            var currentGoal = _context.Goals.SingleOrDefault(g=>g.UserProfileId == userProfileId);
+            currentGoal = newGoal;
+            _context.SaveChanges();
+            return RedirectToAction("Index", new { controller = "Home" });
         }
 
 
+        public ActionResult NewGoalForm()
+        {
+            Goal viewModel;
+            var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
+                viewModel = new Goal();
+            else
+                viewModel = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
+
+            //TODO check if goal already exists, if so prompt to delete, if not or expired, overwrite.
+            return View(viewModel);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

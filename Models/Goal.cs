@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -25,5 +26,9 @@ namespace BodyCompositionCalculator.Models
         public int? StartBodyFat { get; set; }
         public int? TargetBodyFat { get; set; }
         public int? FinalBodyFat { get; set; }
+ 
+        [ForeignKey("UserProfile")]
+        public int UserProfileId { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }

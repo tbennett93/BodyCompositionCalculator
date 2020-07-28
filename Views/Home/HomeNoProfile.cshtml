@@ -1,0 +1,16 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Home No Profile</h2>
+
+
+<div class="jumbotron">
+
+    <h2>@Html.ActionLink("Create Profile", "Edit", new { controller = "Profile" }, new { @class = "btn btn-primary" })</h2>
+
+</div>
+

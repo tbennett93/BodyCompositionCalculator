@@ -39,7 +39,7 @@ namespace BodyCompositionCalculator.Controllers
         public ActionResult Create(UserProfile userProfile)
         {
 
-            //Return the same page with error reasons. If these don't help, run in debug and check output
+            //Return the same page with erro 
             if (!ModelState.IsValid)
 
             {
@@ -69,12 +69,15 @@ namespace BodyCompositionCalculator.Controllers
             UserProfile viewModel = new UserProfile
             {
                 ApplicationUserId = User.Identity.GetUserId()
+                //,
+                //ApplicationUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId())
+
             };
             return View(viewModel);
         }
 
         // POST: Profile/Edit/5
-        [HttpPost]  
+        [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try

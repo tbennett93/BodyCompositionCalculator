@@ -235,6 +235,10 @@
     <Compile Include="Migrations\202007271927199_UpdatesToModelProperites.designer.cs">
       <DependentUpon>202007271927199_UpdatesToModelProperites.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007281943592_MoveGoalForeignKeyFromParentToChild.cs" />
+    <Compile Include="Migrations\202007281943592_MoveGoalForeignKeyFromParentToChild.designer.cs">
+      <DependentUpon>202007281943592_MoveGoalForeignKeyFromParentToChild.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\ActivityLevelValues.cs" />
@@ -311,6 +315,8 @@
     <Content Include="Views\Home\HomeNoGoal.cshtml" />
     <Content Include="Views\Home\HomeWithGoal.cshtml" />
     <Content Include="Views\Home\HomeNoLogin.cshtml" />
+    <Content Include="Views\Home\HomeNoProfile.cshtml" />
+    <Content Include="Views\Home\HomeEndedGoal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -361,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007271927199_UpdatesToModelProperites.resx">
       <DependentUpon>202007271927199_UpdatesToModelProperites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007281943592_MoveGoalForeignKeyFromParentToChild.resx">
+      <DependentUpon>202007281943592_MoveGoalForeignKeyFromParentToChild.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
