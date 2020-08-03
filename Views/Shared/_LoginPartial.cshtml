@@ -1,24 +1,44 @@
 ﻿@using Microsoft.AspNet.Identity
-
-
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
-
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        </ul>
+    <div class="navbar-nav">
+        <div class="nav-item">
+            <a>@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage", @class = "nav-link"})</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        </div>
+    </div>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div class="navbar-nav ml-auto">
+        <div class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</div>
+        <div class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</div>
+    </div>
 }
+
+@*{
+<form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="ml-auto">
+    <div class="navbar-nav">
+        <div class="nav-item">
+            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="nav-link btn navbar-btn">Hello @UserManager.GetUserName(User)!</a>
+        </div>
+        <div class="nav-item">
+            <button type="submit" class="btn btn-link navbar-btn nav-link">Logout</button>
+        </div>
+    </div>
+</form>
+}
+else
+{
+<div class="navbar-nav ml-auto">
+    <div class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a></div>
+    <div class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Log in</a></div>
+</div>
+
+}*@

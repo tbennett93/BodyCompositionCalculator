@@ -671,13 +671,14 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 .input-daterange input:last-child {
   border-radius: 0 3px 3px 0;
 }
-.input-daterange .input-group-addon {
-  width: auto;
-  min-width: 16px;
-  padding: 4px 5px;
-  line-height: 1.42857143;
-  border-width: 1px 0;
-  margin-left: -5px;
-  margin-right: -5px;
-}
+    .input-daterange .input-group-addon {
+        width: auto;
+        min-width: 16px;
+        padding: 4px 5px;
+        line-height: 1.42857143;
+        border-width: 1px 0;
+        margin-left: -5px;
+        margin-right: -5px;
+        vertical-align: middle;
+    }
 /*# sourceMappingURL=bootstrap-datepicker3.css.map */

@@ -1,46 +1,51 @@
 ﻿<!DOCTYPE html>
+<html lang="en">
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("The Body Tracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Tracker", "Index", "Tracker")</li>
-                    <li>@Html.ActionLink("Calculators", "Index", "Calculators")</li>
-                    <li>@Html.ActionLink("Guides", "Index", "Guides")</li>
-                    <li>@Html.ActionLink("My Profile", "Index", "Profile")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
+<style>
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <ul class="nav navbar-nav ">
+            <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new {@class = "nav-link"})</li>
+            <li class="nav-item">@Html.ActionLink("Tracker", "Index", "Tracker", null, new {@class = "nav-link"})</li>
+            <li class="nav-item">@Html.ActionLink("Calculators", "Index", "Calculators", null, new {@class = "nav-link"})</li>
+            <li class="nav-item">@Html.ActionLink("Guides", "Index", "Guides", null, new {@class = "nav-link"})</li>
+            <li class="nav-item">@Html.ActionLink("My Profile", "Index", "Profile", null, new {@class = "nav-link"})</li>
+        </ul>
+        @Html.Partial("_LoginPartial")
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+</nav>
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+</div>
 
 
-    @RenderSection("scripts", required: false)
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 
 </body>
 </html>

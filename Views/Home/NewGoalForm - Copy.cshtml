@@ -1,0 +1,202 @@
+﻿@using System.Activities.Expressions
+@using System.Web.UI.WebControls
+@model BodyCompositionCalculator.Models.Goal
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<html>
+<head>
+    <!-- Place your kit's code here -->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://kit.fontawesome.com/7ec14fb925.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h2>Edit Goal</h2>
+
+    @*<div class="form-group">
+            <div id="datepicker-group" class="input-group date" data-date-format="dd/mm/yyyy">
+                <input class="form-control" name="data" type="text" />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+        </div>*@
+
+    @*Without using the using keyword, the form (which is html form type) would remain open as it's not automatically closed.*@
+    @using (Html.BeginForm("AddNewGoal", "Home"))
+
+    {
+        <div class="form-group">
+            <label>Start Date</label>
+            <div class="input-group date">
+                @*@Html.TextBoxFor(model => model.StartDate, new { @type="date",  @class = "form-control datepicker",  @Value = Model.StartDate.ToString("yyyy-MM-dd") } )*@
+                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datepicker", @style = "display:inline-block;", @id = "startDate" })
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+            @Html.ValidationMessageFor(m => m.StartDate)
+        </div>
+
+
+        <div class="form-group">
+            <div id="datepicker-group" class="input-group date" data-date-format="dd/mm/yyyy">
+                @Html.TextBoxFor(x => x.StartDate, new { @class = "form-control" })
+                <span class="input-group-addon"><i class=""></i></span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input type="text" class="form-control" id="startDate">
+            <div class="input-group-append">
+                <span class="input-group-text">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label>End Date</label>
+
+            <div class="form-group">
+                <div class="input-group col-xs-5">
+                    @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datepicker", @id = "endDate" })
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-calendar " aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+
+            @Html.ValidationMessageFor(m => m.EndDate)
+        </div>
+
+
+        <div class="form-group">
+            <label>Starting Weight</label>
+            @Html.TextBoxFor(m => m.StartWeightInKg, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.StartWeightInKg)
+        </div>
+        <div class="form-group">
+            <label>Target Weight</label>
+            @Html.TextBoxFor(m => m.TargetWeightInKg, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TargetWeightInKg)
+        </div>
+        <div class="form-group">
+            <label>Starting Body Fat</label>
+            @Html.TextBoxFor(m => m.StartBodyFat, new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(m => m.StartBodyFat)
+        </div>
+
+        <div class="form-group">
+            <label>Target Body Fat</label>
+            @Html.TextBoxFor(m => m.TargetBodyFat, new { @class = "form-control" })
+            <div class="input-group-append">
+                <span class="input-group-text">
+                    <i class="fas fa-calendar-alt"></i>
+                </span>
+            </div>
+            @Html.ValidationMessageFor(m => m.TargetBodyFat)
+        </div>
+
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.UserProfileId)
+        @Html.HiddenFor(m => m.FinalWeightInKg)
+        @Html.HiddenFor(m => m.FinalBodyFat)
+        @Html.AntiForgeryToken();
+
+
+        <button type="submit" class="btn btn-primary">Save</button>
+
+
+    }
+    <p></p>
+    <p></p>
+    <p></p>
+    <div class="input-group date">
+        <input type="text" class="form-control"><span class="input-group-addon"><i style="horiz-align: left" , class="glyphicon glyphicon-th" aria-hidden="true"></i></span>
+    </div>
+    <p></p>
+    <p></p>
+    <p></p>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile02">
+            <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+        </div>
+        <div class="input-group-append">
+            <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">Button</button>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
+            <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+
+
+
+    <script>
+        $(function () {
+            $('#sandbox-container .input-group.date').datepicker({
+            });;
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(function () { // will trigger when the document is ready
+            $('#test').datepicker({
+                format: "d M yyyy",
+                showOn: "button",
+                buttonImage: "~/Content/images/calendar.gif",
+                todayHighlight: true,
+                buttonImageOnly: true,
+                autoclose: true,
+                clearBtn: true
+            }); //Initialise any date pickers
+        });
+    </script>
+    
+    
+  
+}

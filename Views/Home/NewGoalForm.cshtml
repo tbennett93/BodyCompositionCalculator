@@ -2,157 +2,140 @@
 @using System.Web.UI.WebControls
 @model BodyCompositionCalculator.Models.Goal
 
-@{
 
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!DOCTYPE html>
+<head>
+    <script src="https://kit.fontawesome.com/7ec14fb925.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    @Styles.Render("~/Content/datepicker")
+</head>
 
 
+<html lang="en">
 
-<h2>Edit Goal</h2>
+<body>
 
-@*<div class="form-group">
-    <div id="datepicker-group" class="input-group date" data-date-format="dd/mm/yyyy">
-        <input class="form-control" name="data" type="text" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-    </div>
-</div>*@
+    <h2>Edit Goal</h2>
 
-@*Without using the using keyword, the form (which is html form type) would remain open as it's not automatically closed.*@
-@using (Html.BeginForm("AddNewGoal", "Home"))
-
-{
-    <div class="form-group">
+    @using (Html.BeginForm("AddNewGoal", "Home"))
+    {
         <label>Start Date</label>
-        <div class="input-group date">
-            @*@Html.TextBoxFor(model => model.StartDate, new { @type="date",  @class = "form-control datepicker",  @Value = Model.StartDate.ToString("yyyy-MM-dd") } )*@
-            @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datepicker", @style = "max-width:none;", @id = "startDate" })
-            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-        </div>
-        @Html.ValidationMessageFor(m => m.StartDate)
-    </div>
-
-
-
-   
-    <div class="form-group">
-        <label>End Date</label>
-        
-        <div class="form-group">
-            <div class="input-group col-xs-5">
-                @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datepicker", @id = "endDate" })
-                <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-calendar " aria-hidden="true"></i>
+        <div id="startDate" , class="form-group input-group date datepicker">
+            @Html.TextBoxFor(model => model.StartDate, "{0: dd MMM yyyy}", new { @class = "form-control" })
+            <div class="input-group-append input-group-addon">
+                <span class="input-group-text">
+                    <span class="fa fa-calendar"></span>
                 </span>
             </div>
         </div>
+        @Html.ValidationMessageFor(m => m.StartDate)
 
+
+        <label>End Date</label>
+        //TODO - Add a validation class that alerts the user than the end date must be greater than the start date
+        <div id="endDate" , class="form-group input-group date datepicker">
+            @Html.TextBoxFor(model => model.EndDate, "{0: dd MMM yyyy}", new { @class = "form-control" })
+            <div class="input-group-append input-group-addon">
+                <span class="input-group-text">
+                    <span class="fa fa-calendar"></span>
+                </span>
+            </div>
+        </div>
         @Html.ValidationMessageFor(m => m.EndDate)
-    </div>
-
- 
-    <div class="form-group">
-        <label>Starting Weight</label>
-        @Html.TextBoxFor(m => m.StartWeightInKg, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.StartWeightInKg)
-    </div>
-    <div class="form-group">
-        <label>Target Weight</label>
-        @Html.TextBoxFor(m => m.TargetWeightInKg, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.TargetWeightInKg)
-    </div>
-    <div class="form-group">
-        <label>Starting Body Fat</label>
-        @Html.TextBoxFor(m => m.StartBodyFat, new { @class = "form-control" })
-
-        @Html.ValidationMessageFor(m => m.StartBodyFat)
-    </div>
-
-    <div class="form-group">
-        <label>Target Body Fat</label>
-        @Html.TextBoxFor(m => m.TargetBodyFat, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.TargetBodyFat)
-    </div>
 
 
-    @Html.HiddenFor(m => m.Id)
-    @Html.HiddenFor(m => m.UserProfileId)
-    @Html.HiddenFor(m => m.FinalWeightInKg)
-    @Html.HiddenFor(m => m.FinalBodyFat)
-    @Html.AntiForgeryToken();
+        @*<p>Working Backup</p>
+            <div class="input-group date datepicker">
+                @Html.TextBoxFor(model => model.EndDate, "{0: dd MMM yyyy}", new { @class = "form-control", @id = "startDate" })
+                <div class="input-group-append input-group-addon">
+                    <span class="input-group-text"><span class="fa fa-calendar"></span></span>
+                </div>
+            </div>
+
+                        @*<div class="input-group date datepicker">
+                @Html.TextBoxFor(model => model.EndDate, "{0: dd MMM yyyy}", new { @class = "form-control", @id = "startDate" })
+                <span class="input-group-addon">
+                    <i class="input-group-text fas fa-calendar-alt  "> </i>
+                </span>
+            </div>*@
 
 
-    <button type="submit" class="btn btn-primary">Save</button>
+        <div class="form-group">
+            <label>Starting Weight</label>
+            @Html.TextBoxFor(m => m.StartWeightInKg, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.StartWeightInKg)
+        </div>
+
+        <div class="form-group">
+            <label>Target Weight</label>
+            @Html.TextBoxFor(m => m.TargetWeightInKg, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TargetWeightInKg)
+        </div>
+
+        <div class="form-group">
+            <label>Starting Body Fat</label>
+            @Html.TextBoxFor(m => m.StartBodyFat, new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(m => m.StartBodyFat)
+        </div>
+
+        <div class="form-group">
+            <label>Target Body Fat</label>
+            @Html.TextBoxFor(m => m.TargetBodyFat, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TargetBodyFat)
+        </div>
 
 
-}
-<p></p>
-<p></p>
-<p></p>
-<div class="input-group date">
-    <input type="text" class="form-control"><span class="input-group-addon"><i style="horiz-align: left", class="glyphicon glyphicon-th"aria-hidden="true"></i></span>
-</div>
-<p></p>
-<p></p>
-<p></p>
-<div>
-
-</div>
-
-@section scripts{
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.UserProfileId)
+        @Html.HiddenFor(m => m.FinalWeightInKg)
+        @Html.HiddenFor(m => m.FinalBodyFat)
+        @Html.AntiForgeryToken()
+        ;
 
 
-    @Scripts.Render("~/bundles/jqueryval")
+        <button type="submit" class="btn btn-primary">Save</button>
+    }
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     @Scripts.Render("~/bundles/jquery")
-    
+    @Scripts.Render("~/bundles/bootstrap")
+
     <script>
-        $(function (){$('#sandbox-container .input-group.date').datepicker({
-        });;
-    </script>
-    
 
+        $(document).ready(function () {
 
-    @*TODO - set min date on the Finish date to start date + 1 - https://jqueryui.com/datepicker/#min-max*@
-    <script type="text/javascript">
-        $(function () { // will trigger when the document is ready
-            $('#startDate').datepicker({
-                format: "d M yyyy",
-                showOn: "button",
-                buttonImage: "/images/calendar.gif",
-                todayHighlight: true,
+            $('#startDate.datepicker').datepicker({
+                format: 'dd M yyyy',
+                todayBtn: true,
                 autoclose: true,
-                clearBtn: true
-            }); //Initialise any date pickers
-        });
-    </script>
+                todayHighlight: true
+            }).on('changeDate', function (selected) {
+                var minDateSelectable = new Date(selected.date.valueOf());
+                var minDate = new Date(selected.date.valueOf() + (1000 * 60 * 60 * 24 * 7));
+                $('#endDate').datepicker({ format: 'dd M yyyy' }); // <--THIS IS THE LINE ADDED
+                $('#endDate').datepicker('setStartDate', minDateSelectable);
+                $('#endDate').datepicker('setDate', minDate); // <--THIS IS THE LINE ADDED
+                //$(this).datepicker('hide');
+            })
+                ;
 
-    <script type="text/javascript">
-        $(function () { // will trigger when the document is ready
-            $('#test').datepicker({
-                format: "d M yyyy",
-                showOn: "button",
-                buttonImage: "~/Content/images/calendar.gif",
-                todayHighlight: true,
-                buttonImageOnly: true,
-                autoclose: true,
-                clearBtn: true
-            }); //Initialise any date pickers
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(function () { // will trigger when the document is ready
             $('#endDate').datepicker({
-                minDate: -20,
-                format: "d M yyyy",
-                showOn: "button",
-                buttonImageOnly: true,
-                buttonImage: "/content/images/calendar.gif",
-                todayHighlight: true,
+                format: 'dd M yyyy',
+                todayBtn: true,
                 autoclose: true,
-                clearBtn: true
-            }); //Initialise any date pickers
+                todayHighlight: true
+            });
+
         });
+
     </script>
 
-}
+</body>
+
+</html>
