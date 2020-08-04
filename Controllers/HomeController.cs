@@ -78,7 +78,9 @@ namespace BodyCompositionCalculator.Controllers
         public ActionResult AddNewGoal(Goal newGoal)
         {
 
-           
+            if (!ModelState.IsValid)
+                return View("NewGoalForm", newGoal);
+
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
 

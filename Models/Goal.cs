@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using BodyCompositionCalculator.Models.Validation;
 
 namespace BodyCompositionCalculator.Models
 {
@@ -15,6 +16,7 @@ namespace BodyCompositionCalculator.Models
         public DateTime StartDate { get; set; }
 
         [Required]
+        [EndDateGreaterThanStartDate]
         public DateTime EndDate { get; set; }
 
         [Required]
