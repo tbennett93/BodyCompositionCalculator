@@ -74,8 +74,8 @@ namespace BodyCompositionCalculator.Controllers
 
 
 
-        // GET: Profile/Edit/5
-        //TODO can only be accessed if logged in
+        // GET: Profile/Edit/
+        [Authorize]
         public ActionResult Edit()
         {
             UserProfile viewModel;

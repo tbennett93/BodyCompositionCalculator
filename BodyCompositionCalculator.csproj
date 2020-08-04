@@ -185,6 +185,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\UserProfileController.cs" />
+    <Compile Include="Controllers\API\UserProgressLogController.cs" />
     <Compile Include="Controllers\API\ValuesController.cs" />
     <Compile Include="Controllers\GuidesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -245,6 +246,14 @@
     <Compile Include="Migrations\202008042132312_MakePropertiesOnProgressLogNullable.cs" />
     <Compile Include="Migrations\202008042132312_MakePropertiesOnProgressLogNullable.designer.cs">
       <DependentUpon>202008042132312_MakePropertiesOnProgressLogNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008042140319_AddFkToUserProgressLog.cs" />
+    <Compile Include="Migrations\202008042140319_AddFkToUserProgressLog.designer.cs">
+      <DependentUpon>202008042140319_AddFkToUserProgressLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008042210030_AddUserProgressLogsTable.cs" />
+    <Compile Include="Migrations\202008042210030_AddUserProgressLogsTable.designer.cs">
+      <DependentUpon>202008042210030_AddUserProgressLogsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2298,6 +2307,7 @@
     <Content Include="vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="vendor\jquery\jquery.min.map" />
     <Content Include="vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Views\Home\NewCheckInForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2345,6 +2355,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008042132312_MakePropertiesOnProgressLogNullable.resx">
       <DependentUpon>202008042132312_MakePropertiesOnProgressLogNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008042140319_AddFkToUserProgressLog.resx">
+      <DependentUpon>202008042140319_AddFkToUserProgressLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008042210030_AddUserProgressLogsTable.resx">
+      <DependentUpon>202008042210030_AddUserProgressLogsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

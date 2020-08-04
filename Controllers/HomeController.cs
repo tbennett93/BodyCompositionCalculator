@@ -110,13 +110,13 @@ namespace BodyCompositionCalculator.Controllers
 
         public ActionResult NewGoalForm()
         {
+            //If no goal found, fetch blank goal page. If existing goal found, fetch existing info into page
             Goal viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
                 viewModel = new Goal();
-            else
-                viewModel = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
-
+            
+            viewModel = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
             //TODO check if goal already exists, if so prompt to delete, if not or expired, overwrite.
             return View(viewModel);
         }
@@ -132,6 +132,55 @@ namespace BodyCompositionCalculator.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult NewCheckInForm()
+        {
+
+            //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
+            UserProgressLog viewModel;
+            var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            if (_context.UserProgressLogs.SingleOrDefault(g =>
+                g.UserProfileId == userProfileId && g.Date == DateTime.Today) == null)
+                viewModel = new UserProgressLog();
+            else
+            { 
+                viewModel = _context.UserProgressLogs.SingleOrDefault(g =>
+                g.UserProfileId == userProfileId && g.Date == DateTime.Today);
+            }
+
+            //TODO check if goal already exists, if so prompt to delete, if not or expired, overwrite.
+            return View(viewModel);
+
+
+        }
+
+        public ActionResult AddNewProgressLog(UserProgressLog userProgressLog)
+        {
+            if (!ModelState.IsValid)
+                return View("NewCheckInForm", userProgressLog);
+
+            currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
+            var userProfileId = currentUserProfile.Id;
+
+            //Check for log on the same date, if it doesn't exist, insert, else update
+            if (_context.UserProgressLogs.SingleOrDefault(g =>
+                g.UserProfileId == userProfileId && g.Date == userProgressLog.Date) == null)
+            {
+                //Insert
+                userProgressLog.UserProfileId = userProfileId;
+                _context.UserProgressLogs.Add(userProgressLog);
+                _context.SaveChanges();
+                return RedirectToAction("Index", new { controller = "Home" });
+            }
+            //Update
+            _context.Entry(_context.UserProgressLogs.SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == userProgressLog.Date))
+                .CurrentValues
+                .SetValues(userProgressLog);
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", new { controller = "Home" });
+
         }
     }
 }
