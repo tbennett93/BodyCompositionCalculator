@@ -19,6 +19,7 @@ namespace BodyCompositionCalculator.Controllers.API
 
         }
         // GET: api/UserProfileLog
+        //TODO delete this 'get all logs' before go live
         [HttpGet]
         public IEnumerable<UserProgressLog> GetUserProgressLogs()
         {
@@ -27,9 +28,12 @@ namespace BodyCompositionCalculator.Controllers.API
 
         // GET: api/UserProfileLog/5
         [HttpGet]
-        public IEnumerable<UserProgressLog> GetUserProgressLogs(int id)
+        public IHttpActionResult GetUserProgressLogs(int id)
         {
-            return _context.UserProgressLogs.Where(u => u.UserProfileId == id).ToList();
+            if(id == Helper_Classes.UserHelpers.GetUserProfile().Id)
+                return Ok(_context.UserProgressLogs.Where(u => u.UserProfileId == id).ToList());
+
+            return Unauthorized();
         }
 
         // POST: api/UserProfileLog
