@@ -11,7 +11,8 @@ namespace BodyCompositionCalculator.Controllers
         // GET: Tracker
         public ActionResult Index()
         {
-            return View();
+            var viewModel = Helper_Classes.UserHelpers.GetUserProfile();
+            return View("Tracker", viewModel);
         }
     }
 }

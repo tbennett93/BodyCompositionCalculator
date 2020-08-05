@@ -1,5 +1,5 @@
 ﻿@using System.Collections.Specialized
-
+@model BodyCompositionCalculator.Models.UserProfile
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.css" />
 </head>
 <body>
-
+    
+<h2>@Html.ActionLink("Check In", "NewCheckInForm", new { controller = "Home" }, new { @class = "btn btn-primary align-content-center" })</h2>
 
 
 <h2>Tracker</h2>
@@ -54,7 +55,7 @@
     $(document).ready(function() {
         $('#dataTable').DataTable({
             ajax: {
-                url: "/api/UserProgressLog",
+                url: "/api/UserProgressLog/" + @Model.Id,
                 //This must call the GET at the above URL, which allows access to an array of customers, of which the types can be used as per the below
                 dataSrc: ""
                 //The dataSrc is null as the array is the actual source of data itself. This is used if there is a sort of parent

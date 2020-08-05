@@ -2317,7 +2317,7 @@
     <Content Include="vendor\jquery\jquery.min.map" />
     <Content Include="vendor\jquery\jquery.slim.min.map" />
     <Content Include="Views\Home\NewCheckInForm.cshtml" />
-    <Content Include="Views\Tracker\Index.cshtml" />
+    <Content Include="Views\Tracker\Tracker.cshtml" />
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
   </ItemGroup>

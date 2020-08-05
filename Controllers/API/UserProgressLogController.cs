@@ -27,9 +27,9 @@ namespace BodyCompositionCalculator.Controllers.API
 
         // GET: api/UserProfileLog/5
         [HttpGet]
-        public IHttpActionResult GetUserProgressLogs(int id)
+        public IEnumerable<UserProgressLog> GetUserProgressLogs(int id)
         {
-            return Ok(_context.UserProgressLogs.Where(u => u.UserProfileId == id).ToList());
+            return _context.UserProgressLogs.Where(u => u.UserProfileId == id).ToList();
         }
 
         // POST: api/UserProfileLog
