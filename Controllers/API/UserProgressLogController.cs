@@ -20,9 +20,9 @@ namespace BodyCompositionCalculator.Controllers.API
         }
         // GET: api/UserProfileLog
         [HttpGet]
-        public IHttpActionResult GetUserProgressLogs()
+        public IEnumerable<UserProgressLog> GetUserProgressLogs()
         {
-            return Ok(_context.UserProgressLogs.ToList());
+            return _context.UserProgressLogs.ToList();
         }
 
         // GET: api/UserProfileLog/5

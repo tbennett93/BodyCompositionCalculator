@@ -1,0 +1,112 @@
+﻿@using System.Collections.Specialized
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+
+<head>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.css" />
+</head>
+<body>
+
+
+
+<h2>Tracker</h2>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Log</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Weight</th>
+                    <th>Body Fat</th>
+                    <th>Photo</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>*@
+
+@Scripts.Render("~/Scripts/moment.js")
+
+<script>
+
+
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            ajax: {
+                url: "/api/UserProgressLog",
+                //This must call the GET at the above URL, which allows access to an array of customers, of which the types can be used as per the below
+                dataSrc: ""
+                //The dataSrc is null as the array is the actual source of data itself. This is used if there is a sort of parent
+            },
+            columns: [
+                //{ data: "Date" },
+                {
+                    data: "Date",
+                    render: function (date) {
+                        //var formattedDate = new Date(date);
+                        var formattedDate = moment(date).format('DD MMM YYYY');
+                        return formattedDate;
+                    }
+                },
+                { data: "WeightInKgs" },
+                { data: "BodyFat" },
+                {
+                    data: "Id",
+                    render: function(data) {
+                        return "<a href='api/photos/'" + data + ">View</a>";
+                    }
+                }
+
+            ]
+        });
+    });
+
+    //$("#dataTable").on("click",
+    //    ".view-photo",
+    //    function() {
+    //        alert("CONFIRM");
+    //        var button = $(this);
+
+
+    //                    $.ajax({
+    //                        url: "/api/customers/" + button.attr("data-customer-id"),
+    //                        method: "DELETE",
+    //                        success: function () {
+    //                            table.row(button.parents("tr")).remove().draw();
+    //                        }
+    //                    });
+    //                    //success: function() {
+    //                    //    alert("CONFIRM");
+    //                    //}
+
+    //    });
+
+
+    //    });
+</script>
+
+
+</body>
+
+</html>

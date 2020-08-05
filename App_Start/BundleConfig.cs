@@ -12,6 +12,7 @@ namespace BodyCompositionCalculator
                         "~/Scripts/jquery-{version}.js"
                         ));
 
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate.js",
                         "~/Scripts/jquery.validate.unobtrusive.js"
