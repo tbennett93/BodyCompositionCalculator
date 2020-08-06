@@ -17,7 +17,8 @@
             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            yAxisID: 'y-axis-1'
+            yAxisID: 'y-axis-1',
+            spanGaps:true
         },
         {
             data: values2,
@@ -34,7 +35,8 @@
             pointHoverBorderColor: "rgba(255, 3, 7, 1)",
             pointHitRadius: 5,
             pointBorderWidth: 1.6,
-            yAxisID: 'y-axis-2'
+            yAxisID: 'y-axis-2',
+            spanGaps: true
         }],
     };
     var ctx = document.getElementById("myAreaChart").getContext("2d");
@@ -95,8 +97,8 @@
                     ticks: {
                         //min: minWeight,
                         //max: maxWeight
-                        suggestedMin: minWeight,
-                        suggestedMax: maxWeight
+                        //suggestedMin: minWeight,
+                        //suggestedMax: maxWeight
                     }
                 },
                 {
@@ -110,8 +112,8 @@
                     ticks: {
                         //min: minBodyFat,
                         //max: maxBodyFat
-                        suggestedMin: minBodyFat,
-                        suggestedMax: maxBodyFat
+                        //suggestedMin: minBodyFat,
+                        //suggestedMax: maxBodyFat
                     }
                     }
                 ]
@@ -148,7 +150,7 @@ xhttp.onreadystatechange = function () {
 
         var minBodyFatInArray = Math.min.apply(Math, values2);
         var maxBodyFatInArray = Math.max.apply(Math, values2);
-        var minBodyFat = minBodyFatInArray - ((maxBodyFatInArray - minBodyFatInArray) * 0.2); // 1
+        var minBodyFat = minBodyFatInArray - ((maxBodyFatInArray - minBodyFatInArray) * 0.1); // 1
         var maxBodyFat = maxBodyFatInArray + ((maxBodyFatInArray - minBodyFatInArray)*0.1); // 1
 
 
