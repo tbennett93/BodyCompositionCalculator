@@ -36,9 +36,10 @@
 
     <!-- Custom styles for this template-->
     <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.css" rel="stylesheet">
 
 </head>
-<script src="~/vendor/js/demo/chart-area-demo.js"></script>
+@*<script src="~/vendor/js/demo/chart-area-demo.js"></script>*@
 
 <body id="page-top">
     <div class="card shadow mb-4">
@@ -49,11 +50,13 @@
             <div class="chart-area">
                 <canvas id="myAreaChart"></canvas>
             </div>
-            <hr>
-            Styling for the area chart can be found in the <code>/js/demo/chart-area-demo.js</code> file.
         </div>
     </div>
 
+
+    @*<div class="chart" style="position: relative; height:80vh; width:100vw">
+            <canvas id="myAreaChart"></canvas>
+        </div>*@
 
 
     <h2>@Html.ActionLink("New Goal", "NewGoalForm", new { controller = "Home" }, new { @class = "btn btn-primary align-content-center" })</h2>
@@ -280,10 +283,22 @@
     <script src="~/vendor/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="~/vendor/chart.js/Chart.min.js"></script>
+    @Scripts.Render("~/Scripts/moment.js")
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    @*<script src="~/vendor/chart.js/Chart.min.js"></script>*@
 
     <!-- Page level custom scripts -->
-    <script src="~/Scripts/chart-area-demo.js"></script>
+    @*<script src="~/Scripts/chart-area-demo.js"></script>*@
+
+    <script src="~/Scripts/js/chart-progress-log.js"></script>
+
+
+    <script>
+        var ctx = document.getElementById('myChart');
+
+    </script>
+
 
 
 </body>
