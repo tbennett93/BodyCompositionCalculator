@@ -1,9 +1,9 @@
-﻿function BuildChart(values, values2, labels, minWeight, maxWeight, minBodyFat, maxBodyFat) {
+﻿function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates) {
     var data = {
-        labels: labels,
+        labels: dates,
         datasets: [{
 
-            data: values,
+            data: progressWeight,
             label: "Weight",
             lineTension: 0.3,
             fill: false,
@@ -21,7 +21,7 @@
             spanGaps:true
         },
         {
-            data: values2,
+            data: progressBodyFat,
             label: "Body Fat %",
             lineTension: 0.4,
             fill:false,
@@ -37,6 +37,42 @@
             pointBorderWidth: 1.6,
             yAxisID: 'y-axis-2',
             spanGaps: true
+        },
+        {
+            data: goalWeight,
+            label: "Goal Weight",
+            lineTension: 0.4,
+            fill:true,
+            backgroundColor: "rgba(0, 3, 7, 1)",
+            borderColor: "rgba(0, 3, 7, 1)",
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(0, 3, 7, 1)",
+            pointBorderColor: "rgba(0, 3, 7, 1)",
+            pointHoverRadius: 2,
+            pointHoverBackgroundColor: "rgba(0, 105, 213, 1)",
+            pointHoverBorderColor: "rgba(0, 3, 7, 1)",
+            pointHitRadius: 15,
+            pointBorderWidth: 1.6,
+            yAxisID: 'y-axis-1',
+            spanGaps: false
+        },
+        {
+            data: goalBodyFat,
+            label: "Goal BodyFat",
+            lineTension: 0.4,
+            fill:true,
+            backgroundColor: "rgba(150, 150, 150, 1)",
+            borderColor: "rgba(150, 150, 150, 1)",
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(150, 150, 150, 1)",
+            pointBorderColor: "rgba(150, 150, 150, 1)",
+            pointHoverRadius: 2,
+            pointHoverBackgroundColor: "rgba(150, 150, 150, 1)",
+            pointHoverBorderColor: "rgba(150, 150, 150, 1)",
+            pointHitRadius: 15,
+            pointBorderWidth: 1.6,
+            yAxisID: 'y-axis-2',
+            spanGaps: false
         }],
     };
     var ctx = document.getElementById("myAreaChart").getContext("2d");
@@ -115,7 +151,29 @@
                         //suggestedMin: minBodyFat,
                         //suggestedMax: maxBodyFat
                     }
-                    }
+                },
+                //{
+                //    id: 'y-axis-3',
+                //    type: 'linear',
+                   
+                //    ticks: {
+                //        //min: minBodyFat,
+                //        //max: maxBodyFat
+                //        //suggestedMin: minBodyFat,
+                //        //suggestedMax: maxBodyFat
+                //    }
+                //},
+                //{
+                //    id: 'y-axis-4',
+                //    type: 'linear',
+                  
+                //    ticks: {
+                //        //min: minBodyFat,
+                //        //max: maxBodyFat
+                //        //suggestedMin: minBodyFat,
+                //        //suggestedMax: maxBodyFat
+                //    }
+                //}
                 ]
             },
         }
@@ -128,14 +186,21 @@ xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         var json = JSON.parse(this.response);
         // Map JSON labels  back to values array
-        var values = json.map(function (e) {
-            return e.WeightInKgs;
+        var progressWeight = json.map(function (e) {
+            return e.WeightInKg;
         });
-        var values2 = json.map(function (e) {
+        var progressBodyFat = json.map(function (e) {
             return e.BodyFat ;
         });
+        var goalWeight = json.map(function (e) {
+            return e.GoalWeight ;
+        });
+        var goalBodyFat = json.map(function (e) {
+            return e.GoalBodyFat ;
+        });
+
         // Map JSON values back to values array
-        var labels = json.map(function (e) {
+        var dates = json.map(function (e) {
             //return (new Date(e.Date)); // Divide to billions in units of ten
             //return (e.Date); // Divide to billions in units of ten
             //return (new Date(e.Date)); // Divide to billions in units of ten
@@ -143,22 +208,23 @@ xhttp.onreadystatechange = function () {
         });
 
         //Set the minimum weight in the Y axis
-        var maxWeightInArray = Math.max.apply(Math, values); // 1
-        var minWeightInArray = Math.min.apply(Math, values); // 1
+        var maxWeightInArray = Math.max.apply(Math, progressWeight); // 1
+        var minWeightInArray = Math.min.apply(Math, progressWeight); // 1
         var minWeight = minWeightInArray - ((maxWeightInArray - minWeightInArray) * 0.1); // 1
         var maxWeight = maxWeightInArray + ((maxWeightInArray - minWeightInArray) * 0.1); // 1
 
-        var minBodyFatInArray = Math.min.apply(Math, values2);
-        var maxBodyFatInArray = Math.max.apply(Math, values2);
+        var minBodyFatInArray = Math.min.apply(Math, progressBodyFat);
+        var maxBodyFatInArray = Math.max.apply(Math, progressBodyFat);
         var minBodyFat = minBodyFatInArray - ((maxBodyFatInArray - minBodyFatInArray) * 0.1); // 1
         var maxBodyFat = maxBodyFatInArray + ((maxBodyFatInArray - minBodyFatInArray)*0.1); // 1
 
 
-        BuildChart(values, values2, labels, minWeight, maxWeight, minBodyFat, maxBodyFat); // Pass in data and call the chart
+        BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates); // Pass in data and call the chart
     }
 };
 //xhttp.open("GET", "https://forbes400.herokuapp.com/api/forbes400?limit=10", false);
-xhttp.open("GET", "/api/UserProgressLog/", false);
+//xhttp.open("GET", "/api/UserProgressLog/", false);
+xhttp.open("GET", "/api/UserProgressLogwithgoal/", false);
 xhttp.send();
 
 //TODO - order GET request

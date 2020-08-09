@@ -30,6 +30,7 @@ namespace BodyCompositionCalculator.Models
         public DbSet<Goal> Goals { get; set; }
 
         public DbSet <UserProgressLog> UserProgressLogs { get; set; }
+        public DbSet <UserProgressLogWithGoal> UserProgressLogsWithGoal { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

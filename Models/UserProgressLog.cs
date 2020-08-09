@@ -10,7 +10,7 @@ namespace BodyCompositionCalculator.Models
     {
         public int Id { get; set; }
         public int? BodyFat { get; set; }
-        public double? WeightInKgs { get; set; }
+        public double? WeightInKg { get; set; }
         public DateTime Date { get; set; } = DateTime.Today;
         public byte?[] Photo { get; set; }
 

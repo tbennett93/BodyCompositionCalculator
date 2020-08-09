@@ -18,10 +18,10 @@ namespace BodyCompositionCalculator.Controllers.API
             _context = new ApplicationDbContext();
 
         }
-        // GET: api/UserProfileLog
-        //TODO delete this 'get all logs' before go live
-        [HttpGet]
-        [Authorize]
+       // GET: api/UserProfileLog
+       //TODO delete this 'get all logs' before go live
+       [HttpGet]
+       [Authorize]
         public IEnumerable<UserProgressLog> GetUserProgressLogs()
         {
 
@@ -32,9 +32,31 @@ namespace BodyCompositionCalculator.Controllers.API
                 .ToList();
 
         }
+    //public IEnumerable<UserProgressLogWithGoal> GetUserProgressLogs()
+    //   {  
 
-        // GET: api/UserProfileLog/5
-        [HttpGet]
+    //       var userId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+
+    //       var query = from UserProgressLog in _context.UserProgressLogs
+    //           join Goal in _context.Goals on UserProgressLog.UserProfileId equals Goal.UserProfileId
+    //           orderby UserProgressLog.Date
+    //           where Goal.UserProfileId == userId
+    //           select new
+    //           {
+    //               StartDate = Goal.StartDate,
+    //               EndDate = Goal.EndDate,
+    //               StartWeightInKg = Goal.StartWeightInKg,
+    //               TargetWeightInKg = Goal.TargetWeightInKg,
+    //               StartBodyFat = Goal.StartBodyFat,
+    //               TargetBodyFat = Goal.TargetBodyFat
+    //           };
+
+    //       return query.ToList();
+
+    //   }
+
+    // GET: api/UserProfileLog/5
+    [HttpGet]
         public IHttpActionResult GetUserProgressLogs(int id)
         {
             if(id == Helper_Classes.UserHelpers.GetUserProfile().Id)

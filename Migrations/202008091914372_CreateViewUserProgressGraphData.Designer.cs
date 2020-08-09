@@ -7,13 +7,13 @@ namespace BodyCompositionCalculator.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddUserProgressLogsTable : IMigrationMetadata
+    public sealed partial class CreateViewUserProgressGraphData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUserProgressLogsTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateViewUserProgressGraphData));
         
         string IMigrationMetadata.Id
         {
-            get { return "202008042210030_AddUserProgressLogsTable"; }
+            get { return "202008091914372_CreateViewUserProgressGraphData"; }
         }
         
         string IMigrationMetadata.Source

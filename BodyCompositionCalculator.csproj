@@ -184,8 +184,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\GoalController.cs" />
     <Compile Include="Controllers\API\UserProfileController.cs" />
     <Compile Include="Controllers\API\UserProgressLogController.cs" />
+    <Compile Include="Controllers\API\UserProgressLogWithGoalController.cs" />
     <Compile Include="Controllers\API\ValuesController.cs" />
     <Compile Include="Controllers\GuidesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -252,9 +254,25 @@
     <Compile Include="Migrations\202008042140319_AddFkToUserProgressLog.designer.cs">
       <DependentUpon>202008042140319_AddFkToUserProgressLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202008042210030_AddUserProgressLogsTable.cs" />
-    <Compile Include="Migrations\202008042210030_AddUserProgressLogsTable.designer.cs">
-      <DependentUpon>202008042210030_AddUserProgressLogsTable.cs</DependentUpon>
+    <Compile Include="Migrations\202008091826225_AddUserProgressLogTableWithGoal.cs" />
+    <Compile Include="Migrations\202008091826225_AddUserProgressLogTableWithGoal.designer.cs">
+      <DependentUpon>202008091826225_AddUserProgressLogTableWithGoal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008091855052_AddUserProfileToUserProfressLogWithGoal.cs" />
+    <Compile Include="Migrations\202008091855052_AddUserProfileToUserProfressLogWithGoal.designer.cs">
+      <DependentUpon>202008091855052_AddUserProfileToUserProfressLogWithGoal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008091913505_CorrectWeightColumnNameUserProgressLog.cs" />
+    <Compile Include="Migrations\202008091913505_CorrectWeightColumnNameUserProgressLog.designer.cs">
+      <DependentUpon>202008091913505_CorrectWeightColumnNameUserProgressLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008091914372_CreateViewUserProgressGraphData.cs" />
+    <Compile Include="Migrations\202008091914372_CreateViewUserProgressGraphData.designer.cs">
+      <DependentUpon>202008091914372_CreateViewUserProgressGraphData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008092056203_CorrectionToDataTypesInUserProgressLogWithGoal.cs" />
+    <Compile Include="Migrations\202008092056203_CorrectionToDataTypesInUserProgressLogWithGoal.designer.cs">
+      <DependentUpon>202008092056203_CorrectionToDataTypesInUserProgressLogWithGoal.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -267,7 +285,9 @@
     <Compile Include="Models\Macros.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Models\UserProgressGraphDataModel.cs" />
     <Compile Include="Models\UserProgressLog.cs" />
+    <Compile Include="Models\UserProgressLogWithGoal.cs" />
     <Compile Include="Models\Validation\EndDateGreaterThanStartDate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -2325,6 +2345,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Shared\EditorTemplate\" />
+    <Folder Include="Views\UserProgressLogWithGoal\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -2372,8 +2393,20 @@
     <EmbeddedResource Include="Migrations\202008042140319_AddFkToUserProgressLog.resx">
       <DependentUpon>202008042140319_AddFkToUserProgressLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008042210030_AddUserProgressLogsTable.resx">
-      <DependentUpon>202008042210030_AddUserProgressLogsTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202008091826225_AddUserProgressLogTableWithGoal.resx">
+      <DependentUpon>202008091826225_AddUserProgressLogTableWithGoal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008091855052_AddUserProfileToUserProfressLogWithGoal.resx">
+      <DependentUpon>202008091855052_AddUserProfileToUserProfressLogWithGoal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008091913505_CorrectWeightColumnNameUserProgressLog.resx">
+      <DependentUpon>202008091913505_CorrectWeightColumnNameUserProgressLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008091914372_CreateViewUserProgressGraphData.resx">
+      <DependentUpon>202008091914372_CreateViewUserProgressGraphData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008092056203_CorrectionToDataTypesInUserProgressLogWithGoal.resx">
+      <DependentUpon>202008092056203_CorrectionToDataTypesInUserProgressLogWithGoal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
