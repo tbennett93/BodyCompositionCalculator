@@ -44,17 +44,28 @@
 <body id="page-top">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Tracker</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Tracker - All Data</h6>
         </div>
         <div class="card-body">
             <div class="chart-area">
-                <canvas id="myAreaChart"></canvas>
+                <canvas id="progressDataAll"></canvas>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tracker - Relevant Data</h6>
+        </div>
+        <div class="card-body">
+            <div class="chart-area">
+                <canvas id="progressDataRelevant"></canvas>
             </div>
         </div>
     </div>
 
-
-    @*<div class="chart" style="position: relative; height:80vh; width:100vw">
+@*<div class="chart" style="position: relative; height:80vh; width:100vw">
             <canvas id="myAreaChart"></canvas>
         </div>*@
 
@@ -292,12 +303,12 @@
     @*<script src="~/Scripts/chart-area-demo.js"></script>*@
 
     <script src="~/Scripts/js/chart-progress-log.js"></script>
+    <script src="~/Scripts/js/chart-progress-log-relevant.js"></script>
 
 
-    <script>
+    @*<script>
         var ctx = document.getElementById('myChart');
-
-    </script>
+    </script>*@
 
 
 

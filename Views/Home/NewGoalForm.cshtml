@@ -124,7 +124,7 @@
                         todayHighlight: true
                     }).on('changeDate', function (selected) {
                         var minDateSelectable = new Date(selected.date.valueOf());
-                        var minDate = new Date(selected.date.valueOf() + (1000 * 60 * 60 * 24 * 7));
+                        var minDate = new Date(selected.date.valueOf() + (1000 * 60 * 60 * 24 *      28));
                         $('#endDate').datepicker({ format: 'dd M yyyy' }); // <--THIS IS THE LINE ADDED
                         $('#endDate').datepicker('setStartDate', minDateSelectable);
                         $('#endDate').datepicker('setDate', minDate); // <--THIS IS THE LINE ADDED

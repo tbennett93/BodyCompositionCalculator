@@ -202,3 +202,8 @@ namespace BodyCompositionCalculator.Controllers
         }
     }
 }
+
+//TODO - using user@user.com as an example where the datapoints are separated from the goal,
+//      figure out a way to only show the most recent goal/data.
+//      There could be a button to 'display all data' which shows this but then a button for 'show relevant'
+//      which only grabs user progress data within the goals time period

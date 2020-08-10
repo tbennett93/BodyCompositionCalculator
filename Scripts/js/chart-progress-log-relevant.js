@@ -85,8 +85,8 @@
             borderDash: [10]
         }],
     };
-    var ctx = document.getElementById("progressDataAll").getContext("2d");
-    var progressDataAll = new Chart(ctx, {
+    var ctx = document.getElementById("progressDataRelevant").getContext("2d");
+    var progressDataRelevant = new Chart(ctx, {
         type: "line",
         data: data,
         options: {
@@ -188,7 +188,7 @@
             },
         }
     });
-    return progressDataAll;
+    return progressDataRelevant;
 }
 
 var xhttp = new XMLHttpRequest();
@@ -235,7 +235,7 @@ xhttp.onreadystatechange = function () {
 };
 //xhttp.open("GET", "https://forbes400.herokuapp.com/api/forbes400?limit=10", false);
 //xhttp.open("GET", "/api/UserProgressLog/", false);
-xhttp.open("GET", "/api/UserProgressAll/", false);
+xhttp.open("GET", "/api/UserProgressRelevant/", false);
 xhttp.send();
 //https://www.chartjs.org/docs/
 //Show picture when clicked node - getElementAtEvent

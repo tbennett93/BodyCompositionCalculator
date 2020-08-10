@@ -12,12 +12,12 @@ using Newtonsoft.Json;
 
 namespace BodyCompositionCalculator.Controllers.API
 {
-    public class UserProgressLogWithGoalController : ApiController
+    public class UserProgressAllController : ApiController
     {
 
         ApplicationDbContext _context;
         //DbContext db;
-        public UserProgressLogWithGoalController()
+        public UserProgressAllController()
         {
             _context = new ApplicationDbContext();
             //db = new DbContext();
