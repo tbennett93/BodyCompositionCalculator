@@ -21,7 +21,6 @@ namespace BodyCompositionCalculator.Models
 
         [Required]
         public double StartWeightInKg { get; set; }
-
         [Required]
         public double TargetWeightInKg { get; set; }
         public double? FinalWeightInKg { get; set; }

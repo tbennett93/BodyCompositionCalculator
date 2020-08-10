@@ -19,7 +19,7 @@
 <body>
 
     <h2>Edit Goal</h2>
-    @*@Html.ValidationSummary()*@
+    @Html.ValidationSummary()
 
     @using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new { @id = "newGoalForm", @class = "form-group" }))
     {

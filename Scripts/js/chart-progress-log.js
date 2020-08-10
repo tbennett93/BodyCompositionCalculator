@@ -1,4 +1,14 @@
 ﻿function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates) {
+    var weightColour = "rgba(230, 57, 70, 1)";
+    var bodyFatColour = "rgba(29, 53, 87, 1)";
+    var weightGoalColour = "rgba(230, 57, 70, 0.5)";
+    var bodyFatGoalColour = "rgba(29, 53, 87, 0.5)";
+
+    38, 70, 83
+    42, 157, 143
+    233, 196, 106
+    244, 162, 97
+    231, 111, 81
     var data = {
         labels: dates,
         datasets: [{
@@ -7,14 +17,14 @@
             label: "Weight",
             lineTension: 0.3,
             fill: false,
-            backgroundColor: "rgba(78, 115, 223, 1)",
-            borderColor: "rgba(78, 115, 223, 1)",
+            backgroundColor: weightColour,
+            borderColor: weightColour,
             pointRadius: 3,
-            pointBackgroundColor: "rgba(78, 115, 223, 1)",
-            pointBorderColor: "rgba(78, 115, 223, 1)",
+            pointBackgroundColor: weightColour,
+            pointBorderColor: weightColour,
             pointHoverRadius: 3,
-            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+            pointHoverBackgroundColor: weightColour,
+            pointHoverBorderColor: weightColour,
             pointHitRadius: 10,
             pointBorderWidth: 2,
             yAxisID: 'y-axis-1',
@@ -25,14 +35,14 @@
             label: "Body Fat %",
             lineTension: 0.4,
             fill:false,
-            backgroundColor: "rgba(255, 3, 7, 1)",
-            borderColor: "rgba(255, 3, 7, 1)",
+            backgroundColor: bodyFatColour,
+            borderColor: bodyFatColour,
             pointRadius: 5,
-            pointBackgroundColor: "rgba(255, 3, 7, 1)",
-            pointBorderColor: "rgba(255, 3, 7, 1)",
+            pointBackgroundColor: bodyFatColour,
+            pointBorderColor: bodyFatColour,
             pointHoverRadius: 2,
-            pointHoverBackgroundColor: "rgba(68, 105, 213, 1)",
-            pointHoverBorderColor: "rgba(255, 3, 7, 1)",
+            pointHoverBackgroundColor: bodyFatColour,
+            pointHoverBorderColor: bodyFatColour,
             pointHitRadius: 5,
             pointBorderWidth: 1.6,
             yAxisID: 'y-axis-2',
@@ -42,37 +52,42 @@
             data: goalWeight,
             label: "Goal Weight",
             lineTension: 0.4,
-            fill:true,
-            backgroundColor: "rgba(0, 3, 7, 1)",
-            borderColor: "rgba(0, 3, 7, 1)",
-            pointRadius: 5,
-            pointBackgroundColor: "rgba(0, 3, 7, 1)",
-            pointBorderColor: "rgba(0, 3, 7, 1)",
+            fill:false,
+            backgroundColor: weightGoalColour,
+            borderColor: weightGoalColour,
+            pointRadius: 10,
+            pointBackgroundColor: weightGoalColour,
+            pointBorderColor: weightGoalColour,
             pointHoverRadius: 2,
-            pointHoverBackgroundColor: "rgba(0, 105, 213, 1)",
-            pointHoverBorderColor: "rgba(0, 3, 7, 1)",
+            pointHoverBackgroundColor: weightGoalColour,
+            pointHoverBorderColor: weightGoalColour,
             pointHitRadius: 15,
             pointBorderWidth: 1.6,
             yAxisID: 'y-axis-1',
-            spanGaps: false
+            spanGaps: true,
+            pointStyle: 'star',
+            borderDash:[10]
+
         },
         {
             data: goalBodyFat,
             label: "Goal BodyFat",
             lineTension: 0.4,
-            fill:true,
-            backgroundColor: "rgba(150, 150, 150, 1)",
-            borderColor: "rgba(150, 150, 150, 1)",
-            pointRadius: 5,
-            pointBackgroundColor: "rgba(150, 150, 150, 1)",
-            pointBorderColor: "rgba(150, 150, 150, 1)",
+            fill:false,
+            backgroundColor: bodyFatGoalColour,
+            borderColor: bodyFatGoalColour,
+            pointRadius: 10,
+            pointBackgroundColor: bodyFatGoalColour,
+            pointBorderColor: bodyFatGoalColour,
             pointHoverRadius: 2,
-            pointHoverBackgroundColor: "rgba(150, 150, 150, 1)",
-            pointHoverBorderColor: "rgba(150, 150, 150, 1)",
+            pointHoverBackgroundColor: bodyFatGoalColour,
+            pointHoverBorderColor: bodyFatGoalColour,
             pointHitRadius: 15,
             pointBorderWidth: 1.6,
             yAxisID: 'y-axis-2',
-            spanGaps: false
+            spanGaps: true,
+            pointStyle: 'star',
+            borderDash: [10]
         }],
     };
     var ctx = document.getElementById("myAreaChart").getContext("2d");
@@ -80,7 +95,6 @@
         type: "line",
         data: data,
         options: {
-            responsive: true,
             legend: {
                 display: true
             },
@@ -92,6 +106,7 @@
                         display: true,
                         labelString: "Date"
                     },
+                    type:'time',
                     time: {
                         displayFormats: {
                                     'millisecond': 'MMM DD',
@@ -204,7 +219,8 @@ xhttp.onreadystatechange = function () {
             //return (new Date(e.Date)); // Divide to billions in units of ten
             //return (e.Date); // Divide to billions in units of ten
             //return (new Date(e.Date)); // Divide to billions in units of ten
-            return (moment(new Date(e.Date)).format("DD MMM YYYY")); // Divide to billions in units of ten
+            //return (moment(new Date(e.Date)).format("DD MMM YYYY")); // Divide to billions in units of ten
+            return (moment(new Date(e.Date))); // Divide to billions in units of ten
         });
 
         //Set the minimum weight in the Y axis
@@ -226,8 +242,5 @@ xhttp.onreadystatechange = function () {
 //xhttp.open("GET", "/api/UserProgressLog/", false);
 xhttp.open("GET", "/api/UserProgressLogwithgoal/", false);
 xhttp.send();
-
-//TODO - order GET request
-//TODO - get current user's log
-//TODO add overlaying body fat % chart
-//TODO highlight notes with photo or display photos above each node that holds a picture
+//https://www.chartjs.org/docs/
+//Show picture when clicked node - getElementAtEvent

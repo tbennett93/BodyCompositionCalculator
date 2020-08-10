@@ -28,7 +28,7 @@ namespace BodyCompositionCalculator.Controllers.API
         public List<UserProgressGraphDataModel> GetUserProgressLogWithGoals()
         {
 
-            //var userId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            var userId = Helper_Classes.UserHelpers.GetUserProfile().Id;
 
             var queryThree = _context.Database.SqlQuery<UserProgressGraphDataModel>
                 ( "select "            
@@ -41,7 +41,7 @@ namespace BodyCompositionCalculator.Controllers.API
                   +"from "
                   +"userprogressgraphdata "
                   +"where 1=1" 
-                  + "and userprofileid = " + 9 
+                  + "and userprofileid = " + userId
                 )
                 .ToList();
             //

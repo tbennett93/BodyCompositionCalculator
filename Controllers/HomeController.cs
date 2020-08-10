@@ -78,8 +78,19 @@ namespace BodyCompositionCalculator.Controllers
         public ActionResult AddNewGoal(Goal newGoal)
         {
 
+
             if (!ModelState.IsValid)
+            {
+                foreach (ModelState modelState in ViewData.ModelState.Values)
+                {
+                    foreach (ModelError error in modelState.Errors)
+                    {
+                        System.Diagnostics.Debug.WriteLine(error);
+                    }
+                }
                 return View("NewGoalForm", newGoal);
+            }
+            
 
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
@@ -110,16 +121,23 @@ namespace BodyCompositionCalculator.Controllers
 
         public ActionResult NewGoalForm()
         {
+            //TODO return sysdate for dates if a new customer and null for the required fields - also do the same on the Profile view
             //If no goal found, fetch blank goal page. If existing goal found, fetch existing info into page
             Goal viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
-                viewModel = new Goal();
-            
-            viewModel = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
+                viewModel = new Goal
+                {
+                    UserProfileId = userProfileId
+                };
+            else
+            {
+                viewModel = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
+            }
             //TODO check if goal already exists, if so prompt to delete, if not or expired, overwrite.
             return View(viewModel);
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
