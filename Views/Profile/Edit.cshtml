@@ -8,6 +8,14 @@
 }
 
 
+<html>
+
+    <head>
+        <script src="https://kit.fontawesome.com/7ec14fb925.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        @Styles.Render("~/Content/datepicker")
+    </head>
+<body>
 <h2>Create Profile</h2>
 
 @*Without using the using keyword, the form (which is html form type) would remain open as it's not automatically closed.*@
@@ -26,8 +34,17 @@
     </div>
     <div class="form-group">
         <label>Date of Birth</label>
-        @Html.TextBoxFor(m => m.DateOfBirth, "{0:d MMM yyyy}", new { @class = "form-control" })
-        @Html.ValidationMessageFor(c => c.DateOfBirth)
+        <div class="form-group">
+            <div id="dateOfBirth" , class="input-group date datepicker">
+                @Html.TextBoxFor(model => model.DateOfBirth, "{0: dd MMM yyyy}", new {  @class = "form-control" })
+                <div class="input-group-append input-group-addon">
+                    <span class="input-group-text">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(m => m.DateOfBirth)
+        </div>
     </div>
     <div class="form-group">
         <label>Sex</label>
@@ -48,13 +65,13 @@
     //TODO Add option for feet and inches
     <div class="form-group">
         <label>Height In Cm</label>
-        @Html.TextBoxFor(m => m.HeightInCm, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.HeightInCm, new { @class = "form-control", @id="height" })
 
         @Html.ValidationMessageFor(c => c.HeightInCm)
     </div>
     <div class="form-group">
         <label>Activity Level</label>
-        @Html.TextBoxFor(m => m.ActivityLevel, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.ActivityLevel, new { @class = "form-control", @id="activity" })
         @Html.ValidationMessageFor(c => c.HeightInCm)
     </div>
 
@@ -91,7 +108,38 @@
 
     <button type="submit" class="btn btn-primary">Save</button>
 }
+    
 
+<script>
+
+    $(document).ready(function () {
+
+
+        var height = $('#height').val();
+        var activity = $('#activity').val();
+
+        if (height == 0) {
+            $('#height').val("");
+        }
+        if (activity == 0) {
+            $('#activity').val("");
+        };
+
+        $('#dateOfBirth.datepicker').datepicker({
+            format: 'dd M yyyy',
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#dateOfBirth.datepicker').datepicker("clearDates");
+
+    });
+</script>
+
+</body>
+
+<html>
 
 @section scripts{
 

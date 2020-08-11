@@ -69,13 +69,13 @@
 
             <div class="form-group">
                 <label>Starting Weight</label>
-                @Html.TextBoxFor(m => m.StartWeightInKg, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.StartWeightInKg, new { @class = "form-control", @id = "startWeight" })
                 @Html.ValidationMessageFor(m => m.StartWeightInKg)
             </div>
 
             <div class="form-group">
                 <label>Target Weight</label>
-                @Html.TextBoxFor(m => m.TargetWeightInKg, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.TargetWeightInKg, new { @class = "form-control" , @id = "targetWeight" })
                 @Html.ValidationMessageFor(m => m.TargetWeightInKg)
             </div>
 
@@ -117,6 +117,25 @@
 
                 $(document).ready(function () {
 
+                    var startWeight = $('#startWeight');
+                    var targetWeight = $('#targetWeight');
+
+                    if (startWeight == 0) {
+                        $('#startWeight').val("");
+                    }
+                    if (targetWeight == 0) {
+                        $('#targetWeight').val("");
+                    };
+
+                    //If the default date is used, set the dates
+                    var startDate = $('#startDate').datepicker('getDate');
+                    if (startDate.getTime() == -62134732740000) { //TODO 12/08/2020 how to compare dates and first output the date in the field to find the correct full date for comparison
+                        $('#startDate').datepicker('clearDates'); //
+                        $('#endDate').datepicker('clearDates'); //
+                    }
+
+
+                    //https://bootstrap-datepicker.readthedocs.io/en/
                     $('#startDate.datepicker').datepicker({
                         format: 'dd M yyyy',
                         todayBtn: true,
