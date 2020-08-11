@@ -34,7 +34,7 @@ namespace BodyCompositionCalculator.Controllers
 
 
         // POST: Profile/Create
-        //TODO can only be accessed if logged in
+        [Authorize]
         [HttpPost]
         public ActionResult Create(UserProfile newUserProfile)
         {

@@ -42,25 +42,41 @@
 @*<script src="~/vendor/js/demo/chart-area-demo.js"></script>*@
 
 <body id="page-top">
-    <div class="card shadow mb-4">
+    @*<div class="card shadow mb-4">
         <div class="card-header py-3">
+
             <h6 class="m-0 font-weight-bold text-primary">Tracker - All Data</h6>
+
         </div>
         <div class="card-body">
             <div class="chart-area">
                 <canvas id="progressDataAll"></canvas>
+
             </div>
         </div>
     </div>
     
 
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Tracker - Relevant Data</h6>
+    </div>
+    <div class="card-body">
+        <div class="chart-area">
+            <canvas id="progressDataRelevant"></canvas>
+        </div>
+    </div>
+</div>*@
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Tracker - Relevant Data</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Tracker</h6>
         </div>
         <div class="card-body">
             <div class="chart-area">
-                <canvas id="progressDataRelevant"></canvas>
+                <button type="button" class="btn btn-primary" id="buttonDisplayGraphAll">All</button>
+                <button type="button" class="btn btn-primary" id="buttonDiplayGraphRelevant">Relevant</button>
+                <canvas id="progressGraphData"></canvas>
             </div>
         </div>
     </div>
@@ -297,8 +313,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
     
-    <script src="~/Scripts/js/chart-progress-log.js"></script>
-    <script src="~/Scripts/js/chart-progress-log-relevant.js"></script>
+    @*<script src="~/Scripts/js/chart-progress-log.js"></script>
+    <script src="~/Scripts/js/chart-progress-log-relevant.js"></script>*@
+    <script src="~/Scripts/js/chart-user-progress-log.js"></script>
 
 
 </body>

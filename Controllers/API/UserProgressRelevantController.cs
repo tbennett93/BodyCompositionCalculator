@@ -72,3 +72,4 @@ namespace BodyCompositionCalculator.Controllers.API
 }
 
 //TODO use a prepared statement here
+//TODO DRY Principle with other user progress controller

@@ -64,7 +64,6 @@ namespace BodyCompositionCalculator.Models
             public static int FeetAndInchesToCM(int feet, int inches)
         {
             int cm = (int)((30.48 * feet) + (2.54 * inches));
-            //TODO this logic
             return cm;
         }
 
@@ -72,7 +71,6 @@ namespace BodyCompositionCalculator.Models
         public static double InchesToCM(int inches)
         {
             double cm = (double)(2.54 * inches);
-            //TODO this logic
             return cm;
         }
 

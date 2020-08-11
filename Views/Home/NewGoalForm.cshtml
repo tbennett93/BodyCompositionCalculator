@@ -36,7 +36,6 @@
             @Html.ValidationMessageFor(m => m.StartDate)
         </div>
             <label>End Date</label>
-            //TODO - Add a validation class that alerts the user than the end date must be greater than the start date
             <div class="form-group">
                 <div id="endDate" , class="input-group date datepicker">
                     @Html.TextBoxFor(model => model.EndDate, "{0: dd MMM yyyy}", new { @id = "endDateText", @class = "form-control" })
@@ -117,8 +116,8 @@
 
                 $(document).ready(function () {
 
-                    var startWeight = $('#startWeight');
-                    var targetWeight = $('#targetWeight');
+                    var startWeight = $('#startWeight').val();
+                    var targetWeight = $('#targetWeight').val();
 
                     if (startWeight == 0) {
                         $('#startWeight').val("");
@@ -129,9 +128,9 @@
 
                     //If the default date is used, set the dates
                     var startDate = $('#startDate').datepicker('getDate');
-                    if (startDate.getTime() == -62134732740000) { //TODO 12/08/2020 how to compare dates and first output the date in the field to find the correct full date for comparison
-                        $('#startDate').datepicker('clearDates'); //
-                        $('#endDate').datepicker('clearDates'); //
+                    if (startDate.getTime() == -62134732740000) { 
+                        $('#startDate').datepicker('clearDates'); 
+                        $('#endDate').datepicker('clearDates'); 
                     }
 
 

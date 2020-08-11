@@ -18,7 +18,6 @@ namespace BodyCompositionCalculator.Controllers.API
 
         }
         // GET: api/Goal
-        //TODO delete this 'get all logs' before go live
         [HttpGet]
         [Authorize]
         public Goal GetUserProgressLogs()

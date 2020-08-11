@@ -19,7 +19,6 @@ namespace BodyCompositionCalculator.Controllers.API
 
         }
        // GET: api/UserProfileLog
-       //TODO delete this 'get all logs' before go live
        [HttpGet]
        [Authorize]
         public IEnumerable<UserProgressLog> GetUserProgressLogs()

@@ -52,7 +52,6 @@ namespace BodyCompositionCalculator.Controllers
                 
 
                 //No goal exists for current user
-                //TODO - clicking New Goal whilst already mid-goal should prompt the user to end the current goal
                 if (_context.Goals.SingleOrDefault(g=>g.UserProfileId == currentUserProfile.Id) == null)
                     //Return view where no goal has been set and no previous goal has been saved
                     return View("HomeNoGoal");
@@ -95,8 +94,7 @@ namespace BodyCompositionCalculator.Controllers
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
 
-            //TODO check if goal already exists, if so prompt to delete, if not or expired, overwrite.
-            //TODO latest checking always updates final weight
+            //TODO latest checkin always updates final weight on goal
 
             //No Goal Id on user profile. Add it
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
@@ -121,7 +119,6 @@ namespace BodyCompositionCalculator.Controllers
 
         public ActionResult NewGoalForm()
         {
-            //TODO return sysdate for dates if a new customer and null for the required fields - also do the same on the Profile view
             //If no goal found, fetch blank goal page. If existing goal found, fetch existing info into page
             Goal viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
@@ -134,7 +131,6 @@ namespace BodyCompositionCalculator.Controllers
             {
                 viewModel = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
             }
-            //TODO check if goal already exists, if so prompt to delete, if not or expired, overwrite.
             return View(viewModel);
         }
 
@@ -167,7 +163,6 @@ namespace BodyCompositionCalculator.Controllers
                 g.UserProfileId == userProfileId && g.Date == DateTime.Today);
             }
 
-            //TODO check if goal already exists, if so prompt to delete, if not or expired, overwrite.
             return View(viewModel);
 
 
@@ -203,7 +198,4 @@ namespace BodyCompositionCalculator.Controllers
     }
 }
 
-//TODO - using user@user.com as an example where the datapoints are separated from the goal,
-//      figure out a way to only show the most recent goal/data.
-//      There could be a button to 'display all data' which shows this but then a button for 'show relevant'
-//      which only grabs user progress data within the goals time period
+//TODO - A button to switch between 'all historical' and 'relevevant to goal' data 

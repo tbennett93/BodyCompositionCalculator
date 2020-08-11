@@ -11,7 +11,6 @@ namespace BodyCompositionCalculator.Models
     public class Goal
     {
         public int Id { get; set; }
-        //TODO - User can't have overlapping goals. If they do, prompt to delete any overlapping ones
         [Required]
         public DateTime StartDate { get; set; }
 
