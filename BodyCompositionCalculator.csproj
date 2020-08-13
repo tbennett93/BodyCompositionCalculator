@@ -183,12 +183,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\GoalController.cs" />
     <Compile Include="Controllers\API\UserProfileController.cs" />
     <Compile Include="Controllers\API\UserProgressRelevantController.cs" />
     <Compile Include="Controllers\API\UserProgressLogController.cs" />
     <Compile Include="Controllers\API\UserProgressAllController.cs" />
+    <Compile Include="Controllers\API\ValidWeightUnitController.cs" />
     <Compile Include="Controllers\API\ValuesController.cs" />
     <Compile Include="Controllers\GuidesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -275,6 +277,30 @@
     <Compile Include="Migrations\202008092056203_CorrectionToDataTypesInUserProgressLogWithGoal.designer.cs">
       <DependentUpon>202008092056203_CorrectionToDataTypesInUserProgressLogWithGoal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008132023067_AddWeightUnitsToDb.cs" />
+    <Compile Include="Migrations\202008132023067_AddWeightUnitsToDb.designer.cs">
+      <DependentUpon>202008132023067_AddWeightUnitsToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008132023586_AddUnitsToWeightUnitsTable.cs" />
+    <Compile Include="Migrations\202008132023586_AddUnitsToWeightUnitsTable.designer.cs">
+      <DependentUpon>202008132023586_AddUnitsToWeightUnitsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008132111502_UpdateWeightUnitType.cs" />
+    <Compile Include="Migrations\202008132111502_UpdateWeightUnitType.designer.cs">
+      <DependentUpon>202008132111502_UpdateWeightUnitType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008132113286_AddWeightUnitsToAlteredTable.cs" />
+    <Compile Include="Migrations\202008132113286_AddWeightUnitsToAlteredTable.designer.cs">
+      <DependentUpon>202008132113286_AddWeightUnitsToAlteredTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008132118322_AddWeightUnitNavigationPropertyToUserProfile.cs" />
+    <Compile Include="Migrations\202008132118322_AddWeightUnitNavigationPropertyToUserProfile.designer.cs">
+      <DependentUpon>202008132118322_AddWeightUnitNavigationPropertyToUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008132138218_WeightUnitCorrection.cs" />
+    <Compile Include="Migrations\202008132138218_WeightUnitCorrection.designer.cs">
+      <DependentUpon>202008132138218_WeightUnitCorrection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\ActivityLevelValues.cs" />
@@ -290,6 +316,8 @@
     <Compile Include="Models\UserProgressLog.cs" />
     <Compile Include="Models\UserProgressLogWithGoal.cs" />
     <Compile Include="Models\Validation\EndDateGreaterThanStartDate.cs" />
+    <Compile Include="Models\ViewModels\EditProfileFormViewModel.cs" />
+    <Compile Include="Models\WeightUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -305,6 +333,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
+    <Content Include="Content\my-styles\profile-view-style.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -394,7 +423,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\chart-user-progress-log.js" />
-    <Content Include="Scripts\js\chart-progress-log-relevant.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -2130,7 +2158,7 @@
     <Content Include="vendor\jquery\jquery.min.js" />
     <Content Include="vendor\jquery\jquery.slim.js" />
     <Content Include="vendor\jquery\jquery.slim.min.js" />
-    <Content Include="Scripts\js\chart-progress-log.js" />
+    <Content Include="Scripts\js\chart-progress-log%28superceded%29.js" />
     <Content Include="vendor\js\demo\chart-area-demo.js" />
     <Content Include="vendor\js\demo\chart-bar-demo.js" />
     <Content Include="vendor\js\demo\chart-pie-demo.js" />
@@ -2344,6 +2372,7 @@
     <Content Include="Views\Tracker\Tracker.cshtml" />
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
+    <Content Include="Views\About\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2411,6 +2440,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008092056203_CorrectionToDataTypesInUserProgressLogWithGoal.resx">
       <DependentUpon>202008092056203_CorrectionToDataTypesInUserProgressLogWithGoal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132023067_AddWeightUnitsToDb.resx">
+      <DependentUpon>202008132023067_AddWeightUnitsToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132023586_AddUnitsToWeightUnitsTable.resx">
+      <DependentUpon>202008132023586_AddUnitsToWeightUnitsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132111502_UpdateWeightUnitType.resx">
+      <DependentUpon>202008132111502_UpdateWeightUnitType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132113286_AddWeightUnitsToAlteredTable.resx">
+      <DependentUpon>202008132113286_AddWeightUnitsToAlteredTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132118322_AddWeightUnitNavigationPropertyToUserProfile.resx">
+      <DependentUpon>202008132118322_AddWeightUnitNavigationPropertyToUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132138218_WeightUnitCorrection.resx">
+      <DependentUpon>202008132138218_WeightUnitCorrection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

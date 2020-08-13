@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BodyCompositionCalculator.Models;
+using BodyCompositionCalculator.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -23,7 +24,7 @@ namespace BodyCompositionCalculator.Controllers
         // GET: Profile
         public ActionResult Index()
         {
-            return View();
+            return View(Helper_Classes.UserHelpers.GetUserProfile());
         }
 
         // GET: Profile/Details/5
@@ -36,7 +37,7 @@ namespace BodyCompositionCalculator.Controllers
         // POST: Profile/Create
         [Authorize]
         [HttpPost]
-        public ActionResult Create(UserProfile newUserProfile)
+        public ActionResult Create(EditProfileFormViewModel newUserProfile)
         {
 
             //Return the same page with erro 
@@ -50,21 +51,22 @@ namespace BodyCompositionCalculator.Controllers
                     System.Diagnostics.Debug.WriteLine(VARIABLE.ErrorMessage);
 
                 }
+
+                newUserProfile.WeightUnits = _context.WeightUnits.ToList();
                 return View("Edit", newUserProfile);
             }
 
             
 
             if(Helper_Classes.UserHelpers.GetUserProfile()==null)
-                _context.UserProfiles.Add(newUserProfile);
+                _context.UserProfiles.Add(newUserProfile.UserProfile);
             else
             {
                 var userProfleId = Helper_Classes.UserHelpers.GetUserProfile().Id;
                 var currentUserProfile = _context.UserProfiles.SingleOrDefault(u=>u.Id == userProfleId) ;
 
-                _context.Entry(_context.UserProfiles.SingleOrDefault(u => u.Id == userProfleId)).CurrentValues.SetValues(newUserProfile);
+                _context.Entry(_context.UserProfiles.SingleOrDefault(u => u.Id == userProfleId)).CurrentValues.SetValues(newUserProfile.UserProfile);
                 _context.SaveChanges();
-                currentUserProfile = newUserProfile;
 
             }
             _context.SaveChanges();
@@ -78,19 +80,28 @@ namespace BodyCompositionCalculator.Controllers
         [Authorize]
         public ActionResult Edit()
         {
-            UserProfile viewModel;
+            ;
+            EditProfileFormViewModel viewModel;
             if (Helper_Classes.UserHelpers.GetUserProfile() == null)
-                viewModel = new UserProfile
+                viewModel = new EditProfileFormViewModel()
                 {
-                    ApplicationUserId = User.Identity.GetUserId()
-                    //,
-                    //ApplicationUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId())
+                    UserProfile = new UserProfile
+                    {
+                        ApplicationUserId = User.Identity.GetUserId()
+                    },
+                    WeightUnits = _context.WeightUnits.ToList()
+                    
                 };
             else
-                viewModel = Helper_Classes.UserHelpers.GetUserProfile();
+                viewModel = new EditProfileFormViewModel()
+                {
+                    UserProfile = Helper_Classes.UserHelpers.GetUserProfile(),
+                    WeightUnits = _context.WeightUnits.ToList()
+
+                };
 
 
-                return View(viewModel);
+            return View(viewModel);
         }
 
         // POST: Profile/Edit/5

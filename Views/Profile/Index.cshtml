@@ -1,14 +1,122 @@
-﻿
+﻿@model BodyCompositionCalculator.Models.UserProfile
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Profile</h2>
+    <html>
 
-<div class="jumbotron">
+    <head>
+        <script src="https://kit.fontawesome.com/7ec14fb925.js" crossorigin="anonymous"></script>
+        @Styles.Render("~/Content/my-styles/profile-view-style.css")
+    </head>
+    <h2>Profile</h2>
 
-    <h2>@Html.ActionLink("Edit Profile", "Edit", new { controller = "Profile" }, new { @class = "btn btn-primary" })</h2>
 
-</div>
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+    </svg>
+    use this icon if possible as from bootstrap and looser license. if deciding to use, remove reference in about
 
+    <div class="container emp-profile">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="~/Content/images/user-alt-solid.svg" alt="" />
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.FirstName @Model.LastName</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Sex</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Sex</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Date of Birth</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.DateOfBirth</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Height</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.HeightInCm @Model.HeightUnit *need JQ to sort the conversion*</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Activity Level</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.ActivityLevel *turn this into the text version or get rid of this and just link to a new Activity log table by fk. can also then get rid of the class</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Macros</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Macros *will need to modify the model to allow the values within</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Weight Unit</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.WeightUnit </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Height Unit</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.HeightUnit </p>
+                            </div>
+                        </div>
+                        *sort out drop down boxes for height and weight unit and sex etc where a pre-written value is required
+                        *add validation on forms containing drop down boxes and don't allow them to be submitted if a reserved value isnt used
+                        *add profile pictures
+                        <div class="row">
+                            <div class="edit-profile-container">
+                                <div class="col">
+                                    @Html.ActionLink("Edit Profile", "Edit", new {controller = "Profile"}, new {@class = "btn btn-primary"})
+                                </div>
+                            </div>
+                        </div>
+                        change text colour to match the button and align button left again
+                    </div>
+
+                        
+                        
+
+                </div>
+            </div>
+        </div>
+    </div>
+            
+
+
+    </html>

@@ -40,9 +40,12 @@ namespace BodyCompositionCalculator.Models
         public List<UserProgressLog> UserProgressLog { get; set; }
         public Macros Macros { get; set; }
 
+        [ForeignKey("WeightUnit")]
+        public int WeightUnitId { get; set; }
         //Preferences
-        [Required]
-        public string WeightUnit { get; set; }
+        public WeightUnit WeightUnit { get; set; }
+
+
         [Required]
         public string HeightUnit { get; set; }
 
