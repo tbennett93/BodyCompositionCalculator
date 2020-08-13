@@ -18,8 +18,7 @@ namespace BodyCompositionCalculator.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
-        public string Sex { get; set; }
+      
         [Required]
         public DateTime DateOfBirth { get; set; }
         [Required]
@@ -35,19 +34,27 @@ namespace BodyCompositionCalculator.Models
 
         public double ActivityLevel { get; set; }
         
-        //Other
-        //public Goal Goal { get; set; }
+
         public List<UserProgressLog> UserProgressLog { get; set; }
         public Macros Macros { get; set; }
 
+
         [ForeignKey("WeightUnit")]
         public int WeightUnitId { get; set; }
-        //Preferences
         public WeightUnit WeightUnit { get; set; }
 
 
-        [Required]
-        public string HeightUnit { get; set; }
+
+        [ForeignKey("HeightUnit")]
+        public int HeightUnitId { get; set; }
+        public HeightUnit HeightUnit { get; set; }
+
+
+        [ForeignKey("Sex")]
+        public int SexId { get; set; }
+        public Sex Sex { get; set; }
+
+
 
 
 

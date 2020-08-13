@@ -48,12 +48,21 @@
     </div>
     <div class="form-group">
         <label>Sex</label>
-        @Html.TextBoxFor(m => m.UserProfile.Sex, new { @class = "form-control" })
+        @Html.DropDownListFor(m=>m.UserProfile.SexId,
+            new SelectList(Model.Sexes, "Id", "Name"),
+            "Select Sex",
+            new { @class = "form-control" }
+            ) 
+
         @Html.ValidationMessageFor(c => c.UserProfile.Sex)
     </div>
     <div class="form-group">
         <label>Height Unit</label>
-        @Html.TextBoxFor(m => m.UserProfile.HeightUnit, new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
+            new SelectList(Model.HeightUnits, "Id", "Name"),
+            "Select Height Unit",
+            new { @class = "form-control" }
+            )
         @Html.ValidationMessageFor(c => c.UserProfile.HeightUnit)
     </div>
     <div class="form-group">

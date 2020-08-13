@@ -32,6 +32,8 @@ namespace BodyCompositionCalculator.Models
         public DbSet <UserProgressLog> UserProgressLogs { get; set; }
 
         public DbSet <WeightUnit> WeightUnits { get; set; }
+        public DbSet <HeightUnit> HeightUnits { get; set; }
+        public DbSet <Sex> Sexes { get; set; }
 
         public DbSet <UserProgressLogWithGoal> UserProgressLogsWithGoal { get; set; }
 

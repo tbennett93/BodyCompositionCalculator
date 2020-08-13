@@ -53,8 +53,11 @@ namespace BodyCompositionCalculator.Controllers
                 }
 
                 newUserProfile.WeightUnits = _context.WeightUnits.ToList();
+                newUserProfile.HeightUnits = _context.HeightUnits.ToList();
+                newUserProfile.Sexes = _context.Sexes.ToList();
                 return View("Edit", newUserProfile);
             }
+
 
             
 
@@ -89,14 +92,20 @@ namespace BodyCompositionCalculator.Controllers
                     {
                         ApplicationUserId = User.Identity.GetUserId()
                     },
-                    WeightUnits = _context.WeightUnits.ToList()
-                    
+                    WeightUnits = _context.WeightUnits.ToList(),
+                    HeightUnits = _context.HeightUnits.ToList(),
+                    Sexes = _context.Sexes.ToList()
+
+
                 };
             else
                 viewModel = new EditProfileFormViewModel()
                 {
                     UserProfile = Helper_Classes.UserHelpers.GetUserProfile(),
-                    WeightUnits = _context.WeightUnits.ToList()
+                    WeightUnits = _context.WeightUnits.ToList(),
+                    HeightUnits = _context.HeightUnits.ToList(),
+                    Sexes = _context.Sexes.ToList()
+
 
                 };
 

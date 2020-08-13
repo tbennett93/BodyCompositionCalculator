@@ -301,6 +301,18 @@
     <Compile Include="Migrations\202008132138218_WeightUnitCorrection.designer.cs">
       <DependentUpon>202008132138218_WeightUnitCorrection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008132229500_AddHeightUnitsTable.cs" />
+    <Compile Include="Migrations\202008132229500_AddHeightUnitsTable.designer.cs">
+      <DependentUpon>202008132229500_AddHeightUnitsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008132243285_AddUserSexValsTable.cs" />
+    <Compile Include="Migrations\202008132243285_AddUserSexValsTable.designer.cs">
+      <DependentUpon>202008132243285_AddUserSexValsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008132246513_UpdateUserProfilesTableWithFkToSexTable.cs" />
+    <Compile Include="Migrations\202008132246513_UpdateUserProfilesTableWithFkToSexTable.designer.cs">
+      <DependentUpon>202008132246513_UpdateUserProfilesTableWithFkToSexTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\ActivityLevelValues.cs" />
@@ -311,12 +323,14 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Macros.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Sex.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UserProgressGraphDataModel.cs" />
     <Compile Include="Models\UserProgressLog.cs" />
     <Compile Include="Models\UserProgressLogWithGoal.cs" />
     <Compile Include="Models\Validation\EndDateGreaterThanStartDate.cs" />
     <Compile Include="Models\ViewModels\EditProfileFormViewModel.cs" />
+    <Compile Include="Models\HeightUnit.cs" />
     <Compile Include="Models\WeightUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -2458,6 +2472,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008132138218_WeightUnitCorrection.resx">
       <DependentUpon>202008132138218_WeightUnitCorrection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132229500_AddHeightUnitsTable.resx">
+      <DependentUpon>202008132229500_AddHeightUnitsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132243285_AddUserSexValsTable.resx">
+      <DependentUpon>202008132243285_AddUserSexValsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008132246513_UpdateUserProfilesTableWithFkToSexTable.resx">
+      <DependentUpon>202008132246513_UpdateUserProfilesTableWithFkToSexTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

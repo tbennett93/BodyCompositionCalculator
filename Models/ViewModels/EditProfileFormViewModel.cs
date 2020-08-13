@@ -10,6 +10,8 @@ namespace BodyCompositionCalculator.Models.ViewModels
     {
         public UserProfile UserProfile { get; set; }
         public IEnumerable<WeightUnit> WeightUnits { get; set; }
+        public IEnumerable<HeightUnit> HeightUnits { get; set; }
+        public IEnumerable<Sex> Sexes { get; set; }
 
 
 
