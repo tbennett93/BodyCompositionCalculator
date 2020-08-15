@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,7 +25,15 @@ namespace BodyCompositionCalculator.Controllers
         // GET: Profile
         public ActionResult Index()
         {
-            return View(Helper_Classes.UserHelpers.GetUserProfile());
+            var userId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            var viewModel = _context.UserProfiles.
+                Include(m => m.Sex).
+                Include(m => m.HeightUnit).
+                Include(m => m.WeightUnit).
+                Include(m => m.ActivityLevel).
+                ToList().
+                SingleOrDefault(m=>m.Id == userId);
+            return View(viewModel);
         }
 
         // GET: Profile/Details/5
@@ -55,6 +64,7 @@ namespace BodyCompositionCalculator.Controllers
                 newUserProfile.WeightUnits = _context.WeightUnits.ToList();
                 newUserProfile.HeightUnits = _context.HeightUnits.ToList();
                 newUserProfile.Sexes = _context.Sexes.ToList();
+                newUserProfile.ActivityLevels = _context.ActivityLevels.ToList();
                 return View("Edit", newUserProfile);
             }
 
@@ -94,7 +104,9 @@ namespace BodyCompositionCalculator.Controllers
                     },
                     WeightUnits = _context.WeightUnits.ToList(),
                     HeightUnits = _context.HeightUnits.ToList(),
-                    Sexes = _context.Sexes.ToList()
+                    Sexes = _context.Sexes.ToList(),
+                    ActivityLevels = _context.ActivityLevels.ToList()
+
 
 
                 };
@@ -104,7 +116,8 @@ namespace BodyCompositionCalculator.Controllers
                     UserProfile = Helper_Classes.UserHelpers.GetUserProfile(),
                     WeightUnits = _context.WeightUnits.ToList(),
                     HeightUnits = _context.HeightUnits.ToList(),
-                    Sexes = _context.Sexes.ToList()
+                    Sexes = _context.Sexes.ToList(),
+                    ActivityLevels = _context.ActivityLevels.ToList()
 
 
                 };

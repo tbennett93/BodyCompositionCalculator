@@ -313,16 +313,31 @@
     <Compile Include="Migrations\202008132246513_UpdateUserProfilesTableWithFkToSexTable.designer.cs">
       <DependentUpon>202008132246513_UpdateUserProfilesTableWithFkToSexTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008151014091_AddActivityLevelToDB.cs" />
+    <Compile Include="Migrations\202008151014091_AddActivityLevelToDB.designer.cs">
+      <DependentUpon>202008151014091_AddActivityLevelToDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008151021271_ChangeActivityLevelToNavPropertyInProfileModel.cs" />
+    <Compile Include="Migrations\202008151021271_ChangeActivityLevelToNavPropertyInProfileModel.designer.cs">
+      <DependentUpon>202008151021271_ChangeActivityLevelToNavPropertyInProfileModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008151045389_CorrectionsToActivityLevelsNames.cs" />
+    <Compile Include="Migrations\202008151045389_CorrectionsToActivityLevelsNames.designer.cs">
+      <DependentUpon>202008151045389_CorrectionsToActivityLevelsNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008151105041_AddBmrCoefficientToSexModel.cs" />
+    <Compile Include="Migrations\202008151105041_AddBmrCoefficientToSexModel.designer.cs">
+      <DependentUpon>202008151105041_AddBmrCoefficientToSexModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Calculation_Constants\ActivityLevelValues.cs" />
     <Compile Include="Models\Calculation_Constants\CaloriesPerWeightUnit.cs" />
     <Compile Include="Models\Calculators.cs" />
-    <Compile Include="Models\Calculation_Constants\SexBmrAdjustment.cs" />
     <Compile Include="Models\Goal.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Macros.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ActivityLevel.cs" />
     <Compile Include="Models\Sex.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UserProgressGraphDataModel.cs" />
@@ -2481,6 +2496,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008132246513_UpdateUserProfilesTableWithFkToSexTable.resx">
       <DependentUpon>202008132246513_UpdateUserProfilesTableWithFkToSexTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008151014091_AddActivityLevelToDB.resx">
+      <DependentUpon>202008151014091_AddActivityLevelToDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008151021271_ChangeActivityLevelToNavPropertyInProfileModel.resx">
+      <DependentUpon>202008151021271_ChangeActivityLevelToNavPropertyInProfileModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008151045389_CorrectionsToActivityLevelsNames.resx">
+      <DependentUpon>202008151045389_CorrectionsToActivityLevelsNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008151105041_AddBmrCoefficientToSexModel.resx">
+      <DependentUpon>202008151105041_AddBmrCoefficientToSexModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

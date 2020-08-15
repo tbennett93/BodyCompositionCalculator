@@ -32,7 +32,9 @@ namespace BodyCompositionCalculator.Models
         public ApplicationUser ApplicationUser { get; set; }
 
 
-        public double ActivityLevel { get; set; }
+        [ForeignKey("ActivityLevel")]
+        public int ActivityLevelId { get; set; }
+        public ActivityLevel ActivityLevel { get; set; }
         
 
         public List<UserProgressLog> UserProgressLog { get; set; }

@@ -45,7 +45,7 @@
                                 <label>Sex</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.Sex</p>
+                                <p>@Model.Sex.Name</p>
                             </div>
                         </div>
                         <div class="row">
@@ -61,7 +61,7 @@
                                 <label>Height</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.HeightInCm @Model.HeightUnit *need JQ to sort the conversion*</p>
+                                <p>@Model.HeightInCm @Model.HeightUnit.Name *need JQ to sort the conversion*</p>
                             </div>
                         </div>
                         <div class="row">
@@ -69,7 +69,7 @@
                                 <label>Activity Level</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.ActivityLevel *turn this into the text version or get rid of this and just link to a new Activity log table by fk. can also then get rid of the class</p>
+                                <p>@Model.ActivityLevel.Name *turn this into the text version or get rid of this and just link to a new Activity log table by fk. can also then get rid of the class</p>
                             </div>
                         </div>
                         <div class="row">
@@ -85,7 +85,7 @@
                                 <label>Weight Unit</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.WeightUnit </p>
+                                <p>@Model.WeightUnit.Name </p>
                             </div>
                         </div>
                         <div class="row">
@@ -93,7 +93,7 @@
                                 <label>Height Unit</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.HeightUnit </p>
+                                <p>@Model.HeightUnit.Name </p>
                             </div>
                         </div>
                         *sort out drop down boxes for height and weight unit and sex etc where a pre-written value is required

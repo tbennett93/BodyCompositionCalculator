@@ -5,13 +5,10 @@ using System.Web;
 
 namespace BodyCompositionCalculator.Models
 {
-    public class Sex
+    public class ActivityLevel
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public double BmrAdjustmentValue { get; set; }
-
-
+        public double Value { get; set; }
     }
 }
