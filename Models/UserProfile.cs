@@ -20,6 +20,7 @@ namespace BodyCompositionCalculator.Models
         public string LastName { get; set; }
       
         [Required]
+        [DisplayFormat(DataFormatString = "{0: dd MMM yyyy}")]
         public DateTime DateOfBirth { get; set; }
         [Required]
         public double HeightInCm { get; set; }

@@ -53,7 +53,7 @@
                                 <label>Date of Birth</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.UserProfile.DateOfBirth</p>
+                                <p>@Html.DisplayFor(m => m.UserProfile.DateOfBirth)</p>
                             </div>
                         </div>
                         <div class="row">
@@ -69,7 +69,7 @@
                                 <label>Activity Level</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.UserProfile.ActivityLevel.Name *turn this into the text version or get rid of this and just link to a new Activity log table by fk. can also then get rid of the class</p>
+                                <p>@Model.UserProfile.ActivityLevel.Name</p>
                             </div>
                         </div>
                         <div class="row">
