@@ -57,41 +57,30 @@
                 @Html.ValidationMessageFor(c => c.UserProfile.Sex)
             </div>
 
-
-            @*<div class="form-group">
-                <label>Height Unit</label>
-                @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
-                    new SelectList(Model.HeightUnits, "Id", "Name"),
-                    "Select Height Unit",
-                    new { @class = "form-control form-inline" }
-                    )
-                @Html.ValidationMessageFor(c => c.UserProfile.HeightUnit)
-            </div>*@
-
-            //TODO Add option for feet and inches
             <div class="form-group">
                 <label>Height</label>
                 <div class="form-group form-inline">
-                    @Html.TextBoxFor(m => m.HeightInputA, new {@class = "form-control col-2", @id = "weightInputA", @min = "0"})
-                    @Html.TextBoxFor(m => m.HeightInputB, new {@class = "form-control col-2", @id = "weightInputB", @min = "0" })
+                    @Html.TextBoxFor(m => m.HeightInputA, new {@class = "form-control col-1", @id = "weightInputA", @min = "0"})
+                    @Html.TextBoxFor(m => m.HeightInputB, new {@class = "form-control col-1", @id = "weightInputB", @min = "0"})
                     @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
                         new SelectList(Model.HeightUnits, "Id", "Name"),
                         "Select Height Unit",
-                        new { @class = "form-control col-1" }
+                        new { @class = "form-control col-1" , @id = "selectorHeightUnit" }
                         )
                 </div>
                 @Html.ValidationMessageFor(c => c.HeightInputA)
                 @Html.ValidationMessageFor(c => c.HeightInputB)
                 @Html.ValidationMessageFor(c => c.UserProfile.HeightUnit)
 
-            </div>
+            </div>            
+            
 
             <div class="form-group">
                 <label>Weight Unit</label>
                 @Html.DropDownListFor(m => m.UserProfile.WeightUnitId,
                     new SelectList(Model.WeightUnits, "Id", "Name"),
                     "Select Weight Unit",
-                    new { @class = "form-control" }
+                    new { @class = "form-control", @id ="selectorWeightUnit" }
                     )
 
                 @Html.ValidationMessageFor(c => c.UserProfile.WeightUnitId)
@@ -112,31 +101,7 @@
             @Html.HiddenFor(m => m.UserProfile.ApplicationUserId)
 
 
-            @*<div class="form-group">
-                <label>Membership Type</label>
-                @Html.DropDownListFor(m => m.Customer.MembershipTypeId, //Doesn't seem to matter what is put here
-                    new SelectList(Model.MembershipTypes, "Id", "Name"), //list of items for dropdown list
-                    "Select Membership Type",
-                    new { @class = "form-control" }
-                    )
-                @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId)
-            </div>
-
-
-
-
-
-
-            <div class="checkbox">
-
-                <label>
-                    @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribed to Newsletter?
-                </label>
-            </div>
-
-
-
-            @Html.AntiForgeryToken();*@
+            @*@Html.AntiForgeryToken();*@
 
             <button type="submit" class="btn btn-primary">Save</button>
 
@@ -147,7 +112,45 @@
 
         <script>
 
-            $(document).ready(function () {
+            $(document).ready(function() {
+
+                heightUnit = $('#selectorHeightUnit').val();
+
+                if (heightUnit == 1) {
+                    $('#weightInputB').hide();
+                }
+
+                $('#selectorHeightUnit').change(function () {
+                    console.log(heightUnit)
+                    console.log($('#selectorHeightUnit').val());
+
+                    if ($('#selectorHeightUnit').val() == 1) {
+                        $('#weightInputB').hide();
+                        if (heightUnit != $('#selectorHeightUnit').val())
+                        {
+                            $('#weightInputA').val("");
+                            heightUnit = $('#selectorHeightUnit').val();
+                            $('#weightInputA').removeClass("col-1");
+                            $('#weightInputB').removeClass("col-1");
+                            $('#weightInputA').addClass("col-2");
+                            $('#weightInputB').addClass("col-2");
+                        }
+
+                    }
+                    if ($('#selectorHeightUnit').val() == 2) {
+                        $('#weightInputB').show();
+                        if (heightUnit != $('#selectorHeightUnit').val()) {
+                            $('#weightInputA').val("");
+                            $('#weightInputB').val("");
+                            heightUnit = $('#selectorHeightUnit').val();
+                            $('#weightInputA').removeClass("col-2");
+                            $('#weightInputB').removeClass("col-2");
+                            $('#weightInputA').addClass("col-1");
+                            $('#weightInputB').addClass("col-1");
+                        }
+                    }
+
+                });
 
 
                 var height = $('#height').val();

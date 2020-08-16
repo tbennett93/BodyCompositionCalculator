@@ -36,7 +36,7 @@ namespace BodyCompositionCalculator.Controllers
 
 
             if (heightUnit == HeightUnits.Cm)
-                heightToDisplay = heightInCm.ToString();
+                heightToDisplay = heightInCm.ToString() + "cm";
             else if (heightUnit == HeightUnits.Feetandinches)
                 heightToDisplay = Calculators.CmToFt(heightInCm).ToString() + "ft" + Calculators.CmToInches(heightInCm).ToString() + "in";
 
