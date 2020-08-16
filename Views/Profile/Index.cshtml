@@ -1,4 +1,4 @@
-﻿@model BodyCompositionCalculator.Models.UserProfile
+﻿@model BodyCompositionCalculator.Models.ViewModels.ProfileViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -37,7 +37,7 @@
                                 <label>Name</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.FirstName @Model.LastName</p>
+                                <p>@Model.UserProfile.FirstName @Model.UserProfile.LastName</p>
                             </div>
                         </div>
                         <div class="row">
@@ -45,7 +45,7 @@
                                 <label>Sex</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.Sex.Name</p>
+                                <p>@Model.UserProfile.Sex.Name</p>
                             </div>
                         </div>
                         <div class="row">
@@ -53,7 +53,7 @@
                                 <label>Date of Birth</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.DateOfBirth</p>
+                                <p>@Model.UserProfile.DateOfBirth</p>
                             </div>
                         </div>
                         <div class="row">
@@ -61,7 +61,7 @@
                                 <label>Height</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.HeightInCm @Model.HeightUnit.Name *need JQ to sort the conversion*</p>
+                                <p>@Model.HeightToDisplay</p>
                             </div>
                         </div>
                         <div class="row">
@@ -69,7 +69,7 @@
                                 <label>Activity Level</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.ActivityLevel.Name *turn this into the text version or get rid of this and just link to a new Activity log table by fk. can also then get rid of the class</p>
+                                <p>@Model.UserProfile.ActivityLevel.Name *turn this into the text version or get rid of this and just link to a new Activity log table by fk. can also then get rid of the class</p>
                             </div>
                         </div>
                         <div class="row">
@@ -77,7 +77,7 @@
                                 <label>Macros</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.Macros *will need to modify the model to allow the values within</p>
+                                <p>@Model.UserProfile.Macros *will need to modify the model to allow the values within</p>
                             </div>
                         </div>
                         <div class="row">
@@ -85,7 +85,8 @@
                                 <label>Weight Unit</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.WeightUnit.Name </p>
+                                <p>@Model.UserProfile.WeightUnit.Name </p>
+                                <p>**DISPLAY WEIGHT HERE</p>
                             </div>
                         </div>
                         <div class="row">
@@ -93,7 +94,7 @@
                                 <label>Height Unit</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.HeightUnit.Name </p>
+                                <p>@Model.UserProfile.HeightUnit.Name </p>
                             </div>
                         </div>
                         *sort out drop down boxes for height and weight unit and sex etc where a pre-written value is required

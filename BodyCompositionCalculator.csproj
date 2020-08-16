@@ -329,9 +329,14 @@
     <Compile Include="Migrations\202008151105041_AddBmrCoefficientToSexModel.designer.cs">
       <DependentUpon>202008151105041_AddBmrCoefficientToSexModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008161521249_UpdateHeightInCmToDouble.cs" />
+    <Compile Include="Migrations\202008161521249_UpdateHeightInCmToDouble.designer.cs">
+      <DependentUpon>202008161521249_UpdateHeightInCmToDouble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\CaloriesPerWeightUnit.cs" />
+    <Compile Include="Models\Calculation_Constants\HeightUnits.cs" />
     <Compile Include="Models\Calculators.cs" />
     <Compile Include="Models\Goal.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -346,6 +351,7 @@
     <Compile Include="Models\Validation\EndDateGreaterThanStartDate.cs" />
     <Compile Include="Models\ViewModels\EditProfileFormViewModel.cs" />
     <Compile Include="Models\HeightUnit.cs" />
+    <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\WeightUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -2508,6 +2514,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008151105041_AddBmrCoefficientToSexModel.resx">
       <DependentUpon>202008151105041_AddBmrCoefficientToSexModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008161521249_UpdateHeightInCmToDouble.resx">
+      <DependentUpon>202008161521249_UpdateHeightInCmToDouble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

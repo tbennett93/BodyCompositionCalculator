@@ -61,9 +61,9 @@ namespace BodyCompositionCalculator.Models
 
 
         //Unit Conversions
-            public static int FeetAndInchesToCM(int feet, int inches)
+            public static double FeetAndInchesToCM(int feet, int inches)
         {
-            int cm = (int)((30.48 * feet) + (2.54 * inches));
+            double cm = (30.48 * feet) + (2.54 * inches);
             return cm;
         }
 
@@ -72,6 +72,23 @@ namespace BodyCompositionCalculator.Models
         {
             double cm = (double)(2.54 * inches);
             return cm;
+        }
+
+        //Unit Conversions
+        public static int CmToFt(double cm)
+        {
+            int Ft = Convert.ToInt32(Math.Floor(cm/30.48));
+            return Ft;
+        }    
+
+        public static int CmToInches(double cm)
+        {
+            //Used to get the remaining inches once the feet have been taken off the total cm
+            int Inches = Convert.ToInt32(
+                //Get the number after the decimal point and multiply by 12 (30.48/2.54 || inches in a foot) to get inches
+                ((cm / 30.48)-Math.Floor(cm / 30.48)) * 12
+                );
+            return Inches;
         }
 
         public static double LbsToKG(double lbs)

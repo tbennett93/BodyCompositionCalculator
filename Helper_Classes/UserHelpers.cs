@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using BodyCompositionCalculator.Models;
@@ -33,5 +34,16 @@ namespace BodyCompositionCalculator.Helper_Classes
                 var userID = GetUserId();
                 return new ApplicationDbContext().UserProfiles.SingleOrDefault(u => u.ApplicationUserId == userID);
             }
+
+
+            public static string GetHeightUnit()
+            {
+                var userId = GetUserProfile().Id;
+                return new ApplicationDbContext().UserProfiles
+                    .Include(m => m.HeightUnit)
+                    .Where(m => m.Id == userId)
+                    .Select(m => m.HeightUnit.Name)
+                    .SingleOrDefault();
+            }            
     }
 }

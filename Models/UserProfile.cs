@@ -22,7 +22,7 @@ namespace BodyCompositionCalculator.Models
         [Required]
         public DateTime DateOfBirth { get; set; }
         [Required]
-        public int HeightInCm { get; set; }
+        public double HeightInCm { get; set; }
 
         //Create a foreign key to link back to the user
         //This foreign key will be populated with the ApplicationUser Id Pk column value when a new user is submitted by getting the active user id

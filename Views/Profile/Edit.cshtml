@@ -56,15 +56,36 @@
 
                 @Html.ValidationMessageFor(c => c.UserProfile.Sex)
             </div>
-            <div class="form-group">
+
+
+            @*<div class="form-group">
                 <label>Height Unit</label>
                 @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
                     new SelectList(Model.HeightUnits, "Id", "Name"),
                     "Select Height Unit",
-                    new { @class = "form-control" }
+                    new { @class = "form-control form-inline" }
                     )
                 @Html.ValidationMessageFor(c => c.UserProfile.HeightUnit)
+            </div>*@
+
+            //TODO Add option for feet and inches
+            <div class="form-group">
+                <label>Height</label>
+                <div class="form-group form-inline">
+                    @Html.TextBoxFor(m => m.HeightInputA, new {@class = "form-control col-2", @id = "weightInputA", @min = "0"})
+                    @Html.TextBoxFor(m => m.HeightInputB, new {@class = "form-control col-2", @id = "weightInputB", @min = "0" })
+                    @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
+                        new SelectList(Model.HeightUnits, "Id", "Name"),
+                        "Select Height Unit",
+                        new { @class = "form-control col-1" }
+                        )
+                </div>
+                @Html.ValidationMessageFor(c => c.HeightInputA)
+                @Html.ValidationMessageFor(c => c.HeightInputB)
+                @Html.ValidationMessageFor(c => c.UserProfile.HeightUnit)
+
             </div>
+
             <div class="form-group">
                 <label>Weight Unit</label>
                 @Html.DropDownListFor(m => m.UserProfile.WeightUnitId,
@@ -75,13 +96,7 @@
 
                 @Html.ValidationMessageFor(c => c.UserProfile.WeightUnitId)
             </div>
-            //TODO Add option for feet and inches
-            <div class="form-group">
-                <label>Height In Cm</label>
-                @Html.TextBoxFor(m => m.UserProfile.HeightInCm, new { @class = "form-control", @id = "height" })
 
-                @Html.ValidationMessageFor(c => c.UserProfile.HeightInCm)
-            </div>
             <div class="form-group">
                 <label>Activity Level</label>
                 @Html.DropDownListFor(m => m.UserProfile.ActivityLevelId,
@@ -127,7 +142,7 @@
 
             <p>Info here regarding activitty type </p>
 
-            }
+        }
 
 
         <script>

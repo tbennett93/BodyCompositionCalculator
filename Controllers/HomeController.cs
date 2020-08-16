@@ -18,7 +18,6 @@ namespace BodyCompositionCalculator.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IdentityDbContext _identityContext;
         private UserProfile currentUserProfile;
-        private string userId;
 
 
         public HomeController()
