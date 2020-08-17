@@ -44,6 +44,16 @@ namespace BodyCompositionCalculator.Helper_Classes
                     .Where(m => m.Id == userId)
                     .Select(m => m.HeightUnit.Name)
                     .SingleOrDefault();
+            }               
+            
+            public static string GetWeightUnit()
+            {
+                var userId = GetUserProfile().Id;
+                return new ApplicationDbContext().UserProfiles
+                    .Include(m => m.HeightUnit)
+                    .Where(m => m.Id == userId)
+                    .Select(m => m.WeightUnit.Name)
+                    .SingleOrDefault();
             }            
     }
 }

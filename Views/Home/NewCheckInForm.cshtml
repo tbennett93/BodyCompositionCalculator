@@ -1,6 +1,6 @@
 ﻿@using System.Activities.Expressions
 @using System.Web.UI.WebControls
-@model BodyCompositionCalculator.Models.UserProgressLog
+@model BodyCompositionCalculator.Models.ViewModels.CheckInFormViewModel
 
 
 @{
@@ -11,6 +11,7 @@
     <script src="https://kit.fontawesome.com/7ec14fb925.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     @Styles.Render("~/Content/datepicker")
+    @Styles.Render("~/Content/my-styles/profile-edit-style.css")
 </head>
 
 
@@ -22,56 +23,68 @@
     @Html.ValidationSummary()
     @*//TODO set this as today by default*@
 
-    @using (Html.BeginForm("AddNewProgressLog", "Home", FormMethod.Post, new { @class = "form-group" }))
+    @using (Html.BeginForm("AddNewProgressLog", "Home", FormMethod.Post))
     {
         <label>Date</label>
-        <div class="form-group">
+        <div class="form-group ">
             <div id="date" , class="input-group date datepicker">
-                @Html.TextBoxFor(model => model.Date, "{0: dd MMM yyyy}", new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.UserProgressLog.Date, "{0: dd MMM yyyy}", new { @class = "form-control col-2" })
                 <div class="input-group-append input-group-addon">
                     <span class="input-group-text">
                         <span class="fa fa-calendar"></span>
                     </span>
                 </div>
             </div>
-            @Html.ValidationMessageFor(m => m.Date)
+            @Html.ValidationMessageFor(m => m.UserProgressLog.Date)
         </div>
 
 
         <label>Weight</label>
-        <div class="form-group input-group">
-            @Html.TextBoxFor(m => m.WeightInKg, new { @class = "form-control", @min = "0" })
-            <div class="input-group-append">
-                <span class="input-group-text">
-                    <i class="fas fa-weight"></i>
-                </span>
+
+        <div class="form-group">
+            <div class="form-group form-inline">
+                @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-1", @id = "weightInputA", @min = "0" })
+                @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-1", @id = "weightInputB", @min = "0" })
+                <p class ="form-control" id="weightUnit">@Model.WeightUnit</p>
+
+               TODO - format the KG box the same as the calendar one or vice versa?
             </div>
-            @Html.ValidationMessageFor(m => m.WeightInKg)
+
+            @Html.ValidationMessageFor(m => m.UserProgressLog.WeightInKg)
         </div>
 
-
         <label>Body Fat</label>
+        <div class="form-group form-inline">
+            @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control col-2", @min = "0" })
+            <p class ="form-control">%</p>
+        </div>
+        @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
+
+
+        @*<label>Body Fat</label>
         <div class="form-group input-group">
-            @Html.TextBoxFor(m => m.BodyFat, new { @class = "form-control", @min = "0" })
+            @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control", @min = "0" })
             <div class="input-group-append">
                 <span class="input-group-text">
                     <i class="fas fa-percentage"></i>
                 </span>
             </div>
-            @Html.ValidationMessageFor(m => m.BodyFat)
-        </div>
+            @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
+        </div>*@
 
 
 
-        @Html.HiddenFor(m => m.Id)
-        @Html.HiddenFor(m => m.UserProfileId)
-        @Html.HiddenFor(m => m.UserProfile)
-        @Html.HiddenFor(m => m.Photo)
+        @Html.HiddenFor(m => m.UserProgressLog.Id)
+        @Html.HiddenFor(m => m.UserProgressLog.UserProfileId)
+        @Html.HiddenFor(m => m.UserProgressLog.UserProfile)
+        @Html.HiddenFor(m => m.UserProgressLog.Photo)
         @Html.AntiForgeryToken()
         ;
 
 
         <button type="submit" class="btn btn-primary">Save</button>
+
+        <p class="subtext">Weight unit can be changed in the profile screen</p>
     }
 
 
@@ -79,7 +92,22 @@
 <script>
         
 
-        $(document).ready(function () {
+    $(document).ready(function () {
+
+
+        var weightUnit = $('#weightUnit').text();
+
+        if (weightUnit == 'kg' || weightUnit == 'lbs') {
+            $('#weightInputB').hide();
+            $('#weightInputA').removeClass("col-1");
+            $('#weightInputA').addClass("col-2");
+        }
+
+
+
+
+
+
 
             $('#date.datepicker').datepicker({
                 format: 'dd M yyyy',

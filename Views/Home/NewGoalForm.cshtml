@@ -1,6 +1,6 @@
 ﻿@using System.Activities.Expressions
 @using System.Web.UI.WebControls
-@model BodyCompositionCalculator.Models.Goal
+@model BodyCompositionCalculator.Models.ViewModels.EditGoalViewModel
 
 
 @{
@@ -18,7 +18,7 @@
 
 <body>
 
-    <h2>Edit Goal</h2>
+    <h2>Edit Goal - have this say New goal if one isn't set</h2>
     @Html.ValidationSummary()
 
     @using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new { @id = "newGoalForm", @class = "form-group" }))
@@ -26,76 +26,95 @@
         <label>Start Date</label>
         <div class="form-group">
             <div id="startDate" , class="input-group date datepicker">
-                @Html.TextBoxFor(model => model.StartDate, "{0: dd MMM yyyy}", new { @id = "startDateText", @class = "form-control" })
+                @Html.TextBoxFor(model => model.Goal.StartDate, "{0: dd MMM yyyy}", new { @id = "startDateText", @class = "form-control col-2" })
                 <div class="input-group-append input-group-addon">
                     <span class="input-group-text">
                         <span class="fa fa-calendar"></span>
                     </span>
                 </div>
             </div>
-            @Html.ValidationMessageFor(m => m.StartDate)
+            @Html.ValidationMessageFor(m => m.Goal.StartDate)
         </div>
             <label>End Date</label>
             <div class="form-group">
                 <div id="endDate" , class="input-group date datepicker">
-                    @Html.TextBoxFor(model => model.EndDate, "{0: dd MMM yyyy}", new { @id = "endDateText", @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Goal.EndDate, "{0: dd MMM yyyy}", new { @id = "endDateText", @class = "form-control col-2" })
                     <div class="input-group-append input-group-addon">
                         <span class="input-group-text">
                             <span class="fa fa-calendar"></span>
                         </span>
                     </div>
                 </div>
-                @Html.ValidationMessageFor(m => m.EndDate)
+                @Html.ValidationMessageFor(m => m.Goal.EndDate)
             </div>
 
 
 
             @*<p>Working Backup</p>
         <div class="input-group date datepicker">
-            @Html.TextBoxFor(model => model.EndDate, "{0: dd MMM yyyy}", new { @class = "form-control", @id = "startDate" })
+            @Html.TextBoxFor(model => model.Goal.EndDate, "{0: dd MMM yyyy}", new { @class = "form-control", @id = "startDate" })
             <div class="input-group-append input-group-addon">
                 <span class="input-group-text"><span class="fa fa-calendar"></span></span>
             </div>
         </div>
 
                     @*<div class="input-group date datepicker">
-            @Html.TextBoxFor(model => model.EndDate, "{0: dd MMM yyyy}", new { @class = "form-control", @id = "startDate" })
+            @Html.TextBoxFor(model => model.Goal.EndDate, "{0: dd MMM yyyy}", new { @class = "form-control", @id = "startDate" })
             <span class="input-group-addon">
                 <i class="input-group-text fas fa-calendar-alt  "> </i>
             </span>
         </div>*@
 
 
-            <div class="form-group">
-                <label>Starting Weight</label>
-                @Html.TextBoxFor(m => m.StartWeightInKg, new { @class = "form-control", @id = "startWeight", @min = "0" })
-                @Html.ValidationMessageFor(m => m.StartWeightInKg)
+        <div class="form-group">
+            <label>Starting Weight</label>
+            <div class="form-group form-inline">
+                @*@Html.TextBoxFor(m => m.Goal.StartWeightInKg, new {@class = "form-control", @id = "startWeight", @min = "0"})*@
+                @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col-1", @id = "startWeightInputA", @min = "0" })
+                @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col-1", @id = "startWeightInputB", @min = "0" })
+                <p class="form-control" id="weightUnit">@Model.WeightUnit</p>
+                @Html.ValidationMessageFor(m => m.Goal.StartWeightInKg)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Target Weight</label>
+            <div class="form-group form-inline">
+                @*@Html.TextBoxFor(m => m.Goal.TargetWeightInKg, new { @class = "form-control", @id = "targetWeight", @min = "0" })*@
+                @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col-1", @id = "targetWeightInputA", @min = "0" })
+                @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col-1", @id = "targetWeightInputB", @min = "0" })
+                <p class="form-control">@Model.WeightUnit</p>
+            </div>
+            @Html.ValidationMessageFor(m => m.Goal.TargetWeightInKg)
+        </div>
+
+        <label>Starting Body Fat</label>
+
+            <div class="form-group form-inline">
+                @Html.TextBoxFor(m => m.Goal.StartBodyFat, new { @class = "form-control col-2", @min = "0" })
+                <p class ="form-control">%</p>
+
+                @*TODO - implement this*@
+                <button>Calculate</button>
+
             </div>
 
-            <div class="form-group">
-                <label>Target Weight</label>
-                @Html.TextBoxFor(m => m.TargetWeightInKg, new { @class = "form-control" , @id = "targetWeight", @min = "0" })
-                @Html.ValidationMessageFor(m => m.TargetWeightInKg)
-            </div>
+        @Html.ValidationMessageFor(m => m.Goal.StartBodyFat)
 
-            <div class="form-group">
-                <label>Starting Body Fat</label>
-                @Html.TextBoxFor(m => m.StartBodyFat, new { @class = "form-control", @min = "0" })
+        <label>Target Body Fat</label>
 
-                @Html.ValidationMessageFor(m => m.StartBodyFat)
-            </div>
+            <div class="form-group form-inline">
+                @Html.TextBoxFor(m => m.Goal.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col-2", @min = "0" })
+                <p class="form-control">%</p>
 
-            <div class="form-group">
-                <label>Target Body Fat</label>
-                @Html.TextBoxFor(m => m.TargetBodyFat, new { @id = "targetBfText", @class = "form-control", @min = "0" })
-                @Html.ValidationMessageFor(m => m.TargetBodyFat)
+                @Html.ValidationMessageFor(m => m.Goal.TargetBodyFat)
             </div>
 
 
-            @Html.HiddenFor(m => m.Id)
-            @Html.HiddenFor(m => m.UserProfileId)
-            @Html.HiddenFor(m => m.FinalWeightInKg)
-            @Html.HiddenFor(m => m.FinalBodyFat)
+            @Html.HiddenFor(m => m.Goal.Id)
+            @Html.HiddenFor(m => m.Goal.UserProfileId)
+            @Html.HiddenFor(m => m.Goal.FinalWeightInKg)
+            @Html.HiddenFor(m => m.Goal.FinalBodyFat)
             @Html.AntiForgeryToken()
             ;
 
@@ -115,6 +134,19 @@
             <script>
 
                 $(document).ready(function () {
+
+                    var weightUnit = $('#weightUnit').text();
+
+                    if (weightUnit == 'kg' || weightUnit == 'lbs') {
+                        $('#startWeightInputB').hide();
+                        $('#startWeightInputA').removeClass("col-1");
+                        $('#startWeightInputA').addClass("col-2");
+                        $('#targetWeightInputB').hide();
+                        $('#targetWeightInputA').removeClass("col-1");
+                        $('#targetWeightInputA').addClass("col-2");
+                    }
+
+
 
                     var startWeight = $('#startWeight').val();
                     var targetWeight = $('#targetWeight').val();

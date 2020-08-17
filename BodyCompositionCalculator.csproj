@@ -333,10 +333,15 @@
     <Compile Include="Migrations\202008161521249_UpdateHeightInCmToDouble.designer.cs">
       <DependentUpon>202008161521249_UpdateHeightInCmToDouble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008171952168_InsertLbsAndStoneIntoWeightUnitsTable.cs" />
+    <Compile Include="Migrations\202008171952168_InsertLbsAndStoneIntoWeightUnitsTable.designer.cs">
+      <DependentUpon>202008171952168_InsertLbsAndStoneIntoWeightUnitsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\CaloriesPerWeightUnit.cs" />
     <Compile Include="Models\Calculation_Constants\HeightUnits.cs" />
+    <Compile Include="Models\Calculation_Constants\WeightUnits.cs" />
     <Compile Include="Models\Calculators.cs" />
     <Compile Include="Models\Goal.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -349,6 +354,8 @@
     <Compile Include="Models\UserProgressLog.cs" />
     <Compile Include="Models\UserProgressLogWithGoal.cs" />
     <Compile Include="Models\Validation\EndDateGreaterThanStartDate.cs" />
+    <Compile Include="Models\ViewModels\CheckInFormViewModel.cs" />
+    <Compile Include="Models\ViewModels\EditGoalViewModel.cs" />
     <Compile Include="Models\ViewModels\EditProfileFormViewModel.cs" />
     <Compile Include="Models\HeightUnit.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
@@ -2518,6 +2525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008161521249_UpdateHeightInCmToDouble.resx">
       <DependentUpon>202008161521249_UpdateHeightInCmToDouble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008171952168_InsertLbsAndStoneIntoWeightUnitsTable.resx">
+      <DependentUpon>202008171952168_InsertLbsAndStoneIntoWeightUnitsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

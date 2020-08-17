@@ -8,6 +8,8 @@ using System.Web.Routing;
 using System.Data.Entity;
 using BodyCompositionCalculator.Controllers.API;
 using BodyCompositionCalculator.Models;
+using BodyCompositionCalculator.Models.Calculation_Constants;
+using BodyCompositionCalculator.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -73,7 +75,7 @@ namespace BodyCompositionCalculator.Controllers
         }
 
      
-        public ActionResult AddNewGoal(Goal newGoal)
+        public ActionResult AddNewGoal(EditGoalViewModel newGoal)
         {
 
 
@@ -99,8 +101,8 @@ namespace BodyCompositionCalculator.Controllers
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
             {
 
-                newGoal.UserProfileId = userProfileId;
-                _context.Goals.Add(newGoal);
+                newGoal.Goal.UserProfileId = userProfileId;
+                _context.Goals.Add(newGoal.Goal);
                 _context.SaveChanges();
                 return RedirectToAction("Index", new { controller = "Home" });
             }
@@ -119,16 +121,57 @@ namespace BodyCompositionCalculator.Controllers
         public ActionResult NewGoalForm()
         {
             //If no goal found, fetch blank goal page. If existing goal found, fetch existing info into page
-            Goal viewModel;
+            EditGoalViewModel viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            int startWeightInputA = 0;
+            int startWeightInputB = 0;
+            int targetWeightInputA = 0;
+            int targetWeightInputB = 0;
+
+            string weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
+
+
+
+
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
-                viewModel = new Goal
+                viewModel = new EditGoalViewModel()
                 {
-                    UserProfileId = userProfileId
+                    Goal = new Goal
+                    {
+                        UserProfileId = userProfileId,
+                    },
+                    StartWeightInputA = startWeightInputA,
+                    StartWeightInputB = startWeightInputB,
+                    TargetWeightInputA = targetWeightInputA,
+                    TargetWeightInputB = targetWeightInputB,
+                    WeightUnit = weightUnit
                 };
             else
             {
-                viewModel = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
+                double startWeight = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId).StartWeightInKg;
+                double targetWeight = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId).TargetWeightInKg;
+                if (weightUnit.Equals(WeightUnits.Lbs) || weightUnit.Equals(WeightUnits.Kg))
+                {
+                    startWeightInputA = Convert.ToInt32(startWeight);
+                    targetWeightInputA = Convert.ToInt32(targetWeight);
+                }
+                else if (weightUnit == WeightUnits.LbsAndStone)
+                {
+                    startWeightInputA = Convert.ToInt32(Calculators.KgsToStone(startWeight));
+                    startWeightInputB = Convert.ToInt32(Calculators.KgsToStone(targetWeight));
+                    targetWeightInputA = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(startWeight));
+                    targetWeightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(targetWeight));
+                }
+
+                viewModel = new EditGoalViewModel
+                {
+                    Goal = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId),
+                    StartWeightInputA = startWeightInputA,
+                    StartWeightInputB = startWeightInputB,
+                    TargetWeightInputA = targetWeightInputA,
+                    TargetWeightInputB = targetWeightInputB,
+                    WeightUnit = weightUnit
+                };
             }
             return View(viewModel);
         }
@@ -150,20 +193,48 @@ namespace BodyCompositionCalculator.Controllers
         public ActionResult NewCheckInForm()
         {
 
+
             //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
-            UserProgressLog viewModel;
+            CheckInFormViewModel viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            double weightInputA = 0.0;
+            double weightInputB = 0.0;
+            var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
+            double weight = _context.UserProfiles.Where(m => m.Id == userProfileId).Select(m => m.HeightInCm)
+                .SingleOrDefault();
+
+            if (weightUnit.Equals(WeightUnits.Kg))
+                weightInputA = Convert.ToInt32(weight);
+            else if (weightUnit.Equals(WeightUnits.Lbs))
+            {
+                weightInputA = Convert.ToInt32(Calculators.KgsToLbs(weight));
+            }
+            else if (weightUnit.Equals(WeightUnits.LbsAndStone))
+            {
+                weightInputA = Convert.ToInt32(Calculators.KgsToStone(weight));
+                weightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(weight));
+            }
             if (_context.UserProgressLogs.SingleOrDefault(g =>
                 g.UserProfileId == userProfileId && g.Date == DateTime.Today) == null)
-                viewModel = new UserProgressLog();
+                viewModel = new CheckInFormViewModel
+                {
+                    UserProgressLog = new UserProgressLog(),
+                    WeightInputA = weightInputA,
+                    WeightInputB = weightInputB,
+                    WeightUnit = weightUnit
+                };
             else
-            { 
-                viewModel = _context.UserProgressLogs.SingleOrDefault(g =>
-                g.UserProfileId == userProfileId && g.Date == DateTime.Today);
+            {
+                viewModel = new CheckInFormViewModel
+                {
+                    UserProgressLog = _context.UserProgressLogs.SingleOrDefault(g =>
+                        g.UserProfileId == userProfileId && g.Date == DateTime.Today),
+                    WeightInputA = weightInputA,
+                    WeightInputB = weightInputB,
+                    WeightUnit = weightUnit
+                };
             }
-
             return View(viewModel);
-
 
         }
 
