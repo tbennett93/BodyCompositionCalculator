@@ -21,7 +21,7 @@
     <h2>Edit Goal - have this say New goal if one isn't set</h2>
     @Html.ValidationSummary()
 
-    @using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new { @id = "newGoalForm", @class = "form-group" }))
+    @using (Html.BeginForm("AddNewGoal", "Home"))
     {
         <label>Start Date</label>
         <div class="form-group">
@@ -71,7 +71,7 @@
             <div class="form-group form-inline">
                 @*@Html.TextBoxFor(m => m.Goal.StartWeightInKg, new {@class = "form-control", @id = "startWeight", @min = "0"})*@
                 @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col-1", @id = "startWeightInputA", @min = "0" })
-                @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col-1", @id = "startWeightInputB", @min = "0" })
+                @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col-1", @id = "startWeightInputB", @min = "0", @max = "13" })
                 <p class="form-control" id="weightUnit">@Model.WeightUnit</p>
                 @Html.ValidationMessageFor(m => m.Goal.StartWeightInKg)
             </div>
@@ -82,7 +82,7 @@
             <div class="form-group form-inline">
                 @*@Html.TextBoxFor(m => m.Goal.TargetWeightInKg, new { @class = "form-control", @id = "targetWeight", @min = "0" })*@
                 @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col-1", @id = "targetWeightInputA", @min = "0" })
-                @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col-1", @id = "targetWeightInputB", @min = "0" })
+                @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col-1", @id = "targetWeightInputB", @min = "0" , @max="13"})
                 <p class="form-control">@Model.WeightUnit</p>
             </div>
             @Html.ValidationMessageFor(m => m.Goal.TargetWeightInKg)
@@ -135,6 +135,24 @@
 
                 $(document).ready(function () {
 
+                    function nullZeroVals(field) {
+                        if (field.val() == 0)
+                            field.val("");
+                    }
+
+                    nullZeroVals($('#startWeightInputA'));
+                    nullZeroVals($('#startWeightInputB'));
+                    nullZeroVals($('#targetWeightInputA'));
+                    nullZeroVals($('#targetWeightInputB'));
+
+
+                    $('#startDate').datepicker({
+                        format: 'dd M yyyy',
+                        todayBtn: true,
+                        autoclose: true,
+                        todayHighlight: true
+                    });
+
                     var weightUnit = $('#weightUnit').text();
 
                     if (weightUnit == 'kg' || weightUnit == 'lbs') {
@@ -164,6 +182,8 @@
                         $('#startDate').datepicker('clearDates'); 
                         $('#endDate').datepicker('clearDates'); 
                     }
+
+
 
 
                     //https://bootstrap-datepicker.readthedocs.io/en/

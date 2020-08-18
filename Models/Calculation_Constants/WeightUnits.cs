@@ -9,7 +9,7 @@ namespace BodyCompositionCalculator.Models.Calculation_Constants
     {
         public const string Kg = "kg";
         public const string Lbs = "lbs";
-        public const string LbsAndStone = "lbs/st";
+        public const string LbsAndStone = "st/lbs";
 
     }
 }

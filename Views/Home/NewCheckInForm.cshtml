@@ -23,7 +23,7 @@
     @Html.ValidationSummary()
     @*//TODO set this as today by default*@
 
-    @using (Html.BeginForm("AddNewProgressLog", "Home", FormMethod.Post))
+    @using (Html.BeginForm("AddNewProgressLog", "Home"))
     {
         <label>Date</label>
         <div class="form-group ">
@@ -40,14 +40,13 @@
 
 
         <label>Weight</label>
-
         <div class="form-group">
             <div class="form-group form-inline">
                 @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-1", @id = "weightInputA", @min = "0" })
-                @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-1", @id = "weightInputB", @min = "0" })
-                <p class ="form-control" id="weightUnit">@Model.WeightUnit</p>
+                @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-1", @id = "weightInputB", @min = "0", @max = "13" })
+                <p class="form-control" id="weightUnit">@Model.WeightUnit</p>
 
-               TODO - format the KG box the same as the calendar one or vice versa?
+                TODO - format the KG box the same as the calendar one or vice versa?
             </div>
 
             @Html.ValidationMessageFor(m => m.UserProgressLog.WeightInKg)
@@ -55,22 +54,22 @@
 
         <label>Body Fat</label>
         <div class="form-group form-inline">
-            @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control col-2", @min = "0" })
-            <p class ="form-control">%</p>
+            @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control col-2", @min = "0", @max = "100" })
+            <p class="form-control">%</p>
         </div>
         @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
 
 
         @*<label>Body Fat</label>
-        <div class="form-group input-group">
-            @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control", @min = "0" })
-            <div class="input-group-append">
-                <span class="input-group-text">
-                    <i class="fas fa-percentage"></i>
-                </span>
-            </div>
-            @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
-        </div>*@
+            <div class="form-group input-group">
+                @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control", @min = "0" })
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="fas fa-percentage"></i>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
+            </div>*@
 
 
 
@@ -84,29 +83,24 @@
 
         <button type="submit" class="btn btn-primary">Save</button>
 
-        <p class="subtext">Weight unit can be changed in the profile screen</p>
     }
 
+    <p class="subtext">Weight unit can be changed in the profile screen</p>
 
 
-<script>
-        
-
-    $(document).ready(function () {
+    <script>
 
 
-        var weightUnit = $('#weightUnit').text();
-
-        if (weightUnit == 'kg' || weightUnit == 'lbs') {
-            $('#weightInputB').hide();
-            $('#weightInputA').removeClass("col-1");
-            $('#weightInputA').addClass("col-2");
-        }
+        $(document).ready(function () {
 
 
+            var weightUnit = $('#weightUnit').text();
 
-
-
+            if (weightUnit == 'kg' || weightUnit == 'lbs') {
+                $('#weightInputB').hide();
+                $('#weightInputA').removeClass("col-1");
+                $('#weightInputA').addClass("col-2");
+            }
 
 
             $('#date.datepicker').datepicker({
@@ -118,8 +112,8 @@
 
         });
 
-</script>
-@Scripts.Render("~/bundles/jqueryval")
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
 
 </body>
 

@@ -337,6 +337,10 @@
     <Compile Include="Migrations\202008171952168_InsertLbsAndStoneIntoWeightUnitsTable.designer.cs">
       <DependentUpon>202008171952168_InsertLbsAndStoneIntoWeightUnitsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008181709149_UpdateLbsAndStoneName.cs" />
+    <Compile Include="Migrations\202008181709149_UpdateLbsAndStoneName.designer.cs">
+      <DependentUpon>202008181709149_UpdateLbsAndStoneName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\CaloriesPerWeightUnit.cs" />
@@ -2260,7 +2264,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\NewGoalForm - Copy.cshtml" />
     <Content Include="Views\Guides\Index.cshtml" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
@@ -2528,6 +2531,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008171952168_InsertLbsAndStoneIntoWeightUnitsTable.resx">
       <DependentUpon>202008171952168_InsertLbsAndStoneIntoWeightUnitsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181709149_UpdateLbsAndStoneName.resx">
+      <DependentUpon>202008181709149_UpdateLbsAndStoneName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

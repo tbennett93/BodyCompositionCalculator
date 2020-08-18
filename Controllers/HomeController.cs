@@ -77,8 +77,6 @@ namespace BodyCompositionCalculator.Controllers
      
         public ActionResult AddNewGoal(EditGoalViewModel newGoal)
         {
-
-
             if (!ModelState.IsValid)
             {
                 foreach (ModelState modelState in ViewData.ModelState.Values)
@@ -90,7 +88,31 @@ namespace BodyCompositionCalculator.Controllers
                 }
                 return View("NewGoalForm", newGoal);
             }
-            
+
+            double startWeight = 0.0;
+            double targetWeight = 0.0;
+
+            if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Kg))
+            {
+                startWeight = newGoal.StartWeightInputA;
+                targetWeight = newGoal.TargetWeightInputA;
+            }
+            else if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Lbs))
+            {
+                startWeight = Calculators.LbsToKG(newGoal.StartWeightInputA);
+                targetWeight = Calculators.LbsToKG(newGoal.TargetWeightInputA);
+            }
+            else if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.LbsAndStone))
+            {
+                startWeight = Calculators.StToKg(newGoal.StartWeightInputA) +
+                              Calculators.LbsToKG(newGoal.StartWeightInputB);
+
+                targetWeight = Calculators.StToKg(newGoal.TargetWeightInputA) +
+                               Calculators.LbsToKG(newGoal.TargetWeightInputB);
+            }
+
+            newGoal.Goal.StartWeightInKg = startWeight;
+            newGoal.Goal.TargetWeightInKg = targetWeight;
 
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
@@ -102,16 +124,18 @@ namespace BodyCompositionCalculator.Controllers
             {
 
                 newGoal.Goal.UserProfileId = userProfileId;
+                
                 _context.Goals.Add(newGoal.Goal);
                 _context.SaveChanges();
                 return RedirectToAction("Index", new { controller = "Home" });
             }
 
 
+            
             //Update the existing Goal record
             _context.Entry(_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId))
                 .CurrentValues
-                .SetValues(newGoal);
+                .SetValues(newGoal.Goal);
             _context.SaveChanges();
             return RedirectToAction("Index", new { controller = "Home" });
         }
@@ -139,6 +163,8 @@ namespace BodyCompositionCalculator.Controllers
                     Goal = new Goal
                     {
                         UserProfileId = userProfileId,
+                        StartDate = DateTime.Today,
+                        EndDate = DateTime.Today.AddDays(30)
                     },
                     StartWeightInputA = startWeightInputA,
                     StartWeightInputB = startWeightInputB,
@@ -150,16 +176,21 @@ namespace BodyCompositionCalculator.Controllers
             {
                 double startWeight = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId).StartWeightInKg;
                 double targetWeight = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId).TargetWeightInKg;
-                if (weightUnit.Equals(WeightUnits.Lbs) || weightUnit.Equals(WeightUnits.Kg))
+                if (weightUnit.Equals(WeightUnits.Kg))
                 {
                     startWeightInputA = Convert.ToInt32(startWeight);
                     targetWeightInputA = Convert.ToInt32(targetWeight);
                 }
+                if (weightUnit.Equals(WeightUnits.Lbs))
+                {
+                    startWeightInputA = Convert.ToInt32(Calculators.KgsToLbs(startWeight));
+                    targetWeightInputA = Convert.ToInt32(Calculators.KgsToLbs(targetWeight));
+                }
                 else if (weightUnit == WeightUnits.LbsAndStone)
                 {
                     startWeightInputA = Convert.ToInt32(Calculators.KgsToStone(startWeight));
-                    startWeightInputB = Convert.ToInt32(Calculators.KgsToStone(targetWeight));
-                    targetWeightInputA = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(startWeight));
+                    startWeightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(startWeight));
+                    targetWeightInputA = Convert.ToInt32(Calculators.KgsToStone(targetWeight));
                     targetWeightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(targetWeight));
                 }
 
@@ -189,6 +220,7 @@ namespace BodyCompositionCalculator.Controllers
 
             return View();
         }
+
 
         public ActionResult NewCheckInForm()
         {
@@ -238,33 +270,121 @@ namespace BodyCompositionCalculator.Controllers
 
         }
 
-        public ActionResult AddNewProgressLog(UserProgressLog userProgressLog)
+        public ActionResult AddNewProgressLog(CheckInFormViewModel formUserProgressLog)
         {
+
             if (!ModelState.IsValid)
-                return View("NewCheckInForm", userProgressLog);
+            {
+                foreach (ModelState modelState in ViewData.ModelState.Values)
+                {
+                    foreach (ModelError error in modelState.Errors)
+                    {
+                        System.Diagnostics.Debug.WriteLine(error);
+                    }
+                }
+                return View("NewCheckInForm", formUserProgressLog);
+
+            }
 
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = currentUserProfile.Id;
 
+
+            double startWeight = 0.0;
+            double targetWeight = 0.0;
+
+            if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Kg))
+            {
+                startWeight = formUserProgressLog.WeightInputA;
+            }
+            else if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Lbs))
+            {
+                startWeight = Calculators.LbsToKG(formUserProgressLog.WeightInputA);
+
+            }
+            else if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.LbsAndStone))
+            {
+                startWeight = Calculators.StToKg(formUserProgressLog.WeightInputA) +
+                              Calculators.LbsToKG(formUserProgressLog.WeightInputB);
+
+            }
+
+            formUserProgressLog.UserProgressLog.WeightInKg = startWeight;
+
             //Check for log on the same date, if it doesn't exist, insert, else update
             if (_context.UserProgressLogs.SingleOrDefault(g =>
-                g.UserProfileId == userProfileId && g.Date == userProgressLog.Date) == null)
+                g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date) == null)
             {
                 //Insert
-                userProgressLog.UserProfileId = userProfileId;
-                _context.UserProgressLogs.Add(userProgressLog);
+                formUserProgressLog.UserProgressLog.UserProfileId = userProfileId;
+                _context.UserProgressLogs.Add(formUserProgressLog.UserProgressLog);
                 _context.SaveChanges();
                 return RedirectToAction("Index", new { controller = "Home" });
             }
             //Update
-            _context.Entry(_context.UserProgressLogs.SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == userProgressLog.Date))
+            _context.Entry(_context.UserProgressLogs.
+                    SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date))
                 .CurrentValues
-                .SetValues(userProgressLog);
+                .SetValues(formUserProgressLog.UserProgressLog);
 
             _context.SaveChanges();
             return RedirectToAction("Index", new { controller = "Home" });
 
         }
+        //public ActionResult NewCheckInForm()
+        //{
+
+        //    //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
+        //    CheckInFormViewModel viewModel = new CheckInFormViewModel();
+        //    var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+        //    viewModel.WeightUnit = "kg";
+        //    viewModel.WeightInputA = 180.0;
+        //    viewModel.WeightInputB = 0.0;
+        //    if (_context.UserProgressLogs.SingleOrDefault(g =>
+        //        g.UserProfileId == userProfileId && g.Date == DateTime.Today) == null)
+        //        viewModel.UserProgressLog = new UserProgressLog();
+
+
+        //    else
+        //    {
+        //        viewModel.UserProgressLog = _context.UserProgressLogs.SingleOrDefault(g =>
+        //        g.UserProfileId == userProfileId && g.Date == DateTime.Today);
+        //    }
+
+        //    return View(viewModel);
+
+
+        //}
+
+        //public ActionResult AddNewProgressLog(CheckInFormViewModel userProgressLogFromForm)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return View("NewCheckInForm", userProgressLogFromForm);
+
+        //    currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
+        //    var userProfileId = currentUserProfile.Id;
+
+        //    userProgressLogFromForm.UserProgressLog.WeightInKg = 0.0;
+
+        //    //Check for log on the same date, if it doesn't exist, insert, else update
+        //    if (_context.UserProgressLogs.SingleOrDefault(g =>
+        //        g.UserProfileId == userProfileId && g.Date == userProgressLogFromForm.UserProgressLog.Date) == null)
+        //    {
+        //        //Insert
+        //        userProgressLogFromForm.UserProgressLog.UserProfileId = userProfileId;
+        //        _context.UserProgressLogs.Add(userProgressLogFromForm.UserProgressLog);
+        //        _context.SaveChanges();
+        //        return RedirectToAction("Index", new { controller = "Home" });
+        //    }
+        //    //Update
+        //    _context.Entry(_context.UserProgressLogs.SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == userProgressLogFromForm.UserProgressLog.Date))
+        //        .CurrentValues
+        //        .SetValues(userProgressLogFromForm.UserProgressLog);
+
+        //    _context.SaveChanges();
+        //    return RedirectToAction("Index", new { controller = "Home" });
+
+        //}
     }
 }
 

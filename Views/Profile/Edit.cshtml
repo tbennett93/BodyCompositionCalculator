@@ -76,9 +76,21 @@
 
             </div>            
             
-
             <div class="form-group">
-                <label>Weight Unit</label>
+                <label>Activity Level*</label>
+                @*TODO - defauly the dropdownlist for new users to a value - do the same for all dropdowns in project*@
+                @Html.DropDownListFor(m => m.UserProfile.ActivityLevelId,
+                    new SelectList(Model.ActivityLevels, "Id", "Name"),
+                    "Select Activity Level",
+                    new { @class = "form-control" }
+                    )
+                @Html.ValidationMessageFor(c => c.UserProfile.ActivityLevel)
+            </div>
+
+
+     
+            <div class="form-group">
+                <label>Weight Unit Preference</label>
                 @Html.DropDownListFor(m => m.UserProfile.WeightUnitId,
                     new SelectList(Model.WeightUnits, "Id", "Name"),
                     "Select Weight Unit",
@@ -88,15 +100,7 @@
                 @Html.ValidationMessageFor(c => c.UserProfile.WeightUnitId)
             </div>
 
-            <div class="form-group">
-                <label>Activity Level*</label>
-                @Html.DropDownListFor(m => m.UserProfile.ActivityLevelId,
-                    new SelectList(Model.ActivityLevels, "Id", "Name"),
-                    "Select Activity Level",
-                    new { @class = "form-control" }
-                    )
-                @Html.ValidationMessageFor(c => c.UserProfile.ActivityLevel)
-            </div>
+
 
 
             @Html.HiddenFor(m => m.UserProfile.Id)
@@ -122,6 +126,11 @@
             $(document).ready(function() {
 
                 heightUnit = $('#selectorHeightUnit').val();
+
+                if (!heightUnit) {
+                    $('#selectorHeightUnit').val("2");
+                }
+
 
                 if (heightUnit == 1) {
                     $('#heightInputB').hide();

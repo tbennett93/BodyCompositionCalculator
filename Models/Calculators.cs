@@ -93,7 +93,7 @@ namespace BodyCompositionCalculator.Models
 
         public static int KgsToStone(double kg)
         {
-            int stone = Convert.ToInt32(Math.Floor(kg*0.157473));
+            int stone = Convert.ToInt32(Math.Floor(kg / 6.35029318));
             return stone;
         }    
 
@@ -102,20 +102,25 @@ namespace BodyCompositionCalculator.Models
             //Used to get the remaining inches once the feet have been taken off the total cm
             int lbs = Convert.ToInt32(
                 //Get the number after the decimal point and multiply by 12 (30.48/2.54 || inches in a foot) to get inches
-                ((kg * 0.157473) -Math.Floor(kg * 0.157473))
+                ((kg / 6.35029318) -Math.Floor(kg / 6.35029318)) * 14
                 );
             return lbs;
         }
 
         public static double LbsToKG(double lbs)
         {
-            double kg = lbs / 2.20462;
+            double kg = lbs * 0.45359237;
+            return kg;
+        }
+        public static double StToKg(double st)
+        {
+            double kg = st * 6.35029318;
             return kg;
         }
 
         public static double KgsToLbs(double kg)
         {
-            double lbs = kg * 2.20462;
+            double lbs = kg / 0.45359237;
             return lbs;
         }
     }
