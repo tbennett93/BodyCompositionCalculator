@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
 
-    console.log("here");
-    //generateChartData("/api/UserProgressAll/");
+    var weightUnit = $("#weightUnit").val();
 
+    
     $("#buttonDisplayGraphAll").click(function () {
         // redraw chart with stanza data
         generateChartData("/api/UserProgressAll/");
@@ -224,13 +224,25 @@
                 var json = JSON.parse(this.response);
                 // Map JSON labels  back to values array
                 var progressWeight = json.map(function (e) {
-                    return e.WeightInKg;
+                    if (weightUnit == 'kg')
+                        {return e.WeightInKg;}
+                    else if (weightUnit == 'lbs' || weightUnit == 'st/lbs')
+                        if (e.WeightInKg > 0) {
+                            { return (e.WeightInKg * 2.20462); }
+                        }
+                    
+
                 });
                 var progressBodyFat = json.map(function (e) {
                     return e.BodyFat;
                 });
                 var goalWeight = json.map(function (e) {
-                    return e.GoalWeight;
+                    if (weightUnit == 'kg')
+                        { return e.GoalWeight; }
+                    else if (weightUnit == 'lbs' || weightUnit == 'st/lbs')
+                        if (e.GoalWeight > 0) {
+                            { return (e.GoalWeight * 2.20462); }
+                        }
                 });
                 var goalBodyFat = json.map(function (e) {
                     return e.GoalBodyFat;

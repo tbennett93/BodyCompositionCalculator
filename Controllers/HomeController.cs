@@ -41,17 +41,17 @@ namespace BodyCompositionCalculator.Controllers
 
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
 
+
+
+
             //Home page - returns different pages based on whether logged in/profile created/goal set
             if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
 
                 if (Helper_Classes.UserHelpers.GetUserProfile() == null)
-                {
                     return View("HomeNoProfile");
-                }
-  
                 
-
+                
                 //No goal exists for current user
                 if (_context.Goals.SingleOrDefault(g=>g.UserProfileId == currentUserProfile.Id) == null)
                     //Return view where no goal has been set and no previous goal has been saved
@@ -64,8 +64,12 @@ namespace BodyCompositionCalculator.Controllers
                     return View("HomeEndedGoal");
                 }
 
+                HomePageViewModel viewModel = new HomePageViewModel
+                {
+                    WeightUnit = Helper_Classes.UserHelpers.GetWeightUnit()
+                };
                 //Goal must be active - return view with current goal summary
-                return View("HomeWithGoal");
+                return View("HomeWithGoal",viewModel);
             }
 
             return View("HomeNoLogin");

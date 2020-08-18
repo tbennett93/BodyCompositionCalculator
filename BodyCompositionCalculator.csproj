@@ -362,6 +362,7 @@
     <Compile Include="Models\ViewModels\EditGoalViewModel.cs" />
     <Compile Include="Models\ViewModels\EditProfileFormViewModel.cs" />
     <Compile Include="Models\HeightUnit.cs" />
+    <Compile Include="Models\ViewModels\HomePageViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\WeightUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
