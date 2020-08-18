@@ -7,7 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.WebPages;
 using BodyCompositionCalculator.Models;
+using BodyCompositionCalculator.Models.Calculation_Constants;
 using Newtonsoft.Json;
 
 namespace BodyCompositionCalculator.Controllers.API
@@ -29,13 +31,16 @@ namespace BodyCompositionCalculator.Controllers.API
         {
 
             var userId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
+            List<UserProgressGraphDataModel> graphData = null;
 
-            var queryThree = _context.Database.SqlQuery<UserProgressGraphDataModel>
+            if (weightUnit == WeightUnits.Kg) 
+                graphData = _context.Database.SqlQuery<UserProgressGraphDataModel>
                 ( "select "            
                   +"date, "
-                  +"weightinkg, "    
+                  +"round(weightinkg,1), "    
                   +"bodyfat, "
-                  +"goalweight, "
+                  +"round(goalweight,1), "
                   +"goalbodyfat, "
                   +"userprofileid "
                   +"from "
@@ -43,11 +48,40 @@ namespace BodyCompositionCalculator.Controllers.API
                   +"where 1=1" 
                   + "and userprofileid = " + userId
                 )
-                .ToList();
+                .ToList(); 
+            if (weightUnit == WeightUnits.LbsAndStone || weightUnit == WeightUnits.Lbs)
+                graphData = _context.Database.SqlQuery<UserProgressGraphDataModel>
+                    ("select "
+                       + "date, "
+                       + "round(weightinkg * 2.20462,1) weightinkg, "
+                       + "bodyfat, "
+                       + "round(goalweight * 2.20462,1) goalweight, "
+                       + "goalbodyfat, "
+                       + "userprofileid "
+                       + "from "
+                       + "userprogressgraphdata "
+                       + "where 1=1"
+                       + "and userprofileid = " + userId
+                    )
+                    .ToList();
+
+            //( "select "            
+            //      +"date, "
+            //      +"weightinkg, "    
+            //      +"bodyfat, "
+            //      +"goalweight, "
+            //      +"goalbodyfat, "
+            //      +"userprofileid "
+            //      +"from "
+            //      +"userprogressgraphdata "
+            //      +"where 1=1" 
+            //      + "and userprofileid = " + userId
+            //    )
+            //    .ToList();
             //
 
-      var JSONdata = JsonConvert.SerializeObject(queryThree, Formatting.None);
-            return queryThree;
+            var JSONdata = JsonConvert.SerializeObject(graphData, Formatting.None);
+            return graphData;
  
 
         }

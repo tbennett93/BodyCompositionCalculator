@@ -1,5 +1,4 @@
 ﻿
-@model BodyCompositionCalculator.Models.ViewModels.HomePageViewModel
 
 @{
     ViewBag.Title = "title";
@@ -84,7 +83,6 @@
             <canvas id="myAreaChart"></canvas>
         </div>*@
 
-<p>***TODO - make graph appear in lbs when thats what the weight is set at. Also round up the weight vals on hovering over points</p>
     <h2>@Html.ActionLink("New Goal", "NewGoalForm", new { controller = "Home" }, new { @class = "btn btn-primary align-content-center" })</h2>
     <h2>@Html.ActionLink("Check In", "NewCheckInForm", new { controller = "Home" }, new { @class = "btn btn-primary align-content-center" })</h2>
 
@@ -305,7 +303,6 @@
     </div>
 </div>
 
-@Html.HiddenFor(m=>m.WeightUnit, new{ @id="weightUnit" });
 
 
 <!-- Core plugin JavaScript-->

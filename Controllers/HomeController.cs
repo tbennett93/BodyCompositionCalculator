@@ -64,12 +64,9 @@ namespace BodyCompositionCalculator.Controllers
                     return View("HomeEndedGoal");
                 }
 
-                HomePageViewModel viewModel = new HomePageViewModel
-                {
-                    WeightUnit = Helper_Classes.UserHelpers.GetWeightUnit()
-                };
+
                 //Goal must be active - return view with current goal summary
-                return View("HomeWithGoal",viewModel);
+                return View("HomeWithGoal");
             }
 
             return View("HomeNoLogin");
