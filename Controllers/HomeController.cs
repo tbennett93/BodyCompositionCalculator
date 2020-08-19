@@ -125,7 +125,6 @@ namespace BodyCompositionCalculator.Controllers
             {
 
                 newGoal.Goal.UserProfileId = userProfileId;
-                
                 _context.Goals.Add(newGoal.Goal);
                 _context.SaveChanges();
                 return RedirectToAction("Index", new { controller = "Home" });

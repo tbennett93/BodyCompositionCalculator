@@ -1,8 +1,6 @@
 ﻿$(document).ready(function () {
 
-    var weightUnit = $("#weightUnit").val();
 
-    
     $("#buttonDisplayGraphAll").click(function () {
         // redraw chart with stanza data
         generateChartData("/api/UserProgressAll/");
@@ -15,18 +13,21 @@
 
 
 
-    function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat) {
+    function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
         var weightColour = "rgba(230, 57, 70, 1)";
         var bodyFatColour = "rgba(29, 53, 87, 1)";
         var weightGoalColour = "rgba(230, 57, 70, 0.5)";
         var bodyFatGoalColour = "rgba(29, 53, 87, 0.5)";
+
+
+        var weightLabel = "Weight (" + weightUnit[0] + ")";
 
         var data = {
             labels: dates,
             datasets: [
                 {
                     data: progressWeight,
-                    label: "Weight",
+                    label: weightLabel,
                     lineTension: 0.3,
                     fill: false,
                     backgroundColor: weightColour,
@@ -138,21 +139,6 @@
                                         'year': 'MMM DD'
                                     }
                                 }
-                                //type: "date",
-                                //type: "time",
-                                //time: {
-                                //    displayFormats: {
-                                //        //'millisecond': 'MMM DD',
-                                //        //'second': 'MMM DD',
-                                //        //'minute': 'MMM DD',
-                                //        //'hour': 'MMM DD',
-                                //        'day': 'MMM DD',
-                                //        //'week': 'MMM DD',
-                                //        //'month': 'MMM DD',
-                                //        //'quarter': 'MMM DD',
-                                //        //'year': 'MMM DD'
-                                //    }
-                                //}
                             }
                         ],
                         yAxes: [
@@ -162,7 +148,7 @@
                                 position: 'left',
                                 scaleLabel: {
                                     display: true,
-                                    labelString: "Weight"
+                                    labelString: weightLabel
                                 },
                                 ticks: {
                                     //min: minWeight,
@@ -187,28 +173,6 @@
                                     suggestedMax: maxBodyFat
                                 }
                             },
-                            //{
-                            //    id: 'y-axis-3',
-                            //    type: 'linear',
-
-                            //    ticks: {
-                            //        //min: minBodyFat,
-                            //        //max: maxBodyFat
-                            //        //suggestedMin: minBodyFat,
-                            //        //suggestedMax: maxBodyFat
-                            //    }
-                            //},
-                            //{
-                            //    id: 'y-axis-4',
-                            //    type: 'linear',
-
-                            //    ticks: {
-                            //        //min: minBodyFat,
-                            //        //max: maxBodyFat
-                            //        //suggestedMin: minBodyFat,
-                            //        //suggestedMax: maxBodyFat
-                            //    }
-                            //}
                         ]
                     },
                 }
@@ -234,6 +198,9 @@
                 });
                 var goalBodyFat = json.map(function (e) {
                     return e.GoalBodyFat;
+                });
+                var weightUnit = json.map(function (e) {
+                    return e.WeightUnit;
                 });
 
                 // Map JSON values back to values array
@@ -262,7 +229,8 @@
                     goalWeight,
                     goalBodyFat,
                     dates,
-                    maxBodyFat); // Pass in data and call the chart
+                    maxBodyFat,
+                    weightUnit); // Pass in data and call the chart
             }
         };
 

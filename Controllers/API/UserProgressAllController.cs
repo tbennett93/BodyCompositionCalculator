@@ -34,21 +34,22 @@ namespace BodyCompositionCalculator.Controllers.API
             var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
             List<UserProgressGraphDataModel> graphData = null;
 
-            if (weightUnit == WeightUnits.Kg) 
+            if (weightUnit == WeightUnits.Kg)
                 graphData = _context.Database.SqlQuery<UserProgressGraphDataModel>
-                ( "select "            
-                  +"date, "
-                  +"round(weightinkg,1), "    
-                  +"bodyfat, "
-                  +"round(goalweight,1), "
-                  +"goalbodyfat, "
-                  +"userprofileid "
-                  +"from "
-                  +"userprogressgraphdata "
-                  +"where 1=1" 
+                ("select "
+                  + "date, "
+                  + "round(weightinkg,1) weightinkg, "
+                  + "bodyfat, "
+                  + "round(goalweight,1) goalweight, "
+                  + "goalbodyfat, "
+                  + "userprofileid, "
+                  + "'kg' weightunit "
+                  + "from "
+                  + "userprogressgraphdata "
+                  + "where 1=1"
                   + "and userprofileid = " + userId
                 )
-                .ToList(); 
+                .ToList();
             if (weightUnit == WeightUnits.LbsAndStone || weightUnit == WeightUnits.Lbs)
                 graphData = _context.Database.SqlQuery<UserProgressGraphDataModel>
                     ("select "
@@ -57,7 +58,8 @@ namespace BodyCompositionCalculator.Controllers.API
                        + "bodyfat, "
                        + "round(goalweight * 2.20462,1) goalweight, "
                        + "goalbodyfat, "
-                       + "userprofileid "
+                       + "userprofileid, "
+                       + "'lbs' weightunit "
                        + "from "
                        + "userprogressgraphdata "
                        + "where 1=1"
@@ -65,26 +67,42 @@ namespace BodyCompositionCalculator.Controllers.API
                     )
                     .ToList();
 
-            //( "select "            
-            //      +"date, "
-            //      +"weightinkg, "    
-            //      +"bodyfat, "
-            //      +"goalweight, "
-            //      +"goalbodyfat, "
-            //      +"userprofileid "
-            //      +"from "
-            //      +"userprogressgraphdata "
-            //      +"where 1=1" 
-            //      + "and userprofileid = " + userId
-            //    )
-            //    .ToList();
-            //
 
             var JSONdata = JsonConvert.SerializeObject(graphData, Formatting.None);
             return graphData;
- 
+
 
         }
+
+
+        //public List<UserProgressGraphDataModel> GetUserProgressLogWithGoals()
+        //{
+
+        //    List<UserProgressGraphDataModel> graphData = null;
+
+        //    graphData = _context.Database.SqlQuery<UserProgressGraphDataModel>
+        //    ("select "
+        //      + "date, "
+        //      + "round(weightinkg,1), "
+        //      + "bodyfat, "
+        //      + "round(goalweight,1), "
+        //      + "goalbodyfat, "
+        //      + "userprofileid, "
+        //      + "'kg' weightunit "
+        //      + "from "
+        //      + "userprogressgraphdata "
+        //      + "where 1=1"
+        //      + "and userprofileid = " + 13
+        //    )
+        //    .ToList();
+
+
+        //    var JSONdata = JsonConvert.SerializeObject(graphData, Formatting.None);
+        //    return graphData;
+        //}
+
+
+
 
     }
 }

@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BodyCompositionCalculator.Models;
+using BodyCompositionCalculator.Models.Calculation_Constants;
 using Newtonsoft.Json;
 
 namespace BodyCompositionCalculator.Controllers.API
@@ -29,17 +30,44 @@ namespace BodyCompositionCalculator.Controllers.API
         {
 
             var userId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
+            List<UserProgressGraphDataModel> graphData = null;
 
-            var queryThree = _context.Database.SqlQuery<UserProgressGraphDataModel>
-                ( "select "            
-                  +"date, "
-                  +"weightinkg, "    
-                  +"bodyfat, "
-                  +"goalweight, "
-                  +"goalbodyfat, "
-                  +"goals.userprofileid "
-                  +"from "
-                  +"userprogressgraphdata, "
+            if (weightUnit == WeightUnits.Kg)
+                graphData = _context.Database.SqlQuery<UserProgressGraphDataModel>
+                    ("select "
+                     + "date, "
+                     + "round(weightinkg,1) weightinkg,  "
+                     + "bodyfat, "
+                     + "round(goalweight,1) goalweight, "
+                     + "goalbodyfat, "
+                     + "goals.userprofileid, "
+                     + "'kg' weightunit "
+                     + "from "
+                     + "userprogressgraphdata, "
+                     + "(select startdate, enddate, goals.userprofileid "
+                     + "from goals ) goals "
+                     + "where 1=1 "
+                     + "and userprogressgraphdata.date >= goals.startdate "
+                     + "and userprogressgraphdata.date <= goals.enddate "
+                     + "and userprogressgraphdata.userprofileid = goals.userprofileid "
+                     + "and userprogressgraphdata.userprofileid = " + userId
+
+                    )
+                    .ToList();
+
+            if (weightUnit == WeightUnits.LbsAndStone || weightUnit == WeightUnits.Lbs)
+                graphData = _context.Database.SqlQuery<UserProgressGraphDataModel>
+                ("select "
+                  + "date, "
+                  + "round(weightinkg* 2.20462,1) weightinkg, "
+                  + "bodyfat, "
+                  + "round(goalweight* 2.20462,1) goalweight, "
+                  + "goalbodyfat, "
+                  + "goals.userprofileid, "
+                  + "'lbs' weightunit "
+                  + "from "
+                  + "userprogressgraphdata, "
                   + "(select startdate, enddate, goals.userprofileid "
                   + "from goals ) goals "
                   + "where 1=1 "
@@ -50,20 +78,9 @@ namespace BodyCompositionCalculator.Controllers.API
 
                 )
                 .ToList();
-         
-                 // + "and userprofileid = " + userId
-                 //
 
-            //+"and date >= (select startdate "
-            //    + "from goals "
-            //    + "where goals.userprofileid = userId) "
-            //
-            //+"and date <= (select enddate "
-            //    + "from goals "
-            //    + "where goals.userprofileid = userId)"
-
-            var JSONdata = JsonConvert.SerializeObject(queryThree, Formatting.None);
-            return queryThree;
+            var JSONdata = JsonConvert.SerializeObject(graphData, Formatting.None);
+            return graphData;
  
 
         }
