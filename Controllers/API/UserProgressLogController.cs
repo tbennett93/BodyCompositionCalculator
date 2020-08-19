@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BodyCompositionCalculator.Models;
+using BodyCompositionCalculator.Models.Calculation_Constants;
+using Microsoft.Ajax.Utilities;
 
 namespace BodyCompositionCalculator.Controllers.API
 {
@@ -58,11 +60,33 @@ namespace BodyCompositionCalculator.Controllers.API
     [HttpGet]
         public IHttpActionResult GetUserProgressLogs(int id)
         {
-            if(id == Helper_Classes.UserHelpers.GetUserProfile().Id)
-                return Ok(_context.UserProgressLogs
-                    .Where(u => u.UserProfileId == id)
-                    .OrderBy(u=>u.Date)
-                    .ToList());
+            var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
+            double weightUnitMultiplier = 1.0;
+
+            if (weightUnit == WeightUnits.Lbs || weightUnit == WeightUnits.LbsAndStone)
+                weightUnitMultiplier = 2.20462;
+
+
+            if (id == Helper_Classes.UserHelpers.GetUserProfile().Id)
+                return Ok((from userProgressLog in _context.UserProgressLogs
+                        orderby userProgressLog.Date
+                        where userProgressLog.UserProfileId == id
+                        select new
+                        {
+                            userProgressLog.Date,
+                            userProgressLog.BodyFat,
+                            WeightInKg = Math.Round((double) (userProgressLog.WeightInKg * weightUnitMultiplier))
+                        }
+                    ).ToList());
+            //if (id == Helper_Classes.UserHelpers.GetUserProfile().Id)
+            //    return
+                    //Ok(_context.UserProgressLogs
+                    //.Where(u => u.UserProfileId == id)
+                    //.OrderBy(u=>u.Date)
+                    //.Select(m=>new { m.BodyFat, m.Date, m.WeightInKg})
+                    //.ToList());
+
+                    //Ok();
 
             return Unauthorized();
         }

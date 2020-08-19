@@ -27,7 +27,7 @@
                 <thead>
                 <tr>
                     <th>Date</th>
-                    <th>Weight</th>
+                    <th>Weight (@Model.WeightUnit.Name)</th>
                     <th>Body Fat</th>
                     <th>Photo</th>
                 </tr>
@@ -42,7 +42,7 @@
 </div>
 
 
-
+    
 
 @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>*@
@@ -52,7 +52,8 @@
 <script>
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+
         $('#dataTable').DataTable({
             ajax: {
                 url: "/api/UserProgressLog/" + @Model.Id,
@@ -70,7 +71,15 @@
                         return formattedDate;
                     }
                 },
-                { data: "WeightInKg" },
+                {
+                    data: "WeightInKg",
+                    render: function (weight) {
+                        //var formattedDate = new Date(date);
+                        var formattedWeight = weight ;
+                        return formattedWeight;
+                    }
+                    
+                },
                 { data: "BodyFat" },
                 {
                     data: "Id",
