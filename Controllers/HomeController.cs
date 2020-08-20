@@ -231,40 +231,38 @@ namespace BodyCompositionCalculator.Controllers
             double weightInputA = 0.0;
             double weightInputB = 0.0;
             var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
-            double weight = _context.UserProfiles.Where(m => m.Id == userProfileId).Select(m => m.HeightInCm)
-                .SingleOrDefault();
+            double weight = 0.0;
 
-            if (weightUnit.Equals(WeightUnits.Kg))
-                weightInputA = Convert.ToInt32(weight);
-            else if (weightUnit.Equals(WeightUnits.Lbs))
-            {
-                weightInputA = Convert.ToInt32(Calculators.KgsToLbs(weight));
-            }
-            else if (weightUnit.Equals(WeightUnits.LbsAndStone))
-            {
-                weightInputA = Convert.ToInt32(Calculators.KgsToStone(weight));
-                weightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(weight));
-            }
             if (_context.UserProgressLogs.SingleOrDefault(g =>
                 g.UserProfileId == userProfileId && g.Date == DateTime.Today) == null)
                 viewModel = new CheckInFormViewModel
                 {
-                    UserProgressLog = new UserProgressLog(),
-                    WeightInputA = weightInputA,
-                    WeightInputB = weightInputB,
-                    WeightUnit = weightUnit
+                    UserProgressLog = new UserProgressLog()
                 };
             else
             {
                 viewModel = new CheckInFormViewModel
                 {
                     UserProgressLog = _context.UserProgressLogs.SingleOrDefault(g =>
-                        g.UserProfileId == userProfileId && g.Date == DateTime.Today),
-                    WeightInputA = weightInputA,
-                    WeightInputB = weightInputB,
-                    WeightUnit = weightUnit
+                        g.UserProfileId == userProfileId && g.Date == DateTime.Today)
                 };
+                weight = (double) viewModel.UserProgressLog.WeightInKg;
             }
+
+
+
+            if (weightUnit.Equals(WeightUnits.Kg))
+                weightInputA = Convert.ToInt32(weight);
+            else if (weightUnit.Equals(WeightUnits.Lbs))
+                weightInputA = Convert.ToInt32(Calculators.KgsToLbs(weight));
+            else if (weightUnit.Equals(WeightUnits.LbsAndStone))
+            {
+                weightInputA = Convert.ToInt32(Calculators.KgsToStone(weight));
+                weightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(weight));
+            }
+            viewModel.WeightInputA = weightInputA;
+            viewModel.WeightInputB = weightInputB;
+            viewModel.WeightUnit = weightUnit;
             return View(viewModel);
         }
 
@@ -278,8 +276,8 @@ namespace BodyCompositionCalculator.Controllers
             double weightInputA = 0.0;
             double weightInputB = 0.0;
             var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
-            double weight = _context.UserProfiles.Where(m => m.Id == userProfileId).Select(m => m.HeightInCm)
-                .SingleOrDefault();
+            UserProgressLog userProgressLog = _context.UserProgressLogs.SingleOrDefault(m => m.Id == id);
+            double weight = userProgressLog.WeightInKg.Value;
 
             if (weightUnit.Equals(WeightUnits.Kg))
                 weightInputA = Convert.ToInt32(weight);
@@ -295,11 +293,12 @@ namespace BodyCompositionCalculator.Controllers
 
             viewModel = new CheckInFormViewModel
             {
-                UserProgressLog = _context.UserProgressLogs.SingleOrDefault(m => m.Id == id),
+                UserProgressLog = userProgressLog,
                 WeightInputA = weightInputA,
                 WeightInputB = weightInputB,
                 WeightUnit = weightUnit,
-                PageTitlePrefix = "Edit"
+                PageTitlePrefix = "Edit",
+                RedirectionPage = "Tracker"
             };
 
             return View("NewCheckInForm",viewModel);
@@ -364,7 +363,7 @@ namespace BodyCompositionCalculator.Controllers
                 .SetValues(formUserProgressLog.UserProgressLog);
 
             _context.SaveChanges();
-            return RedirectToAction("Index", new { controller = "Home" });
+            return RedirectToAction("Index", new { controller = formUserProgressLog.RedirectionPage });
 
         }
         //public ActionResult NewCheckInForm()
