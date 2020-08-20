@@ -73,6 +73,7 @@ namespace BodyCompositionCalculator.Controllers.API
                         where userProgressLog.UserProfileId == id
                         select new
                         {
+                            ProgressLogId = userProgressLog.Id,
                             userProgressLog.Date,
                             userProgressLog.BodyFat,
                             WeightInKg = Math.Round((double) (userProgressLog.WeightInKg * weightUnitMultiplier))

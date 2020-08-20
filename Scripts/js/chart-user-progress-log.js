@@ -122,7 +122,6 @@
                             {
                                 scaleLabel: {
                                     display: true,
-                                    labelString: "Date"
                                 },
                                 type: 'time',
                                 time: {
@@ -237,7 +236,9 @@
         xhttp.open("GET", apiString, false);
         xhttp.send();
     }
-    generateChartData("/api/UserProgressAll/");
+
+    //Auto load the relevant goal data
+    generateChartData("/api/UserProgressRelevant/");
 
 
 });

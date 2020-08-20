@@ -15,7 +15,7 @@
     
 <h2>@Html.ActionLink("Check In", "NewCheckInForm", new { controller = "Home" }, new { @class = "btn btn-primary align-content-center" })</h2>
 
-
+    
 <h2>Tracker</h2>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -52,7 +52,7 @@
 <script>
 
 
-    $(document).ready(function () {
+    $(document).ready(function () { 
 
         $('#dataTable').DataTable({
             ajax: {
@@ -65,10 +65,11 @@
                 //{ data: "Date" },
                 {
                     data: "Date",
-                    render: function (date) {
+                    render: function (na1, na2, data) {
                         //var formattedDate = new Date(date);
-                        var formattedDate = moment(date).format('DD MMM YYYY');
-                        return formattedDate;
+                        var formattedDate = moment(data.Date).format('DD MMM YYYY');
+                        var formattedDateForLink = moment(data.Date).format('DD MMM YYYY');
+                        return "<a href='home/NewCheckInForm/" + data.ProgressLogId + "'>" + formattedDate + "</a>";
                     }
                 },
                 {

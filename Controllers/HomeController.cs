@@ -221,11 +221,10 @@ namespace BodyCompositionCalculator.Controllers
             return View();
         }
 
+        [Route("Home/NewCheckInForm")]
 
         public ActionResult NewCheckInForm()
         {
-
-
             //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
             CheckInFormViewModel viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
@@ -267,8 +266,44 @@ namespace BodyCompositionCalculator.Controllers
                 };
             }
             return View(viewModel);
-
         }
+
+        [Route("Home/NewCheckInForm/{id:int}")]
+
+        public ActionResult NewCheckInForm(int id)
+        {
+            //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
+            CheckInFormViewModel viewModel;
+            var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            double weightInputA = 0.0;
+            double weightInputB = 0.0;
+            var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
+            double weight = _context.UserProfiles.Where(m => m.Id == userProfileId).Select(m => m.HeightInCm)
+                .SingleOrDefault();
+
+            if (weightUnit.Equals(WeightUnits.Kg))
+                weightInputA = Convert.ToInt32(weight);
+            else if (weightUnit.Equals(WeightUnits.Lbs))
+            {
+                weightInputA = Convert.ToInt32(Calculators.KgsToLbs(weight));
+            }
+            else if (weightUnit.Equals(WeightUnits.LbsAndStone))
+            {
+                weightInputA = Convert.ToInt32(Calculators.KgsToStone(weight));
+                weightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(weight));
+            }
+
+            viewModel = new CheckInFormViewModel
+            {
+                UserProgressLog = _context.UserProgressLogs.SingleOrDefault(m => m.Id == id),
+                WeightInputA = weightInputA,
+                WeightInputB = weightInputB,
+                WeightUnit = weightUnit
+            };
+
+            return View("NewCheckInForm",viewModel);
+        }
+
 
         public ActionResult AddNewProgressLog(CheckInFormViewModel formUserProgressLog)
         {

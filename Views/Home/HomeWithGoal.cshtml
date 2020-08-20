@@ -71,10 +71,18 @@
     <div class="card shadow mb-4">
     
         <div class="card-body">
-            <div class="chart-area">
-                <button type="button" class="btn btn-primary" id="buttonDisplayGraphAll">All</button>
-                <button type="button" class="btn btn-primary" id="buttonDiplayGraphRelevant">Relevant</button>
-                <canvas id="progressGraphData"></canvas>
+            <div class="container">
+
+
+                <div class="chart-area row">
+                    <canvas id="progressGraphData"></canvas>
+                </div>
+                <div class="row justify-content-around">
+                    <button type="button" class="btn btn-outline-dark " id="buttonDiplayGraphRelevant">Current Goal Data</button>
+                    <button type="button" class="btn btn-outline-dark " id="buttonDisplayGraphAll">All Data</button>
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -100,7 +108,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Your Goals</h1>
+                        <h1 class="h3 mb-0 text-gray-800">My Goals</h1>
                     </div>
 
                     <div class="row">
@@ -271,8 +279,10 @@
                         <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
+
             </footer>
             <!-- End of Footer -->
+            
 
         </div>
         <!-- End of Content Wrapper -->
