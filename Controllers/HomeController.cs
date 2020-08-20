@@ -298,7 +298,8 @@ namespace BodyCompositionCalculator.Controllers
                 UserProgressLog = _context.UserProgressLogs.SingleOrDefault(m => m.Id == id),
                 WeightInputA = weightInputA,
                 WeightInputB = weightInputB,
-                WeightUnit = weightUnit
+                WeightUnit = weightUnit,
+                PageTitlePrefix = "Edit"
             };
 
             return View("NewCheckInForm",viewModel);

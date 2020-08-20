@@ -11,5 +11,6 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public double WeightInputA { get; set; }
         public double WeightInputB { get; set; }
         public string WeightUnit { get; set; }
+        public string PageTitlePrefix { get; set; } = "New";
     }
 }
