@@ -102,9 +102,19 @@ namespace BodyCompositionCalculator.Controllers.API
         {
         }
 
+        [HttpDelete]
         // DELETE: api/UserProfileLog/5
         public void Delete(int id)
         {
+            var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            //var userCheck = _context.UserProfiles.Include(m=>m.UserProgressLog).SingleOrDefault(m=>m.);
+            var progressLogInDb = _context.UserProgressLogs.SingleOrDefault(c => c.Id == id && c.UserProfileId == userProfileId);
+
+            if (progressLogInDb == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            _context.UserProgressLogs.Remove(progressLogInDb);
+            _context.SaveChanges();
         }
     }
 }

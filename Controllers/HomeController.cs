@@ -222,9 +222,9 @@ namespace BodyCompositionCalculator.Controllers
             return View();
         }
 
-        [Route("Home/NewCheckInForm")]
+        //[Route("Home/NewCheckInForm")]
 
-        public ActionResult NewCheckInForm()
+        public ActionResult NewCheckInForm(string pageFrom)
         {
             //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
             CheckInFormViewModel viewModel;
@@ -262,8 +262,9 @@ namespace BodyCompositionCalculator.Controllers
                 weightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(weight));
             }
             viewModel.WeightInputA = weightInputA;
-            viewModel.WeightInputB = weightInputB;
+            viewModel.WeightInputB = weightInputB;  
             viewModel.WeightUnit = weightUnit;
+            viewModel.RedirectionPage = pageFrom;
             return View(viewModel);
         }
 
@@ -355,7 +356,7 @@ namespace BodyCompositionCalculator.Controllers
                 formUserProgressLog.UserProgressLog.UserProfileId = userProfileId;
                 _context.UserProgressLogs.Add(formUserProgressLog.UserProgressLog);
                 _context.SaveChanges();
-                return RedirectToAction("Index", new { controller = "Home" });
+                return RedirectToAction("Index", new { controller = formUserProgressLog.RedirectionPage });
             }
             //Update
             _context.Entry(_context.UserProgressLogs.
