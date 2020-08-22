@@ -77,10 +77,15 @@
                 <div class="chart-area row">
                     <canvas id="progressGraphData"></canvas>
                 </div>
-                <div class="row justify-content-around">
-                    <button type="button" class="btn btn-outline-dark " id="buttonDiplayGraphRelevant">Current Goal Data</button>
-                    <button type="button" class="btn btn-outline-dark " id="buttonDisplayGraphAll">All Data</button>
 
+                
+                <div class="row btn-group-toggle justify-content-around" data-toggle="buttons">
+                    <label class="btn btn-outline-dark active  justify-content-around">
+                        <input class ="justify-content-around" type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked> Current Goal Data
+                    </label>
+                    <label class="btn btn-outline-dark  justify-content-around">
+                        <input class="justify-content-around"type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off"> All Data
+                    </label>
                 </div>
 
             </div>
@@ -300,7 +305,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close active" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>

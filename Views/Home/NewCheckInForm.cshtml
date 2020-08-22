@@ -46,7 +46,6 @@
                 @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-1", @id = "weightInputB", @min = "0", @max = "13" })
                 <p class="form-control" id="weightUnit">@Model.WeightUnit</p>
 
-                TODO - format the KG box the same as the calendar one or vice versa?
             </div>
 
             @Html.ValidationMessageFor(m => m.UserProgressLog.WeightInKg)
@@ -82,11 +81,12 @@
         ;
 
 
-        <button type="submit" class="btn btn-primary">Save</button>
-
+        <container class=" justify-content-around">
+            <button type="submit" class="btn btn-primary col-1">Save</button>
+        </container>
     }
 
-    <p class="subtext">Weight unit can be changed in the profile screen</p>
+    <p class="subtext form-text">*Weight unit can be changed in the profile screen</p>
 
 
     <script>

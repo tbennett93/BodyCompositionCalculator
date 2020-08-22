@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Data.Entity;
+using System.Net;
 using BodyCompositionCalculator.Controllers.API;
 using BodyCompositionCalculator.Models;
 using BodyCompositionCalculator.Models.Calculation_Constants;
@@ -364,6 +365,25 @@ namespace BodyCompositionCalculator.Controllers
 
             _context.SaveChanges();
             return RedirectToAction("Index", new { controller = formUserProgressLog.RedirectionPage });
+
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public ActionResult DeleteUserProgressLog(int id)
+        {
+
+            var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            //var userCheck = _context.UserProfiles.Include(m=>m.UserProgressLog).SingleOrDefault(m=>m.);
+            var progressLogInDb = _context.UserProgressLogs.SingleOrDefault(c => c.Id == id && c.UserProfileId == userProfileId);
+
+            if (progressLogInDb == null)    
+                throw new HttpException("Not Found");
+
+            _context.UserProgressLogs.Remove(progressLogInDb);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Tracker");
+
 
         }
         //public ActionResult NewCheckInForm()
