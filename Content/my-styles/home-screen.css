@@ -1,0 +1,18 @@
+﻿.chart-container {
+    position: relative;
+    margin: auto;
+    height: 20rem;
+    min-width: 400px;
+}
+
+
+
+.logo {
+    width: 200px;
+    height: 164px;
+}
+
+.ground {
+    fill: #94d31b;
+  
+}

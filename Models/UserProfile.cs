@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -15,12 +16,16 @@ namespace BodyCompositionCalculator.Models
         public int Id { get; set; }
         public byte?[] ProfilePhoto { get; set; }
         [Required]
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
         [Required]
+        [DisplayName("Last Name")]
+
         public string LastName { get; set; }
       
         [Required]
         [DisplayFormat(DataFormatString = "{0: dd MMM yyyy}")]
+        [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
         [Required]
         public double HeightInCm { get; set; }
@@ -33,8 +38,10 @@ namespace BodyCompositionCalculator.Models
         public ApplicationUser ApplicationUser { get; set; }
 
 
+
         [ForeignKey("ActivityLevel")]
         public int ActivityLevelId { get; set; }
+        [DisplayName("Activity Level")]
         public ActivityLevel ActivityLevel { get; set; }
         
 
@@ -44,6 +51,7 @@ namespace BodyCompositionCalculator.Models
 
         [ForeignKey("WeightUnit")]
         public int WeightUnitId { get; set; }
+        [DisplayName("Weight Unit")]
         public WeightUnit WeightUnit { get; set; }
 
 

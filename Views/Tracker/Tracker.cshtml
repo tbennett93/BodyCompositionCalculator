@@ -11,6 +11,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.css" />
+    @Styles.Render("~/Content/my-styles/link-colour.css")
 </head>
 <body>
 
@@ -53,118 +54,125 @@
     <script>
 
 
-    $(document).ready(function () {
+        $(document).ready(function() {
+            
 
-        var table = $('#dataTable').DataTable({
-            ajax: {
-                url: "/api/UserProgressLog/" + @Model.Id,
-                //This must call the GET at the above URL, which allows access to an array of customers, of which the types can be used as per the below
-                dataSrc: ""
-                //The dataSrc is null as the array is the actual source of data itself. This is used if there is a sort of parent
-            },
-            columns: [
-                //{ data: "Date" },
-                {
-                    data: "Date",
-                    render: function(na1, na2, data) {
-                        //var formattedDate = new Date(date);
-                        var formattedDate = moment(data.Date).format('DD MMM YYYY');
-                        var formattedDateForLink = moment(data.Date).format('DD MMM YYYY');
-                        return formattedDate
-                    }
+
+            var table = $('#dataTable').DataTable({
+                ajax: {
+                    url: "/api/UserProgressLog/" + @Model.Id,
+                    //This must call the GET at the above URL, which allows access to an array of customers, of which the types can be used as per the below
+                    dataSrc: ""
+                    //The dataSrc is null as the array is the actual source of data itself. This is used if there is a sort of parent
                 },
-                {
-                    data: "WeightInKg",
-                    render: function(weight) {
-                        //var formattedDate = new Date(date);
-                        var formattedWeight = weight;
-                        return formattedWeight;
+                columns: [
+                    //{ data: "Date" },
+                    {
+                        data: "Date",
+                        render: function(na1, na2, data) {
+                            //var formattedDate = new Date(date);
+                            var formattedDate = moment(data.Date).format('DD MMM YYYY');
+                            var formattedDateForLink = moment(data.Date).format('DD MMM YYYY');
+                            return formattedDate
+                        }
+                    },
+                    {
+                        data: "WeightInKg",
+                        render: function(weight) {
+                            //var formattedDate = new Date(date);
+                            var formattedWeight = weight;
+                            return formattedWeight;
+                        }
+
+                    },
+                    { data: "BodyFat" },
+                    {
+                        data: "Id",
+                        orderable: false,
+
+                        render: function(data) {
+                            return "<a href='api/photos/'" + data + ">View</a>";
+                        }
+                    },
+                    {
+                        title: "<p style='text-align: center'>Edit/Delete</p>",
+                        orderable: false,
+                        data: null,
+                        width: "15%",
+                        render: function(na1, na2, data) {
+                            //var formattedDate = new Date(date);
+                            var formattedDate = moment(data.Date).format('DD MMM YYYY');
+                            var formattedDateForLink = moment(data.Date).format('DD MMM YYYY');
+                            //return "<a href='/home/newcheckinform/" + data.ProgressLogId + "'>Edit</a>/<a href = '/home/deletecheckinform/" + data.ProgressLogId + "' > Delete</a>"
+                            return "<div class='container'>" +
+                                "<div class='row justify-content-around'>"
+                                //+ "<button href='api/photos/' class='btn btn-outline-secondary btn-sm js-delete col-auto' data-customer-Id=>Edit</button>"
+                                +
+                                "<a href='/home/newcheckinform/" +
+                                data.ProgressLogId +
+                                "' class='btn btn-outline-secondary btn-sm col-auto or-link-col' data-customer-Id=>Edit</a>"
+                                //+ "<a href='/home/DeleteUserProgressLog/" + data.ProgressLogId + "' class='btn btn-outline-secondary btn-sm js-delete col-auto' data-customer-Id=>Delete</a>"
+                                +
+                                "<a data-log-Id='" +
+                                data.ProgressLogId +
+                                "' class='btn btn-outline-secondary btn-sm js-delete col-auto'=>Delete</a>"
+                                //+"<a class='btn btn-outline-secondary btn-sm js-delete col-auto' data-customer-Id=>Delete</a>"
+                                +
+                                "</div>" +
+                                "</div>";
+
+
+                        }
                     }
+                ]
+            });
 
-                },
-                { data: "BodyFat" },
-                {
-                    data: "Id",
-                    orderable: false,
+            $("#dataTable").on("click",
+                ".js-delete",
+                function() {
+                    var button = $(this);
+                    bootbox.confirm("Are you sure you want to delete this record?",
+                        function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/userprogresslog/" + button.attr("data-log-id"),
+                                    method: "DELETE",
+                                    success: function() {
+                                        //table.row(button).remove().draw();
+                                        table.row(button.parents("tr")).remove().draw();
 
-                    render: function(data) {
-                        return "<a href='api/photos/'" + data + ">View</a>";
-                    }
-                },
-                {
-                    title: "<p style='text-align: center'>Edit/Delete</p>",
-                    orderable: false,
-                    data: null,
-                    width: "15%",
-                    render: function(na1, na2, data) {
-                    //var formattedDate = new Date(date);
-                    var formattedDate = moment(data.Date).format('DD MMM YYYY');
-                    var formattedDateForLink = moment(data.Date).format('DD MMM YYYY');
-                    //return "<a href='/home/newcheckinform/" + data.ProgressLogId + "'>Edit</a>/<a href = '/home/deletecheckinform/" + data.ProgressLogId + "' > Delete</a>"
-                    return "<div class='container'>"
-                        + "<div class='row justify-content-around'>"
-                        //+ "<button href='api/photos/' class='btn btn-outline-secondary btn-sm js-delete col-auto' data-customer-Id=>Edit</button>"
-                        + "<a href='/home/newcheckinform/" + data.ProgressLogId + "' class='btn btn-outline-secondary btn-sm js-delete col-auto' data-customer-Id=>Edit</a>"
-                        //+ "<a href='/home/DeleteUserProgressLog/" + data.ProgressLogId + "' class='btn btn-outline-secondary btn-sm js-delete col-auto' data-customer-Id=>Delete</a>"
-                        + "<a data-log-Id='" + data.ProgressLogId + "' class='btn btn-outline-secondary btn-sm js-delete col-auto'=>Delete</a>"
-                        //+"<a class='btn btn-outline-secondary btn-sm js-delete col-auto' data-customer-Id=>Delete</a>"
-                        +"</div>"
-                        +"</div>"
-                        ;
+                                        //button.parents("tr").remove();
+                                    }
+                                });
+                            }
+                        });
 
 
-                }
-                }
-
-            ]
+                });
         });
 
-        $("#dataTable").on("click",
-            ".js-delete",
-            function() {
-                var button = $(this);
-                bootbox.confirm("Are you sure you want to delete this record?",
-                    function(result) {
-                        if (result) {
-                            $.ajax({
-                                url: "/api/userprogresslog/" + button.attr("data-log-id"),
-                                method: "DELETE",
-                                success: function () {
-                                    //table.row(button).remove().draw();
-                                    table.row(button.parents("tr")).remove().draw();
-
-                                    //button.parents("tr").remove();
-                                }
-                            });
-                        }
-                    });
+        //$("#dataTable").on("click",
+        //    ".view-photo",
+        //    function() {
+        //        alert("CONFIRM");
+        //        var button = $(this);
 
 
-            });
-    });
+        //                    $.ajax({
+        //                        url: "/api/customers/" + button.attr("data-customer-id"),
+        //                        method: "DELETE",
+        //                        success: function () {
+        //                            table.row(button.parents("tr")).remove().draw();
+        //                        }
+        //                    });
+        //                    //success: function() {
+        //                    //    alert("CONFIRM");
+        //                    //}
 
-    //$("#dataTable").on("click",
-    //    ".view-photo",
-    //    function() {
-    //        alert("CONFIRM");
-    //        var button = $(this);
-
-
-    //                    $.ajax({
-    //                        url: "/api/customers/" + button.attr("data-customer-id"),
-    //                        method: "DELETE",
-    //                        success: function () {
-    //                            table.row(button.parents("tr")).remove().draw();
-    //                        }
-    //                    });
-    //                    //success: function() {
-    //                    //    alert("CONFIRM");
-    //                    //}
-
-    //    });
+        //    });
 
 
-    //    });
+        //    });
     </script>
 
 

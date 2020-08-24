@@ -37,69 +37,177 @@
     <!-- Custom styles for this template-->
     <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    @Styles.Render("~/Content/my-styles/home-screen.css")
+    @Styles.Render("~/Content/my-styles/shared-styles.css")
 
 </head>
 @*<script src="~/vendor/js/demo/chart-area-demo.js"></script>*@
 
 <body id="page-top">
     @*<div class="card shadow mb-4">
-        <div class="card-header py-3">
+                <div class="card-header py-3">
 
-            <h6 class="m-0 font-weight-bold text-primary">Tracker - All Data</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Tracker - All Data</h6>
 
-        </div>
-        <div class="card-body">
-            <div class="chart-area">
-                <canvas id="progressDataAll"></canvas>
-
-            </div>
-        </div>
-    </div>
-    
-
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Tracker - Relevant Data</h6>
-    </div>
-    <div class="card-body">
-        <div class="chart-area">
-            <canvas id="progressDataRelevant"></canvas>
-        </div>
-    </div>
-</div>*@
-
-    <div class="card shadow mb-4">
-    
-        <div class="card-body">
-            <div class="container">
-
-
-                <div class="chart-area row">
-                    <canvas id="progressGraphData"></canvas>
                 </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="progressDataAll"></canvas>
 
-                
-                <div class="row btn-group-toggle justify-content-around" data-toggle="buttons">
-                    <label class="btn btn-outline-dark active  justify-content-around">
-                        <input class ="justify-content-around" type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked> Current Goal Data
-                    </label>
-                    <label class="btn btn-outline-dark  justify-content-around">
-                        <input class="justify-content-around"type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off"> All Data
-                    </label>
+                    </div>
                 </div>
-
             </div>
-        </div>
-    </div>
 
-@*<div class="chart" style="position: relative; height:80vh; width:100vw">
-            <canvas id="myAreaChart"></canvas>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Tracker - Relevant Data</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="progressDataRelevant"></canvas>
+                </div>
+            </div>
         </div>*@
 
-    <h2>@Html.ActionLink("New Goal", "NewGoalForm", new { controller = "Home" }, new { @class = "btn btn-primary align-content-center" })</h2>
-    <h2>@Html.ActionLink("Check In", "NewCheckInForm", new { controller = "Home", pageFrom = "Home" }, new { @class = "btn btn-primary align-content-center" })</h2>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="container chart-container">
 
-    <!-- Page Wrapper -->
+                <canvas id="progressGraphData"></canvas>
+
+            </div>
+
+
+            <div class="row btn-group-toggle justify-content-around" data-toggle="buttons">
+                <label class="btn btn-outline-dark  btn-sm active  justify-content-around">
+                    <input class="justify-content-around" type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked> Current Goal Data
+                </label>
+                <label class="btn btn-outline-dark  btn-sm   justify-content-around">
+                    <input class="justify-content-around" type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off"> All Data
+                </label>
+            </div>
+
+
+
+        </div>
+    </div>
+    
+<!--Check in Button-->
+<div class="container" id="check-in-button">
+        <div class="row justify-content-center">
+            <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+            <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 xmlns:cc="http://creativecommons.org/ns#"
+                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:svg="http://www.w3.org/2000/svg"
+                 xmlns="http://www.w3.org/2000/svg"
+                 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                 id="svg8"
+                 version="1.1"
+                 viewBox="0 0 210 297"
+                 height="300px"
+                 width="auto"
+                 sodipodi:docname="Check In Button.svg"
+                 pointer-events= bounding-box
+                 inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+
+    
+                <defs id="defs2" />
+                <metadata id="metadata5">
+                    <rdf:RDF>
+                        <cc:Work rdf:about="">
+                            <dc:format>image/svg+xml</dc:format>
+                            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                            <dc:title />
+                        </cc:Work>
+                    </rdf:RDF>
+                </metadata>
+            <a class="btn" href="Home/NewCheckInForm?pageFrom=Home">
+                
+                
+                    <g id="g884"
+                       class="icon-primary-custom"
+                       transform="translate(-12.948625)">
+                        <ellipse rx="39.309525"
+                                 cy="72.328232"
+                                 cx="100.65098"
+                                 id="path10"
+                                 style="fill: none;  stroke-width: 9; stroke-miterlimit: 4; stroke-dasharray: none" />
+                        <path id="path841"
+                              d="M 100.65098,52.682999 V 91.97347"
+                              style="fill: none;  stroke-width: 7.4334; stroke-linecap: round; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1" />
+                        <path style="fill: none;  stroke-width: 7.43339; stroke-linecap: round; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1"
+                              d="M 120.29622,72.328235 H 81.005739"
+                              id="path841-3" />
+                    </g>
+                    <g id="g879"
+                       transform="translate(1.2432404,1.0583333)">
+                        <g id="g33">
+                            <rect class="icon-primary-custom"
+                                  style="display: inline; fill-opacity: 1; stroke-width: 5.41455; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none"
+                                  id="rect862"
+                                  width="92.087349"
+                                  height="34.794144"
+                                  x="40.41544"
+                                  y="119.74335" />
+                            <text xml:space="preserve"
+                                  style="font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 17.3455px; line-height: 1.25; font-family: Roboto; -inkscape-font-specification: 'Roboto Bold'; display: inline; fill: #ffffff; fill-opacity: 1; stroke-width: 1.08409"
+                                  x="53.555176"
+                                  y="142.56029"
+                                  class="icon-text-primary-custom"
+                                  id="text870">
+                                <tspan id="tspan868"
+                                       x="53.555176"
+                                       y="142.56029"
+                                       style="font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-family: Roboto; -inkscape-font-specification: 'Roboto Bold'; fill-opacity: 1; stroke-width: 1.08409">Check in</tspan>
+                                </text>
+                        </g>
+                    </g>
+
+
+              
+            </a>
+
+
+                <g inkscape:label="Icon"
+                   id="layer3"
+                   inkscape:groupmode="layer" />
+                <g inkscape:label="Textbox"
+                   id="layer4"
+                   inkscape:groupmode="layer" />
+
+            </svg>
+
+
+        </div>
+
+    </div>
+
+
+
+<!-- Content Wrapper -->
+    <div class="d-flex flex-column">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+
+            <div class="card shadow mb-4 shadow">
+                <div id="content-wrapper row" class="d-flex flex-column">
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="wrapper">
 
         <!-- Content Wrapper -->
@@ -117,6 +225,8 @@
                     </div>
 
                     <div class="row">
+
+
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -173,7 +283,7 @@
                                                 <div class="col-auto">
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">1400</div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -274,6 +384,7 @@
 
                 </div>
                 <!-- /.container-fluid -->
+                <h2>@Html.ActionLink("New Goal", "NewGoalForm", new { controller = "Home" }, new { @class = "btn btn-primary align-content-center col" })</h2>
 
             </div>
             <!-- End of Main Content -->
@@ -287,7 +398,7 @@
 
             </footer>
             <!-- End of Footer -->
-            
+
 
         </div>
         <!-- End of Content Wrapper -->
@@ -300,27 +411,27 @@
     </a>
 
     <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close active" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close active" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
-<!-- Core plugin JavaScript-->
+    <!-- Core plugin JavaScript-->
     <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
@@ -331,9 +442,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
-    
+
     @*<script src="~/Scripts/js/chart-progress-log.js"></script>
-    <script src="~/Scripts/js/chart-progress-log-relevant.js"></script>*@
+        <script src="~/Scripts/js/chart-progress-log-relevant.js"></script>*@
     <script src="~/Scripts/js/chart-user-progress-log.js"></script>
 
 </body>

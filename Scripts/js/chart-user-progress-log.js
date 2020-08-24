@@ -14,10 +14,10 @@
 
 
     function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
-        var weightColour = "rgba(230, 57, 70, 1)";
-        var bodyFatColour = "rgba(29, 53, 87, 1)";
-        var weightGoalColour = "rgba(230, 57, 70, 0.5)";
-        var bodyFatGoalColour = "rgba(29, 53, 87, 0.5)";
+        var weightColour = "rgba(231, 111, 81, 1)";
+        var bodyFatColour = "rgba(90,92,105,1)";
+        var weightGoalColour = "rgba(231, 111, 81, 0.5)";
+        var bodyFatGoalColour = "rgba(90,92,105,0.5)";
 
 
         var weightLabel = "Weight (" + weightUnit[0] + ")";
@@ -115,7 +115,7 @@
                     legend: {
                         display: true
                     },
-                    responsive: true, // Instruct chart JS to respond nicely.
+                    responsive: true, 
                     maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
                     scales: {
                         xAxes: [

@@ -1,0 +1,58 @@
+﻿/*.logo-primary-col {
+    stroke: #e76f51;
+}
+*/
+
+.btn-primary-custom {
+    background-color: #e76f51;
+    border-color: #e76f51;
+    color: #fff;
+}
+
+.btn-primary-custom:hover {
+    color: #5A5C69;
+    text-decoration: none;
+    stroke: #5A5C69;
+}
+
+.stroke-primary-custom {
+    color: #fff;
+    stroke: #e76f51;
+}
+
+    .stroke-primary-custom:hover {
+        color: #fff;
+        stroke: #5A5C69;
+    }
+
+.icon-primary-custom {
+    fill: #e76f51;
+    stroke: #e76f51;
+}
+
+.icon-text-primary-custom {
+    fill: #ffffff;
+}
+
+.btn-secondary-custom {
+    background-color: #5A5C69;
+    border-color: #5A5C69;
+    color: #fff;
+}
+
+    .btn-secondary-custom:hover {
+        color: #e76f51;
+        text-decoration: none;
+        stroke: #e76f51;
+    }
+
+.stroke-secondary-custom {
+    color: #fff;
+    stroke: #5A5C69;
+}
+
+    .stroke-secondary-custom:hover {
+        color: #fff;
+        stroke: #e76f51;
+    }
+

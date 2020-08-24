@@ -157,7 +157,7 @@ namespace BodyCompositionCalculator.Controllers
 
 
 
-
+            //No existing goal
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
                 viewModel = new EditGoalViewModel()
                 {
@@ -171,8 +171,10 @@ namespace BodyCompositionCalculator.Controllers
                     StartWeightInputB = startWeightInputB,
                     TargetWeightInputA = targetWeightInputA,
                     TargetWeightInputB = targetWeightInputB,
-                    WeightUnit = weightUnit
+                    WeightUnit = weightUnit,
+                    Title = "New Goal"
                 };
+            //Existing goal
             else
             {
                 double startWeight = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId).StartWeightInKg;
@@ -202,7 +204,8 @@ namespace BodyCompositionCalculator.Controllers
                     StartWeightInputB = startWeightInputB,
                     TargetWeightInputA = targetWeightInputA,
                     TargetWeightInputB = targetWeightInputB,
-                    WeightUnit = weightUnit
+                    WeightUnit = weightUnit,
+                    Title = "Edit Goal"
                 };
             }
             return View(viewModel);
@@ -359,6 +362,12 @@ namespace BodyCompositionCalculator.Controllers
                 return RedirectToAction("Index", new { controller = formUserProgressLog.RedirectionPage });
             }
             //Update
+            var progressLogId = _context.UserProgressLogs.SingleOrDefault(g =>
+                g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date).Id;
+            formUserProgressLog.UserProgressLog.Id = progressLogId;
+            formUserProgressLog.UserProgressLog.UserProfileId = userProfileId;
+
+
             _context.Entry(_context.UserProgressLogs.
                     SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date))
                 .CurrentValues
