@@ -3,68 +3,29 @@
 }
 */
 
-.btn-primary-custom {
-    background-color: #F76C6C;
-    border-color: #F76C6C;
-    color: #fff;
-}
-
-.btn-primary-custom:hover {
-    color: #5A5C69;
-    text-decoration: none;
-    stroke: #5A5C69;
-}
-
-.stroke-primary-custom {
-    color: #fff;
-    stroke: #F76C6C;
-}
-
-    .stroke-primary-custom:hover {
-        color: #fff;
-        stroke: #5A5C69;
-    }
 
 .icon-primary-custom {
     fill: #F76C6C;
     stroke: #F76C6C;
 }
 
-
-.icon-text-primary-custom {
-    fill: #ffffff;
+.icon-primary-custom:hover {
+    fill: #F76C6C;
+    stroke: #F76C6C;
 }
 
-    .icon-text-primary-custom:hover {
-        fill: #5A5C69;
-    }
 
-.btn-secondary-custom {
-    background-color: #5A5C69;
-    border-color: #5A5C69;
-    color: #fff;
+.my-text-small {
+    font-size: .9rem;
 }
-
-    .btn-secondary-custom:hover {
-        color: #F76C6C;
-        text-decoration: none;
-        stroke: #F76C6C;
-    }
-
-.stroke-secondary-custom {
-    color: #fff;
-    stroke: #5A5C69;
-}
-
-    .stroke-secondary-custom:hover {
-        color: #fff;
-        stroke: #F76C6C;
-    }
 
 .my-header-font {
     font-family: "Raleway";
-    color: #14213d;
     font-weight: "Semibold";
+}
+
+.my-paragraph-font {
+    font-family: "Roboto";
 }
 
 .my-theme-col-1 {
@@ -83,6 +44,10 @@
     color: #24305E;
 }
 
+.my-page-background {
+    background-color: #f8f9fa !important;
+
+}
 
 .my-border-right-1 {
     border-right: 0.25rem solid #F8E9A1 !important;
@@ -133,4 +98,22 @@
 
 .my-background-5 {
     background-color: #24305E;
+}
+
+.navbar-custom {
+    background-color: #F76C6C;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255,255,255,.8);
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
 }
