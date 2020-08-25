@@ -5,10 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Home With Goal</h2>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +16,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    
 
     <title>SB Admin 2 - Cards</title>
     
@@ -38,6 +33,7 @@
     <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
     @Styles.Render("~/Content/my-styles/home-screen.css")
     @Styles.Render("~/Content/my-styles/shared-styles.css")
@@ -45,201 +41,36 @@
 </head>
 @*<script src="~/vendor/js/demo/chart-area-demo.js"></script>*@
 
-<body id="page-top">
-    @*<div class="card shadow mb-4">
-                <div class="card-header py-3">
-
-                    <h6 class="m-0 font-weight-bold text-primary">Tracker - All Data</h6>
-
-                </div>
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="progressDataAll"></canvas>
-
-                    </div>
-                </div>
-            </div>
+<body id="page-top" style="background: #f8f9fa">
 
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Tracker - Relevant Data</h6>
-            </div>
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="progressDataRelevant"></canvas>
-                </div>
-            </div>
-        </div>*@
-
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="container chart-container">
-
-                <canvas id="progressGraphData"></canvas>
-
-            </div>
-
-
-            <div class="row btn-group-toggle justify-content-around" data-toggle="buttons">
-                <label class="btn btn-outline-dark  btn-sm active  justify-content-around">
-                    <input class="justify-content-around" type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked> Current Goal Data
-                </label>
-                <label class="btn btn-outline-dark  btn-sm   justify-content-around">
-                    <input class="justify-content-around" type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off"> All Data
-                </label>
-            </div>
-
-
-
-        </div>
-    </div>
-    
-<!--Check in Button-->
-<div class="container" id="check-in-button">
-        <div class="row justify-content-center">
-            <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-
-            <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
-                 xmlns:cc="http://creativecommons.org/ns#"
-                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                 xmlns:svg="http://www.w3.org/2000/svg"
-                 xmlns="http://www.w3.org/2000/svg"
-                 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-                 id="svg8"
-                 version="1.1"
-                 viewBox="0 0 210 297"
-                 height="300px"
-                 width="auto"
-                 sodipodi:docname="Check In Button.svg"
-                 pointer-events= bounding-box
-                 inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
-
-    
-                <defs id="defs2" />
-                <metadata id="metadata5">
-                    <rdf:RDF>
-                        <cc:Work rdf:about="">
-                            <dc:format>image/svg+xml</dc:format>
-                            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-                            <dc:title />
-                        </cc:Work>
-                    </rdf:RDF>
-                </metadata>
-            <a class="btn" href="Home/NewCheckInForm?pageFrom=Home">
-                
-                
-                    <g id="g884"
-                       class="icon-primary-custom"
-                       transform="translate(-12.948625)">
-                        <ellipse rx="39.309525"
-                                 cy="72.328232"
-                                 cx="100.65098"
-                                 id="path10"
-                                 style="fill: none;  stroke-width: 9; stroke-miterlimit: 4; stroke-dasharray: none" />
-                        <path id="path841"
-                              d="M 100.65098,52.682999 V 91.97347"
-                              style="fill: none;  stroke-width: 7.4334; stroke-linecap: round; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1" />
-                        <path style="fill: none;  stroke-width: 7.43339; stroke-linecap: round; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1"
-                              d="M 120.29622,72.328235 H 81.005739"
-                              id="path841-3" />
-                    </g>
-                    <g id="g879"
-                       transform="translate(1.2432404,1.0583333)">
-                        <g id="g33">
-                            <rect class="icon-primary-custom"
-                                  style="display: inline; fill-opacity: 1; stroke-width: 5.41455; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none"
-                                  id="rect862"
-                                  width="92.087349"
-                                  height="34.794144"
-                                  x="40.41544"
-                                  y="119.74335" />
-                            <text xml:space="preserve"
-                                  style="font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 17.3455px; line-height: 1.25; font-family: Roboto; -inkscape-font-specification: 'Roboto Bold'; display: inline; fill: #ffffff; fill-opacity: 1; stroke-width: 1.08409"
-                                  x="53.555176"
-                                  y="142.56029"
-                                  class="icon-text-primary-custom"
-                                  id="text870">
-                                <tspan id="tspan868"
-                                       x="53.555176"
-                                       y="142.56029"
-                                       style="font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-family: Roboto; -inkscape-font-specification: 'Roboto Bold'; fill-opacity: 1; stroke-width: 1.08409">Check in</tspan>
-                                </text>
-                        </g>
-                    </g>
-
-
-              
-            </a>
-
-
-                <g inkscape:label="Icon"
-                   id="layer3"
-                   inkscape:groupmode="layer" />
-                <g inkscape:label="Textbox"
-                   id="layer4"
-                   inkscape:groupmode="layer" />
-
-            </svg>
-
-
-        </div>
-
-    </div>
-
-
-
-<!-- Content Wrapper -->
-    <div class="d-flex flex-column">
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-            <!-- Page Heading -->
-
-            <div class="card shadow mb-4 shadow">
-                <div id="content-wrapper row" class="d-flex flex-column">
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="wrapper">
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">My Goals</h1>
+                        <h1 class=" mb-0 my-header-font">My Goals</h1>
                     </div>
 
                     <div class="row">
-
-
-
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card my-border-right-2 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Weight To Lose</div>
+                                            <div class="text-xs font-weight-bold my-font-2 text-uppercase mb-1">Weight To Lose</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">3 lbs</div>
                                         </div>
                                         <div class="col">
                                             <div class="progress progress-sm mr-2">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar my-background-2" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -252,16 +83,16 @@
 
                         <!-- Earnings (Annual) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card my-border-right-3 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Time Remaining</div>
+                                            <div class="text-xs font-weight-bold my-font-3 text-uppercase mb-1">Time Remaining</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">25 days</div>
                                         </div>
                                         <div class="col">
                                             <div class="progress progress-sm mr-2">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar my-background-3" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -274,11 +105,11 @@
 
                         <!-- Tasks Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card my-border-right-1 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Daily Calories</div>
+                                            <div class="text-xs font-weight-bold my-font-1 text-uppercase mb-1">Daily Calories</div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">1400</div>
@@ -296,11 +127,11 @@
 
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card my-border-right-5 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Macros</div>
+                                            <div class="text-xs font-weight-bold text-info-5 text-uppercase mb-1">Macros</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">6C:3P:1F</div>
                                         </div>
                                         <div class="col-auto">
@@ -312,125 +143,380 @@
                         </div>
                     </div>
 
-                    <div class="row">
-
-                        <div class="col-lg-6">
-
-                            <!-- Default Card Example -->
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    Default Card Example
-                                </div>
-                                <div class="card-body">
-                                    This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
-                                </div>
-                            </div>
-
-                            <!-- Basic Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
-                                </div>
-                                <div class="card-body">
-                                    The styling for this basic card example is created by using default Bootstrap utility classes. By using utility classes, the style of the card component can be easily modified with no need for any custom CSS!
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-6">
-
-                            <!-- Dropdown Card Example -->
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Dropdown Card Example</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
-                                </div>
-                            </div>
-
-                            <!-- Collapsable Card Example -->
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Accordion -->
-                                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                    <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-                                </a>
-                                <!-- Card Content - Collapse -->
-                                <div class="collapse show" id="collapseCardExample">
-                                    <div class="card-body">
-                                        This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
-                <h2>@Html.ActionLink("New Goal", "NewGoalForm", new { controller = "Home" }, new { @class = "btn btn-primary align-content-center col" })</h2>
-
             </div>
             <!-- End of Main Content -->
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-
-            </footer>
-            <!-- End of Footer -->
-
-
         </div>
         <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Page Wrapper -->
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close active" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+    <div class="col">
+        <!-- Card Header - Dropdown -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="container chart-container ">
+                    <canvas id="progressGraphData"></canvas>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+
+                <div class="row btn-group-toggle justify-content-around" data-toggle="buttons">
+                    <label class="btn btn-outline-dark  btn-sm active  justify-content-around">
+                        <input class="justify-content-around" type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked> Current Goal Data
+                    </label>
+                    <label class="btn btn-outline-dark  btn-sm   justify-content-around">
+                        <input class="justify-content-around" type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off"> All Data
+                    </label>
                 </div>
+
             </div>
         </div>
+
     </div>
 
 
 
+    <!--Check in button-->
+
+<div class="container row">
+
+    <div class="col" id="check-in-button">
+
+
+        <div class="row justify-content-center">
+            <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+            <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 xmlns:cc="http://creativecommons.org/ns#"
+                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:svg="http://www.w3.org/2000/svg"
+                 xmlns="http://www.w3.org/2000/svg"
+                 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                 id="svg8"
+                 version="1.1"
+                 viewBox="0 0 97.5019 128.78487"
+                 height="150px"
+                 width="auto"
+                 sodipodi:docname="Check In Button.svg"
+                 pointer-events=bounding-box
+                 inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+                <sodipodi:namedview fit-margin-bottom="0"
+                                    fit-margin-right="0"
+                                    fit-margin-left="0"
+                                    fit-margin-top="0"
+                                    inkscape:document-rotation="0"
+                                    pagecolor="#ffffff"
+                                    bordercolor="#666666"
+                                    borderopacity="1"
+                                    objecttolerance="10"
+                                    gridtolerance="10"
+                                    guidetolerance="10"
+                                    inkscape:pageopacity="0"
+                                    inkscape:pageshadow="2"
+                                    inkscape:window-width="1920"
+                                    inkscape:window-height="1017"
+                                    id="namedview915"
+                                    showgrid="false"
+                                    inkscape:snap-text-baseline="true"
+                                    inkscape:zoom="0.75722503"
+                                    inkscape:cx="232.42165"
+                                    inkscape:cy="171.60832"
+                                    inkscape:window-x="-8"
+                                    inkscape:window-y="-8"
+                                    inkscape:window-maximized="1"
+                                    inkscape:current-layer="svg8" />
+                <defs id="defs2" />
+                <metadata id="metadata5">
+                    <rdf:RDF>
+                        <cc:Work rdf:about="">
+                            <dc:format>image/svg+xml</dc:format>
+                            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                            <dc:title></dc:title>
+                        </cc:Work>
+                    </rdf:RDF>
+                </metadata>
+                <a class="btn" href="Home/NewCheckInForm?pageFrom=Home">
+
+
+                    <g id="g884"
+                       class="icon-primary-custom"
+                       transform="translate(-51.90003,-28.51823)">
+                        <ellipse ry="39.310001"
+                                 rx="39.309525"
+                                 cy="72.328232"
+                                 cx="100.65098"
+                                 id="path10"
+                                 style="fill: none; stroke-width: 9; stroke-miterlimit: 4; stroke-dasharray: none" />
+                        <path id="path841"
+                              d="M 100.65098,52.682999 V 91.97347"
+                              style="fill: none; stroke-width: 7.4334; stroke-linecap: round; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1" />
+                        <path style="fill: none; stroke-width: 7.43339; stroke-linecap: round; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1"
+                              d="M 120.29622,72.328235 H 81.005739"
+                              id="path841-3" />
+                    </g>
+                    <g id="g879"
+                       transform="translate(-37.708165,-27.459897)">
+                        <g id="g33">
+                            <rect class="icon-primary-custom"
+                                  style="display: inline; fill-opacity: 1; stroke-width: 5.41455; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none"
+                                  id="rect862"
+                                  width="92.087349"
+                                  height="34.794144"
+                                  x="40.41544"
+                                  y="118.74335" />
+                            <text
+                                xml:space="preserve"
+                                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.3455px;line-height:1.25;font-family:ro;-inkscape-font-specification:ro;display:inline;fill:#ffffff;fill-opacity:1;stroke-width:1.08409"
+                                x="53.555176"
+                                y="142.56029"
+                                id="text870"><tspan
+                                                 id="tspan868"
+                                                 x="53.555176"
+                                                 y="142.56029"
+                                                 style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';fill:#ffffff;fill-opacity:1;stroke-width:1.08409">Check in</tspan></text>
+                        </g>
+                    </g>
+
+                </a>
+                <g transform="translate(-38.951405,-28.51823)"
+                   inkscape:label="Icon"
+                   id="layer3"
+                   inkscape:groupmode="layer" />
+                <g transform="translate(-38.951405,-28.51823)"
+                   inkscape:label="Textbox"
+                   id="layer4"
+                   inkscape:groupmode="layer" />
+            </svg>
+
+        </div>
+    </div>
+
+
+    
+<div class="col" id="check-in-button">
+
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+     id="svg8"
+     version="1.1"
+     viewBox="0 0 97.5019 128.78487"
+     height="150px"
+     width="auto"
+     sodipodi:docname="Goal Button.svg"
+     inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+    <sodipodi:namedview inkscape:snap-global="true"
+                        fit-margin-bottom="0"
+                        fit-margin-right="0"
+                        fit-margin-left="0"
+                        fit-margin-top="0"
+                        inkscape:document-rotation="0"
+                        pagecolor="#ffffff"
+                        bordercolor="#666666"
+                        borderopacity="1"
+                        objecttolerance="10"
+                        gridtolerance="10"
+                        guidetolerance="10"
+                        inkscape:pageopacity="0"
+                        inkscape:pageshadow="2"
+                        inkscape:window-width="1920"
+                        inkscape:window-height="1017"
+                        id="namedview915"
+                        showgrid="false"
+                        inkscape:snap-text-baseline="true"
+                        inkscape:zoom="0.75722503"
+                        inkscape:cx="232.42165"
+                        inkscape:cy="171.60832"
+                        inkscape:window-x="-8"
+                        inkscape:window-y="-8"
+                        inkscape:window-maximized="1"
+                        inkscape:current-layer="svg8" />
+    <defs id="defs2" />
+    <metadata id="metadata5">
+        <rdf:RDF>
+            <cc:Work rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                <dc:title></dc:title>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <a class="btn" href="Home/NewGoalForm">
+
+        <ellipse class="icon-primary-custom"
+                 style="fill:none;stroke-width:9;stroke-miterlimit:4;stroke-dasharray:none"
+                 id="path10"
+                 cx="48.75095"
+                 cy="43.810001"
+                 rx="39.309525"
+                 ry="39.310001" />
+
+        <g id="g879"
+           transform="translate(-37.708165,-27.459897)">
+            <g id="g33">
+                <rect class="icon-primary-custom"
+                      style="display:inline;fill-opacity:1;stroke-width:5.41455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+                      id="rect862"
+                      width="92.087349"
+                      height="34.794144"
+                      x="40.41544"
+                      y="118.74335" />
+                <text xml:space="preserve"
+                      style="font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 17.3455px; line-height: 1.25; font-family: ro; -inkscape-font-specification: ro; display: inline; fill: #ffffff; fill-opacity: 1; stroke-width: 1.08409"
+                      x="49.303493"
+                      y="142.56029"
+                      id="text870">
+                <tspan id="tspan868"
+                       x="49.303493"
+                       y="142.56029"
+                       style="font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-family: Roboto; -inkscape-font-specification: 'Roboto Bold'; fill: #ffffff; fill-opacity: 1; stroke-width: 1.08409">New Goal</tspan></text>
+            </g>
+        </g>
+        <g style="display:inline"
+           transform="translate(-38.951405,-28.51823)"
+           inkscape:label="Icon"
+           id="layer3"
+           inkscape:groupmode="layer" />
+        <g transform="translate(-38.951405,-28.51823)"
+           inkscape:label="Textbox"
+           id="layer4"
+           inkscape:groupmode="layer" />
+        <ellipse ry="27.082529"
+                 rx="27.082199"
+                 cy="43.810001"
+                 cx="48.75095"
+                 id="path10-4"
+                 class="icon-primary-custom"
+                 style="fill:none;stroke-width:6.20052;stroke-miterlimit:4;stroke-dasharray:none" />
+        <ellipse ry="15.795886"
+                 rx="15.795694"
+                 cy="43.810001"
+                 cx="48.75095"
+                 id="path10-8"
+                 class="icon-primary-custom"
+                 style="fill:none;stroke-width:3.61645;stroke-miterlimit:4;stroke-dasharray:none" />
+        <circle r="5.4158826"
+                cy="43.810001"
+                cx="48.75095"
+                id="path109"
+                class="icon-primary-custom"
+                style="fill-rule:evenodd;stroke-width:0.264583" />
+
+    </a>
+
+</svg>
+
+
+
+</div>
+</div>
+
+
+
+    <div class="row">
+        <!-- Content Wrapper -->
+        <div class="d-flex flex-column">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="card shadow mb-4 shadow">
+                    <div id="content-wrapper row" class="d-flex flex-column">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+
+            <div class="col-lg-6">
+
+                <!-- Default Card Example -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Default Card Example
+                    </div>
+                    <div class="card-body">
+                        This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
+                    </div>
+                </div>
+
+                <!-- Basic Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+                    </div>
+                    <div class="card-body">
+                        The styling for this basic card example is created by using default Bootstrap utility classes. By using utility classes, the style of the card component can be easily modified with no need for any custom CSS!
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <!-- Dropdown Card Example -->
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Dropdown Card Example</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
+                    </div>
+                </div>
+
+                <!-- Collapsable Card Example -->
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                        <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardExample">
+                        <div class="card-body">
+                            This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2020</span>
+            </div>
+        </div>
+
+    </footer>
+    <!-- End of Footer -->
     <!-- Core plugin JavaScript-->
     <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
 

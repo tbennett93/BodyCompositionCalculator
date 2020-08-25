@@ -4,8 +4,8 @@
 */
 
 .btn-primary-custom {
-    background-color: #e76f51;
-    border-color: #e76f51;
+    background-color: #F76C6C;
+    border-color: #F76C6C;
     color: #fff;
 }
 
@@ -17,7 +17,7 @@
 
 .stroke-primary-custom {
     color: #fff;
-    stroke: #e76f51;
+    stroke: #F76C6C;
 }
 
     .stroke-primary-custom:hover {
@@ -26,13 +26,18 @@
     }
 
 .icon-primary-custom {
-    fill: #e76f51;
-    stroke: #e76f51;
+    fill: #F76C6C;
+    stroke: #F76C6C;
 }
+
 
 .icon-text-primary-custom {
     fill: #ffffff;
 }
+
+    .icon-text-primary-custom:hover {
+        fill: #5A5C69;
+    }
 
 .btn-secondary-custom {
     background-color: #5A5C69;
@@ -41,9 +46,9 @@
 }
 
     .btn-secondary-custom:hover {
-        color: #e76f51;
+        color: #F76C6C;
         text-decoration: none;
-        stroke: #e76f51;
+        stroke: #F76C6C;
     }
 
 .stroke-secondary-custom {
@@ -53,6 +58,79 @@
 
     .stroke-secondary-custom:hover {
         color: #fff;
-        stroke: #e76f51;
+        stroke: #F76C6C;
     }
 
+.my-header-font {
+    font-family: "Raleway";
+    color: #14213d;
+    font-weight: "Semibold";
+}
+
+.my-theme-col-1 {
+    color: #F8E9A1;
+}
+.my-theme-col-2 {
+    color: #F76C6C;
+}
+.my-theme-col-3 {
+    color: #A8D0E6;
+}
+.my-theme-col-4 {
+    color: #374785;
+}
+.my-theme-col-5 {
+    color: #24305E;
+}
+
+
+.my-border-right-1 {
+    border-right: 0.25rem solid #F8E9A1 !important;
+}
+.my-border-right-2 {
+    border-right: 0.25rem solid #F76C6C !important;
+}
+.my-border-right-3 {
+    border-right: 0.25rem solid #A8D0E6 !important;
+}
+.my-border-right-4 {
+    border-right: 0.25rem solid #374785 !important;
+}
+.my-border-right-5 {
+    border-right: 0.25rem solid #24305E !important;
+}
+.my-font-1 {
+    color:  #F8E9A1 ;
+}
+.my-font-2 {
+    color:  #F76C6C ;
+}
+.my-font-3 {
+    color:  #A8D0E6 ;
+}
+.my-font-4 {
+    color:  #374785 ;
+}
+.my-font-5 {
+    color:  #24305E ;
+}
+
+.my-background-1 {
+    background-color: #F8E9A1;
+}
+
+.my-background-2 {
+    background-color: #F76C6C;
+}
+
+.my-background-3 {
+    background-color: #A8D0E6;
+}
+
+.my-background-4 {
+    background-color: #374785;
+}
+
+.my-background-5 {
+    background-color: #24305E;
+}

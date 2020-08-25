@@ -14,10 +14,10 @@
 
 
     function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
-        var weightColour = "rgba(231, 111, 81, 1)";
-        var bodyFatColour = "rgba(90,92,105,1)";
-        var weightGoalColour = "rgba(231, 111, 81, 0.5)";
-        var bodyFatGoalColour = "rgba(90,92,105,0.5)";
+        var weightColour = "rgba(247, 108, 108, 1)";
+        var bodyFatColour = "rgba(55, 71, 133,1)";
+        var weightGoalColour = "rgba(247, 108, 108, 0.5)";
+        var bodyFatGoalColour = "rgba(55, 71, 133,0.5)";
 
 
         var weightLabel = "Weight (" + weightUnit[0] + ")";
@@ -35,30 +35,13 @@
                     pointRadius: 3,
                     pointBackgroundColor: weightColour,
                     pointBorderColor: weightColour,
-                    pointHoverRadius: 3,
+                    pointHoverRadius: 15,
                     pointHoverBackgroundColor: weightColour,
                     pointHoverBorderColor: weightColour,
                     pointHitRadius: 10,
-                    pointBorderWidth: 2,
+                    pointBorderWidth: 11,
                     yAxisID: 'y-axis-1',
-                    spanGaps: true
-                },
-                {
-                    data: progressBodyFat,
-                    label: "Body Fat %",
-                    lineTension: 0.4,
-                    fill: false,
-                    backgroundColor: bodyFatColour,
-                    borderColor: bodyFatColour,
-                    pointRadius: 5,
-                    pointBackgroundColor: bodyFatColour,
-                    pointBorderColor: bodyFatColour,
-                    pointHoverRadius: 2,
-                    pointHoverBackgroundColor: bodyFatColour,
-                    pointHoverBorderColor: bodyFatColour,
-                    pointHitRadius: 5,
-                    pointBorderWidth: 1.6,
-                    yAxisID: 'y-axis-2',
+                    borderWidth:10, 
                     spanGaps: true
                 },
                 {
@@ -79,9 +62,30 @@
                     yAxisID: 'y-axis-1',
                     spanGaps: true,
                     pointStyle: 'star',
-                    borderDash: [10]
+                    borderWidth: 7,
+                    borderDash: [20]
 
                 },
+                {
+                    data: progressBodyFat,
+                    label: "Body Fat %",
+                    lineTension: 0.4,
+                    fill: false,
+                    backgroundColor: bodyFatColour,
+                    borderColor: bodyFatColour,
+                    pointRadius: 5,
+                    pointBackgroundColor: bodyFatColour,
+                    pointBorderColor: bodyFatColour,
+                    pointHoverRadius: 15,
+                    pointHoverBackgroundColor: bodyFatColour,
+                    pointHoverBorderColor: bodyFatColour,
+                    pointHitRadius: 5,
+                    pointBorderWidth: 11,
+                    yAxisID: 'y-axis-2',
+                    borderWidth: 10,
+                    spanGaps: true
+                },
+                
                 {
                     data: goalBodyFat,
                     label: "Goal BodyFat",
@@ -100,7 +104,8 @@
                     yAxisID: 'y-axis-2',
                     spanGaps: true,
                     pointStyle: 'star',
-                    borderDash: [10]
+                    borderWidth: 7,
+                    borderDash: [20]
                 }
             ],
         };
