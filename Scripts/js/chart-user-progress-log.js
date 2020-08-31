@@ -32,7 +32,7 @@
                     fill: false,
                     backgroundColor: weightColour,
                     borderColor: weightColour,
-                    pointRadius: 5,
+                    pointRadius: 3,
                     pointBackgroundColor: weightColour,
                     pointBorderColor: weightColour,
                     pointHoverRadius: 15,
@@ -41,7 +41,7 @@
                     pointHitRadius: 5,
                     pointBorderWidth: 5,
                     yAxisID: 'y-axis-1',
-                    borderWidth:7, 
+                    borderWidth:3, 
                     spanGaps: true
                 },
                 {
@@ -51,7 +51,7 @@
                     fill: false,
                     backgroundColor: weightGoalColour,
                     borderColor: weightGoalColour,
-                    pointRadius: 5,
+                    pointRadius: 7,
                     pointBackgroundColor: weightGoalColour,
                     pointBorderColor: weightGoalColour,
                     pointHoverRadius: 2,
@@ -60,7 +60,7 @@
                     pointHitRadius: 5,
                     spanGaps: true,
                     pointStyle: 'star',
-                    borderWidth: 5,
+                    borderWidth: 3,
                     borderDash: [20]
                 },
                 {
@@ -70,7 +70,7 @@
                     fill: false,
                     backgroundColor: bodyFatColour,
                     borderColor: bodyFatColour,
-                    pointRadius: 5,
+                    pointRadius: 3,
                     pointBackgroundColor: bodyFatColour,
                     pointBorderColor: bodyFatColour,
                     pointHoverRadius: 15,
@@ -79,7 +79,7 @@
                     pointHitRadius: 5,
                     pointBorderWidth: 5,
                     yAxisID: 'y-axis-2',
-                    borderWidth: 7,
+                    borderWidth: 3,
                     spanGaps: true
                 },
                 
@@ -90,7 +90,7 @@
                     fill: false,
                     backgroundColor: bodyFatGoalColour,
                     borderColor: bodyFatGoalColour,
-                    pointRadius: 5,
+                    pointRadius: 7,
                     pointBackgroundColor: bodyFatGoalColour,
                     pointBorderColor: bodyFatGoalColour,
                     pointHoverRadius: 2,
@@ -101,7 +101,7 @@
                     yAxisID: 'y-axis-2',
                     spanGaps: true,
                     pointStyle: 'star',
-                    borderWidth: 5,
+                    borderWidth: 3,
                     borderDash: [20]
                 }
             ],
@@ -115,15 +115,20 @@
                 data: data,
                 options: {
                     legend: {
-                        display: true
+                        display: true,
+                        fontFamily: "Helvetica"
+
                     },
                     responsive: true, 
                     maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
                     scales: {
+
                         xAxes: [
                             {
                                 scaleLabel: {
                                     display: true,
+                                    fontFamily: "Helvetica"
+
                                 },
                                 type: 'time',
                                 time: {
@@ -133,7 +138,6 @@
                                         'minute': 'MMM DD',
                                         'hour': 'MMM DD',
                                         'day': 'MMM DD',
-
                                         'week': 'MMM DD',
                                         'month': 'MMM DD',
                                         'quarter': 'MMM DD',
@@ -149,9 +153,11 @@
                                 position: 'left',
                                 scaleLabel: {
                                     display: true,
-                                    labelString: weightLabel
+                                    labelString: weightLabel,
+                                    fontFamily: "Helvetica"
                                 },
                                 ticks: {
+                                    fontFamily: "Helvetica"
                                     //min: minWeight,
                                     //max: maxWeight
                                     //suggestedMin: minWeight,
@@ -165,13 +171,15 @@
                                 position: 'right',
                                 scaleLabel: {
                                     display: true,
-                                    labelString: "Body Fat %"
+                                    labelString: "Body Fat %",
+                                    fontFamily: "Helvetica"
                                 },
                                 ticks: {
                                     //min: minBodyFat,
                                     //max: maxBodyFat
                                     //suggestedMin: minBodyFat,
-                                    suggestedMax: maxBodyFat
+                                    suggestedMax: maxBodyFat,
+                                    fontFamily: "Helvetica"
                                 }
                             },
                         ]

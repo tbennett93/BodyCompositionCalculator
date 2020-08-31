@@ -42,7 +42,7 @@ namespace BodyCompositionCalculator.Controllers
 
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
 
-
+            HomeViewModel viewModel = new HomeViewModel();
 
 
             //Home page - returns different pages based on whether logged in/profile created/goal set
@@ -65,9 +65,55 @@ namespace BodyCompositionCalculator.Controllers
                     return View("HomeEndedGoal");
                 }
 
+                var userProfile = Helper_Classes.UserHelpers.GetUserProfile();
+
+                var userProfileId = userProfile.Id;
+
+                var currentGoal = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId);
+
+
+                var startWeight = currentGoal.StartWeightInKg;
+
+                var today = DateTime.Today;
+                var currentWeightDate = _context.UserProgressLogs
+                    .Where(m => m.UserProfileId == userProfileId && m.Date.Year <= today.Year && m.Date.Month <= today.Month && m.Date.Day <= today.Day).Select(m=>m.Date).First();
+                //var currentWeightDate = _context.UserProgressLogs
+                //    .Where(m => m.UserProfileId == userProfileId && m.Date <= today).Select(m => m.Date).OrderByDescending(m => m.Date).First();
+
+                var currentWeight = _context.UserProgressLogs.SingleOrDefault(m =>
+                    m.UserProfileId == userProfileId && m.Date == currentWeightDate).WeightInKg;
+
+                var goalWeight = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId).TargetWeightInKg;
+
+                viewModel.StartWeight = Convert.ToInt32(startWeight).ToString() + "Add units";
+                viewModel.CurrentWeight = Convert.ToInt32(currentWeight).ToString();
+                viewModel.GoalWeight = Convert.ToInt32(goalWeight).ToString();
+                viewModel.WeightProgressPercentage = Convert.ToInt32((startWeight-currentWeight)/(startWeight-goalWeight) * 100).ToString();
+                viewModel.TimeRemaining = (currentGoal.EndDate - currentWeightDate).TotalDays + " days";
+                //var sex = userProfile.Sex.BmrAdjustmentValue;
+                var sex = _context.UserProfiles.Include(m=>m.Sex).SingleOrDefault(m=>m.Id == userProfileId).Sex.BmrAdjustmentValue;
+                var height = userProfile.HeightInCm;
+                var dob = userProfile.DateOfBirth;
+                var activityVal = _context.UserProfiles.Include(m => m.ActivityLevel)
+                    .SingleOrDefault(m => m.Id == userProfileId).ActivityLevel.Value;
+
+                // Calculate the age.
+                var age = today.Year - dob.Year;
+                // Go back to the year the person was born in case of a leap year
+                if (dob.Date > today.AddYears(-age)) age--;
+
+                var bmr = Calculators.CalculateBmr(sex, Convert.ToInt32(height), age, Convert.ToInt32(currentWeight));
+
+                viewModel.Calories = Calculators.CalculateDailyCaloriesFromWeight(bmr, activityVal, (double) currentWeight, goalWeight,currentGoal.StartDate, currentGoal.EndDate).ToString();
+
+                viewModel.Macros = "Not Set";
+
+                viewModel.GoalType = "Edit Goal";
+                if (currentGoal.EndDate < DateTime.Today)
+                    viewModel.GoalType = "New Goal";
 
                 //Goal must be active - return view with current goal summary
-                return View("HomeWithGoal");
+                return View("HomeWithGoal", viewModel);
             }
 
             return View("HomeNoLogin");
@@ -96,21 +142,21 @@ namespace BodyCompositionCalculator.Controllers
 
             if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Kg))
             {
-                startWeight = newGoal.StartWeightInputA;
-                targetWeight = newGoal.TargetWeightInputA;
+                startWeight = Convert.ToDouble(newGoal.StartWeightInputA);
+                targetWeight = Convert.ToDouble(newGoal.TargetWeightInputA);
             }
             else if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Lbs))
             {
-                startWeight = Calculators.LbsToKG(newGoal.StartWeightInputA);
-                targetWeight = Calculators.LbsToKG(newGoal.TargetWeightInputA);
+                startWeight = Calculators.LbsToKG(Convert.ToDouble(newGoal.StartWeightInputA));
+                targetWeight = Calculators.LbsToKG(Convert.ToDouble(newGoal.TargetWeightInputA));
             }
             else if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.LbsAndStone))
             {
-                startWeight = Calculators.StToKg(newGoal.StartWeightInputA) +
-                              Calculators.LbsToKG(newGoal.StartWeightInputB);
+                startWeight = Calculators.StToKg(Convert.ToDouble(newGoal.StartWeightInputA)) +
+                              Calculators.LbsToKG(Convert.ToDouble(newGoal.StartWeightInputB));
 
-                targetWeight = Calculators.StToKg(newGoal.TargetWeightInputA) +
-                               Calculators.LbsToKG(newGoal.TargetWeightInputB);
+                targetWeight = Calculators.StToKg(Convert.ToDouble(newGoal.TargetWeightInputA)) +
+                               Calculators.LbsToKG(Convert.ToDouble(newGoal.TargetWeightInputB));
             }
 
             newGoal.Goal.StartWeightInKg = startWeight;
@@ -148,14 +194,12 @@ namespace BodyCompositionCalculator.Controllers
             //If no goal found, fetch blank goal page. If existing goal found, fetch existing info into page
             EditGoalViewModel viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
-            int startWeightInputA = 0;
-            int startWeightInputB = 0;
-            int targetWeightInputA = 0;
-            int targetWeightInputB = 0;
+            string startWeightInputA = "";
+            string startWeightInputB = "";
+            string targetWeightInputA = "";
+            string targetWeightInputB = "";
 
             string weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
-
-
 
             //No existing goal
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
@@ -181,20 +225,20 @@ namespace BodyCompositionCalculator.Controllers
                 double targetWeight = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId).TargetWeightInKg;
                 if (weightUnit.Equals(WeightUnits.Kg))
                 {
-                    startWeightInputA = Convert.ToInt32(startWeight);
-                    targetWeightInputA = Convert.ToInt32(targetWeight);
+                    startWeightInputA = Convert.ToInt32(startWeight).ToString();
+                    targetWeightInputA = Convert.ToInt32(targetWeight).ToString();
                 }
                 if (weightUnit.Equals(WeightUnits.Lbs))
                 {
-                    startWeightInputA = Convert.ToInt32(Calculators.KgsToLbs(startWeight));
-                    targetWeightInputA = Convert.ToInt32(Calculators.KgsToLbs(targetWeight));
+                    startWeightInputA = Convert.ToInt32(Calculators.KgsToLbs(startWeight)).ToString();
+                    targetWeightInputA = Convert.ToInt32(Calculators.KgsToLbs(targetWeight)).ToString();
                 }
                 else if (weightUnit == WeightUnits.LbsAndStone)
                 {
-                    startWeightInputA = Convert.ToInt32(Calculators.KgsToStone(startWeight));
-                    startWeightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(startWeight));
-                    targetWeightInputA = Convert.ToInt32(Calculators.KgsToStone(targetWeight));
-                    targetWeightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(targetWeight));
+                    startWeightInputA = Convert.ToInt32(Calculators.KgsToStone(startWeight)).ToString();
+                    startWeightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(startWeight)).ToString();
+                    targetWeightInputA = Convert.ToInt32(Calculators.KgsToStone(targetWeight)).ToString();
+                    targetWeightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(targetWeight)).ToString();
                 }
 
                 viewModel = new EditGoalViewModel
@@ -232,8 +276,8 @@ namespace BodyCompositionCalculator.Controllers
             //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
             CheckInFormViewModel viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
-            double weightInputA = 0.0;
-            double weightInputB = 0.0;
+            string weightInputA = "";
+            string weightInputB = "";
             var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
             double weight = 0.0;
 
@@ -256,13 +300,13 @@ namespace BodyCompositionCalculator.Controllers
 
 
             if (weightUnit.Equals(WeightUnits.Kg))
-                weightInputA = Convert.ToInt32(weight);
+                weightInputA = Convert.ToInt32(weight).ToString();
             else if (weightUnit.Equals(WeightUnits.Lbs))
-                weightInputA = Convert.ToInt32(Calculators.KgsToLbs(weight));
+                weightInputA = Convert.ToInt32(Calculators.KgsToLbs(weight)).ToString();
             else if (weightUnit.Equals(WeightUnits.LbsAndStone))
             {
-                weightInputA = Convert.ToInt32(Calculators.KgsToStone(weight));
-                weightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(weight));
+                weightInputA = Convert.ToInt32(Calculators.KgsToStone(weight)).ToString();
+                weightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(weight)).ToString();
             }
             viewModel.WeightInputA = weightInputA;
             viewModel.WeightInputB = weightInputB;  
@@ -278,22 +322,22 @@ namespace BodyCompositionCalculator.Controllers
             //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
             CheckInFormViewModel viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
-            double weightInputA = 0.0;
-            double weightInputB = 0.0;
+            string weightInputA = "";
+            string weightInputB = "";
             var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
             UserProgressLog userProgressLog = _context.UserProgressLogs.SingleOrDefault(m => m.Id == id);
             double weight = userProgressLog.WeightInKg.Value;
 
             if (weightUnit.Equals(WeightUnits.Kg))
-                weightInputA = Convert.ToInt32(weight);
+                weightInputA = Convert.ToInt32(weight).ToString();
             else if (weightUnit.Equals(WeightUnits.Lbs))
             {
-                weightInputA = Convert.ToInt32(Calculators.KgsToLbs(weight));
+                weightInputA = Convert.ToInt32(Calculators.KgsToLbs(weight)).ToString();
             }
             else if (weightUnit.Equals(WeightUnits.LbsAndStone))
             {
-                weightInputA = Convert.ToInt32(Calculators.KgsToStone(weight));
-                weightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(weight));
+                weightInputA = Convert.ToInt32(Calculators.KgsToStone(weight)).ToString();
+                weightInputB = Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(weight)).ToString();
             }
 
             viewModel = new CheckInFormViewModel
@@ -335,21 +379,19 @@ namespace BodyCompositionCalculator.Controllers
 
             if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Kg))
             {
-                startWeight = formUserProgressLog.WeightInputA;
+                startWeight = Convert.ToDouble(formUserProgressLog.WeightInputA);
             }
             else if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Lbs))
             {
-                startWeight = Calculators.LbsToKG(formUserProgressLog.WeightInputA);
-
+                startWeight = Calculators.LbsToKG(Convert.ToDouble(formUserProgressLog.WeightInputA));
             }
             else if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.LbsAndStone))
             {
-                startWeight = Calculators.StToKg(formUserProgressLog.WeightInputA) +
-                              Calculators.LbsToKG(formUserProgressLog.WeightInputB);
-
+                startWeight = Calculators.StToKg(Convert.ToDouble(formUserProgressLog.WeightInputA)) +
+                              Calculators.LbsToKG(Convert.ToDouble(formUserProgressLog.WeightInputB));
             }
 
-            formUserProgressLog.UserProgressLog.WeightInKg = startWeight;
+            formUserProgressLog.UserProgressLog.WeightInKg = Convert.ToDouble(startWeight);
 
             //Check for log on the same date, if it doesn't exist, insert, else update
             if (_context.UserProgressLogs.SingleOrDefault(g =>

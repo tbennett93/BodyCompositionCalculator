@@ -18,7 +18,7 @@
 
 <body>
 
-    <h2>@Model.Title</h2>
+    <h2 class="mb-4">@Model.Title</h2>
     @Html.ValidationSummary()
 
     @using (Html.BeginForm("AddNewGoal", "Home"))
@@ -88,7 +88,7 @@
             @Html.ValidationMessageFor(m => m.Goal.TargetWeightInKg)
         </div>
 
-        <label>Starting Body Fat</label>
+        <label>Starting Body Fat (optional)</label>
 
             <div class="form-group form-inline">
                 @Html.TextBoxFor(m => m.Goal.StartBodyFat, new { @class = "form-control col-2", @min = "0" })
@@ -101,7 +101,7 @@
 
         @Html.ValidationMessageFor(m => m.Goal.StartBodyFat)
 
-        <label>Target Body Fat</label>
+        <label>Target Body Fat  (optional)</label>
 
             <div class="form-group form-inline">
                 @Html.TextBoxFor(m => m.Goal.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col-2", @min = "0" })
@@ -135,15 +135,15 @@
 
                 $(document).ready(function () {
 
-                    function nullZeroVals(field) {
-                        if (field.val() == 0)
-                            field.val("");
-                    }
+                    //function nullZeroVals(field) {
+                    //    if (field.val() == 0)
+                    //        field.val("");
+                    //}
 
-                    nullZeroVals($('#startWeightInputA'));
-                    nullZeroVals($('#startWeightInputB'));
-                    nullZeroVals($('#targetWeightInputA'));
-                    nullZeroVals($('#targetWeightInputB'));
+                    //nullZeroVals($('#startWeightInputA'));
+                    //nullZeroVals($('#startWeightInputB'));
+                    //nullZeroVals($('#targetWeightInputA'));
+                    //nullZeroVals($('#targetWeightInputB'));
 
 
                     $('#startDate').datepicker({

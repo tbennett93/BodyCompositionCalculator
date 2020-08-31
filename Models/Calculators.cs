@@ -54,7 +54,7 @@ namespace BodyCompositionCalculator.Models
 
         public static int CalculateBmr(double sexModification, int heightInCm, int age, int weightInKg)
         {
-            return Convert.ToInt32((10+ weightInKg) + (6.25 + heightInCm) - (5 * age) + sexModification);
+            return Convert.ToInt32((10* weightInKg) + (6.25 * heightInCm) - (5 * age) + sexModification);
         }
 
 

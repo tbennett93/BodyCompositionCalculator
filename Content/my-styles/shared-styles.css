@@ -21,7 +21,7 @@
 
 .my-header-font {
     font-family: "Raleway";
-    font-weight: "Semibold";
+    font-weight: bold;
 }
 
 .my-paragraph-font {
@@ -46,7 +46,6 @@
 
 .my-page-background {
     background-color: #f8f9fa !important;
-
 }
 
 .my-border-right-1 {
@@ -64,8 +63,25 @@
 .my-border-right-5 {
     border-right: 0.25rem solid #24305E !important;
 }
+
+.my-border-bottom-1 {
+    border-bottom: 0.25rem solid #F8E9A1 !important;
+}
+.my-border-bottom-2 {
+    border-bottom: 0.25rem solid #F76C6C !important;
+}
+.my-border-bottom-3 {
+    border-bottom: 0.25rem solid #A8D0E6 !important;
+}
+.my-border-bottom-4 {
+    border-bottom: 0.25rem solid #374785 !important;
+}
+.my-border-bottom-5 {
+    border-bottom: 0.25rem solid #24305E !important;
+}
+
 .my-font-1 {
-    color:  #F8E9A1 ;
+    color: #F8E9A1;
 }
 .my-font-2 {
     color:  #F76C6C ;
@@ -101,7 +117,7 @@
 }
 
 .navbar-custom {
-    background-color: #F76C6C;
+    background-color: #A8D0E6;
 }
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
@@ -110,10 +126,44 @@
 }
 /* change the link color */
 .navbar-custom .navbar-nav .nav-link {
-    color: rgba(255,255,255,.5);
+    color: rgba(255,255,255,.9);
 }
 /* change the color of active or hovered links */
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:hover .nav-link {
     color: #ffffff;
 }
+
+
+
+.btn-outline-cust {
+    color: #24305E;
+    border-color: #24305E;
+}
+
+    .btn-outline-cust:hover {
+        color: #fff;
+        background-color: #24305E;
+        border-color: #24305E;
+    }
+
+    .btn-outline-cust:focus, .btn-outline-cust.focus {
+        box-shadow: 0 0 0 0.2rem rgba( 36, 48, 94, 0.5);
+    }
+
+    .btn-outline-cust.disabled, .btn-outline-cust:disabled {
+        color: #24305E;
+        background-color: transparent;
+    }
+
+    .btn-outline-cust:not(:disabled):not(.disabled):active, .btn-outline-cust:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-cust.dropdown-toggle {
+        color: #fff;
+        background-color: #24305E;
+        border-color: #24305E;
+    }
+
+        .btn-outline-cust:not(:disabled):not(.disabled):active:focus, .btn-outline-cust:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-outline-cust.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba( 36, 48, 94, 0.5);
+        }

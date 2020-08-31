@@ -8,8 +8,8 @@ namespace BodyCompositionCalculator.Models.ViewModels
     public class CheckInFormViewModel
     {
         public UserProgressLog UserProgressLog { get; set; }
-        public double WeightInputA { get; set; }
-        public double WeightInputB { get; set; }
+        public string WeightInputA { get; set; }
+        public string WeightInputB { get; set; }
         public string WeightUnit { get; set; }
         public string PageTitlePrefix { get; set; } = "New";
         public string RedirectionPage { get; set; } = "Home";
