@@ -93,6 +93,7 @@ namespace BodyCompositionCalculator.Controllers
 
                 //viewModel.CurrentWeight = Convert.ToInt32(currentWeight).ToString();
                 //viewModel.GoalWeight = Convert.ToInt32(goalWeight).ToString();
+
                 viewModel.WeightProgressPercentage = Convert.ToInt32((startWeight-currentWeight)/(startWeight-goalWeight) * 100).ToString();
                 viewModel.TimeRemaining = (currentGoal.EndDate - maxLogDate).TotalDays + " days";
                 //var sex = userProfile.Sex.BmrAdjustmentValue;

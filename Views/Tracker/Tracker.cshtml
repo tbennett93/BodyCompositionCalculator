@@ -50,6 +50,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>*@
 
     @Scripts.Render("~/Scripts/moment.js")
+    <script src="//cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js"></script>
 
     <script>
 
@@ -57,6 +58,7 @@
         $(document).ready(function() {
             
 
+            $.fn.dataTable.moment('DD MMM YYYY');
 
             var table = $('#dataTable').DataTable({
                 ajax: {
@@ -71,17 +73,17 @@
                         data: "Date",
                         render: function(na1, na2, data) {
                             //var formattedDate = new Date(date);
+
                             var formattedDate = moment(data.Date).format('DD MMM YYYY');
-                            var formattedDateForLink = moment(data.Date).format('DD MMM YYYY');
-                            return formattedDate
+                            return formattedDate;
                         }
                     },
                     {
                         data: "WeightInKg",
                         render: function(weight) {
                             //var formattedDate = new Date(date);
-                            var formattedWeight = weight;
-                            return formattedWeight;
+                            //var formattedWeight = weight;
+                            return weight;
                         }
 
                     },
