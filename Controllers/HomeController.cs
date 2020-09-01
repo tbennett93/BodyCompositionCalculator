@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Net;
 using BodyCompositionCalculator.Controllers.API;
 using BodyCompositionCalculator.Models;
@@ -75,21 +76,25 @@ namespace BodyCompositionCalculator.Controllers
                 var startWeight = currentGoal.StartWeightInKg;
 
                 var today = DateTime.Today;
-                var currentWeightDate = _context.UserProgressLogs
-                    .Where(m => m.UserProfileId == userProfileId && m.Date.Year <= today.Year && m.Date.Month <= today.Month && m.Date.Day <= today.Day).Select(m=>m.Date).First();
+                var maxLogDate = Helper_Classes.UserHelpers.GetMaxUserLogDate();
                 //var currentWeightDate = _context.UserProgressLogs
                 //    .Where(m => m.UserProfileId == userProfileId && m.Date <= today).Select(m => m.Date).OrderByDescending(m => m.Date).First();
 
                 var currentWeight = _context.UserProgressLogs.SingleOrDefault(m =>
-                    m.UserProfileId == userProfileId && m.Date == currentWeightDate).WeightInKg;
+                    m.UserProfileId == userProfileId && m.Date == maxLogDate).WeightInKg;
 
                 var goalWeight = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId).TargetWeightInKg;
 
-                viewModel.StartWeight = Convert.ToInt32(startWeight).ToString() + "Add units";
-                viewModel.CurrentWeight = Convert.ToInt32(currentWeight).ToString();
-                viewModel.GoalWeight = Convert.ToInt32(goalWeight).ToString();
+
+
+                viewModel.StartWeight = GetWeightString(startWeight);
+                viewModel.CurrentWeight = GetWeightString((double) currentWeight);
+                viewModel.GoalWeight = GetWeightString(goalWeight);
+
+                //viewModel.CurrentWeight = Convert.ToInt32(currentWeight).ToString();
+                //viewModel.GoalWeight = Convert.ToInt32(goalWeight).ToString();
                 viewModel.WeightProgressPercentage = Convert.ToInt32((startWeight-currentWeight)/(startWeight-goalWeight) * 100).ToString();
-                viewModel.TimeRemaining = (currentGoal.EndDate - currentWeightDate).TotalDays + " days";
+                viewModel.TimeRemaining = (currentGoal.EndDate - maxLogDate).TotalDays + " days";
                 //var sex = userProfile.Sex.BmrAdjustmentValue;
                 var sex = _context.UserProfiles.Include(m=>m.Sex).SingleOrDefault(m=>m.Id == userProfileId).Sex.BmrAdjustmentValue;
                 var height = userProfile.HeightInCm;
@@ -104,7 +109,13 @@ namespace BodyCompositionCalculator.Controllers
 
                 var bmr = Calculators.CalculateBmr(sex, Convert.ToInt32(height), age, Convert.ToInt32(currentWeight));
 
-                viewModel.Calories = Calculators.CalculateDailyCaloriesFromWeight(bmr, activityVal, (double) currentWeight, goalWeight,currentGoal.StartDate, currentGoal.EndDate).ToString();
+                var dailyCalories = Calculators.CalculateDailyCaloriesFromWeight(bmr, activityVal,
+                    (double) currentWeight, goalWeight, currentGoal.StartDate, currentGoal.EndDate);
+                if (dailyCalories > 900)
+                    viewModel.Calories = dailyCalories.ToString();
+                else
+                    viewModel.Calories = "Daily calories too low. Revise Goal.";
+
 
                 viewModel.Macros = "Not Set";
 
@@ -122,7 +133,22 @@ namespace BodyCompositionCalculator.Controllers
 
         }
 
-     
+        private static string GetWeightString(double val)
+        {
+            switch (Helper_Classes.UserHelpers.GetWeightUnit())
+            {
+                case WeightUnits.Kg:
+                    return Math.Round(val, 1) + "kg";
+                case WeightUnits.Lbs:
+                    return Convert.ToInt32(Calculators.KgsToLbs(val)) + "lbs";
+                case WeightUnits.LbsAndStone:
+                    return Convert.ToInt32(Calculators.KgsToStone(val)) + "st" + Convert.ToInt32(Calculators.KgsToLbsRemainingFromStone(val)) + "lb";
+            }
+
+            return "Weight Unit Not Found";
+        }
+
+
         public ActionResult AddNewGoal(EditGoalViewModel newGoal)
         {
             if (!ModelState.IsValid)
@@ -366,6 +392,7 @@ namespace BodyCompositionCalculator.Controllers
                         System.Diagnostics.Debug.WriteLine(error);
                     }
                 }
+
                 return View("NewCheckInForm", formUserProgressLog);
 
             }

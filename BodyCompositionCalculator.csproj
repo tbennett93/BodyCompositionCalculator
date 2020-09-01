@@ -357,6 +357,7 @@
     <Compile Include="Models\UserProgressGraphDataModel.cs" />
     <Compile Include="Models\UserProgressLog.cs" />
     <Compile Include="Models\UserProgressLogWithGoal.cs" />
+    <Compile Include="Models\Validation\CheckInDateNotInFuture.cs" />
     <Compile Include="Models\Validation\EndDateGreaterThanStartDate.cs" />
     <Compile Include="Models\ViewModels\CheckInFormViewModel.cs" />
     <Compile Include="Models\ViewModels\EditGoalViewModel.cs" />

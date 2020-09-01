@@ -54,6 +54,17 @@ namespace BodyCompositionCalculator.Helper_Classes
                     .Where(m => m.Id == userId)
                     .Select(m => m.WeightUnit.Name)
                     .SingleOrDefault();
-            }            
+            }
+
+            public static DateTime GetMaxUserLogDate()
+            {
+                var today = DateTime.Today;
+                var userId = GetUserProfile().Id;
+                return new ApplicationDbContext().UserProgressLogs
+                    .Where(m => m.UserProfileId == userId && m.Date.Year <= today.Year && m.Date.Month <= today.Month && m.Date.Day <= today.Day)
+                    .Select(m => m.Date).OrderByDescending(m => m.Year)
+                    .ThenByDescending(m => m.Month)
+                    .ThenByDescending(m => m.Day).First();
+        }
     }
 }
