@@ -1,6 +1,10 @@
 ﻿$(document).ready(function () {
 
 
+    var toDisplayBf = false;
+    var toHideBf = !toDisplayBf;
+
+
     $("#buttonDisplayGraphAll").click(function () {
         // redraw chart with stanza data
         generateChartData("/api/UserProgressAll/");
@@ -11,6 +15,15 @@
         generateChartData("/api/UserProgressRelevant/");
     });
 
+    $("#buttonToggleBodyFat").click(function () {
+        // redraw chart with stanza data
+        if (toDisplayBf) {
+            toDisplayBf = false;
+        } else{ toDisplayBf = true;}
+
+        if ($('#buttonDiplayGraphRelevant').is(':checked')) { generateChartData("/api/UserProgressRelevant/"); }
+        else { generateChartData("/api/UserProgressAll/");}
+    });
 
 
     function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
@@ -19,11 +32,12 @@
         var weightGoalColour = "rgba(247, 108, 108, 0.5)";
         var bodyFatGoalColour = "rgba(55, 71, 133,0.5)";
         var todayLineColour = "#A8D0E6";
-
-
         var weightLabel = "Weight (" + weightUnit[0] + ")";
 
-        var data = {
+        var toHideBf = !toDisplayBf;
+
+
+    var data = {
             labels: dates,
             datasets: [
                 {
@@ -82,12 +96,13 @@
                     pointBorderWidth: 5,
                     yAxisID: 'y-axis-2',
                     borderWidth: 3,
-                    spanGaps: true
+                    spanGaps: true,
+                    hidden: toHideBf
                 },
                 
                 {
                     data: goalBodyFat,
-                    label: "Goal BodyFat",
+                    label: "Goal Body Fat %",
                     lineTension: 0.5,
                     fill: false,
                     backgroundColor: bodyFatGoalColour,
@@ -104,7 +119,9 @@
                     spanGaps: true,
                     pointStyle: 'star',
                     borderWidth: 3,
-                    borderDash: [20]
+                    borderDash: [20],
+                    hidden: toHideBf
+
                 }
             ],
         };
@@ -116,6 +133,7 @@
 
         today = mm + '/' + dd + '/' + yyyy;
 
+
         var ctx = document.getElementById("progressGraphData").getContext("2d");
         var progressDataAll = new Chart(ctx,
             {
@@ -124,9 +142,17 @@
                 options: {
                     legend: {
                         display: true,
-                        fontFamily: "Helvetica"
+                        labels: {
+                            filter: function (item, chart) {
+                                if (!toDisplayBf) { return !item.text.includes("Body Fat"); }
+                                return true;
+
+                                // Logic to remove a particular legend item goes here
+                            }
+                        }
 
                     },
+                
                     annotation: {
                         annotations: [
                             {
@@ -136,10 +162,18 @@
                                 value: (moment(new Date(today))),
                                 borderColor: todayLineColour,
                                 borderWidth: 4,
+                                borderDash: [5, 2],
+                                borderDashOffset: 10,
                                 label: {
-                                    content: "TODAY",
+                                    content: "Today",
                                     enabled: true,
-                                    position: "top"
+                                    position: "center",
+                                    rotation: 0,
+                                    xAdjust: 30,
+                                    fontSize: 12,
+                                    backgroundColor: todayLineColour,
+                                    yAdjust: -60,
+                                    cornerRadius: 60
                                 }
                             }
                         ]
@@ -172,6 +206,7 @@
                             }
                         ],
                         yAxes: [
+
                             {
                                 id: 'y-axis-1',
                                 type: 'linear',
@@ -194,12 +229,15 @@
                                 id: 'y-axis-2',
                                 type: 'linear',
                                 position: 'right',
+                                display: toDisplayBf,
                                 scaleLabel: {
-                                    display: true,
+                                    display: toDisplayBf,
                                     labelString: "Body Fat %",
                                     fontFamily: "Helvetica"
                                 },
                                 ticks: {
+                                    display: toDisplayBf,
+
                                     //min: minBodyFat,
                                     //max: maxBodyFat
                                     //suggestedMin: minBodyFat,
