@@ -3,8 +3,16 @@
 }
 */
 
+:root {
+    --colour-1: #F8E9A1;
+    --colour-2: #F76C6C;
+    --colour-3: #A8D0E6;
+    --colour-4: #374785;
+    --colour-5: #24305E
+}
 
 .icon-primary-custom {
+    /*    fill: var(--colour-2);*/
     fill: #F76C6C;
     stroke: #F76C6C;
 }

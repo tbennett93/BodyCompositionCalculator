@@ -18,6 +18,7 @@
         var bodyFatColour = "rgba(55, 71, 133,1)";
         var weightGoalColour = "rgba(247, 108, 108, 0.5)";
         var bodyFatGoalColour = "rgba(55, 71, 133,0.5)";
+        var todayLineColour = "#A8D0E6";
 
 
         var weightLabel = "Weight (" + weightUnit[0] + ")";
@@ -61,6 +62,7 @@
                     spanGaps: true,
                     pointStyle: 'star',
                     borderWidth: 3,
+                    yAxisID: 'y-axis-1',
                     borderDash: [20]
                 },
                 {
@@ -107,6 +109,12 @@
             ],
         };
 
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
 
         var ctx = document.getElementById("progressGraphData").getContext("2d");
         var progressDataAll = new Chart(ctx,
@@ -118,6 +126,23 @@
                         display: true,
                         fontFamily: "Helvetica"
 
+                    },
+                    annotation: {
+                        annotations: [
+                            {
+                                type: "line",
+                                mode: "vertical",
+                                scaleID: "x-axis-0",
+                                value: (moment(new Date(today))),
+                                borderColor: todayLineColour,
+                                borderWidth: 4,
+                                label: {
+                                    content: "TODAY",
+                                    enabled: true,
+                                    position: "top"
+                                }
+                            }
+                        ]
                     },
                     responsive: true, 
                     maintainAspectRatio: false, // Add to prevent default behavior of full-width/height 
