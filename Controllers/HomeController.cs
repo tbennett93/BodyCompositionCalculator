@@ -200,18 +200,40 @@ namespace BodyCompositionCalculator.Controllers
 
                 newGoal.Goal.UserProfileId = userProfileId;
                 _context.Goals.Add(newGoal.Goal);
-                _context.SaveChanges();
-                return RedirectToAction("Index", new { controller = "Home" });
+            }
+            else
+            {
+                //Update the existing Goal record
+                _context.Entry(_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId))
+                    .CurrentValues
+                    .SetValues(newGoal.Goal);
             }
 
 
-            
-            //Update the existing Goal record
-            _context.Entry(_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId))
-                .CurrentValues
-                .SetValues(newGoal.Goal);
             _context.SaveChanges();
+
+
+
+            if (newGoal.AddAsCheckIn && newGoal.Goal.StartDate <= DateTime.Today)
+            {
+                var checkInModel = new CheckInFormViewModel
+                {
+                    WeightUnit = newGoal.WeightUnit,
+                    WeightInputA = newGoal.StartWeightInputA,
+                    WeightInputB = newGoal.StartWeightInputB,
+                    UserProgressLog = new UserProgressLog
+                    {
+                        Date = newGoal.Goal.StartDate,
+                        BodyFat = newGoal.Goal.StartBodyFat
+                    }
+                };
+
+                UpdateDbWithNewCheckIn(checkInModel);
+
+            }
+
             return RedirectToAction("Index", new { controller = "Home" });
+
         }
 
 
@@ -381,22 +403,9 @@ namespace BodyCompositionCalculator.Controllers
         }
 
 
-        public ActionResult AddNewProgressLog(CheckInFormViewModel formUserProgressLog)
+        private void UpdateDbWithNewCheckIn(CheckInFormViewModel formUserProgressLog)
         {
 
-            if (!ModelState.IsValid)
-            {
-                foreach (ModelState modelState in ViewData.ModelState.Values)
-                {
-                    foreach (ModelError error in modelState.Errors)
-                    {
-                        System.Diagnostics.Debug.WriteLine(error);
-                    }
-                }
-
-                return View("NewCheckInForm", formUserProgressLog);
-
-            }
 
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = currentUserProfile.Id;
@@ -428,22 +437,44 @@ namespace BodyCompositionCalculator.Controllers
                 //Insert
                 formUserProgressLog.UserProgressLog.UserProfileId = userProfileId;
                 _context.UserProgressLogs.Add(formUserProgressLog.UserProgressLog);
-                _context.SaveChanges();
-                return RedirectToAction("Index", new { controller = formUserProgressLog.RedirectionPage });
             }
-            //Update
-            var progressLogId = _context.UserProgressLogs.SingleOrDefault(g =>
-                g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date).Id;
-            formUserProgressLog.UserProgressLog.Id = progressLogId;
-            formUserProgressLog.UserProgressLog.UserProfileId = userProfileId;
+            else
+            {
+                var progressLogId = _context.UserProgressLogs.SingleOrDefault(g =>
+                    g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date).Id;
+                formUserProgressLog.UserProgressLog.Id = progressLogId;
+                formUserProgressLog.UserProgressLog.UserProfileId = userProfileId;
 
 
-            _context.Entry(_context.UserProgressLogs.
-                    SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date))
-                .CurrentValues
-                .SetValues(formUserProgressLog.UserProgressLog);
+                _context.Entry(_context.UserProgressLogs.
+                        SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date))
+                    .CurrentValues
+                    .SetValues(formUserProgressLog.UserProgressLog);
 
+            }
             _context.SaveChanges();
+
+            //Update
+
+        }
+
+        public ActionResult AddNewProgressLog(CheckInFormViewModel formUserProgressLog)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                foreach (ModelState modelState in ViewData.ModelState.Values)
+                {
+                    foreach (ModelError error in modelState.Errors)
+                    {
+                        System.Diagnostics.Debug.WriteLine(error);
+                    }
+                }
+                return View("NewCheckInForm", formUserProgressLog);
+            }
+
+            UpdateDbWithNewCheckIn(formUserProgressLog);
+
             return RedirectToAction("Index", new { controller = formUserProgressLog.RedirectionPage });
 
         }

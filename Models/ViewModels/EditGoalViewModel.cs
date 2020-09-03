@@ -14,6 +14,7 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public string TargetWeightInputB { get; set; }
         public string WeightUnit { get; set; }
         public string Title { get; set; }
+        public bool AddAsCheckIn { get; set; } = true;
     }
 
 }
