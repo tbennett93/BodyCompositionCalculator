@@ -21,7 +21,8 @@
     <h2 class="mb-4">@Model.Title</h2>
     @Html.ValidationSummary()
 
-    @using (Html.BeginForm("AddNewGoal", "Home"))
+    @using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new { @id = "goalForm"}))
+
     {
         <label>Start Date</label>
         <div class="form-group">
@@ -116,11 +117,10 @@
 
 
         <div class="form-check mb-4">
-            @Html.CheckBoxFor(m => m.AddAsCheckIn, new { @class = " form-check-input mb-4 ischecked" })
+            @Html.CheckBoxFor(m => m.AddAsCheckIn, new { @id = "checkInCheckBox", @class = " form-check-input mb-4"  })
             <label class="form-check-label">Check in with these details</label>
         </div>
 
-        <p>JS validation on start date > today and checkbox checked</p>
 
         <button type="submit" class="btn btn-primary">Save</button>
 
@@ -141,15 +141,30 @@
 
         $(document).ready(function () {
 
-            //function nullZeroVals(field) {
-            //    if (field.val() == 0)
-            //        field.val("");
-            //}
 
-            //nullZeroVals($('#startWeightInputA'));
-            //nullZeroVals($('#startWeightInputB'));
-            //nullZeroVals($('#targetWeightInputA'));
-            //nullZeroVals($('#targetWeightInputB'));
+            var checkBox = $("#checkInCheckBox");
+            var checkBoxVal = checkBox.val();
+
+            checkBox.change(function () {
+                checkBoxVal = this.checked;
+            });
+
+            function greyCheckBox(dt) {
+
+                var today = new Date();
+                today = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+
+                if (dt > today) {
+                    checkBox.prop('checked', false);
+                    checkBox.prop('disabled', true);
+
+                } else {
+                    checkBox.prop('checked', checkBoxVal);
+                    checkBox.prop('disabled', false);
+                }
+
+            }
+
 
 
             $('#startDate').datepicker({
@@ -182,13 +197,21 @@
                 $('#targetWeight').val("");
             };
 
+
+
             //If the default date is used, set the dates
             var startDate = $('#startDate').datepicker('getDate');
+            greyCheckBox(startDate);
+
+
+
             if (startDate.getFullYear() == 0) {
                 $('#startDate').datepicker('clearDates');
                 $('#endDate').datepicker('clearDates');
             }
 
+
+         
             //https://bootstrap-datepicker.readthedocs.io/en/
             $('#startDate.datepicker').datepicker({
                 format: 'dd M yyyy',
@@ -196,11 +219,12 @@
                 autoclose: true,
                 todayHighlight: true
             }).on('changeDate', function (selected) {
-                var minDateSelectable = new Date(selected.date.valueOf());
+                var dateSelected = new Date(selected.date.valueOf());
                 var minDate = new Date(selected.date.valueOf() + (1000 * 60 * 60 * 24 * 28));
                 $('#endDate').datepicker({ format: 'dd M yyyy' }); // <--THIS IS THE LINE ADDED
-                $('#endDate').datepicker('setStartDate', minDateSelectable);
+                $('#endDate').datepicker('setStartDate', dateSelected);
                 $('#endDate').datepicker('setDate', minDate); // <--THIS IS THE LINE ADDED
+                greyCheckBox(dateSelected);
                 //$(this).datepicker('hide');
             });
 
