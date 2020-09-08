@@ -381,6 +381,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
+    <Content Include="Content\images\5898.jpg" />
+    <Content Include="Content\images\hero-img.png" />
+    <Content Include="Content\images\pexels-pixabay-53404.jpg" />
+    <Content Include="Content\images\pexels-victor-freitas-841130.jpg" />
     <Content Include="Content\my-styles\home-screen.css" />
     <Content Include="Content\my-styles\link-colour.css" />
     <Content Include="Content\my-styles\profile-edit-style.css" />
@@ -460,6 +464,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\images\5898.eps" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />

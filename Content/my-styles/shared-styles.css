@@ -246,3 +246,41 @@
     .show > .btn-cust-4.dropdown-toggle:focus {
         box-shadow: 0 0 0 0.2rem rgba(247, 108, 108, 0.5);
     }
+
+
+.btn-cust-1 {
+    color: #fff;
+    background-color: #374785;
+    border-color: #374785;
+}
+
+.btn-cust-1:hover {
+    color: #fff;
+    background-color: #374785;
+    border-color: #374785;
+}
+
+.btn-cust-1:focus, .btn-cust-1.focus {
+    color: #fff;
+    background-color: #374785;
+    border-color: #374785;
+    box-shadow: 0 0 0 0.2rem rgba(247, 108, 108, 0.5);
+}
+
+.btn-cust-1.disabled, .btn-cust-1:disabled {
+    color: #fff;
+    background-color: #374785;
+    border-color: #374785;
+}
+
+.btn-cust-1:not(:disabled):not(.disabled):active, .btn-cust-1:not(:disabled):not(.disabled).active,
+.show > .btn-cust-1.dropdown-toggle {
+    color: #fff;
+    background-color: rgba(247, 108, 108, 0.5);
+    border-color: rgba(247, 108, 108, 0.5);
+}
+
+.btn-cust-1:not(:disabled):not(.disabled):active:focus, .btn-cust-1:not(:disabled):not(.disabled).active:focus,
+.show > .btn-cust-1.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(247, 108, 108, 0.5);
+}
