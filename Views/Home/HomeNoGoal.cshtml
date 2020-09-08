@@ -5,12 +5,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Home No Goal</h2>
 
 
-<div class="jumbotron">
+<!DOCTYPE html>
+<html lang="en">
 
-    <h2>@Html.ActionLink("New Goal", "NewGoalForm", new { controller = "Home" }, new { @class = "btn btn-primary" })</h2>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    @Styles.Render("~/Content/my-styles/shared-styles.css")
+
+
+</head>
+
+<body>
+
+
+<div style=" min-width:400px " id="main" class="d-flex align-items-center">
+
+    
+    <div class="col pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center text-center">
+        <h4 class="mb-4" style="font-family: Raleway; ">Now set yourself a goal to begin...</h4>
+
+        <h2>@Html.ActionLink("New Goal", "NewGoalForm", new { controller = "Home" }, new { @class = "btn btn-cust-4" })</h2>
+
+
+    </div>
 
 </div>
 
+
+
+</body>
+
+
+
+</html>
