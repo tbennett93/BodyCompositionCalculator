@@ -28,8 +28,12 @@ namespace BodyCompositionCalculator.Controllers
         // GET: Profile
         public ActionResult Index()
         {
-            var userId = Helper_Classes.UserHelpers.GetUserProfile().Id;
-            
+            var userProfile = Helper_Classes.UserHelpers.GetUserProfile();
+            if (userProfile == null)
+                return RedirectToAction("Edit");
+
+
+            var userId = userProfile.Id;
             string heightToDisplay = "";
             string heightUnit = _context.UserProfiles.Where(m=>m.Id==userId).Select(m=>m.HeightUnit.Name).SingleOrDefault();
             double heightInCm = _context.UserProfiles.Where(m => m.Id == userId).Select(m => m.HeightInCm)
@@ -52,9 +56,7 @@ namespace BodyCompositionCalculator.Controllers
                     Include(m => m.ActivityLevel).
                     ToList().
                     SingleOrDefault(m => m.Id == userId)
-        };
-
-            
+            };
 
             return View(viewModel);
         }
