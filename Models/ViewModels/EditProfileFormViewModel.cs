@@ -20,6 +20,7 @@ namespace BodyCompositionCalculator.Models.ViewModels
         [DisplayName("Activity Level")]
         public IEnumerable<ActivityLevel> ActivityLevels { get; set; }
 
+        public string RedirectionPage { get; set; }
 
 
     }

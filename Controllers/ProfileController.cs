@@ -8,6 +8,7 @@ using System.Web.WebPages;
 using BodyCompositionCalculator.Models;
 using BodyCompositionCalculator.Models.Calculation_Constants;
 using BodyCompositionCalculator.Models.ViewModels;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -96,30 +97,28 @@ namespace BodyCompositionCalculator.Controllers
             }
 
 
-            
+            double heightInCm = 0.0d;
+            if (heightUnit == HeightUnits.Cm)
+                heightInCm = newUserProfile.HeightInputA;
+            else if (heightUnit == HeightUnits.Feetandinches)
+                heightInCm = Calculators.FeetAndInchesToCM(newUserProfile.HeightInputA, newUserProfile.HeightInputB);
 
-            if(Helper_Classes.UserHelpers.GetUserProfile()==null)
+            newUserProfile.UserProfile.HeightInCm = heightInCm;
+
+            if (Helper_Classes.UserHelpers.GetUserProfile()==null)
                 _context.UserProfiles.Add(newUserProfile.UserProfile);
+                
             else
             {
                 var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
                 var currentUserProfile = _context.UserProfiles.SingleOrDefault(u=>u.Id == userProfileId) ;
-                double heightInCm = 0.0d;
-
-
-                if (heightUnit == HeightUnits.Cm)
-                    heightInCm = newUserProfile.HeightInputA;
-                else if (heightUnit == HeightUnits.Feetandinches)
-                    heightInCm = Calculators.FeetAndInchesToCM(newUserProfile.HeightInputA, newUserProfile.HeightInputB);
-
-                newUserProfile.UserProfile.HeightInCm = heightInCm;
+               
 
                 _context.Entry(_context.UserProfiles.SingleOrDefault(u => u.Id == userProfileId)).CurrentValues.SetValues(newUserProfile.UserProfile);
-                _context.SaveChanges();
 
             }
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", newUserProfile.RedirectionPage);
         }
 
 
@@ -130,12 +129,15 @@ namespace BodyCompositionCalculator.Controllers
         public ActionResult Edit()
         {
             EditProfileFormViewModel viewModel;
-
+            
             var userProfile = Helper_Classes.UserHelpers.GetUserProfile();
+
+            var returnPage = userProfile == null ? "Home" : "Profile";
+            //var returnPage =  "Home";
+
             if (userProfile == null)
                 viewModel = new EditProfileFormViewModel()
                 {
-
                     UserProfile = new UserProfile
                     {
                         ApplicationUserId = User.Identity.GetUserId()
@@ -143,7 +145,8 @@ namespace BodyCompositionCalculator.Controllers
                     WeightUnits = _context.WeightUnits.ToList(),
                     HeightUnits = _context.HeightUnits.ToList(),
                     Sexes = _context.Sexes.ToList(),
-                    ActivityLevels = _context.ActivityLevels.ToList()
+                    ActivityLevels = _context.ActivityLevels.ToList(),
+                    RedirectionPage = returnPage
                 };
             else
             {
@@ -157,7 +160,8 @@ namespace BodyCompositionCalculator.Controllers
                     Sexes = _context.Sexes.ToList(),
                     ActivityLevels = _context.ActivityLevels.ToList(),
                     HeightInputA = valForHeighInputA,
-                    HeightInputB = valForHeighInputB
+                    HeightInputB = valForHeighInputB,
+                    RedirectionPage = returnPage
                 };
             }
 

@@ -17,188 +17,188 @@
     @Styles.Render("~/Content/my-styles/profile-edit-style.css")
 
 </head>
-    <body>
-        <h2>Create Profile</h2>
+<body>
+    <h2>Create Profile</h2>
 
-        @*Without using the using keyword, the form (which is html form type) would remain open as it's not automatically closed.*@
-        @using (Html.BeginForm("Create", "Profile"))
-        {
-            @Html.ValidationSummary(true, "Please fix the following errors:")
-            <div class="form-group">
-                @Html.LabelFor(m => m.UserProfile.FirstName)
-                @Html.TextBoxFor(m => m.UserProfile.FirstName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(c => c.UserProfile.FirstName)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.UserProfile.LastName)
-                @Html.TextBoxFor(m => m.UserProfile.LastName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(c => c.UserProfile.LastName)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.UserProfile.DateOfBirth)
+    @*Without using the using keyword, the form (which is html form type) would remain open as it's not automatically closed.*@
+    @using (Html.BeginForm("Create", "Profile"))
+    {
+        @Html.ValidationSummary(true, "Please fix the following errors:")
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserProfile.FirstName)
+            @Html.TextBoxFor(m => m.UserProfile.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.UserProfile.FirstName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserProfile.LastName)
+            @Html.TextBoxFor(m => m.UserProfile.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.UserProfile.LastName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserProfile.DateOfBirth)
 
-                <div class="form-group">
-                    <div id="dateOfBirth" , class="input-group date datepicker">
-                        @Html.TextBoxFor(model => model.UserProfile.DateOfBirth, "{0: dd MMM yyyy}", new { @class = "form-control" })
-                        <div class="input-group-append input-group-addon">
-                            <span class="input-group-text">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                        </div>
+            <div class="form-group">
+                <div id="dateOfBirth" , class="input-group date datepicker">
+                    @Html.TextBoxFor(model => model.UserProfile.DateOfBirth, "{0: dd MMM yyyy}", new { @class = "form-control" })
+                    <div class="input-group-append input-group-addon">
+                        <span class="input-group-text">
+                            <span class="fa fa-calendar"></span>
+                        </span>
                     </div>
-                    @Html.ValidationMessageFor(m => m.UserProfile.DateOfBirth)
                 </div>
+                @Html.ValidationMessageFor(m => m.UserProfile.DateOfBirth)
             </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.UserProfile.Sex)
-                @Html.DropDownListFor(m => m.UserProfile.SexId,
-                    new SelectList(Model.Sexes, "Id", "Name"),
-                    "Select Sex",
-                    new { @class = "form-control" }
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserProfile.Sex)
+            @Html.DropDownListFor(m => m.UserProfile.SexId,
+                new SelectList(Model.Sexes, "Id", "Name"),
+                "Select Sex",
+                new { @class = "form-control" }
+                )
+
+            @Html.ValidationMessageFor(c => c.UserProfile.Sex)
+        </div>
+
+        <div class="form-group">
+            <label>Height</label>
+            <div class="form-group form-inline">
+                @Html.TextBoxFor(m => m.HeightInputA, new { @class = "form-control col-1", @id = "heightInputA", @min = "0" })
+                @Html.TextBoxFor(m => m.HeightInputB, new { @class = "form-control col-1", @id = "heightInputB", @min = "0" })
+                @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
+                    new SelectList(Model.HeightUnits, "Id", "Name"),
+                    "Select Height Unit",
+                    new { @class = "form-control col-1", @id = "selectorHeightUnit" }
                     )
-
-                @Html.ValidationMessageFor(c => c.UserProfile.Sex)
             </div>
+            @Html.ValidationMessageFor(c => c.HeightInputA)
+            @Html.ValidationMessageFor(c => c.HeightInputB)
+            @Html.ValidationMessageFor(c => c.UserProfile.HeightUnit)
 
-            <div class="form-group">
-                <label>Height</label>
-                <div class="form-group form-inline">
-                    @Html.TextBoxFor(m => m.HeightInputA, new {@class = "form-control col-1", @id = "heightInputA", @min = "0"})
-                    @Html.TextBoxFor(m => m.HeightInputB, new {@class = "form-control col-1", @id = "heightInputB", @min = "0"})
-                    @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
-                        new SelectList(Model.HeightUnits, "Id", "Name"),
-                        "Select Height Unit",
-                        new { @class = "form-control col-1" , @id = "selectorHeightUnit" }
-                        )
-                </div>
-                @Html.ValidationMessageFor(c => c.HeightInputA)
-                @Html.ValidationMessageFor(c => c.HeightInputB)
-                @Html.ValidationMessageFor(c => c.UserProfile.HeightUnit)
+        </div>
 
-            </div>            
-            
-            <div class="form-group">
-                @Html.LabelFor(m => m.UserProfile.ActivityLevel)*
-                @*TODO - defauly the dropdownlist for new users to a value - do the same for all dropdowns in project*@
-                @Html.DropDownListFor(m => m.UserProfile.ActivityLevelId,
-                    new SelectList(Model.ActivityLevels, "Id", "Name"),
-                    "Select Activity Level",
-                    new { @class = "form-control" }
-                    )
-                @Html.ValidationMessageFor(c => c.UserProfile.ActivityLevel)
-            </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserProfile.ActivityLevel)*
+            @*TODO - defauly the dropdownlist for new users to a value - do the same for all dropdowns in project*@
+            @Html.DropDownListFor(m => m.UserProfile.ActivityLevelId,
+                new SelectList(Model.ActivityLevels, "Id", "Name"),
+                "Select Activity Level",
+                new { @class = "form-control" }
+                )
+            @Html.ValidationMessageFor(c => c.UserProfile.ActivityLevel)
+        </div>
 
 
-     
-            <div class="form-group">
-                @Html.LabelFor(m => m.UserProfile.WeightUnit) 
-                @Html.DropDownListFor(m => m.UserProfile.WeightUnitId, new SelectList(Model.WeightUnits, "Id", "Name"), "Select Weight Unit", new { @class = "form-control", @id = "selectorWeightUnit" })
 
-                @Html.ValidationMessageFor(c => c.UserProfile.WeightUnitId)
-            </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserProfile.WeightUnit)
+            @Html.DropDownListFor(m => m.UserProfile.WeightUnitId, new SelectList(Model.WeightUnits, "Id", "Name"), "Select Weight Unit", new { @class = "form-control", @id = "selectorWeightUnit" })
+
+            @Html.ValidationMessageFor(c => c.UserProfile.WeightUnitId)
+        </div>
 
 
 
 
-            @Html.HiddenFor(m => m.UserProfile.Id)
-            @Html.HiddenFor(m => m.UserProfile.ApplicationUserId)
+        @Html.HiddenFor(m => m.UserProfile.Id)
+        @Html.HiddenFor(m => m.UserProfile.ApplicationUserId)
+        @Html.HiddenFor(m => m.RedirectionPage)
 
 
-            @*@Html.AntiForgeryToken();*@
+        @*@Html.AntiForgeryToken();*@
 
-            <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
 
-            <p class ="subtext">*Try to be as honest as you can when selecting activity level:</p>
-            <p class ="subtext"> -Sedentary (most common) - little to no daily exercise</p>
-            <p class ="subtext"> -Lightly Active - light exercise 1-3 days per week</p>
-            <p class ="subtext"> -Moderately Active - moderate exercise 3-5 days per week</p>
-            <p class ="subtext"> -Very Active - hard exercise 6-7 days per week- </p>
-            <p class ="subtext"> -Extra Active - hard exercise twice or more per day/very physical job </p>
+        <p class="subtext">*Try to be as honest as you can when selecting activity level:</p>
+        <p class="subtext"> -Sedentary (most common) - little to no daily exercise</p>
+        <p class="subtext"> -Lightly Active - light exercise 1-3 days per week</p>
+        <p class="subtext"> -Moderately Active - moderate exercise 3-5 days per week</p>
+        <p class="subtext"> -Very Active - hard exercise 6-7 days per week- </p>
+        <p class="subtext"> -Extra Active - hard exercise twice or more per day/very physical job </p>
 
-        }
-
-
-        <script>
-
-            $(document).ready(function() {
-
-                heightUnit = $('#selectorHeightUnit').val();
-
-                if (!heightUnit) {
-                    $('#selectorHeightUnit').val("2");
-                }
+    }
 
 
-                if (heightUnit == 1) {
+    <script>
+
+        $(document).ready(function () {
+
+            heightUnit = $('#selectorHeightUnit').val();
+
+            if (!heightUnit) {
+                $('#selectorHeightUnit').val("2");
+            }
+
+
+            if (heightUnit == 1) {
+                $('#heightInputB').hide();
+            }
+
+            if ($('#heightInputA').val() == 0) {
+                $('#heightInputA').val("");
+                $('#heightInputB').val("");
+            }
+
+            $('#selectorHeightUnit').change(function () {
+                console.log(heightUnit)
+                console.log($('#selectorHeightUnit').val());
+
+                if ($('#selectorHeightUnit').val() == 1) {
                     $('#heightInputB').hide();
-                }
-
-                if ($('#heightInputA').val() == 0) {
-                    $('#heightInputA').val("");
-                    $('#heightInputB').val("");
-                }
-
-                $('#selectorHeightUnit').change(function () {
-                    console.log(heightUnit)
-                    console.log($('#selectorHeightUnit').val());
-
-                    if ($('#selectorHeightUnit').val() == 1) {
-                        $('#heightInputB').hide();
-                        if (heightUnit != $('#selectorHeightUnit').val())
-                        {
-                            $('#heightInputA').val("");
-                            heightUnit = $('#selectorHeightUnit').val();
-                            $('#heightInputA').removeClass("col-1");
-                            $('#heightInputB').removeClass("col-1");
-                            $('#heightInputA').addClass("col-2");
-                            $('#heightInputB').addClass("col-2");
-                        }
-
-                    }
-                    if ($('#selectorHeightUnit').val() == 2) {
-                        $('#heightInputB').show();
-                        if (heightUnit != $('#selectorHeightUnit').val()) {
-                            $('#heightInputA').val("");
-                            $('#heightInputB').val("");
-                            heightUnit = $('#selectorHeightUnit').val();
-                            $('#heightInputA').removeClass("col-2");
-                            $('#heightInputB').removeClass("col-2");
-                            $('#heightInputA').addClass("col-1");
-                            $('#heightInputB').addClass("col-1");
-                        }
+                    if (heightUnit != $('#selectorHeightUnit').val()) {
+                        $('#heightInputA').val("");
+                        heightUnit = $('#selectorHeightUnit').val();
+                        $('#heightInputA').removeClass("col-1");
+                        $('#heightInputB').removeClass("col-1");
+                        $('#heightInputA').addClass("col-2");
+                        $('#heightInputB').addClass("col-2");
                     }
 
-                });
-
-
-                var height = $('#height').val();
-                var activity = $('#activity').val();
-
-                if (height == 0) {
-                    $('#height').val("");
                 }
-                if (activity == 0) {
-                    $('#activity').val("");
-                };
-
-                $('#dateOfBirth.datepicker').datepicker({
-                    format: 'dd M yyyy',
-                    todayBtn: true,
-                    autoclose: true,
-                    todayHighlight: true
-                });
-
-
-                var dateOfBirth = $('#dateOfBirth').datepicker('getDate');
-                if (dateOfBirth.getFullYear() == 0) {
-                    $('#dateOfBirth').datepicker('clearDates');
+                if ($('#selectorHeightUnit').val() == 2) {
+                    $('#heightInputB').show();
+                    if (heightUnit != $('#selectorHeightUnit').val()) {
+                        $('#heightInputA').val("");
+                        $('#heightInputB').val("");
+                        heightUnit = $('#selectorHeightUnit').val();
+                        $('#heightInputA').removeClass("col-2");
+                        $('#heightInputB').removeClass("col-2");
+                        $('#heightInputA').addClass("col-1");
+                        $('#heightInputB').addClass("col-1");
+                    }
                 }
-
 
             });
-        </script>
 
-    </body>
+
+            var height = $('#height').val();
+            var activity = $('#activity').val();
+
+            if (height == 0) {
+                $('#height').val("");
+            }
+            if (activity == 0) {
+                $('#activity').val("");
+            };
+
+            $('#dateOfBirth.datepicker').datepicker({
+                format: 'dd M yyyy',
+                todayBtn: true,
+                autoclose: true,
+                todayHighlight: true
+            });
+
+
+            var dateOfBirth = $('#dateOfBirth').datepicker('getDate');
+            if (dateOfBirth.getFullYear() == 0) {
+                $('#dateOfBirth').datepicker('clearDates');
+            }
+
+
+        });
+    </script>
+
+</body>
 
 <html>
 
