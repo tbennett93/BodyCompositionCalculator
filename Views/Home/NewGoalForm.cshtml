@@ -21,7 +21,7 @@
     <h2 class="mb-4">@Model.Title</h2>
     @Html.ValidationSummary()
 
-    @using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new { @id = "goalForm"}))
+    @using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new { @id = "goalForm" }))
 
     {
         <label>Start Date</label>
@@ -116,8 +116,16 @@
         </div>
 
 
+        <label>Calculate Calories Using:</label>
+        @Html.DropDownListFor(expression: m => m.CalculationBasisChoice,
+            selectList: Model.CalculationBasis,
+            htmlAttributes: new { @class = "form-control col-2 mb-4 " }
+            )
+
+        <p>Grey and select Weight if starting </p>
+
         <div class="form-check mb-4">
-            @Html.CheckBoxFor(m => m.AddAsCheckIn, new { @id = "checkInCheckBox", @class = " form-check-input mb-4"  })
+            @Html.CheckBoxFor(m => m.AddAsCheckIn, new { @id = "checkInCheckBox", @class = " form-check-input mb-4" })
             <label class="form-check-label">Check in with these details</label>
         </div>
 
@@ -211,7 +219,7 @@
             }
 
 
-         
+
             //https://bootstrap-datepicker.readthedocs.io/en/
             $('#startDate.datepicker').datepicker({
                 format: 'dd M yyyy',

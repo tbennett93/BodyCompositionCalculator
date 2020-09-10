@@ -30,5 +30,8 @@ namespace BodyCompositionCalculator.Models
         [ForeignKey("UserProfile")]
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
+
+        [Required] 
+        public string CalculationBasis { get; set; } = "Weight";
     }
 }

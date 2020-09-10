@@ -27,10 +27,10 @@
 
 
     function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
-        var weightColour = "rgba(247, 108, 108, 1)";
-        var bodyFatColour = "rgba(55, 71, 133,1)";
-        var weightGoalColour = "rgba(247, 108, 108, 0.5)";
-        var bodyFatGoalColour = "rgba(55, 71, 133,0.5)";
+        var bodyFatColour = "rgba(247, 108, 108, 1)";
+        var weightColour = "rgba(55, 71, 133,1)";
+        var bodyFatGoalColour = "rgba(247, 108, 108, 0.5)";
+        var weightGoalColour = "rgba(55, 71, 133,0.5)";
         var todayLineColour = "#A8D0E6";
         var weightLabel = "Weight (" + weightUnit[0] + ")";
 

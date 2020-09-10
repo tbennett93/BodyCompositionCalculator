@@ -83,7 +83,11 @@ namespace BodyCompositionCalculator.Controllers
                 var currentWeight = _context.UserProgressLogs.SingleOrDefault(m =>
                     m.UserProfileId == userProfileId && m.Date == maxLogDate).WeightInKg;
 
+                var currentBodyFat = _context.UserProgressLogs.SingleOrDefault(m =>
+                    m.UserProfileId == userProfileId && m.Date == maxLogDate).BodyFat;
+
                 var goalWeight = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId).TargetWeightInKg;
+                var goalBodyFat = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId).TargetBodyFat;
 
 
 
@@ -110,8 +114,14 @@ namespace BodyCompositionCalculator.Controllers
 
                 var bmr = Calculators.CalculateBmr(sex, Convert.ToInt32(height), age, Convert.ToInt32(currentWeight));
 
-                var dailyCalories = Calculators.CalculateDailyCaloriesFromWeight(bmr, activityVal,
-                    (double) currentWeight, goalWeight, currentGoal.StartDate, currentGoal.EndDate);
+
+                int dailyCalories = 0;
+                if (currentGoal.CalculationBasis.Equals(CalculationBasis.Weight))
+                    dailyCalories = Calculators.CalculateDailyCaloriesFromWeight(bmr, activityVal,
+                        (double) currentWeight, goalWeight, currentGoal.StartDate, currentGoal.EndDate);
+                else if (currentGoal.CalculationBasis.Equals(CalculationBasis.BodyFat))
+                    dailyCalories = Calculators.CalculateCalorieDeficitFromBodyFat((double) currentWeight, (int) currentBodyFat, (int) goalBodyFat, currentGoal.StartDate, currentGoal.EndDate);
+
                 if (dailyCalories > 900)
                     viewModel.Calories = dailyCalories.ToString();
                 else
@@ -164,6 +174,9 @@ namespace BodyCompositionCalculator.Controllers
                 return View("NewGoalForm", newGoal);
             }
 
+            var calculationBasis = newGoal.CalculationBasisChoice;
+
+
             double startWeight = 0.0;
             double targetWeight = 0.0;
 
@@ -193,6 +206,8 @@ namespace BodyCompositionCalculator.Controllers
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
 
             //TODO latest checkin always updates final weight on goal
+            
+            newGoal.Goal.CalculationBasis = (string) calculationBasis;
 
             //No Goal Id on user profile. Add it
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
@@ -249,6 +264,8 @@ namespace BodyCompositionCalculator.Controllers
             string targetWeightInputB = "";
 
             string weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
+            var dbGoal = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
+
 
             //No existing goal
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
@@ -265,7 +282,8 @@ namespace BodyCompositionCalculator.Controllers
                     TargetWeightInputA = targetWeightInputA,
                     TargetWeightInputB = targetWeightInputB,
                     WeightUnit = weightUnit,
-                    Title = "New Goal"
+                    Title = "New Goal",
+                    CalculationBasis = new SelectList(new List<string>{"Weight", "Body Fat"},dbGoal.CalculationBasis)
                 };
             //Existing goal
             else
@@ -292,13 +310,15 @@ namespace BodyCompositionCalculator.Controllers
 
                 viewModel = new EditGoalViewModel
                 {
-                    Goal = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId),
+                    Goal = dbGoal,
                     StartWeightInputA = startWeightInputA,
                     StartWeightInputB = startWeightInputB,
                     TargetWeightInputA = targetWeightInputA,
                     TargetWeightInputB = targetWeightInputB,
                     WeightUnit = weightUnit,
-                    Title = "Edit Goal"
+                    Title = "Edit Goal",
+                    CalculationBasis = new SelectList(new List<string> { "Weight", "Body Fat" }, dbGoal.CalculationBasis)
+
                 };
             }
             return View(viewModel);

@@ -341,8 +341,17 @@
     <Compile Include="Migrations\202008181709149_UpdateLbsAndStoneName.designer.cs">
       <DependentUpon>202008181709149_UpdateLbsAndStoneName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009092111326_AddCalculationBasisFieldToGoal.cs" />
+    <Compile Include="Migrations\202009092111326_AddCalculationBasisFieldToGoal.designer.cs">
+      <DependentUpon>202009092111326_AddCalculationBasisFieldToGoal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009092117047_MakeCalclationBasisMandatory.cs" />
+    <Compile Include="Migrations\202009092117047_MakeCalclationBasisMandatory.designer.cs">
+      <DependentUpon>202009092117047_MakeCalclationBasisMandatory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Calculation_Constants\CalculationBasis.cs" />
     <Compile Include="Models\Calculation_Constants\CaloriesPerWeightUnit.cs" />
     <Compile Include="Models\Calculation_Constants\HeightUnits.cs" />
     <Compile Include="Models\Calculation_Constants\WeightUnits.cs" />
@@ -2545,6 +2554,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008181709149_UpdateLbsAndStoneName.resx">
       <DependentUpon>202008181709149_UpdateLbsAndStoneName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009092111326_AddCalculationBasisFieldToGoal.resx">
+      <DependentUpon>202009092111326_AddCalculationBasisFieldToGoal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009092117047_MakeCalclationBasisMandatory.resx">
+      <DependentUpon>202009092117047_MakeCalclationBasisMandatory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

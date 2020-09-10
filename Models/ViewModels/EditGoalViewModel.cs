@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BodyCompositionCalculator.Models.ViewModels
 {
@@ -15,6 +16,10 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public string WeightUnit { get; set; }
         public string Title { get; set; }
         public bool AddAsCheckIn { get; set; } = true;
+        public string CalculationBasisChoice { get; set; }
+        public SelectList CalculationBasis { get; set; }
+
+
     }
 
 }
