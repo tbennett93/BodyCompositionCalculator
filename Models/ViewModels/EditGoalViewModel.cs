@@ -18,6 +18,7 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public bool AddAsCheckIn { get; set; } = true;
         public string CalculationBasisChoice { get; set; }
         public SelectList CalculationBasis { get; set; }
+        public bool TrackBodyFat { get; set; } = true;
 
 
     }

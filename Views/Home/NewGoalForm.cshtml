@@ -84,19 +84,20 @@
 
         <div class="form-group">
             <label>Target Weight</label>
-            <div class="form-group form-inline">
+            <div class="form-group form-inline mb-0" id="targetWeightBoxes">
                 @*@Html.TextBoxFor(m => m.Goal.TargetWeightInKg, new { @class = "form-control", @id = "targetWeight", @min = "0" })*@
                 @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col-1", @id = "targetWeightInputA", @min = "0" })
                 @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col-1", @id = "targetWeightInputB", @min = "0", @max = "13" })
-                <p class="form-control">@Model.WeightUnit</p>
+                <p id="targetWeightUnit" class="form-control">@Model.WeightUnit</p>
             </div>
+            <small>*If using body fat to calculate calories, target weight is calculated automatically</small>
             @Html.ValidationMessageFor(m => m.Goal.TargetWeightInKg)
         </div>
 
-        <label>Starting Body Fat (optional)</label>
+        <label>Starting Body Fat</label>
 
         <div class="form-group form-inline">
-            @Html.TextBoxFor(m => m.Goal.StartBodyFat, new { @class = "form-control col-2", @min = "0" })
+            @Html.TextBoxFor(m => m.Goal.StartBodyFat, new { @id= "startBfText",  @class = "form-control col-2", @min = "0" })
             <p class="form-control">%</p>
 
             @*TODO - implement this*@
@@ -106,7 +107,7 @@
 
         @Html.ValidationMessageFor(m => m.Goal.StartBodyFat)
 
-        <label>Target Body Fat  (optional)</label>
+        <label>Target Body Fat</label>
 
         <div class="form-group form-inline">
             @Html.TextBoxFor(m => m.Goal.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col-2", @min = "0" })
@@ -116,18 +117,25 @@
         </div>
 
 
-        <label>Calculate Calories Using:</label>
+        <label>Calculate Goal Plan Using:</label>
         @Html.DropDownListFor(expression: m => m.CalculationBasisChoice,
             selectList: Model.CalculationBasis,
-            htmlAttributes: new { @class = "form-control col-2 mb-4 " }
+            htmlAttributes: new { @class = "form-control col-2 mb-4 ", @id = "calculationBasis" }
             )
 
-        <p>Grey and select Weight if starting </p>
 
         <div class="form-check mb-4">
-            @Html.CheckBoxFor(m => m.AddAsCheckIn, new { @id = "checkInCheckBox", @class = " form-check-input mb-4" })
+            @Html.CheckBoxFor(m => m.AddAsCheckIn, new { @id = "checkInCheckBox", @class = " form-check-input" })
             <label class="form-check-label">Check in with these details</label>
         </div>
+
+        <div class="form-check mb-4">
+            @Html.CheckBoxFor(m => m.TrackBodyFat, new { @id = "trackBfCheckBox", @class = " form-check-input" })
+            <label class="form-check-label">Track Body Fat Percentage</label>
+        </div>
+
+        <p>Grey and select Weight if starting and target body fat are null </p>
+        <p>Handle the create of the form where calculate calories using BF is selected as it will need to ignore target weight </p>
 
 
         <button type="submit" class="btn btn-primary">Save</button>
@@ -150,8 +158,51 @@
         $(document).ready(function () {
 
 
+            var startBfText = $("#startBfText");
+            var targetBfText = $("#targetBfText");
+
+
+            function handleBodyFatReadOnly() {
+                var checked = !$("#trackBfCheckBox").prop("checked");
+                startBfText.prop('readonly', checked);
+                targetBfText.prop('readonly', checked);
+            };
+                
+            handleBodyFatReadOnly();
+            $("#trackBfCheckBox").on('change', 
+                function () {
+                    handleBodyFatReadOnly();
+                });
+
+
+
+
             var checkBox = $("#checkInCheckBox");
             var checkBoxVal = checkBox.val();
+            var calculationBasis = $("#calculationBasis");
+
+            function handleTargetWeightReadOnly() {
+                var targetWeightA = $("#targetWeightInputA");
+                var targetWeightB = $("#targetWeightInputB");
+
+                function changeTargetWeight(bool) {
+                    targetWeightA.prop('readonly', bool);
+                    targetWeightB.prop('readonly', bool);
+                }
+                if (calculationBasis.val() == "Weight") {
+                    changeTargetWeight(false);
+                } else if (calculationBasis.val() == "Body Fat") {
+                    changeTargetWeight(true);
+                }
+            }
+
+            handleTargetWeightReadOnly();
+
+            calculationBasis.on("change",
+                function () { handleTargetWeightReadOnly(); }
+            );
+
+
 
             checkBox.change(function () {
                 checkBoxVal = this.checked;
