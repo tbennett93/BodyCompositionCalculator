@@ -224,15 +224,15 @@
 
     .btn-cust-4:focus, .btn-cust-4.focus {
         color: #fff;
-        background-color: #F8E9A1;
-        border-color: #F8E9A1;
+        background-color: #F76C6C;
+        border-color: #F76C6C;
         box-shadow: 0 0 0 0.2rem rgba(247, 108, 108, 0.5);
     }
 
     .btn-cust-4.disabled, .btn-cust-4:disabled {
         color: #fff;
-        background-color: #F8E9A1;
-        border-color: #F8E9A1;
+        background-color: #F76C6C;
+        border-color: #F76C6C;
     }
 
     .btn-cust-4:not(:disabled):not(.disabled):active, .btn-cust-4:not(:disabled):not(.disabled).active,

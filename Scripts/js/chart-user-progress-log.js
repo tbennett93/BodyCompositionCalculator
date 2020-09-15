@@ -15,15 +15,18 @@
         generateChartData("/api/UserProgressRelevant/");
     });
 
+
     $("#buttonToggleBodyFat").click(function () {
-        // redraw chart with stanza data
-        toDisplayBf = !toDisplayBf;
-        //if (toDisplayBf) {
-        //    toDisplayBf = false;
-        //} else{ toDisplayBf = true;}
+        if (this.checked) {
+            $("#buttonToggleBodyFatText").text("Hide Body Fat %");
+            toDisplayBf = true;
+        } else {
+            $("#buttonToggleBodyFatText").text("Display Body Fat %");
+            toDisplayBf = false;
+        }
 
         if ($('#buttonDiplayGraphRelevant').is(':checked')) { generateChartData("/api/UserProgressRelevant/"); }
-        else { generateChartData("/api/UserProgressAll/");}
+        else { generateChartData("/api/UserProgressAll/"); }
     });
 
 

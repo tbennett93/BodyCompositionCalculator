@@ -338,23 +338,33 @@
                     <canvas id="progressGraphData"></canvas>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-4 btn-group-toggle " data-toggle="buttons">
+                <div class="container row justify-content-around">
+                    <div class="col-3 btn-group-toggle " data-toggle="buttons">
                         <label class="btn btn-outline-cust-5  btn-sm active ">
-                            <input type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked=checked />Goal Data
+                            <input type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked />Goal Data
                         </label>
                         <label class="btn btn-outline-cust-5  btn-sm ">
                             <input type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off" />All Data
                         </label>
                     </div>
 
-                    <label class="btn btn-cust-4 col-2 btn-sm"  data-toggle="button" id="buttonToggleBodyFat">Display Body Fat %</label>
+     
+                    <div class="col-3 btn-group-toggle  ">
+                        <label class="btn btn-cust-4  btn-sm  ">
+
+                            <input id="buttonToggleBodyFat" type='checkbox' autocomplete="off" data-toggle="button"/><span id="buttonToggleBodyFatText">Display Body Fat %</span>
+                            @*<label id='buttonToggleBodyFatText' for="buttonToggleBodyFat">Display Body Fat %</label>*@
+
+                        </label>
+                    </div>              
+
+                </div>
                 </div>
 
             </div>
         </div>
 
-    </div>
+    
 
 
     <!--Check in button-->
@@ -385,6 +395,8 @@
         <script src="~/Scripts/js/chart-progress-log-relevant.js"></script>*@
     <script src="~/Scripts/js/chart-user-progress-log.js"></script>
 
+
 </body>
+
 
 </html>
