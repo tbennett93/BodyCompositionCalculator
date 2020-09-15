@@ -15,7 +15,7 @@ namespace BodyCompositionCalculator.Models.Validation
 
             if (viewModel.TrackBodyFat)
             {
-                if(viewModel.TargetBodyFat == null)
+                if(viewModel.TargetBodyFat == null || viewModel.TargetBodyFat == 0 )
                     return new ValidationResult("Target Body Fat Required");
             }
 

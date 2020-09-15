@@ -167,15 +167,26 @@
 
             var startBfText = $("#startBfText");
             var targetBfText = $("#targetBfText");
+            var calculationBasis = $("#calculationBasis");
+
 
 
             function handleBodyFatReadOnly() {
-                var checked = !$("#trackBfCheckBox").prop("checked");
-                startBfText.prop('readonly', checked);
-                targetBfText.prop('readonly', checked);
+                var checked = $("#trackBfCheckBox").prop("checked");
+                function setBfReadOnly(bool) {
+                    startBfText.prop('readonly', bool);
+                    targetBfText.prop('readonly', bool);
+                }
+                if (calculationBasis.val() == "Weight" && !checked) {
+                    setBfReadOnly(true);
+                } else  {
+                    setBfReadOnly(false);
+                }
+                
             };
                 
             handleBodyFatReadOnly();
+
             $("#trackBfCheckBox").on('change', 
                 function () {
                     handleBodyFatReadOnly();
@@ -186,7 +197,6 @@
 
             var checkBox = $("#checkInCheckBox");
             var checkBoxVal = checkBox.val();
-            var calculationBasis = $("#calculationBasis");
 
             function handleTargetWeightReadOnly() {
                 var targetWeightA = $("#targetWeightInputA");
@@ -206,7 +216,10 @@
             handleTargetWeightReadOnly();
 
             calculationBasis.on("change",
-                function () { handleTargetWeightReadOnly(); }
+                function () {
+                    handleTargetWeightReadOnly();
+                    handleBodyFatReadOnly();
+                }
             );
 
 
