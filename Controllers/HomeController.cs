@@ -120,7 +120,7 @@ namespace BodyCompositionCalculator.Controllers
                     dailyCalories = Calculators.CalculateDailyCaloriesFromWeight(bmr, activityVal,
                         (double) currentWeight, goalWeight, currentGoal.StartDate, currentGoal.EndDate);
                 else if (currentGoal.CalculationBasis.Equals(CalculationBasis.BodyFat))
-                    dailyCalories = Calculators.CalculateDailyCaloriesFromBodyFat((double) currentWeight, (int) currentBodyFat, (int) goalBodyFat, currentGoal.StartDate, currentGoal.EndDate);
+                    dailyCalories = Calculators.CalculateDailyCaloriesFromBodyFat(bmr, activityVal, (double) currentWeight, (int) currentBodyFat, (int) goalBodyFat, currentGoal.StartDate, currentGoal.EndDate);
 
                 if (dailyCalories > 900)
                     viewModel.Calories = dailyCalories.ToString();

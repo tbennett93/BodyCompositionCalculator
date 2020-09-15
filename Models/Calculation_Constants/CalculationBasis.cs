@@ -8,6 +8,6 @@ namespace BodyCompositionCalculator.Models.Calculation_Constants
     public class CalculationBasis
     {
         public static string Weight = "Weight";
-        public static string BodyFat = "BodyFat";
+        public static string BodyFat = "Body Fat";
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using BodyCompositionCalculator.Models.Calculation_Constants;
 using BodyCompositionCalculator.Models.ViewModels;
 
 namespace BodyCompositionCalculator.Models.Validation
@@ -13,7 +14,7 @@ namespace BodyCompositionCalculator.Models.Validation
         {
             var viewModel = (Goal)validationContext.ObjectInstance; //needs casting to customer as it only returns a type of Object
 
-            if (viewModel.TrackBodyFat)
+            if (viewModel.TrackBodyFat || viewModel.CalculationBasis.Equals(CalculationBasis.BodyFat))
             {
                 if(viewModel.StartBodyFat == null || viewModel.StartBodyFat==0)
                     return new ValidationResult("Starting Body Fat Required");
