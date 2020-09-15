@@ -17,9 +17,10 @@
 
     $("#buttonToggleBodyFat").click(function () {
         // redraw chart with stanza data
-        if (toDisplayBf) {
-            toDisplayBf = false;
-        } else{ toDisplayBf = true;}
+        toDisplayBf = !toDisplayBf;
+        //if (toDisplayBf) {
+        //    toDisplayBf = false;
+        //} else{ toDisplayBf = true;}
 
         if ($('#buttonDiplayGraphRelevant').is(':checked')) { generateChartData("/api/UserProgressRelevant/"); }
         else { generateChartData("/api/UserProgressAll/");}

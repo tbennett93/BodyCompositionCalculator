@@ -19,7 +19,7 @@
 <body>
 
     <h2 class="mb-4">@Model.Title</h2>
-    @Html.ValidationSummary()
+    @*@Html.ValidationSummary()*@
 
     @using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new { @id = "goalForm" }))
 
@@ -88,7 +88,8 @@
                 @*@Html.TextBoxFor(m => m.Goal.TargetWeightInKg, new { @class = "form-control", @id = "targetWeight", @min = "0" })*@
                 @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col-1", @id = "targetWeightInputA", @min = "0" })
                 @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col-1", @id = "targetWeightInputB", @min = "0", @max = "13" })
-                <p id="targetWeightUnit" class="form-control">@Model.WeightUnit</p>
+                <p id="targetWeightUnit" class="form-control">@Html.DisplayFor(m => m.WeightUnit)</p>
+                
             </div>
             <small>*If using body fat to calculate calories, target weight is calculated automatically</small>
             @Html.ValidationMessageFor(m => m.Goal.TargetWeightInKg)
@@ -96,24 +97,30 @@
 
         <label>Starting Body Fat</label>
 
-        <div class="form-group form-inline">
-            @Html.TextBoxFor(m => m.Goal.StartBodyFat, new { @id= "startBfText",  @class = "form-control col-2", @min = "0" })
-            <p class="form-control">%</p>
+        <div>
+            <div class="form-group form-inline">
+                @Html.TextBoxFor(m => m.Goal.StartBodyFat, new { @id= "startBfText",  @class = "form-control col-2", @min = "0" })
+                <p class="form-control">%</p>
 
-            @*TODO - implement this*@
-            <button>Calculate</button>
+                @*TODO - implement this*@
+                <button>Calculate</button>
+
+            </div>
+            @Html.ValidationMessageFor(m => m.Goal.StartBodyFat)
 
         </div>
 
-        @Html.ValidationMessageFor(m => m.Goal.StartBodyFat)
 
         <label>Target Body Fat</label>
 
-        <div class="form-group form-inline">
-            @Html.TextBoxFor(m => m.Goal.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col-2", @min = "0" })
-            <p class="form-control">%</p>
+        <div>
+            <div class="form-group form-inline">
+                @Html.TextBoxFor(m => m.Goal.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col-2", @min = "0" })
+                <p class="form-control">%</p>
 
+            </div>
             @Html.ValidationMessageFor(m => m.Goal.TargetBodyFat)
+
         </div>
 
 
@@ -130,11 +137,10 @@
         </div>
 
         <div class="form-check mb-4">
-            @Html.CheckBoxFor(m => m.TrackBodyFat, new { @id = "trackBfCheckBox", @class = " form-check-input" })
+            @Html.CheckBoxFor(m => m.Goal.TrackBodyFat, new { @id = "trackBfCheckBox", @class = " form-check-input" })
             <label class="form-check-label">Track Body Fat Percentage</label>
         </div>
 
-        <p>Grey and select Weight if starting and target body fat are null </p>
         <p>Handle the create of the form where calculate calories using BF is selected as it will need to ignore target weight </p>
 
 
@@ -145,6 +151,7 @@
         @Html.HiddenFor(m => m.Goal.UserProfileId)
         @Html.HiddenFor(m => m.Goal.FinalWeightInKg)
         @Html.HiddenFor(m => m.Goal.FinalBodyFat)
+        @Html.HiddenFor(m => m.WeightUnit)
         @Html.AntiForgeryToken()
         ;
 

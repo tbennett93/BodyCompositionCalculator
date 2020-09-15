@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BodyCompositionCalculator.Models.Validation;
 
 namespace BodyCompositionCalculator.Models.ViewModels
 {
@@ -18,7 +19,9 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public bool AddAsCheckIn { get; set; } = true;
         public string CalculationBasisChoice { get; set; }
         public SelectList CalculationBasis { get; set; }
-        public bool TrackBodyFat { get; set; } = true;
+
+        //[BodyFatRequiredIfTracked]
+        //public bool TrackBodyFat { get; set; } = true;
 
 
     }

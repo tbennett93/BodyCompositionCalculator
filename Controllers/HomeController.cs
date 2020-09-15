@@ -162,6 +162,13 @@ namespace BodyCompositionCalculator.Controllers
 
         public ActionResult AddNewGoal(EditGoalViewModel newGoal)
         {
+
+            currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
+            var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+            var dbGoal = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
+            newGoal.CalculationBasis = new SelectList(new List<string> {"Weight", "Body Fat"}, dbGoal.CalculationBasis);
+
+
             if (!ModelState.IsValid)
             {
                 foreach (ModelState modelState in ViewData.ModelState.Values)
@@ -174,11 +181,15 @@ namespace BodyCompositionCalculator.Controllers
                 return View("NewGoalForm", newGoal);
             }
 
+            var trackBf = newGoal.Goal.TrackBodyFat;
+
             var calculationBasis = newGoal.CalculationBasisChoice;
 
 
             double startWeight = 0.0;
             double targetWeight = 0.0;
+
+
 
             if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Kg))
             {
@@ -202,8 +213,7 @@ namespace BodyCompositionCalculator.Controllers
             newGoal.Goal.StartWeightInKg = startWeight;
             newGoal.Goal.TargetWeightInKg = targetWeight;
 
-            currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
-            var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+
 
             //TODO latest checkin always updates final weight on goal
             
@@ -226,8 +236,6 @@ namespace BodyCompositionCalculator.Controllers
 
 
             _context.SaveChanges();
-
-
 
             if (newGoal.AddAsCheckIn && newGoal.Goal.StartDate <= DateTime.Today)
             {
@@ -265,6 +273,7 @@ namespace BodyCompositionCalculator.Controllers
 
             string weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
             var dbGoal = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
+            
 
 
             //No existing goal
