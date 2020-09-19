@@ -92,6 +92,11 @@ namespace BodyCompositionCalculator.Controllers
                 var goalBodyFat = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId).TargetBodyFat;
 
 
+                var includeBodyFatSummary = currentGoal.CalculationBasis == CalculationBasis.BodyFat ? true : false;
+                viewModel.StartBodyFat = currentGoal.StartBodyFat.ToString();
+                viewModel.CurrentBodyFat = currentBodyFat.ToString();
+                viewModel.GoalBodyFat = currentGoal.TargetBodyFat.ToString();
+                viewModel.IncludeBodyFatSummary = includeBodyFatSummary;
                 viewModel.TrackBodyFat = trackBodyFat;
                 viewModel.StartWeight = GetWeightString(startWeight);
                 viewModel.CurrentWeight = GetWeightString((double) currentWeight);

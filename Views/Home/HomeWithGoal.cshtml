@@ -1,4 +1,7 @@
-﻿@model BodyCompositionCalculator.Models.ViewModels.HomeViewModel
+﻿@using System.Runtime.Remoting.Messaging
+@using BodyCompositionCalculator.Models
+@using BodyCompositionCalculator.Models.Calculation_Constants
+@model BodyCompositionCalculator.Models.ViewModels.HomeViewModel
 
 @{
     ViewBag.Title = "title";
@@ -44,262 +47,343 @@
 
 <body id="page-top" class="my-page-background">
 
-<div id="wrapper">
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
-        <div id="content">
-            <!-- Begin Page Content -->
-            <div class="container-fluid ">
+    <div id="wrapper">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Begin Page Content -->
+                <div class="container-fluid ">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-start ">
-                    <h2 class=" mb-2 my-header-font text-center align-content-center text-">Home</h2>
-                </div>
-
-                <hr class="mb-4"/>
-
-                <div class="row justify-content-around align-content-center align-items-center" id="check-in-button">
-
-                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
-                    <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
-                         xmlns:cc="http://creativecommons.org/ns#"
-                         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                         xmlns:svg="http://www.w3.org/2000/svg"
-                         xmlns="http://www.w3.org/2000/svg"
-                         xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-                         xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-                         inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-                         sodipodi:docname="Check In Button Text Only.svg"
-                         width="120px"
-                         viewBox="0 0 97.501892 40.208692"
-                         version="1.1"
-                         id="svg8">
-
-                        <a class="btn" href="Home/NewCheckInForm?pageFrom=Home">
-                            <svg class="svg-rect" height="34.794144"
-                                 width="92.087349">
-                                <rect class="icon-primary-custom" x="0" y="0" rx="3" ry="3" height="34.794144"
-                                      width="92.087349" fill="#e7e7e7"></rect>
-                                <text style="font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 17.3455px; line-height: 1.25; font-family: Roboto; -inkscape-font-specification: 'Roboto Bold'; display: inline; fill: #ffffff; fill-opacity: 1; stroke-width: 1.08409"
-                                      x="50%" y="50%" text-anchor="middle" dominant-baseline="central" stroke-width="1px">Check In</text>
-                            </svg>
-                        </a>
-                        <g inkscape:groupmode="layer"
-                           id="layer3"
-                           inkscape:label="Icon"
-                           transform="translate(-38.951405,-117.09441)"/>
-                        <g inkscape:groupmode="layer"
-                           id="layer4"
-                           inkscape:label="Textbox"
-                           transform="translate(-38.951405,-117.09441)"/>
-                    </svg>
-
-
-
-
-                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
-                    <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
-                         xmlns:cc="http://creativecommons.org/ns#"
-                         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                         xmlns:svg="http://www.w3.org/2000/svg"
-                         xmlns="http://www.w3.org/2000/svg"
-                         xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-                         xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-                         inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-                         sodipodi:docname="Goal Button Text Only.svg"
-                         width="120px"
-                         viewBox="0 0 97.501892 40.208692"
-                         version="1.1"
-                         id="svg8">
-
-                        <a class="btn" href="Home/NewGoalForm">
-                            <svg class="svg-rect" height="34.794144"
-                                 width="92.087349">
-                                <rect class="icon-primary-custom" x="0" y="0" rx="3" ry="3" height="34.794144"
-                                      width="92.087349" fill="#e7e7e7"></rect>
-                                <text style="font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 17.3455px; line-height: 1.25; font-family: Roboto; -inkscape-font-specification: 'Roboto Bold'; display: inline; fill: #ffffff; fill-opacity: 1; stroke-width: 1.08409"
-                                      x="50%" y="50%" text-anchor="middle" dominant-baseline="central">@Model.GoalType</text>
-                            </svg>
-                        </a>
-                    </svg>
-                </div>
-                <hr/>
-
-                <!-- Weight Info -->
-                <div class="row mb-4 card  shadow h-100 py-2 my-border-bottom-3" style="min-width: 200px">
-                    <div class="container card-body col-12 ">
-                        <div class="row  justify-content-around mb-4 text-center">
-                            <div class="col-lg-3 mr-1 card card-body ">
-                                <div class="my-text-small my-header-font my-font-3 text-uppercase mb-1 ">Start Weight</div>
-                                <div class="h5 mb-0 font-weight-normal text-gray-800 my-text-small ">@Model.StartWeight</div>
-                            </div>
-                            <div class="col-lg-3 mr-1 card  card-body">
-                                <div class="my-text-small my-header-font my-font-3 text-uppercase mb-1">Current Weight</div>
-                                <div class="h5 mb-0 font-weight-normal text-gray-800 my-text-small">@Model.CurrentWeight</div>
-                            </div>
-                            <div class="col-lg-3 mr-1 card card-body ">
-                                <div class="my-text-small my-header-font my-font-3 text-uppercase mb-1">Goal Weight</div>
-                                <div class="h5 mb-0 font-weight-normal text-gray-800 my-text-small">@Model.GoalWeight</div>
-                            </div>
-
-                        </div>
-
-                        <div class="row align-items-center">
-                            <div class="col mr-1">
-                                <div class="col">
-                                    <div class="progress  mr-2">
-                                        <div class="progress-bar my-background-3" role="progressbar" style="width: @Model.WeightProgressPercentage%">@Model.WeightProgressPercentage%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-start ">
+                        <h2 class=" mb-2 my-header-font text-center align-content-center text-">Home</h2>
                     </div>
-                </div>
 
-                <!-- Goal/Progress Cards -->
-                <div class="row justify-content-around" style="min-width: 200px">
+                    <hr class="mb-4" />
 
-                    <div class="  col-lg-4 mb-4 card my-border-right-4 shadow h-100 py-2">
-                        <div class="card-body container ">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-1">
-                                    <div class="my-text-small my-header-font my-font-4 text-uppercase mb-1">Time Remaining</div>
+                    <div class="row justify-content-around align-content-center align-items-center" id="check-in-button">
 
-                                    <div class="h5 mb-0 text-gray-800 my-text-small">@Model.TimeRemaining</div>
-                                </div>
+                        <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 
-                                @*<div class="col">
-                                                <div class="progress  mr-2">
-                                                    <div class="progress-bar my-background-4" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                        <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             xmlns:cc="http://creativecommons.org/ns#"
+                             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:svg="http://www.w3.org/2000/svg"
+                             xmlns="http://www.w3.org/2000/svg"
+                             xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                             xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                             inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+                             sodipodi:docname="Check In Button Text Only.svg"
+                             width="120px"
+                             viewBox="0 0 97.501892 40.208692"
+                             version="1.1"
+                             id="svg8">
+
+                            <a class="btn" href="Home/NewCheckInForm?pageFrom=Home">
+                                <svg class="svg-rect" height="34.794144"
+                                     width="92.087349">
+                                    <rect class="icon-primary-custom" x="0" y="0" rx="3" ry="3" height="34.794144"
+                                          width="92.087349" fill="#e7e7e7"></rect>
+                                    <text style="font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 17.3455px; line-height: 1.25; font-family: Roboto; -inkscape-font-specification: 'Roboto Bold'; display: inline; fill: #ffffff; fill-opacity: 1; stroke-width: 1.08409"
+                                          x="50%" y="50%" text-anchor="middle" dominant-baseline="central" stroke-width="1px">Check In</text>
+                                </svg>
+                            </a>
+                            <g inkscape:groupmode="layer"
+                               id="layer3"
+                               inkscape:label="Icon"
+                               transform="translate(-38.951405,-117.09441)" />
+                            <g inkscape:groupmode="layer"
+                               id="layer4"
+                               inkscape:label="Textbox"
+                               transform="translate(-38.951405,-117.09441)" />
+                        </svg>
+
+
+
+
+                        <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+                        <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             xmlns:cc="http://creativecommons.org/ns#"
+                             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:svg="http://www.w3.org/2000/svg"
+                             xmlns="http://www.w3.org/2000/svg"
+                             xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                             xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                             inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+                             sodipodi:docname="Goal Button Text Only.svg"
+                             width="120px"
+                             viewBox="0 0 97.501892 40.208692"
+                             version="1.1"
+                             id="svg8">
+
+                            <a class="btn" href="Home/NewGoalForm">
+                                <svg class="svg-rect" height="34.794144"
+                                     width="92.087349">
+                                    <rect class="icon-primary-custom" x="0" y="0" rx="3" ry="3" height="34.794144"
+                                          width="92.087349" fill="#e7e7e7"></rect>
+                                    <text style="font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 17.3455px; line-height: 1.25; font-family: Roboto; -inkscape-font-specification: 'Roboto Bold'; display: inline; fill: #ffffff; fill-opacity: 1; stroke-width: 1.08409"
+                                          x="50%" y="50%" text-anchor="middle" dominant-baseline="central">@Model.GoalType</text>
+                                    </svg>
+                                </a>
+                            </svg>
+                        </div>
+                        <hr />
+
+                        @if (@Model.IncludeBodyFatSummary)
+                        {
+                            <!-- Weight Info -->
+                            <div class="row mb-4 card  shadow h-100 py-2 my-border-bottom-3" style="min-width: 200px">
+                                <div class="container card-body col-12 ">
+                                    <div class="row  justify-content-around mb-4 text-center">
+
+
+                             
+                                        <div class="card col-lg-3 justify-content-center align-text-top align-top ">
+
+                                            <div class="row  justify-content-center text-center align-content-center border-bottom  ">
+                                                <div class=" my-text-small my-header-font text-uppercase mb-2 mt-2">Start</div>
+                                            </div>
+
+                                            <div class="row card-body">
+                                                <div class="col-lg-6  border-right justify-content-center text-center align-content-center   ">
+                                                    <div class=" my-text-small  my-font-3 text-uppercase  border-bottom">Weight</div>
+                                                    <div class=" my-text-small    ">@Model.StartWeight</div>
                                                 </div>
-                                            </div>*@
-                                <div class="col-auto">
-                                    <i class="fas fa-clock fa-2x text-gray-300"></i>
+                                                <div class="col-lg-6   justify-content-center text-center align-content-center  ">
+                                                    <div class=" my-text-small  my-font-3 text-uppercase  border-bottom">Body Fat</div>
+                                                    <div class=" my-text-small   ">@Model.StartBodyFat%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card col-lg-3 justify-content-center align-text-top align-top ">
+
+                                            <div class="row  justify-content-center text-center align-content-center border-bottom  ">
+                                                <div class=" my-text-small my-header-font  text-uppercase mb-2 mt-2">Current</div>
+                                            </div>
+
+                                            <div class="row card-body">
+                                                <div class="col-lg-6  border-right justify-content-center text-center align-content-center   ">
+                                                    <div class=" my-text-small  my-font-3 text-uppercase  border-bottom">Weight</div>
+                                                    <div class=" my-text-small    ">@Model.CurrentWeight</div>
+                                                </div>
+                                                <div class="col-lg-6   justify-content-center text-center align-content-center  ">
+                                                    <div class=" my-text-small  my-font-3 text-uppercase  border-bottom">Body Fat</div>
+                                                    <div class=" my-text-small   ">@Model.CurrentBodyFat%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card col-lg-3 justify-content-center align-text-top align-top ">
+
+                                            <div class="row  justify-content-center text-center align-content-center border-bottom  ">
+                                                <div class=" my-text-small my-header-font text-uppercase mb-2 mt-2">Goal</div>
+                                            </div>
+
+                                            <div class="row card-body">
+                                                <div class="col-lg-6  border-right justify-content-center text-center align-content-center   ">
+                                                    <div class=" my-text-small  my-font-3 text-uppercase  border-bottom">Weight</div>
+                                                    <div class=" my-text-small    ">@Model.GoalWeight</div>
+                                                </div>
+                                                <div class="col-lg-6   justify-content-center text-center align-content-center  ">
+                                                    <div class=" my-text-small  my-font-3 text-uppercase  border-bottom">Body Fat</div>
+                                                    <div class=" my-text-small   ">@Model.GoalBodyFat%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row align-items-center">
+                                        <div class="col mr-1">
+                                            <div class="col">
+                                                <div class="progress  mr-2">
+                                                    <div class="progress-bar my-background-3" role="progressbar" style="width: @Model.WeightProgressPercentage%">@Model.WeightProgressPercentage%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
                             </div>
+                        }
+                        else 
+                        {
+                            <div class="row mb-4 card  shadow h-100 py-2 my-border-bottom-3" style="min-width: 200px">
+                                <div class="container card-body col-12 ">
+                                    <div class="row  justify-content-around mb-4 text-center">
+                                        <div class="col-lg-3 mr-1 card card-body ">
+                                            <div class="my-text-small my-header-font my-font-3 text-uppercase mb-1 ">Start Weight</div>
+                                            <div class="h5 mb-0 font-weight-normal text-gray-800 my-text-small ">@Model.StartWeight</div>
+                                        </div>
+                                        <div class="col-lg-3 mr-1 card  card-body">
+                                            <div class="my-text-small my-header-font my-font-3 text-uppercase mb-1">Current Weight</div>
+                                            <div class="h5 mb-0 font-weight-normal text-gray-800 my-text-small">@Model.CurrentWeight</div>
+                                        </div>
+                                        <div class="col-lg-3 mr-1 card card-body ">
+                                            <div class="my-text-small my-header-font my-font-3 text-uppercase mb-1">Goal Weight</div>
+                                            <div class="h5 mb-0 font-weight-normal text-gray-800 my-text-small">@Model.GoalWeight</div>
+                                        </div>
 
-                        </div>
-                    </div>
+                                    </div>
 
-                    <div class=" col-lg-4 mb-4 card my-border-right-4 shadow h-100 py-2">
-                        <div class="card-body container ">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="my-text-small my-header-font my-font-4 text-uppercase mb-1">Daily Calories</div>
+                                    <div class="row align-items-center">
+                                        <div class="col mr-1">
+                                            <div class="col">
+                                                <div class="progress  mr-2">
+                                                    <div class="progress-bar my-background-3" role="progressbar" style="width: @Model.WeightProgressPercentage%">@Model.WeightProgressPercentage%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+       
+
+                        <!-- Goal/Progress Cards -->
+                        <div class="row justify-content-around" style="min-width: 200px">
+
+                            <div class="  col-lg-4 mb-4 card my-border-right-4 shadow h-100 py-2">
+                                <div class="card-body container ">
                                     <div class="row no-gutters align-items-center">
+                                        <div class="col mr-1">
+                                            <div class="my-text-small my-header-font my-font-4 text-uppercase mb-1">Time Remaining</div>
+
+                                            <div class="h5 mb-0 text-gray-800 my-text-small">@Model.TimeRemaining</div>
+                                        </div>
+
+                                        @*<div class="col">
+                                <div class="progress  mr-2">
+                                    <div class="progress-bar my-background-4" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                </div>
+                            </div>*@
                                         <div class="col-auto">
-                                            <div class="h5 mb-0 mr-3 text-gray-800 my-text-small">@Model.Calories</div>
+                                            <i class="fas fa-clock fa-2x text-gray-300"></i>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class=" col-lg-4 mb-4 card my-border-right-4 shadow h-100 py-2">
+                                <div class="card-body container ">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="my-text-small my-header-font my-font-4 text-uppercase mb-1">Daily Calories</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 text-gray-800 my-text-small">@Model.Calories</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                </div>
+                            </div>
+
+                            <!-- Pending Requests Card Example -->
+                            @*<div class=" col-lg-3 mb-4 card my-border-right-4 shadow h-100 py-2">
+                    <div class="card-body container ">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="my-text-small my-header-font my-font-4 text-uppercase mb-1">Macros</div>
+                                <div class="h5 mb-0 mr-3 text-gray-800 my-text-small">@Model.Macros</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dice-three fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
+                </div>*@
 
-                    <!-- Pending Requests Card Example -->
-                    @*<div class=" col-lg-3 mb-4 card my-border-right-4 shadow h-100 py-2">
-                                    <div class="card-body container ">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="my-text-small my-header-font my-font-4 text-uppercase mb-1">Macros</div>
-                                                <div class="h5 mb-0 mr-3 text-gray-800 my-text-small">@Model.Macros</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dice-three fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
-
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
-<div class="col">
-    <!-- Card Header - Dropdown -->
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="container chart-container ">
-                <canvas id="progressGraphData"></canvas>
-            </div>
+        <div class="col">
+            <!-- Card Header - Dropdown -->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="container chart-container ">
+                        <canvas id="progressGraphData"></canvas>
+                    </div>
 
-            <div class="container row justify-content-around">
-                <div class="col-3 btn-group-toggle " data-toggle="buttons">
-                    <label class="btn btn-outline-cust-5  btn-sm active ">
-                        <input type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked=checked />Goal Data
-                    </label>
-                    <label class="btn btn-outline-cust-5  btn-sm ">
-                        <input type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off"/>All Data
-                    </label>
+                    <div class="container row justify-content-around">
+                        <div class="col-3 btn-group-toggle " data-toggle="buttons">
+                            <label class="btn btn-outline-cust-5  btn-sm active ">
+                                <input type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked=checked checked=checked />Goal Data
+                            </label>
+                            <label class="btn btn-outline-cust-5  btn-sm ">
+                                <input type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off" />All Data
+                            </label>
+                        </div>
+
+
+                        <div class="col-3 btn-group-toggle  ">
+                            <label class="btn btn-cust-4  btn-sm  ">
+
+                                <input id="buttonToggleBodyFat" type='checkbox' autocomplete="off" data-toggle="button" /><span id="buttonToggleBodyFatText">Display Body Fat %</span>
+                                @*<label id='buttonToggleBodyFatText' for="buttonToggleBodyFat">Display Body Fat %</label>*@
+
+                            </label>
+                        </div>
+
+                    </div>
                 </div>
 
-
-                <div class="col-3 btn-group-toggle  ">
-                    <label class="btn btn-cust-4  btn-sm  ">
-
-                        <input id="buttonToggleBodyFat" type='checkbox' autocomplete="off" data-toggle="button"/><span id="buttonToggleBodyFatText">Display Body Fat %</span>
-                        @*<label id='buttonToggleBodyFatText' for="buttonToggleBodyFat">Display Body Fat %</label>*@
-
-                    </label>
-                </div>
-
             </div>
+
         </div>
 
-    </div>
-
-</div>
-
-    
 
 
 
-<script src="~/vendor/jquery-easing/jquery.easing.min.js">
-</script>
+
+        <script src="~/vendor/jquery-easing/jquery.easing.min.js">
+        </script>
 
 
-@Scripts.Render("~/Scripts/moment.js")
+        @Scripts.Render("~/Scripts/moment.js")
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
-</script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
+        </script>
 
-<script src="https://cdn.jsdelivr.net/gh/mill1000/chartjs-plugin-annotation@v0.5.8/chartjs-plugin-annotation.min.js">
-</script>
-
-
-
-<script src="~/Scripts/js/chart-user-progress-log.js">
-</script>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js">
-</script>
-
-
-<script>
-
-    $(document).ready(function() {
-
-        if ('@Model.TrackBodyFat' == "True") {
-        $("#buttonToggleBodyFat").click();
-        };
-
-    });
-
-</script>
+        <script src="https://cdn.jsdelivr.net/gh/mill1000/chartjs-plugin-annotation@v0.5.8/chartjs-plugin-annotation.min.js">
+        </script>
 
 
 
-</body>
+        <script src="~/Scripts/js/chart-user-progress-log.js">
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js">
+        </script>
+
+
+        <script>
+
+            $(document).ready(function() {
+
+            if ('@Model.TrackBodyFat' == "True") {
+            $("#buttonToggleBodyFat").click();
+            };
+
+            });
+
+        </script>
+
+
+
+    </body>
 
 
 </html>
