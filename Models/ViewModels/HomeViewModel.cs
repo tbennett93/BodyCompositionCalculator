@@ -15,5 +15,6 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public string Calories { get; set; }
         public string Macros { get; set; }  
         public string GoalType { get; set; }
+        public bool TrackBodyFat { get; set; }
     }
 }

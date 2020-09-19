@@ -16,14 +16,34 @@
     });
 
 
+    //$(document).ready(function () {
+
+
+        //$("#buttonToggleBodyFat").on("change",
+        //    function () {
+        //    });
+
+        //if (trackBodyFat2 == "True") {
+        //    console.log("here");
+        //};
+
+
+        //$("#buttonToggleBodyFat").prop('checked', false);
+        //console.log($("#buttonToggleBodyFat").prop('checked'));
+        //$("#buttonToggleBodyFat").prop('checked', true);
+        //console.log($("#buttonToggleBodyFat").prop('checked'));
+
+
+    //});
+
+
+
+
     $("#buttonToggleBodyFat").click(function () {
-        if (this.checked) {
-            $("#buttonToggleBodyFatText").text("Hide Body Fat %");
-            toDisplayBf = true;
-        } else {
-            $("#buttonToggleBodyFatText").text("Display Body Fat %");
-            toDisplayBf = false;
-        }
+  
+        if (this.checked) $("#buttonToggleBodyFatText").text("Hide Body Fat %");
+        else $("#buttonToggleBodyFatText").text("Show Body Fat %");
+        toDisplayBf = this.checked;
 
         if ($('#buttonDiplayGraphRelevant').is(':checked')) { generateChartData("/api/UserProgressRelevant/"); }
         else { generateChartData("/api/UserProgressAll/"); }

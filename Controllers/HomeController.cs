@@ -66,13 +66,15 @@ namespace BodyCompositionCalculator.Controllers
                     return View("HomeEndedGoal");
                 }
 
+
                 var userProfile = Helper_Classes.UserHelpers.GetUserProfile();
 
                 var userProfileId = userProfile.Id;
 
                 var currentGoal = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId);
 
-
+                var trackBodyFat = currentGoal.TrackBodyFat;
+                    
                 var startWeight = currentGoal.StartWeightInKg;
 
                 var today = DateTime.Today;
@@ -90,7 +92,7 @@ namespace BodyCompositionCalculator.Controllers
                 var goalBodyFat = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId).TargetBodyFat;
 
 
-
+                viewModel.TrackBodyFat = trackBodyFat;
                 viewModel.StartWeight = GetWeightString(startWeight);
                 viewModel.CurrentWeight = GetWeightString((double) currentWeight);
                 viewModel.GoalWeight = GetWeightString(goalWeight);

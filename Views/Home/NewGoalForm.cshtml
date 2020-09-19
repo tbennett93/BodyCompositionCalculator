@@ -18,36 +18,36 @@
 
 <body>
 
-    <h2 class="mb-4">@Model.Title</h2>
-    @*@Html.ValidationSummary()*@
+<h2 class="mb-4">@Model.Title</h2>
+@*@Html.ValidationSummary()*@
 
-    @using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new { @id = "goalForm" }))
+@using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new {@id = "goalForm"}))
 
-    {
-        <label>Start Date</label>
-        <div class="form-group">
-            <div id="startDate" , class="input-group date datepicker">
-                @Html.TextBoxFor(model => model.Goal.StartDate, "{0: dd MMM yyyy}", new { @id = "startDateText", @class = "form-control col-2" })
-                <div class="input-group-append input-group-addon">
-                    <span class="input-group-text">
-                        <span class="fa fa-calendar"></span>
-                    </span>
-                </div>
+{
+    <label>Start Date</label>
+    <div class="form-group">
+        <div id="startDate" , class="input-group date datepicker">
+            @Html.TextBoxFor(model => model.Goal.StartDate, "{0: dd MMM yyyy}", new {@id = "startDateText", @class = "form-control col-2"})
+            <div class="input-group-append input-group-addon">
+                <span class="input-group-text">
+                    <span class="fa fa-calendar"></span>
+                </span>
             </div>
-            @Html.ValidationMessageFor(m => m.Goal.StartDate)
         </div>
-        <label>End Date</label>
-        <div class="form-group">
-            <div id="endDate" , class="input-group date datepicker">
-                @Html.TextBoxFor(model => model.Goal.EndDate, "{0: dd MMM yyyy}", new { @id = "endDateText", @class = "form-control col-2" })
-                <div class="input-group-append input-group-addon">
-                    <span class="input-group-text">
-                        <span class="fa fa-calendar"></span>
-                    </span>
-                </div>
+        @Html.ValidationMessageFor(m => m.Goal.StartDate)
+    </div>
+    <label>End Date</label>
+    <div class="form-group">
+        <div id="endDate" , class="input-group date datepicker">
+            @Html.TextBoxFor(model => model.Goal.EndDate, "{0: dd MMM yyyy}", new {@id = "endDateText", @class = "form-control col-2"})
+            <div class="input-group-append input-group-addon">
+                <span class="input-group-text">
+                    <span class="fa fa-calendar"></span>
+                </span>
             </div>
-            @Html.ValidationMessageFor(m => m.Goal.EndDate)
         </div>
+        @Html.ValidationMessageFor(m => m.Goal.EndDate)
+    </div>
 
 
 
@@ -67,237 +67,232 @@
             </div>*@
 
 
-        <div class="form-group">
-            <label>Starting Weight</label>
-            <div class="form-group form-inline">
-                @*@Html.TextBoxFor(m => m.Goal.StartWeightInKg, new {@class = "form-control", @id = "startWeight", @min = "0"})*@
-                @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col-1", @id = "startWeightInputA", @min = "0" })
-                @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col-1", @id = "startWeightInputB", @min = "0", @max = "13" })
-                <p class="form-control" id="weightUnit">@Model.WeightUnit</p>
-                @Html.ValidationMessageFor(m => m.Goal.StartWeightInKg)
-            </div>
+    <div class="form-group">
+        <label>Starting Weight</label>
+        <div class="form-group form-inline">
+            @*@Html.TextBoxFor(m => m.Goal.StartWeightInKg, new {@class = "form-control", @id = "startWeight", @min = "0"})*@
+            @Html.TextBoxFor(m => m.StartWeightInputA, new {@class = "form-control col-1", @id = "startWeightInputA", @min = "0"})
+            @Html.TextBoxFor(m => m.StartWeightInputB, new {@class = "form-control col-1", @id = "startWeightInputB", @min = "0", @max = "13"})
+            <p class="form-control" id="weightUnit">@Model.WeightUnit</p>
+            @Html.ValidationMessageFor(m => m.Goal.StartWeightInKg)
         </div>
+    </div>
 
 
 
 
 
-        <div class="form-group">
-            <label>Target Weight</label>
-            <div class="form-group form-inline mb-0" id="targetWeightBoxes">
-                @*@Html.TextBoxFor(m => m.Goal.TargetWeightInKg, new { @class = "form-control", @id = "targetWeight", @min = "0" })*@
-                @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col-1", @id = "targetWeightInputA", @min = "0" })
-                @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col-1", @id = "targetWeightInputB", @min = "0", @max = "13" })
-                <p id="targetWeightUnit" class="form-control">@Html.DisplayFor(m => m.WeightUnit)</p>
-                
-            </div>
-            <small>*If using body fat to calculate calories, target weight is calculated automatically</small>
-            @Html.ValidationMessageFor(m => m.Goal.TargetWeightInKg)
-        </div>
-
-        <label>Starting Body Fat</label>
-
-        <div>
-            <div class="form-group form-inline">
-                @Html.TextBoxFor(m => m.Goal.StartBodyFat, new { @id= "startBfText",  @class = "form-control col-2", @min = "0" })
-                <p class="form-control">%</p>
-
-                @*TODO - implement this*@
-                <button>Calculate</button>
-
-            </div>
-            @Html.ValidationMessageFor(m => m.Goal.StartBodyFat)
+    <div class="form-group">
+        <label>Target Weight</label>
+        <div class="form-group form-inline mb-0" id="targetWeightBoxes">
+            @*@Html.TextBoxFor(m => m.Goal.TargetWeightInKg, new { @class = "form-control", @id = "targetWeight", @min = "0" })*@
+            @Html.TextBoxFor(m => m.TargetWeightInputA, new {@class = "form-control col-1", @id = "targetWeightInputA", @min = "0"})
+            @Html.TextBoxFor(m => m.TargetWeightInputB, new {@class = "form-control col-1", @id = "targetWeightInputB", @min = "0", @max = "13"})
+            <p id="targetWeightUnit" class="form-control">@Html.DisplayFor(m => m.WeightUnit)</p>
 
         </div>
+        <small>*If using body fat to calculate calories, target weight is calculated automatically</small>
+        @Html.ValidationMessageFor(m => m.Goal.TargetWeightInKg)
+    </div>
+
+    <label>Starting Body Fat</label>
+
+    <div>
+        <div class="form-group form-inline">
+            @Html.TextBoxFor(m => m.Goal.StartBodyFat, new {@id = "startBfText", @class = "form-control col-2", @min = "0"})
+            <p class="form-control">%</p>
+
+            @*TODO - implement this*@
+            <button>Calculate</button>
+
+        </div>
+        @Html.ValidationMessageFor(m => m.Goal.StartBodyFat)
+
+    </div>
 
 
-        <label>Target Body Fat</label>
+    <label>Target Body Fat</label>
 
-        <div>
-            <div class="form-group form-inline">
-                @Html.TextBoxFor(m => m.Goal.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col-2", @min = "0" })
-                <p class="form-control">%</p>
+    <div>
+        <div class="form-group form-inline">
+            @Html.TextBoxFor(m => m.Goal.TargetBodyFat, new {@id = "targetBfText", @class = "form-control col-2", @min = "0"})
+            <p class="form-control">%</p>
 
-            </div>
+        </div>
+        <div class="mb-2">
             @Html.ValidationMessageFor(m => m.Goal.TargetBodyFat)
-
         </div>
 
-
-        <label>Calculate Goal Plan Using:</label>
-        @Html.DropDownListFor(expression: m => m.CalculationBasisChoice,
-            selectList: Model.CalculationBasis,
-            htmlAttributes: new { @class = "form-control col-2 mb-4 ", @id = "calculationBasis" }
-            )
+    </div>
 
 
-        <div class="form-check mb-4">
-            @Html.CheckBoxFor(m => m.AddAsCheckIn, new { @id = "checkInCheckBox", @class = " form-check-input" })
-            <label class="form-check-label">Check in with these details</label>
-        </div>
-
-        <div class="form-check mb-4">
-            @Html.CheckBoxFor(m => m.Goal.TrackBodyFat, new { @id = "trackBfCheckBox", @class = " form-check-input" })
-            <label class="form-check-label">Track Body Fat Percentage</label>
-        </div>
-
-        <p>Handle the create of the form where calculate calories using BF is selected as it will need to ignore target weight </p>
+    <label>Calculate Goal Plan Using:</label>
+    @Html.DropDownListFor(expression: m => m.CalculationBasisChoice, selectList: Model.CalculationBasis, htmlAttributes: new {@class = "form-control col-2 mb-4 ", @id = "calculationBasis"} )
 
 
-        <button type="submit" class="btn btn-primary">Save</button>
+    <div class="form-check mb-4">
+        @Html.CheckBoxFor(m => m.AddAsCheckIn, new {@id = "checkInCheckBox", @class = " form-check-input"})
+        <label class="form-check-label">Check in with these details</label>
+    </div>
+
+    <div class="form-check mb-4">
+        @Html.CheckBoxFor(m => m.Goal.TrackBodyFat, new {@id = "trackBfCheckBox", @class = " form-check-input"})
+        <label class="form-check-label">Track Body Fat Percentage</label>
+    </div>
+
+    <p>Handle the create of the form where calculate calories using BF is selected as it will need to ignore target weight </p>
 
 
-        @Html.HiddenFor(m => m.Goal.Id)
-        @Html.HiddenFor(m => m.Goal.UserProfileId)
-        @Html.HiddenFor(m => m.Goal.FinalWeightInKg)
-        @Html.HiddenFor(m => m.Goal.FinalBodyFat)
-        @Html.HiddenFor(m => m.WeightUnit)
-        @Html.AntiForgeryToken()
-        ;
+    <button type="submit" class="btn btn-primary">Save</button>
 
 
-
-    }
-
-
-    <script>
-
-        $(document).ready(function () {
-
-
-            var startBfText = $("#startBfText");
-            var targetBfText = $("#targetBfText");
-            var calculationBasis = $("#calculationBasis");
+    @Html.HiddenFor(m => m.Goal.Id)
+    @Html.HiddenFor(m => m.Goal.UserProfileId)
+    @Html.HiddenFor(m => m.Goal.FinalWeightInKg)
+    @Html.HiddenFor(m => m.Goal.FinalBodyFat)
+    @Html.HiddenFor(m => m.WeightUnit)
+    @Html.AntiForgeryToken()
+    ;
 
 
 
-            function handleBodyFatReadOnly() {
-                var checked = $("#trackBfCheckBox").prop("checked");
-                function setBfReadOnly(bool) {
-                    startBfText.prop('readonly', bool);
-                    targetBfText.prop('readonly', bool);
-                }
-                if (calculationBasis.val() == "Weight" && !checked) {
-                    setBfReadOnly(true);
-                } else  {
-                    setBfReadOnly(false);
-                }
-                
-            };
-                
-            handleBodyFatReadOnly();
-
-            $("#trackBfCheckBox").on('change', 
-                function () {
-                    handleBodyFatReadOnly();
-                });
+}
 
 
 
+<script>
 
-            var checkBox = $("#checkInCheckBox");
-            var checkBoxVal = checkBox.val();
+    $(document).ready(function() {
 
-            function handleTargetWeightReadOnly() {
-                var targetWeightA = $("#targetWeightInputA");
-                var targetWeightB = $("#targetWeightInputB");
 
-                function changeTargetWeight(bool) {
-                    targetWeightA.prop('readonly', bool);
-                    targetWeightB.prop('readonly', bool);
-                }
-                if (calculationBasis.val() == "Weight") {
-                    changeTargetWeight(false);
-                } else if (calculationBasis.val() == "Body Fat") {
-                    changeTargetWeight(true);
-                }
+        var startBfText = $("#startBfText");
+        var targetBfText = $("#targetBfText");
+        var calculationBasis = $("#calculationBasis");
+
+
+        function handleBodyFatReadOnly() {
+            var checked = $("#trackBfCheckBox").prop("checked");
+
+            function setBfReadOnly(bool) {
+                startBfText.prop('readonly', bool);
+                targetBfText.prop('readonly', bool);
             }
 
-            handleTargetWeightReadOnly();
+            if (calculationBasis.val() == "Weight" && !checked) {
+                setBfReadOnly(true);
+            } else {
+                setBfReadOnly(false);
+            }
 
-            calculationBasis.on("change",
-                function () {
-                    handleTargetWeightReadOnly();
-                    handleBodyFatReadOnly();
-                }
-            );
+        };
 
+        handleBodyFatReadOnly();
 
-
-            checkBox.change(function () {
-                checkBoxVal = this.checked;
+        $("#trackBfCheckBox").on('change',
+            function() {
+                handleBodyFatReadOnly();
             });
 
-            function greyCheckBox(dt) {
 
-                var today = new Date();
-                today = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+        var checkBox = $("#checkInCheckBox");
+        var checkBoxVal = checkBox.val();
 
-                if (dt > today) {
-                    checkBox.prop('checked', false);
-                    checkBox.prop('disabled', true);
+        function handleTargetWeightReadOnly() {
+            var targetWeightA = $("#targetWeightInputA");
+            var targetWeightB = $("#targetWeightInputB");
 
-                } else {
-                    checkBox.prop('checked', checkBoxVal);
-                    checkBox.prop('disabled', false);
-                }
-
+            function changeTargetWeight(bool) {
+                targetWeightA.prop('readonly', bool);
+                targetWeightB.prop('readonly', bool);
             }
 
+            if (calculationBasis.val() == "Weight") {
+                changeTargetWeight(false);
+            } else if (calculationBasis.val() == "Body Fat") {
+                changeTargetWeight(true);
+            }
+        }
+
+        handleTargetWeightReadOnly();
+
+        calculationBasis.on("change",
+            function() {
+                handleTargetWeightReadOnly();
+                handleBodyFatReadOnly();
+            }
+        );
 
 
-            $('#startDate').datepicker({
-                format: 'dd M yyyy',
-                todayBtn: true,
-                autoclose: true,
-                todayHighlight: true
-            });
+        checkBox.change(function() {
+            checkBoxVal = this.checked;
+        });
 
-            var weightUnit = $('#weightUnit').text();
+        function greyCheckBox(dt) {
 
-            if (weightUnit == 'kg' || weightUnit == 'lbs') {
-                $('#startWeightInputB').hide();
-                $('#startWeightInputA').removeClass("col-1");
-                $('#startWeightInputA').addClass("col-2");
-                $('#targetWeightInputB').hide();
-                $('#targetWeightInputA').removeClass("col-1");
-                $('#targetWeightInputA').addClass("col-2");
+            var today = new Date();
+            today = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+
+            if (dt > today) {
+                checkBox.prop('checked', false);
+                checkBox.prop('disabled', true);
+
+            } else {
+                checkBox.prop('checked', checkBoxVal);
+                checkBox.prop('disabled', false);
             }
 
+        }
 
 
-            var startWeight = $('#startWeight').val();
-            var targetWeight = $('#targetWeight').val();
+        $('#startDate').datepicker({
+            format: 'dd M yyyy',
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: true
+        });
 
-            if (startWeight == 0) {
-                $('#startWeight').val("");
-            }
-            if (targetWeight == 0) {
-                $('#targetWeight').val("");
-            };
+        var weightUnit = $('#weightUnit').text();
 
-
-
-            //If the default date is used, set the dates
-            var startDate = $('#startDate').datepicker('getDate');
-            greyCheckBox(startDate);
-
-
-
-            if (startDate.getFullYear() == 0) {
-                $('#startDate').datepicker('clearDates');
-                $('#endDate').datepicker('clearDates');
-            }
+        if (weightUnit == 'kg' || weightUnit == 'lbs') {
+            $('#startWeightInputB').hide();
+            $('#startWeightInputA').removeClass("col-1");
+            $('#startWeightInputA').addClass("col-2");
+            $('#targetWeightInputB').hide();
+            $('#targetWeightInputA').removeClass("col-1");
+            $('#targetWeightInputA').addClass("col-2");
+        }
 
 
+        var startWeight = $('#startWeight').val();
+        var targetWeight = $('#targetWeight').val();
 
-            //https://bootstrap-datepicker.readthedocs.io/en/
-            $('#startDate.datepicker').datepicker({
-                format: 'dd M yyyy',
-                todayBtn: true,
-                autoclose: true,
-                todayHighlight: true
-            }).on('changeDate', function (selected) {
+        if (startWeight == 0) {
+            $('#startWeight').val("");
+        }
+        if (targetWeight == 0) {
+            $('#targetWeight').val("");
+        };
+
+
+        //If the default date is used, set the dates
+        var startDate = $('#startDate').datepicker('getDate');
+        greyCheckBox(startDate);
+
+
+        if (startDate.getFullYear() == 0) {
+            $('#startDate').datepicker('clearDates');
+            $('#endDate').datepicker('clearDates');
+        }
+
+
+        //https://bootstrap-datepicker.readthedocs.io/en/
+        $('#startDate.datepicker').datepicker({
+            format: 'dd M yyyy',
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: true
+        }).on('changeDate',
+            function(selected) {
                 var dateSelected = new Date(selected.date.valueOf());
                 var minDate = new Date(selected.date.valueOf() + (1000 * 60 * 60 * 24 * 28));
                 $('#endDate').datepicker({ format: 'dd M yyyy' }); // <--THIS IS THE LINE ADDED
@@ -307,17 +302,18 @@
                 //$(this).datepicker('hide');
             });
 
-            $('#endDate').datepicker({
-                format: 'dd M yyyy',
-                todayBtn: true,
-                autoclose: true,
-                todayHighlight: true
-            });
-
-
+        $('#endDate').datepicker({
+            format: 'dd M yyyy',
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: true
         });
 
-    </script>
+
+    });
+
+</script>
+
 
 
 </body>
