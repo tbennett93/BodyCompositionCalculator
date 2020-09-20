@@ -47,8 +47,8 @@ namespace BodyCompositionCalculator.Models
 
         public static double CalculateEstimatedGoalWeight(double currentWeightInKg, int currentBodyFat, int goalBodyFat )
         {
-            double leanBodyMass = currentWeightInKg - (currentWeightInKg * (currentBodyFat / 100));
-            return leanBodyMass/(1-(goalBodyFat/100));
+            double leanBodyMass = currentWeightInKg - (currentWeightInKg * (currentBodyFat / 100.0));
+            return leanBodyMass/(1.0-(goalBodyFat/100.0));
         }
 
 

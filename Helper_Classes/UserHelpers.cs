@@ -65,6 +65,25 @@ namespace BodyCompositionCalculator.Helper_Classes
                     .Select(m => m.Date).OrderByDescending(m => m.Year)
                     .ThenByDescending(m => m.Month)
                     .ThenByDescending(m => m.Day).First();
-        }
+            }
+
+            public static double? GetCurrentWeight()
+            {
+                return GetCurrentCheckIn().WeightInKg;
+            }
+            public static int? GetCurrentBodyFat()
+            {   
+                return GetCurrentCheckIn().BodyFat;
+            }
+            public static UserProgressLog GetCurrentCheckIn()
+            {
+                var userId = GetUserProfile().Id;
+                var maxLogDate = GetMaxUserLogDate();
+                return new ApplicationDbContext().UserProgressLogs.SingleOrDefault(m =>
+                    m.UserProfileId == userId && m.Date == maxLogDate);
+            }
+
+
+
     }
 }

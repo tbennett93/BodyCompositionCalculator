@@ -82,11 +82,9 @@ namespace BodyCompositionCalculator.Controllers
                 //var currentWeightDate = _context.UserProgressLogs
                 //    .Where(m => m.UserProfileId == userProfileId && m.Date <= today).Select(m => m.Date).OrderByDescending(m => m.Date).First();
 
-                var currentWeight = _context.UserProgressLogs.SingleOrDefault(m =>
-                    m.UserProfileId == userProfileId && m.Date == maxLogDate).WeightInKg;
+                var currentWeight = Helper_Classes.UserHelpers.GetCurrentWeight();
 
-                var currentBodyFat = _context.UserProgressLogs.SingleOrDefault(m =>
-                    m.UserProfileId == userProfileId && m.Date == maxLogDate).BodyFat;
+                var currentBodyFat = Helper_Classes.UserHelpers.GetCurrentBodyFat();
 
                 var goalWeight = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId).TargetWeightInKg;
                 var goalBodyFat = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId).TargetBodyFat;
@@ -105,7 +103,12 @@ namespace BodyCompositionCalculator.Controllers
                 //viewModel.CurrentWeight = Convert.ToInt32(currentWeight).ToString();
                 //viewModel.GoalWeight = Convert.ToInt32(goalWeight).ToString();
 
-                viewModel.WeightProgressPercentage = Convert.ToInt32((startWeight-currentWeight)/(startWeight-goalWeight) * 100).ToString();
+
+                //Unable to divide by zero so if no difference between start and end weights, divide by 1 instead
+                var fullGoalDifference = startWeight - goalWeight == 0 ? 1: startWeight - goalWeight;
+        
+
+                viewModel.WeightProgressPercentage = Convert.ToInt32((startWeight-currentWeight)/(fullGoalDifference) * 100).ToString();
                 viewModel.TimeRemaining = (currentGoal.EndDate - maxLogDate).TotalDays + " days";
                 //var sex = userProfile.Sex.BmrAdjustmentValue;
                 var sex = _context.UserProfiles.Include(m=>m.Sex).SingleOrDefault(m=>m.Id == userProfileId).Sex.BmrAdjustmentValue;
@@ -196,6 +199,26 @@ namespace BodyCompositionCalculator.Controllers
             double startWeight = 0.0;
             double targetWeight = 0.0;
 
+            if (newGoal.AddAsCheckIn && newGoal.Goal.StartDate <= DateTime.Today)
+            {
+                var checkInModel = new CheckInFormViewModel
+                {
+                    WeightUnit = newGoal.WeightUnit,
+                    WeightInputA = newGoal.StartWeightInputA,
+                    WeightInputB = newGoal.StartWeightInputB,
+                    UserProgressLog = new UserProgressLog
+                    {
+                        Date = newGoal.Goal.StartDate,
+                        BodyFat = newGoal.Goal.StartBodyFat
+                    }
+                };
+                UpdateDbWithNewCheckIn(checkInModel);
+            }
+
+
+
+
+
 
 
             if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Kg))
@@ -217,10 +240,9 @@ namespace BodyCompositionCalculator.Controllers
                                Calculators.LbsToKG(Convert.ToDouble(newGoal.TargetWeightInputB));
             }
 
+
             newGoal.Goal.StartWeightInKg = startWeight;
             newGoal.Goal.TargetWeightInKg = targetWeight;
-
-
 
             //TODO latest checkin always updates final weight on goal
             
@@ -229,7 +251,6 @@ namespace BodyCompositionCalculator.Controllers
             //No Goal Id on user profile. Add it
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
             {
-
                 newGoal.Goal.UserProfileId = userProfileId;
                 _context.Goals.Add(newGoal.Goal);
             }
@@ -240,27 +261,25 @@ namespace BodyCompositionCalculator.Controllers
                     .CurrentValues
                     .SetValues(newGoal.Goal);
             }
-
-
             _context.SaveChanges();
 
-            if (newGoal.AddAsCheckIn && newGoal.Goal.StartDate <= DateTime.Today)
+
+            //Overwrite new target weight with estimated one if using body fat to calculate goal - ordering is important here as the db needs to have been updated already
+            if (calculationBasis.Equals(CalculationBasis.BodyFat))
             {
-                var checkInModel = new CheckInFormViewModel
-                {
-                    WeightUnit = newGoal.WeightUnit,
-                    WeightInputA = newGoal.StartWeightInputA,
-                    WeightInputB = newGoal.StartWeightInputB,
-                    UserProgressLog = new UserProgressLog
-                    {
-                        Date = newGoal.Goal.StartDate,
-                        BodyFat = newGoal.Goal.StartBodyFat
-                    }
-                };
+                targetWeight = Calculators.CalculateEstimatedGoalWeight((double)Helper_Classes.UserHelpers.GetCurrentWeight(),
+                    (int)Helper_Classes.UserHelpers.GetCurrentBodyFat(), (int)newGoal.Goal.TargetBodyFat);
 
-                UpdateDbWithNewCheckIn(checkInModel);
+                newGoal.Goal.TargetWeightInKg = targetWeight;
 
+                _context.Entry(_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId))
+                    .CurrentValues
+                    .SetValues(newGoal.Goal);
+
+                _context.SaveChanges();
             }
+
+
 
             return RedirectToAction("Index", new { controller = "Home" });
 
