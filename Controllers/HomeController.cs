@@ -90,7 +90,7 @@ namespace BodyCompositionCalculator.Controllers
                 var goalBodyFat = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId).TargetBodyFat;
 
 
-                var includeBodyFatSummary = currentGoal.CalculationBasis == CalculationBasis.BodyFat ? true : false;
+                var includeBodyFatSummary = currentGoal.CalculationBasis == CalculationBasis.BodyFat || currentGoal.TrackBodyFat ? true : false;
                 viewModel.StartBodyFat = currentGoal.StartBodyFat.ToString();
                 viewModel.CurrentBodyFat = currentBodyFat.ToString();
                 viewModel.GoalBodyFat = currentGoal.TargetBodyFat.ToString();
@@ -500,15 +500,13 @@ namespace BodyCompositionCalculator.Controllers
                 formUserProgressLog.UserProgressLog.Id = progressLogId;
                 formUserProgressLog.UserProgressLog.UserProfileId = userProfileId;
 
-
                 _context.Entry(_context.UserProgressLogs.
                         SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date))
                     .CurrentValues
                     .SetValues(formUserProgressLog.UserProgressLog);
-
             }
             _context.SaveChanges();
-
+                
             //Update
 
         }
