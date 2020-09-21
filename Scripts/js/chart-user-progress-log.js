@@ -53,8 +53,8 @@
     function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
         var bodyFatColour = "rgba(247, 108, 108, 1)";
         var weightColour = "rgba(55, 71, 133,1)";
-        var bodyFatGoalColour = "rgba(247, 108, 108, 0.5)";
-        var weightGoalColour = "rgba(55, 71, 133,0.5)";
+        var bodyFatGoalColour = "rgba(247, 108, 108, 0.3)";
+        var weightGoalColour = "rgba(55, 71, 133,0.3)";
         var todayLineColour = "#A8D0E6";
         var weightLabel = "Weight (" + weightUnit[0] + ")";
 
@@ -91,8 +91,8 @@
                     backgroundColor: weightGoalColour,
                     borderColor: weightGoalColour,
                     pointRadius: 7,
-                    pointBackgroundColor: weightGoalColour,
-                    pointBorderColor: weightGoalColour,
+                    pointBackgroundColor: weightColour,
+                    pointBorderColor: weightColour,
                     pointHoverRadius: 2,
                     pointHoverBackgroundColor: weightGoalColour,
                     pointHoverBorderColor: weightGoalColour,
@@ -132,13 +132,12 @@
                     backgroundColor: bodyFatGoalColour,
                     borderColor: bodyFatGoalColour,
                     pointRadius: 7,
-                    pointBackgroundColor: bodyFatGoalColour,
-                    pointBorderColor: bodyFatGoalColour,
+                    pointBackgroundColor: bodyFatColour,
+                    pointBorderColor: bodyFatColour,
                     pointHoverRadius: 2,
                     pointHoverBackgroundColor: bodyFatGoalColour,
                     pointHoverBorderColor: bodyFatGoalColour,
                     pointHitRadius: 5,
-                    pointBorderWidth: 1.6,
                     yAxisID: 'y-axis-2',
                     spanGaps: true,
                     pointStyle: 'star',

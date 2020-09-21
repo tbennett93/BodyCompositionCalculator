@@ -1,5 +1,6 @@
 ﻿@using System.Activities.Expressions
 @using System.Web.UI.WebControls
+@using BodyCompositionCalculator.Models.Calculation_Constants
 @model BodyCompositionCalculator.Models.ViewModels.CheckInFormViewModel
 
 
@@ -19,112 +20,158 @@
 
 <body>
 
-    <h2>@Model.PageTitlePrefix Check-In</h2>
+    <h2 class="mb-4">@Model.PageTitlePrefix Check-In</h2>
     @*@Html.ValidationSummary()*@
-    @*//TODO set this as today by default*@
+
+
 
     @using (Html.BeginForm("AddNewProgressLog", "Home"))
     {
-        <label>Date</label>
-        <div class="form-group ">
-            <div id="date" , class="input-group date datepicker">
-                @Html.TextBoxFor(model => model.UserProgressLog.Date, "{0: dd MMM yyyy}", new { @class = "form-control col-2" })
-                <div class="input-group-append input-group-addon">
+        //Date
+        <div class="form-group row pb-0">
+            <label class="col-form-label col-2 pb-0 mb-0" for="date">Date</label>
+            <div id="date" class="form-group  col-sm-6 col-md-4 date datepicker input-group pb-0 mb-0">
+                @Html.TextBoxFor(model => model.UserProgressLog.Date, "{0: dd MMM yyyy}", new { @class = "form-control ml-0 " })
+                <div class="input-group-append input-group-addon ">
                     <span class="input-group-text">
                         <span class="fa fa-calendar"></span>
                     </span>
                 </div>
+                @Html.ValidationMessageFor(m => m.UserProgressLog.Date)
             </div>
-            @Html.ValidationMessageFor(m => m.UserProgressLog.Date)
         </div>
 
+ 
 
-        <label>Weight</label>
-        <div class="form-group">
-            <div class="form-group form-inline">
-                @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-1", @id = "weightInputA", @min = "0" })
-                @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-1", @id = "weightInputB", @min = "0", @max = "13" })
-                <p class="form-control" id="weightUnit">@Model.WeightUnit</p>
-
-            </div>
-
-            @Html.ValidationMessageFor(m => m.WeightInputA)
-            @Html.ValidationMessageFor(m => m.WeightInputB)
-
-        </div>
-
-        <label>Body Fat</label>
-        <div class="form-group form-inline">
-            @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control col-2", @min = "0", @max = "100" })
-            <p class="form-control">%</p>
-        </div>
-        @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
+   
 
 
-        @*<label>Body Fat</label>
-            <div class="form-group input-group">
-                @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control", @min = "0" })
-                <div class="input-group-append">
-                    <span class="input-group-text">
-                        <i class="fas fa-percentage"></i>
-                    </span>
+                @*<label class="col-form-label col-2" for="weightInputBox">Weight</label>
+                    <div class="input-group col-3" id="weightInputBox">
+                            @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control ", @id = "weightInputA", @min = "0" })
+                            <label for="weightInputA" class=" form-control-plaintext input-group-append mr-0">st</label>
+                        
+                            @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control ", @id = "weightInputB", @min = "0", @max = "13" })
+                            <label for="weightInputB" class="col-form-label form-control-plaintext input-group-append " disabled="disabled">lbs</label>
+                    </div>*@
+
+
+            if (@Model.WeightUnit.Equals(WeightUnits.LbsAndStone))
+            {
+                //weight input
+                <div class="form-group row">
+                    <label class="col-form-label col-2" for="weightInputBox">Weight</label>
+                    <div class="col-sm-6 " id="weightInputBox">
+                        <div class="form-inline">
+                            @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-2", @id = "weightInputA", @min = "0" })
+                            <label for="weightInputA" class=" form-control-plaintext col-1 text-wrap ">st</label>
+
+
+                            @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-2", @id = "weightInputB", @min = "0", @max = "13" })
+                            <label for="weightInputB" class=" form-control-plaintext col-1 text-wrap" disabled="disabled">lbs</label>
+                        </div>
+
+                    
+                        @Html.ValidationMessageFor(m => m.WeightInputA)
+                        @Html.ValidationMessageFor(m => m.WeightInputB)
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                //weight input
+                <div class="form-group row">
+                    <label class="col-form-label col-2" for="weightInputBox">Weight</label>
+                    <div class="col-sm-6 " id="weightInputBox">
+                        <div class="form-inline">
+                            @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-2", @id = "weightInputA", @min = "0" })
+                            <label for="weightInputA" class=" form-control-plaintext col-1 text-wrap ">@Model.WeightUnit</label>
+                        </div>
+
+                    
+                        @Html.ValidationMessageFor(m => m.WeightInputA)
+                        @Html.ValidationMessageFor(m => m.WeightInputB)
+                    </div>
+                </div>
+            }
+            
+
+        //BF input
+        <div class="form-group row">
+            <label class="col-form-label col-2 " for="date">Body Fat</label>
+            <div id="date" class="form-group  col-sm-6 col-md-4  input-group">
+                @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control col-2", @min = "0", @max = "100" })
+
+                <div class="form-row">
+                    <div class="form-group form-inline">
+                        <p class="form-control">%</p>
+                    </div>
                 </div>
                 @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
-            </div>*@
+            </div>
+        </div>
+            
+
+
+            @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
+
+            @*<label>Body Fat</label>
+                <div class="form-group input-group">
+                    @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control", @min = "0" })
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fas fa-percentage"></i>
+                        </span>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
+                </div>*@
 
 
 
-        @Html.HiddenFor(m => m.UserProgressLog.Id)
-        @Html.HiddenFor(m => m.UserProgressLog.UserProfileId)
-        @Html.HiddenFor(m => m.UserProgressLog.UserProfile)
-        @Html.HiddenFor(m => m.UserProgressLog.Photo)
-        @Html.HiddenFor(m => m.RedirectionPage)
-        @Html.HiddenFor(m => m.WeightUnit)
-        @Html.AntiForgeryToken()
-        ;
+            @Html.HiddenFor(m => m.UserProgressLog.Id)
+            @Html.HiddenFor(m => m.UserProgressLog.UserProfileId)
+            @Html.HiddenFor(m => m.UserProgressLog.UserProfile)
+            @Html.HiddenFor(m => m.UserProgressLog.Photo)
+            @Html.HiddenFor(m => m.RedirectionPage)
+            @Html.HiddenFor(m => m.WeightUnit)
+            @Html.AntiForgeryToken()
 
 
-        <container class=" justify-content-around">
-            <button type="submit" class="btn btn-primary col-1">Save</button>
-        </container>
-    }
-
-    <p class="subtext form-text">*Weight unit can be changed in the profile screen</p>
 
 
-    <script>
+            <container class=" justify-content-around">
+                <button type="submit" class="btn btn-primary ">Save</button>
+            </container>
 
-
-        $(document).ready(function () {
-
-            if ($("#weightInputA").val() == 0) {
-                $("#weightInputA").val("");
-                $("#weightInputB").val("");
             }
 
 
-            var weightUnit = $('#weightUnit').text();
-
-            if (weightUnit == 'kg' || weightUnit == 'lbs') {
-                $('#weightInputB').hide();
-                $('#weightInputA').removeClass("col-1");
-                $('#weightInputA').addClass("col-2");
-            }
+            <p class=" text-muted subtext form-text">*Weight unit can be changed in the profile screen</p>
+            <script>
 
 
-            $('#date.datepicker').datepicker({
-                format: 'dd M yyyy',
-                todayBtn: true,
-                autoclose: true,
-                todayHighlight: true
-            });
+                $(document).ready(function () {
 
-        });
+                    if ($("#weightInputA").val() == 0) {
+                        $("#weightInputA").val("");
+                        $("#weightInputB").val("");
+                    }
 
-    </script>
-    @Scripts.Render("~/bundles/jqueryval")
 
-</body>
+                    $('#date.datepicker').datepicker({
+                        format: 'dd M yyyy',
+                        todayBtn: true,
+                        autoclose: true,
+                        todayHighlight: true
+                    });
+
+                });
+
+            </script>
+            @Scripts.Render("~/bundles/jqueryval")
+
+    </body>
 
 </html>
 
