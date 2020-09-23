@@ -29,10 +29,12 @@
     {
         //Date
         <div class="form-group row pb-0">
-            <label class="col-form-label col-2 pb-0 mb-0" for="date">Date</label>
-            <div id="date" class="form-group  col-sm-6 col-md-4 date datepicker input-group pb-0 mb-0">
-                @Html.TextBoxFor(model => model.UserProgressLog.Date, "{0: dd MMM yyyy}", new { @class = "form-control ml-0 " })
-                <div class="input-group-append input-group-addon ">
+            @*<label class="col-form-label col-12 col-sm-2 pb-0 mb-0" for="date">Date</label>*@
+            @*<div id="date" class="form-group  col-12 col-sm-6 col-md-4 col-lg-3 date datepicker input-group pb-0 mb-0">*@
+            <label class="col-form-label col-12 col-sm-2" for="date">Date</label>
+            <div class="col-12 col-sm-6 date datepicker input-group " id="date">
+                @Html.TextBoxFor(model => model.UserProgressLog.Date, "{0: dd MMM yyyy}", new {@class = "form-control col-11 mr-0 pr-0"})
+                <div class="input-group-append input-group-addon ml-0 pl-0 col-1 ">
                     <span class="input-group-text">
                         <span class="fa fa-calendar"></span>
                     </span>
@@ -56,18 +58,18 @@
                     </div>*@
 
 
-            if (@Model.WeightUnit.Equals(WeightUnits.LbsAndStone))
+            if (!@Model.WeightUnit.Equals(WeightUnits.LbsAndStone))
             {
                 //weight input
                 <div class="form-group row">
                     <label class="col-form-label col-2" for="weightInputBox">Weight</label>
                     <div class="col-sm-6 " id="weightInputBox">
                         <div class="form-inline">
-                            @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-2", @id = "weightInputA", @min = "0" })
+                            @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-5", @id = "weightInputA", @min = "0" })
                             <label for="weightInputA" class=" form-control-plaintext col-1 text-wrap ">st</label>
 
 
-                            @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-2", @id = "weightInputB", @min = "0", @max = "13" })
+                            @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-5", @id = "weightInputB", @min = "0", @max = "13" })
                             <label for="weightInputB" class=" form-control-plaintext col-1 text-wrap" disabled="disabled">lbs</label>
                         </div>
 
@@ -82,24 +84,22 @@
             {
                 //weight input
                 <div class="form-group row">
-                    <label class="col-form-label col-2" for="weightInputBox">Weight</label>
-                    <div class="col-sm-6 " id="weightInputBox">
-                        <div class="form-inline">
-                            @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-2", @id = "weightInputA", @min = "0" })
-                            <label for="weightInputA" class=" form-control-plaintext col-1 text-wrap ">@Model.WeightUnit</label>
+                    <label class="col-form-label col-12 col-sm-2" for="weightInputBox">Weight</label>
+                        <div class="form-inline form-group col-12 col-sm-6" id="weightInputBox">
+                            @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-11", @id = "weightInputA", @min = "0" })
+                            <label for="weightInputA" class="form-control form-control-plaintext  text-wrap col-1 ">@Model.WeightUnit</label>
                         </div>
 
                     
                         @Html.ValidationMessageFor(m => m.WeightInputA)
                         @Html.ValidationMessageFor(m => m.WeightInputB)
                     </div>
-                </div>
             }
             
 
         //BF input
         <div class="form-group row">
-            <label class="col-form-label col-2 " for="date">Body Fat</label>
+            <label class="col-form-label col-2 text-no" for="date">Body Fat</label>
             <div id="date" class="form-group  col-sm-6 col-md-4  input-group">
                 @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control col-2", @min = "0", @max = "100" })
 
