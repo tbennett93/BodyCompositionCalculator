@@ -12,20 +12,21 @@ namespace BodyCompositionCalculator.Models.ViewModels
     public class EditGoalViewModel
     {
         public Goal Goal { get; set; }
+
         [DisplayName("weight")]
         [Required]
         public string StartWeightInputA { get; set; }
+
         [DisplayName("weight")]
         [Required]
-
         public string StartWeightInputB { get; set; }
-        [DisplayName("weight")]
-        [Required]
 
+        [DisplayName("weight")]
+        [RequiredIfWeightAsCalcBasis]
         public string TargetWeightInputA { get; set; }
-        [DisplayName("weight")]
-        [Required]
 
+        [DisplayName("weight")]
+        [RequiredIfWeightAsCalcBasis]
         public string TargetWeightInputB { get; set; }
         public string WeightUnit { get; set; }
         public string Title { get; set; }
