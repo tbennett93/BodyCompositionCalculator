@@ -177,7 +177,7 @@ namespace BodyCompositionCalculator.Controllers
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
             var dbGoal = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
             newGoal.CalculationBasis = new SelectList(new List<string> {"Weight", "Body Fat"}, dbGoal.CalculationBasis);
-
+            newGoal.Title = "Edit Goal";
 
             if (!ModelState.IsValid)
             {
@@ -550,60 +550,7 @@ namespace BodyCompositionCalculator.Controllers
 
 
         }
-        //public ActionResult NewCheckInForm()
-        //{
-
-        //    //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
-        //    CheckInFormViewModel viewModel = new CheckInFormViewModel();
-        //    var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
-        //    viewModel.WeightUnit = "kg";
-        //    viewModel.WeightInputA = 180.0;
-        //    viewModel.WeightInputB = 0.0;
-        //    if (_context.UserProgressLogs.SingleOrDefault(g =>
-        //        g.UserProfileId == userProfileId && g.Date == DateTime.Today) == null)
-        //        viewModel.UserProgressLog = new UserProgressLog();
-
-
-        //    else
-        //    {
-        //        viewModel.UserProgressLog = _context.UserProgressLogs.SingleOrDefault(g =>
-        //        g.UserProfileId == userProfileId && g.Date == DateTime.Today);
-        //    }
-
-        //    return View(viewModel);
-
-
-        //}
-
-        //public ActionResult AddNewProgressLog(CheckInFormViewModel userProgressLogFromForm)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return View("NewCheckInForm", userProgressLogFromForm);
-
-        //    currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
-        //    var userProfileId = currentUserProfile.Id;
-
-        //    userProgressLogFromForm.UserProgressLog.WeightInKg = 0.0;
-
-        //    //Check for log on the same date, if it doesn't exist, insert, else update
-        //    if (_context.UserProgressLogs.SingleOrDefault(g =>
-        //        g.UserProfileId == userProfileId && g.Date == userProgressLogFromForm.UserProgressLog.Date) == null)
-        //    {
-        //        //Insert
-        //        userProgressLogFromForm.UserProgressLog.UserProfileId = userProfileId;
-        //        _context.UserProgressLogs.Add(userProgressLogFromForm.UserProgressLog);
-        //        _context.SaveChanges();
-        //        return RedirectToAction("Index", new { controller = "Home" });
-        //    }
-        //    //Update
-        //    _context.Entry(_context.UserProgressLogs.SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == userProgressLogFromForm.UserProgressLog.Date))
-        //        .CurrentValues
-        //        .SetValues(userProgressLogFromForm.UserProgressLog);
-
-        //    _context.SaveChanges();
-        //    return RedirectToAction("Index", new { controller = "Home" });
-
-        //}
+       
     }
 }
 

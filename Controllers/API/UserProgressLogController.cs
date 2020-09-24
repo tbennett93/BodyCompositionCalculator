@@ -63,48 +63,51 @@ namespace BodyCompositionCalculator.Controllers.API
             var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
             double weightUnitMultiplier = 1.0;
 
-            if (weightUnit == WeightUnits.Lbs )
+            if (weightUnit == WeightUnits.Lbs)
                 weightUnitMultiplier = 2.20462;
 
 
             if (id == Helper_Classes.UserHelpers.GetUserProfile().Id)
             {
                 if (weightUnit == WeightUnits.Kg || weightUnit == WeightUnits.Lbs)
-                    return Ok((from userProgressLog in _context.UserProgressLogs
-                            orderby userProgressLog.Date
-                            where userProgressLog.UserProfileId == id
-                            select new
-                            {
-                                ProgressLogId = userProgressLog.Id,
-                                userProgressLog.Date,
-                                userProgressLog.BodyFat,
-                                WeightInKg = Math.Round((double)(userProgressLog.WeightInKg * weightUnitMultiplier))
-                            }
-                        ).ToList());
+                    return Ok((_context.UserProgressLogs.OrderBy(userProgressLog => userProgressLog.Date)
+                        .Where(userProgressLog => userProgressLog.UserProfileId == id)
+                        .Where(userProgressLog => userProgressLog.WeightInKg > 0)
+                        .Select(userProgressLog => new
+                        {
+                            ProgressLogId = userProgressLog.Id,
+                            userProgressLog.Date,
+                            userProgressLog.BodyFat,
+                            WeightInKg = Math.Round((double) (userProgressLog.WeightInKg * weightUnitMultiplier))
+                        })).ToList());
                 else if (weightUnit == WeightUnits.LbsAndStone)
-                    return Ok((from userProgressLog in _context.UserProgressLogs
-                            orderby userProgressLog.Date
-                            where userProgressLog.UserProfileId == id
-                            select new
-                            {
-                                ProgressLogId = userProgressLog.Id,
-                                userProgressLog.Date,
-                                userProgressLog.BodyFat,
-                                WeightInKg = Math.Floor((double)(userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) + "st" + (((double)(userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) - Math.Floor((double)(userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318)) * 14 + "lbs"
-                            }
-                        ).ToList());
+                    return Ok((_context.UserProgressLogs.OrderBy(userProgressLog => userProgressLog.Date)
+                        .Where(userProgressLog => userProgressLog.UserProfileId == id)
+                        .Where(userProgressLog => (userProgressLog.WeightInKg > 0))
+                        .Select(userProgressLog => new
+                        {
+                            ProgressLogId = userProgressLog.Id,
+                            userProgressLog.Date,
+                            userProgressLog.BodyFat,
+                            WeightInKg =
+                                Math.Floor(
+                                    (double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) +
+                                "st" +
+                                (((double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) -
+                                 Math.Floor((double) (userProgressLog.WeightInKg * weightUnitMultiplier) /
+                                            6.35029318)) * 14 + "lbs"
+                        })).ToList());
             }
-                
+
 
             //if (id == Helper_Classes.UserHelpers.GetUserProfile().Id)
-            //    return
-                    //Ok(_context.UserProgressLogs
-                    //.Where(u => u.UserProfileId == id)
-                    //.OrderBy(u=>u.Date)
-                    //.Select(m=>new { m.BodyFat, m.Date, m.WeightInKg})
-                    //.ToList());
-
-                    //Ok();
+            //return
+            //    Ok(_context.UserProgressLogs
+            //    .Where(u => u.UserProfileId == id)
+            //    .OrderBy(u => u.Date)
+            //    .Select(m => new { m.BodyFat, m.Date, m.WeightInKg })
+            //    .ToList());
+            //Ok();
 
             return Unauthorized();
         }

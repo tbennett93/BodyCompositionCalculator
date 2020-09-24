@@ -1,6 +1,7 @@
 ﻿@using System.Activities.Expressions
 @using System.Web.UI.WebControls
 @using BodyCompositionCalculator.Models.Calculation_Constants
+@using Microsoft.Ajax.Utilities
 @model BodyCompositionCalculator.Models.ViewModels.EditGoalViewModel
 
 
@@ -25,9 +26,7 @@
     @using (Html.BeginForm("AddNewGoal", "Home", FormMethod.Post, new { @id = "goalForm" }))
 
     {
-
-
-
+        @Html.ValidationSummary();
 
 
             <div class="row">
@@ -67,7 +66,22 @@
 
 
 
+        var startWeightA = Model.StartWeightInputA == null ? "" : Model.StartWeightInputA;
+        var startWeightB = Model.StartWeightInputB;
+        var targetWeightA = Model.TargetWeightInputA == null ? "" : Model.TargetWeightInputA;
+        var targetWeightB = Model.TargetWeightInputB;
 
+        if (startWeightA.Equals("0"))
+        {
+            startWeightA = "";
+            startWeightB = "";
+        }
+
+        if (targetWeightA.Equals("0"))
+        {
+            targetWeightA = "";
+            targetWeightB = "";
+        }
 
         if (@Model.WeightUnit.Equals(WeightUnits.LbsAndStone))
         {
@@ -76,9 +90,9 @@
                 <div class="col-sm-12 col-md-6 mb-4 ">
                     <div class="row align-items-center">
                         <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Weight</label>
-                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0" })
+                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0", Value = startWeightA })
                         <label for="startWeightInputA" class=" form-text col-1 pl-0 ">st</label>
-                        @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col", @id = "startWeightInputB", @min = "0", @max = "13" })
+                        @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col", @id = "startWeightInputB", @min = "0", @max = "13", Value = startWeightB })
                         <label for="startWeightInputB" class=" form-text col-md-1 col-2 pl-0">lbs</label>
                     </div>
                 </div>
@@ -86,9 +100,9 @@
                 <div class="col-sm-12  col-md-6 mb-4">
                     <div class="row align-items-center">
                         <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Target Weight</label>
-                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0" })
+                        @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0", Value = targetWeightA })
                         <label for="targetWeightInputA" class=" form-text col-1 pl-0 ">st</label>
-                        @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col", @id = "targetWeightInputB", @min = "0", @max = "13" })
+                        @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col", @id = "targetWeightInputB", @min = "0", @max = "13", Value = targetWeightB })
                         <label for="targetWeightInputB" class=" form-text col-md-1 col-2 pl-0">lbs</label>
                     </div>
                 </div>
@@ -104,16 +118,19 @@
                 <div class="col-sm-12 col-md-6 mb-4 ">
                     <div class="row align-items-center">
                         <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Weight</label>
-                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0" })
-                    <label for="startWeightInputA" class=" form-text col-2 col-md-1 pl-0 ">@Model.WeightUnit</label>
+                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0", Value = startWeightA })
+                        @Html.HiddenFor(m => m.StartWeightInputB, new { Value = 0 })
+                        <label for="startWeightInputA" class=" form-text col-2 col-md-1 pl-0 ">@Model.WeightUnit</label>
                     </div>
                 </div>
 
                 <div class="col-sm-12  col-md-6 mb-4">
                     <div class="row align-items-center">
                         <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Target Weight</label>
-                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0" })
-                    <label for="targetWeightInputA" class=" form-text col-2 col-md-1 pl-0 ">@Model.WeightUnit</label>
+                        @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0", Value = targetWeightA })
+                        @Html.HiddenFor(m => m.TargetWeightInputB, new { Value = 0 })
+
+                        <label for="targetWeightInputA" class=" form-text col-2 col-md-1 pl-0 ">@Model.WeightUnit</label>
                     </div>
                 </div>
             </div>
@@ -142,7 +159,7 @@
         </div>
 
 
-        <label class="row">Calculate Goal Plan Using:</label>
+        <label >Calculate Goal Plan Using:</label>
         @Html.DropDownListFor(expression: m => m.CalculationBasisChoice, selectList: Model.CalculationBasis, htmlAttributes: new { @class = " form-control row mb-4 ", @id = "calculationBasis" })
 
 
@@ -266,17 +283,6 @@
                             todayHighlight: true
                         });
 
-
-
-                        var startWeight = $('#startWeight').val();
-                        var targetWeight = $('#targetWeight').val();
-
-                        if (startWeight == 0) {
-                            $('#startWeight').val("");
-                        }
-                        if (targetWeight == 0) {
-                            $('#targetWeight').val("");
-                        };
 
 
                         //If the default date is used, set the dates

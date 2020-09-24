@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,9 +12,20 @@ namespace BodyCompositionCalculator.Models.ViewModels
     public class EditGoalViewModel
     {
         public Goal Goal { get; set; }
+        [DisplayName("weight")]
+        [Required]
         public string StartWeightInputA { get; set; }
+        [DisplayName("weight")]
+        [Required]
+
         public string StartWeightInputB { get; set; }
+        [DisplayName("weight")]
+        [Required]
+
         public string TargetWeightInputA { get; set; }
+        [DisplayName("weight")]
+        [Required]
+
         public string TargetWeightInputB { get; set; }
         public string WeightUnit { get; set; }
         public string Title { get; set; }
