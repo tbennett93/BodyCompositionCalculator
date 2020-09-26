@@ -377,6 +377,8 @@ namespace BodyCompositionCalculator.Controllers
 
         public ActionResult NewCheckInForm(string pageFrom)
         {
+            //Used when creating a new check in
+
             //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page
             CheckInFormViewModel viewModel;
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
@@ -420,7 +422,7 @@ namespace BodyCompositionCalculator.Controllers
         }
 
         [Route("Home/NewCheckInForm/{id:int}")]
-
+        //Used when 'editing' a check in from the tracker
         public ActionResult NewCheckInForm(int id)
         {
             //If no log found for that date, fetch blank log page. If existing log found, fetch existing info into page

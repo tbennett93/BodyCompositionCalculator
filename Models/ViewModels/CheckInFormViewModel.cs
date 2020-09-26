@@ -19,5 +19,7 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public string WeightUnit { get; set; }
         public string PageTitlePrefix { get; set; } = "New";
         public string RedirectionPage { get; set; } = "Home";
+
+        public bool IsBodyFatCalculation { get; set; }
     }
 }

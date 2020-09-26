@@ -370,6 +370,7 @@
     <Compile Include="Models\UserProgressGraphDataModel.cs" />
     <Compile Include="Models\UserProgressLog.cs" />
     <Compile Include="Models\UserProgressLogWithGoal.cs" />
+    <Compile Include="Models\Validation\RequiredIfBodyFatAsCalcBasis.cs" />
     <Compile Include="Models\Validation\RequiredIfWeightAsCalcBasis.cs" />
     <Compile Include="Models\Validation\StartBodyFatRequiredIfTracked.cs" />
     <Compile Include="Models\Validation\TargetBodyFatRequiredIfTracked.cs" />
