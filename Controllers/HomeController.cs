@@ -176,8 +176,9 @@ namespace BodyCompositionCalculator.Controllers
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
             var dbGoal = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
-            newGoal.CalculationBasis = new SelectList(new List<string> {"Weight", "Body Fat"}, dbGoal.CalculationBasis);
+            newGoal.CalculationBasis = new SelectList(new List<string> { "Weight", "Body Fat" }, dbGoal.CalculationBasis);
             newGoal.Title = "Edit Goal";
+
 
             if (!ModelState.IsValid)
             {
@@ -190,6 +191,12 @@ namespace BodyCompositionCalculator.Controllers
                 }
                 return View("NewGoalForm", newGoal);
             }
+
+ 
+
+            newGoal.Goal.StartBodyFat = newGoal.StartBodyFat;
+            newGoal.Goal.TargetBodyFat = newGoal.TargetBodyFat;
+            newGoal.Goal.TrackBodyFat = newGoal.TrackBodyFat;
 
             var trackBf = newGoal.Goal.TrackBodyFat;
 
@@ -356,6 +363,11 @@ namespace BodyCompositionCalculator.Controllers
 
                 };
             }
+
+            viewModel.StartBodyFat = viewModel.Goal.StartBodyFat;
+            viewModel.TargetBodyFat = viewModel.Goal.TargetBodyFat;
+            viewModel.TrackBodyFat = viewModel.Goal.TrackBodyFat;
+
             return View(viewModel);
         }
 

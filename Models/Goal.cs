@@ -23,9 +23,7 @@ namespace BodyCompositionCalculator.Models
         [Required]
         public double TargetWeightInKg { get; set; }
         public double? FinalWeightInKg { get; set; }
-        [StartBodyFatRequiredIfTracked]
         public int? StartBodyFat { get; set; }
-        [TargetBodyFatRequiredIfTracked]
         public int? TargetBodyFat { get; set; }
         public int? FinalBodyFat { get; set; }
  
@@ -35,7 +33,6 @@ namespace BodyCompositionCalculator.Models
 
         [Required] 
         public string CalculationBasis { get; set; } = "Weight";
-        [TargetBodyFatRequiredIfTracked]
         public bool TrackBodyFat { get; set; } = true;
     }
 }

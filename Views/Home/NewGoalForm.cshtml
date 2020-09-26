@@ -142,7 +142,7 @@
             <div class="col-sm-12  col-md-6  mb-4">
                 <div class="row align-items-center">
                     <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Body Fat</label>
-                    @Html.TextBoxFor(m => m.Goal.StartBodyFat, new { @id = "startBfText", @class = "form-control col", @min = "0" })
+                    @Html.TextBoxFor(m => m.StartBodyFat, new { @id = "startBfText", @class = "form-control col", @min = "0" })
                     <label class=" col-2 col-md-1 pl-0">%</label>
 
                 </div>
@@ -151,7 +151,7 @@
             <div class="col-sm-12  col-md-6  mb-4">
                 <div class="row align-items-center">
                     <label class="col-12 col-md-4 col-lg-3 pl-0">Target Body Fat</label>
-                    @Html.TextBoxFor(m => m.Goal.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col", @min = "0" })
+                    @Html.TextBoxFor(m => m.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col", @min = "0" })
                     <label class=" col-2 col-md-1 pl-0">%</label>
 
                 </div>
@@ -169,7 +169,7 @@
         </div>
 
         <div class="row form-check mb-4">
-            @Html.CheckBoxFor(m => m.Goal.TrackBodyFat, new { @id = "trackBfCheckBox", @class = " form-check-input" })
+            @Html.CheckBoxFor(m => m.TrackBodyFat, new { @id = "trackBfCheckBox", @class = " form-check-input" })
             <label class="form-check-label">Track body fat percentage</label>
         </div>
 
@@ -183,6 +183,9 @@
         @Html.HiddenFor(m => m.Goal.FinalWeightInKg)
         @Html.HiddenFor(m => m.Goal.FinalBodyFat)
         @Html.HiddenFor(m => m.WeightUnit)
+        @Html.HiddenFor(m=>m.Goal.StartBodyFat)
+        @Html.HiddenFor(m=>m.Goal.TargetBodyFat)
+        @Html.HiddenFor(m=>m.Goal.TrackBodyFat)
         @Html.AntiForgeryToken()
         ;
 

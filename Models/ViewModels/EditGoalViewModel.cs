@@ -28,11 +28,20 @@ namespace BodyCompositionCalculator.Models.ViewModels
         [DisplayName("weight")]
         [RequiredIfWeightAsCalcBasis]
         public string TargetWeightInputB { get; set; }
+
         public string WeightUnit { get; set; }
         public string Title { get; set; }
         public bool AddAsCheckIn { get; set; } = true;
         public string CalculationBasisChoice { get; set; }
         public SelectList CalculationBasis { get; set; }
+
+        [StartBodyFatRequiredIfTracked]
+        public int? StartBodyFat { get; set; }
+
+        [TargetBodyFatRequiredIfTracked]
+        public int? TargetBodyFat { get; set; }
+
+        public bool TrackBodyFat { get; set; }
 
         //[BodyFatRequiredIfTracked]
         //public bool TrackBodyFat { get; set; } = true;
