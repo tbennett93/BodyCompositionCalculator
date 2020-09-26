@@ -100,20 +100,19 @@
         <div class="form-group row">
             <label class="col-form-label col-2 text-no" for="date">Body Fat</label>
             <div id="date" class="form-group  col-sm-6 col-md-4  input-group">
-                @Html.TextBoxFor(m => m.UserProgressLog.BodyFat, new { @class = "form-control col-2", @min = "0", @max = "100" })
+                @Html.TextBoxFor(m => m.BodyFat, new { @class = "form-control col-2", @min = "0", @max = "100" })
 
                 <div class="form-row">
                     <div class="form-group form-inline">
                         <p class="form-control">%</p>
                     </div>
                 </div>
-                @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
+                @Html.ValidationMessageFor(m => m.BodyFat)
             </div>
         </div>
             
 
 
-            @Html.ValidationMessageFor(m => m.UserProgressLog.BodyFat)
 
       
 
@@ -124,6 +123,7 @@
             @Html.HiddenFor(m => m.UserProgressLog.Photo)
             @Html.HiddenFor(m => m.RedirectionPage)
             @Html.HiddenFor(m => m.WeightUnit)
+            @Html.HiddenFor(m=>m.IsBodyFatCalculation)
             @Html.AntiForgeryToken()
 
 

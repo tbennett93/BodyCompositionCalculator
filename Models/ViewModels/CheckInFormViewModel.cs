@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using BodyCompositionCalculator.Models.Validation;
 
 namespace BodyCompositionCalculator.Models.ViewModels
 {
@@ -21,5 +22,8 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public string RedirectionPage { get; set; } = "Home";
 
         public bool IsBodyFatCalculation { get; set; }
+        [RequiredIfBodyFatAsCalcBasis]
+        public int? BodyFat { get; set; }
+
     }
 }

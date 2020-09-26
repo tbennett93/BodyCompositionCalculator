@@ -122,6 +122,13 @@ namespace BodyCompositionCalculator.Helper_Classes
             }
 
 
+            public static Goal GetCurrentGoal()
+            {
+                var userId = GetUserProfile().Id;
+
+                return new ApplicationDbContext().Goals.SingleOrDefault(m => m.UserProfileId == userId);
+            }
+
 
     }
 }

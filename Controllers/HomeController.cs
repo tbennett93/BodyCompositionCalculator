@@ -71,7 +71,7 @@ namespace BodyCompositionCalculator.Controllers
 
                 var userProfileId = userProfile.Id;
 
-                var currentGoal = _context.Goals.SingleOrDefault(m => m.UserProfileId == userProfileId);
+                var currentGoal = Helper_Classes.UserHelpers.GetCurrentGoal();
 
                 var trackBodyFat = currentGoal.TrackBodyFat;
                     
@@ -393,15 +393,19 @@ namespace BodyCompositionCalculator.Controllers
                 {
                     UserProgressLog = new UserProgressLog()
                 };
+
             else
             {
                 viewModel = new CheckInFormViewModel
                 {
                     UserProgressLog = _context.UserProgressLogs.SingleOrDefault(g =>
-                        g.UserProfileId == userProfileId && g.Date == DateTime.Today)
+                        g.UserProfileId == userProfileId && g.Date == DateTime.Today),
+
                 };
                 weight = (double) viewModel.UserProgressLog.WeightInKg;
             }
+
+            viewModel.BodyFat = viewModel.UserProgressLog.BodyFat;
 
 
 
@@ -418,6 +422,10 @@ namespace BodyCompositionCalculator.Controllers
             viewModel.WeightInputB = weightInputB;  
             viewModel.WeightUnit = weightUnit;
             viewModel.RedirectionPage = pageFrom;
+
+            viewModel.IsBodyFatCalculation =
+                Helper_Classes.UserHelpers.GetCurrentGoal().CalculationBasis == CalculationBasis.BodyFat ? true : false;
+
             return View(viewModel);
         }
 
@@ -455,6 +463,10 @@ namespace BodyCompositionCalculator.Controllers
                 PageTitlePrefix = "Edit",
                 RedirectionPage = "Tracker"
             };
+
+            viewModel.BodyFat = viewModel.UserProgressLog.BodyFat;
+            viewModel.IsBodyFatCalculation =
+                Helper_Classes.UserHelpers.GetCurrentGoal().CalculationBasis == CalculationBasis.BodyFat ? true : false;
 
             return View("NewCheckInForm",viewModel);
         }
@@ -528,6 +540,7 @@ namespace BodyCompositionCalculator.Controllers
                 return View("NewCheckInForm", formUserProgressLog);
             }
 
+            formUserProgressLog.UserProgressLog.BodyFat = formUserProgressLog.BodyFat;
             UpdateDbWithNewCheckIn(formUserProgressLog);
 
             return RedirectToAction("Index", new { controller = formUserProgressLog.RedirectionPage });

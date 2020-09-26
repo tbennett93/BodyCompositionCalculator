@@ -12,7 +12,7 @@ namespace BodyCompositionCalculator.Models.Validation
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var viewModel = (EditGoalViewModel)validationContext.ObjectInstance; //needs casting to customer as it only returns a type of Object
+            var viewModel = (EditGoalViewModel)validationContext.ObjectInstance; 
 
             if (viewModel.CalculationBasisChoice.Equals(CalculationBasis.Weight))
             {

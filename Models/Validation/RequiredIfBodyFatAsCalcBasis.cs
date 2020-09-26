@@ -13,11 +13,11 @@ namespace BodyCompositionCalculator.Models.Validation
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var viewModel = (CheckInFormViewModel)validationContext.ObjectInstance; //needs casting to customer as it only returns a type of Object
+            var viewModel = (CheckInFormViewModel)validationContext.ObjectInstance; 
 
             if (viewModel.IsBodyFatCalculation)
             {
-                if (viewModel.UserProgressLog.BodyFat == null )
+                if (viewModel.BodyFat == null )
                     return new ValidationResult("Body Fat % Required");
             }
 
