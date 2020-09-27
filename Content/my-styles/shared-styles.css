@@ -88,6 +88,22 @@
     border-bottom: 0.25rem solid #24305E !important;
 }
 
+.my-border-left-1 {
+    border-left: 0.25rem solid #F8E9A1 !important;
+}
+.my-border-left-2 {
+    border-left: 0.25rem solid #F76C6C !important;
+}
+.my-border-left-3 {
+    border-left: 0.25rem solid #A8D0E6 !important;
+}
+.my-border-left-4 {
+    border-left: 0.25rem solid #374785 !important;
+}
+.my-border-left-5 {
+    border-left: 0.25rem solid #24305E !important;
+}
+
 .my-font-1 {
     color: #F8E9A1;
 }

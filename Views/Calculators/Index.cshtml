@@ -1,0 +1,238 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    @Styles.Render("~/Content/my-styles/shared-styles.css")
+
+</head>
+<body>
+
+<div class="container">
+<h2 class="mb-4 ">Calculators</h2>
+
+<!--Jackson Pollock-->
+<div class="card mb-4">
+    <div class="card-body shadow h-100 py-2 my-border-left-2 ">
+        <h5 class="card-title mt-2">Jackson/Pollock Method</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Most accurate for calculations <u style="text-underline: ">below</u> 12% for males and 15% for females </h6>
+        <div class="row justify-content-around">
+            <!--Jackson Pollock Male Card-->
+            <div class="card card-body  col-md-5 col-12  border-bottom shadow m-2 ">
+                <h5 class="text-center mb-4">Male</h5>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="jpmcAge">Age</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="jpmcAge"class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="jpmcAb">Abdominal (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="jpmcAb" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="jpmcPec">Pectoral (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="jpmcPec" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-6">
+                        <label for="jpmcThigh">Thigh (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="jpmcThigh" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <div id="jpmcCalcBtn" class="btn btn-cust-4">Calculate</div>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <div id="jpmcCalcField" readonly class="form-control text-center col-sm-2 ">6%</div>
+                </div>
+            </div>
+
+            <!--Jackson Pollock Female Card-->
+            <div class="card card-body  col-md-5 col-12  border-bottom shadow m-2">
+                <h5 class="text-center mb-4">Female</h5>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="jpfcAge">Age</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="jpfcAge" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="jpfcSupra">Suprailiac (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="jpfcSupra" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="jpfcTri">Tricep (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="jpfcTri" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-6">
+                        <label for="jpfcThigh">Thigh (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="jpfcThigh" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <div id="jpfcCalcBtn" class="btn btn-cust-4">Calculate</div>
+
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <div id="jpfcCalcField" readonly class="form-control text-center col-sm-2 ">6%</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--Durnin/Womersley-->
+<div class="card mb-4">
+    <div class="card-body shadow h-100 py-2 my-border-left-2 ">
+        <h5 class="card-title mt-2">Durnin/Womersley Method Method</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Most accurate for calculations <u style="text-underline: double">above</u> 12% for males and 15% for females </h6>
+        <div class="row justify-content-around">
+            <!--Durnin/Womersley Male Card-->
+            <div class="card card-body col-md-5 col-12 border-bottom shadow m-2">
+                <h5 class="text-center mb-4">Male</h5>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="dwmcAge">Age</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwmcAge" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="dwmcTri">Tricep (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwmcTri" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="dwmcBi">Bicep (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwmcBi" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="dwmcSub">Subscapular (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwmcSub" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row  mb-4">
+                    <div class="col-6">
+                        <label for="dwmcSupra">Suprailiac (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwmcSupra" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <div id="dwmcCalcBtn" class="btn btn-cust-4">Calculate</div>
+
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <div id="dwmcCalcField" readonly class="form-control text-center col-sm-2 ">6%</div>
+                </div>
+            </div>
+
+
+            <!--Durnin/Womersley Female Card-->
+            <div class="card card-body  col-md-5 col-12  border-bottom shadow m-2">
+                <h5 class="text-center mb-4">Female</h5>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="dwfcAge">Age</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwfcAge" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="dwfcTri">Tricep (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwfcTri" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="dwfcBi">Bicep (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwfcBi" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="dwfcSub">Subscapular (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwfcSub" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row  mb-4">
+                    <div class="col-6">
+                        <label for="dwfcSupra">Suprailiac (mm)</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="dwfcSupra" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <div id="dwfcCalcBtn" class="btn btn-cust-4">Calculate</div>
+
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <div id="dwfcCalcField" readonly class="form-control text-center col-sm-2 ">6%</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+<a href="https://fitties.com/fat-caliper-plus/body-fat-calculation-methods/jackson-pollock-3/">JP3</a>
+<a href="https://fitties.com/fat-caliper-plus/body-fat-calculation-methods/durnin-womersley/">DW4</a>
+<code>BD = 1.1125025 - (0.0013125 x sum of chest, triceps and subscapular skinfolds in mm ) + (0.0000055 x square of the sum of chest, triceps and subscapular) - (0.000244 x age)</code>
+<code>% Body Fat = (495 / Body Density) - 450.</code>
+
+
+Work out how to do the guides
+</body>

@@ -192,6 +192,7 @@
     <Compile Include="Controllers\API\UserProgressAllController.cs" />
     <Compile Include="Controllers\API\ValidWeightUnitController.cs" />
     <Compile Include="Controllers\API\ValuesController.cs" />
+    <Compile Include="Controllers\CalculatorsController.cs" />
     <Compile Include="Controllers\GuidesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -2447,6 +2448,7 @@
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
     <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Calculators\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
