@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-sm-12  col-md-6 col-xl-6 mb-4 ">
                     <div class="row align-items-center">
-                        <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Date</label>
+                        <label for="startDateText" class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Date</label>
                         <div class="col pl-0 ">
                             <div id="startDate" class="input-group date datepicker">
                                 @Html.TextBoxFor(model => model.Goal.StartDate, "{0: dd MMM yyyy}", new { @id = "startDateText", @class = "form-control " })
@@ -48,7 +48,7 @@
 
                 <div class="col-sm-12  col-md-6 col-xl-6 mb-4 ">
                     <div class="row align-items-center">
-                        <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">End Date</label>
+                        <label for="endDateText" class="col-12 col-md-4 nowrap col-lg-3 pl-0">End Date</label>
                         <div class="col pl-0">
                             <div id="endDate" class="input-group date datepicker">
                                 @Html.TextBoxFor(model => model.Goal.EndDate, "{0: dd MMM yyyy}", new { @id = "endDateText", @class = "form-control " })
@@ -89,7 +89,7 @@
 
                 <div class="col-sm-12 col-md-6 mb-4 ">
                     <div class="row align-items-center">
-                        <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Weight</label>
+                        <label for="startWeightInputA" class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Weight</label>
                         @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0", Value = startWeightA })
                         <label for="startWeightInputA" class=" form-text col-1 pl-0 ">st</label>
                         @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col", @id = "startWeightInputB", @min = "0", @max = "13", Value = startWeightB })
@@ -99,7 +99,7 @@
 
                 <div class="col-sm-12  col-md-6 mb-4">
                     <div class="row align-items-center">
-                        <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Target Weight</label>
+                        <label for="targetWeightInputA" class="col-12 col-md-4 nowrap col-lg-3 pl-0">Target Weight</label>
                         @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0", Value = targetWeightA })
                         <label for="targetWeightInputA" class=" form-text col-1 pl-0 ">st</label>
                         @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col", @id = "targetWeightInputB", @min = "0", @max = "13", Value = targetWeightB })
@@ -117,7 +117,7 @@
 
                 <div class="col-sm-12 col-md-6 mb-4 ">
                     <div class="row align-items-center">
-                        <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Weight</label>
+                        <label for="startWeightInputA"class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Weight</label>
                         @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0", Value = startWeightA })
                         @Html.HiddenFor(m => m.StartWeightInputB, new { Value = 0 })
                         <label for="startWeightInputA" class=" form-text col-2 col-md-1 pl-0 ">@Model.WeightUnit</label>
@@ -126,10 +126,9 @@
 
                 <div class="col-sm-12  col-md-6 mb-4">
                     <div class="row align-items-center">
-                        <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Target Weight</label>
+                        <label for="targetWeightInputA"class="col-12 col-md-4 nowrap col-lg-3 pl-0">Target Weight</label>
                         @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0", Value = targetWeightA })
                         @Html.HiddenFor(m => m.TargetWeightInputB, new { Value = 0 })
-
                         <label for="targetWeightInputA" class=" form-text col-2 col-md-1 pl-0 ">@Model.WeightUnit</label>
                     </div>
                 </div>
@@ -141,7 +140,7 @@
         <div class="row ">
             <div class="col-sm-12  col-md-6  mb-4">
                 <div class="row align-items-center">
-                    <label class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Body Fat</label>
+                    <label for="startBfText"class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Body Fat</label>
                     @Html.TextBoxFor(m => m.StartBodyFat, new { @id = "startBfText", @class = "form-control col", @min = "0" })
                     <label class=" col-2 col-md-1 pl-0">%</label>
 
@@ -150,7 +149,7 @@
 
             <div class="col-sm-12  col-md-6  mb-4">
                 <div class="row align-items-center">
-                    <label class="col-12 col-md-4 col-lg-3 pl-0">Target Body Fat</label>
+                    <label for="targetBfText" class="col-12 col-md-4 col-lg-3 pl-0">Target Body Fat</label>
                     @Html.TextBoxFor(m => m.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col", @min = "0" })
                     <label class=" col-2 col-md-1 pl-0">%</label>
 
@@ -159,18 +158,18 @@
         </div>
 
 
-        <label class="row" >Calculate Goal Plan Using:</label>
+        <label for="calculationBasis" class="row" >Calculate Goal Plan Using:</label>
         @Html.DropDownListFor(expression: m => m.CalculationBasisChoice, selectList: Model.CalculationBasis, htmlAttributes: new { @class = " form-control row mb-4 ", @id = "calculationBasis" })
 
 
         <div class="row form-check mb-4">
             @Html.CheckBoxFor(m => m.AddAsCheckIn, new { @id = "checkInCheckBox", @class = " form-check-input" })
-            <label class="form-check-label">Check in with these details</label>
+            <label for="checkInCheckBox"class="form-check-label">Check in with these details</label>
         </div>
 
         <div class="row form-check mb-4">
             @Html.CheckBoxFor(m => m.TrackBodyFat, new { @id = "trackBfCheckBox", @class = " form-check-input" })
-            <label class="form-check-label">Track body fat percentage</label>
+            <label for="trackBfCheckBox"class="form-check-label">Track body fat percentage</label>
         </div>
 
 
