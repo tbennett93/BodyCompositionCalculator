@@ -11,228 +11,333 @@
 <body>
 
 <div class="container">
-<h2 class="mb-4 ">Calculators</h2>
+    <h2 class="mb-4 ">Calculators</h2>
 
-<!--Jackson Pollock-->
-<div class="card mb-4">
-    <div class="card-body shadow h-100 py-2 my-border-left-2 ">
-        <h5 class="card-title mt-2">Jackson/Pollock Method</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Most accurate for calculations <u style="text-underline: ">below</u> 12% for males and 15% for females </h6>
-        <div class="row justify-content-around">
-            <!--Jackson Pollock Male Card-->
-            <div class="card card-body  col-md-5 col-12  border-bottom shadow m-2 ">
-                <h5 class="text-center mb-4">Male</h5>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="jpmcAge">Age</label>
+    <!--Jackson Pollock-->
+    <div class="card mb-4">
+        <div class="card-body shadow h-100 py-2 my-border-left-2 ">
+            <h5 class="card-title mt-2">Jackson/Pollock Method</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Most accurate for calculations <u style="text-underline: ">below</u> 12% for males and 15% for females </h6>
+            <div class="row justify-content-around">
+                <!--Jackson Pollock Male Card-->
+                <div class="card card-body  col-md-5 col-12  border-bottom shadow m-2 ">
+                    <h5 class="text-center mb-4">Male</h5>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="jpmcAge">Age</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpmcAge"class="form-control"></input>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <input id="jpmcAge"class="form-control"></input>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="jpmcAb">Abdominal (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0" id="jpmcAb" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="jpmcPec">Pectoral (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0" id="jpmcPec" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label for="jpmcThigh">Thigh (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0" id="jpmcThigh" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2 justify-content-center">
+                        <div id="jpmcCalcBtn" class="btn btn-cust-4">Calculate</div>
+                    </div>
+                    <div class="row mb-2 justify-content-center">
+                        <input   id="jpmcCalcField" readonly class="form-control text-center col-sm-2 "></input>
                     </div>
                 </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="jpmcAb">Abdominal (mm)</label>
+
+                <!--Jackson Pollock Female Card-->
+                <div class="card card-body  col-md-5 col-12  border-bottom shadow m-2">
+                    <h5 class="text-center mb-4">Female</h5>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="jpfcAge">Age</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpfcAge" class="form-control"></input>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <input id="jpmcAb" class="form-control"></input>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="jpfcSupra">Suprailiac (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpfcSupra" class="form-control"></input>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="jpmcPec">Pectoral (mm)</label>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="jpfcTri">Tricep (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpfcTri" class="form-control"></input>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <input id="jpmcPec" class="form-control"></input>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label for="jpfcThigh">Thigh (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpfcThigh" class="form-control"></input>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-6">
-                        <label for="jpmcThigh">Thigh (mm)</label>
+                    <div class="row mb-2 justify-content-center">
+                        <div id="jpfcCalcBtn" class="btn btn-cust-4">Calculate</div>
                     </div>
-                    <div class="col-6">
-                        <input id="jpmcThigh" class="form-control"></input>
+                    <div class="row mb-2 justify-content-center">
+                        <input  id="jpfcCalcField" readonly class="form-control text-center col-sm-2 "></input>
                     </div>
-                </div>
-                <div class="row mb-2 justify-content-center">
-                    <div id="jpmcCalcBtn" class="btn btn-cust-4">Calculate</div>
-                </div>
-                <div class="row mb-2 justify-content-center">
-                    <div id="jpmcCalcField" readonly class="form-control text-center col-sm-2 ">6%</div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!--Jackson Pollock Female Card-->
-            <div class="card card-body  col-md-5 col-12  border-bottom shadow m-2">
-                <h5 class="text-center mb-4">Female</h5>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="jpfcAge">Age</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="jpfcAge" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="jpfcSupra">Suprailiac (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="jpfcSupra" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="jpfcTri">Tricep (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="jpfcTri" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-6">
-                        <label for="jpfcThigh">Thigh (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="jpfcThigh" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2 justify-content-center">
-                    <div id="jpfcCalcBtn" class="btn btn-cust-4">Calculate</div>
 
+    <!--Durnin/Womersley-->
+    <div class="card mb-4">
+        <div class="card-body shadow h-100 py-2 my-border-left-2 ">
+            <h5 class="card-title mt-2">Durnin/Womersley Method Method</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Most accurate for calculations <u style="text-underline: double">above</u> 12% for males and 15% for females </h6>
+            <div class="row justify-content-around">
+                <!--Durnin/Womersley Male Card-->
+                <div class="card card-body col-md-5 col-12 border-bottom shadow m-2">
+                    <h5 class="text-center mb-4">Male</h5>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="dwmcAge">Age</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwmcAge" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="dwmcTri">Tricep (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwmcTri" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="dwmcBi">Bicep (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwmcBi" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="dwmcSub">Subscapular (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwmcSub" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row  mb-4">
+                        <div class="col-6">
+                            <label for="dwmcSupra">Suprailiac (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwmcSupra" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2 justify-content-center">
+                        <div id="dwmcCalcBtn" class="btn btn-cust-4">Calculate</div>
+
+                    </div>
+                    <div class="row mb-2 justify-content-center">
+                        <input  id="dwmcCalcField" readonly class="form-control text-center col-sm-2 "></input>
+                    </div>
                 </div>
-                <div class="row mb-2 justify-content-center">
-                    <div id="jpfcCalcField" readonly class="form-control text-center col-sm-2 ">6%</div>
+
+
+                <!--Durnin/Womersley Female Card-->
+                <div class="card card-body  col-md-5 col-12  border-bottom shadow m-2">
+                    <h5 class="text-center mb-4">Female</h5>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="dwfcAge">Age</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number" min="0"id="dwfcAge" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="dwfcTri">Tricep (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwfcTri" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="dwfcBi">Bicep (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwfcBi" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="dwfcSub">Subscapular (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwfcSub" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row  mb-4">
+                        <div class="col-6">
+                            <label for="dwfcSupra">Suprailiac (mm)</label>
+                        </div>
+                        <div class="col-6">
+                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwfcSupra" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="row mb-2 justify-content-center">
+                        <div id="dwfcCalcBtn" class="btn btn-cust-4">Calculate</div>
+
+                    </div>
+                    <div class="row mb-2 justify-content-center">
+                        <input  id="dwfcCalcField" readonly class="form-control text-center col-sm-2 "></input>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
-
-<!--Durnin/Womersley-->
-<div class="card mb-4">
-    <div class="card-body shadow h-100 py-2 my-border-left-2 ">
-        <h5 class="card-title mt-2">Durnin/Womersley Method Method</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Most accurate for calculations <u style="text-underline: double">above</u> 12% for males and 15% for females </h6>
-        <div class="row justify-content-around">
-            <!--Durnin/Womersley Male Card-->
-            <div class="card card-body col-md-5 col-12 border-bottom shadow m-2">
-                <h5 class="text-center mb-4">Male</h5>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="dwmcAge">Age</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwmcAge" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="dwmcTri">Tricep (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwmcTri" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="dwmcBi">Bicep (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwmcBi" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="dwmcSub">Subscapular (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwmcSub" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row  mb-4">
-                    <div class="col-6">
-                        <label for="dwmcSupra">Suprailiac (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwmcSupra" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2 justify-content-center">
-                    <div id="dwmcCalcBtn" class="btn btn-cust-4">Calculate</div>
-
-                </div>
-                <div class="row mb-2 justify-content-center">
-                    <div id="dwmcCalcField" readonly class="form-control text-center col-sm-2 ">6%</div>
-                </div>
-            </div>
-
-
-            <!--Durnin/Womersley Female Card-->
-            <div class="card card-body  col-md-5 col-12  border-bottom shadow m-2">
-                <h5 class="text-center mb-4">Female</h5>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="dwfcAge">Age</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwfcAge" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="dwfcTri">Tricep (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwfcTri" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="dwfcBi">Bicep (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwfcBi" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="dwfcSub">Subscapular (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwfcSub" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row  mb-4">
-                    <div class="col-6">
-                        <label for="dwfcSupra">Suprailiac (mm)</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="dwfcSupra" class="form-control"></input>
-                    </div>
-                </div>
-                <div class="row mb-2 justify-content-center">
-                    <div id="dwfcCalcBtn" class="btn btn-cust-4">Calculate</div>
-
-                </div>
-                <div class="row mb-2 justify-content-center">
-                    <div id="dwfcCalcField" readonly class="form-control text-center col-sm-2 ">6%</div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-</div>
-
-
-<a href="https://fitties.com/fat-caliper-plus/body-fat-calculation-methods/jackson-pollock-3/">JP3</a>
-<a href="https://fitties.com/fat-caliper-plus/body-fat-calculation-methods/durnin-womersley/">DW4</a>
-<code>BD = 1.1125025 - (0.0013125 x sum of chest, triceps and subscapular skinfolds in mm ) + (0.0000055 x square of the sum of chest, triceps and subscapular) - (0.000244 x age)</code>
-<code>% Body Fat = (495 / Body Density) - 450.</code>
-
 
 Work out how to do the guides
+
+<script>
+
+    //Jackson Pollock Male
+    $("#jpmcCalcBtn").on("click", function () {
+        var age = parseInt($("#jpmcAge").val());
+        var ab = parseInt($("#jpmcAb").val());
+        var pec = parseInt($("#jpmcPec").val());
+        var thigh = parseInt($("#jpmcThigh").val());
+        var sumSkinfolds = ab + pec + thigh;
+        var bodyDensity = (1.10938 - (0.0008267 * sumSkinfolds)) + (0.0000016 * Math.sqrt(sumSkinfolds)) - (0.0002574 * age);
+        var bf = Math.round((495 / bodyDensity) - 450);
+        $("#jpmcCalcField").val(bf + "%");
+    });
+
+    //Jackson Pollock Female
+    $("#jpfcCalcBtn").on("click", function () {
+        var age = parseInt($("#jpfcAge").val());
+        var supra = parseInt($("#jpfcSupra").val());
+        var tri = parseInt($("#jpfcTri").val());
+        var thigh = parseInt($("#jpfcThigh").val());
+        var sumSkinfolds = supra + tri + thigh;
+        var bodyDensity = (1.0994921 - (0.0009929 * sumSkinfolds)) + (0.0000023  * Math.sqrt(sumSkinfolds)) - (0.0002574 * age);
+        var bf = Math.round((495 / bodyDensity) - 450);
+        $("#jpfcCalcField").val(bf + "%");
+    });
+
+
+
+    //Durnin Womersley Male
+    $("#dwmcCalcBtn").on("click", function() {
+        var age = parseInt($("#dwmcAge").val());
+        var supra = parseInt($("#dwmcSupra").val());
+        var tri = parseInt($("#dwmcTri").val());
+        var bi = parseInt($("#dwmcBi").val());
+        var sub = parseInt($("#dwmcSub").val());
+        var varA;
+        var varB;
+
+        if (age < 17) {
+            varA = 1.1533;
+            varB = 0.0643;
+        };
+        if (age >= 17 && age <= 19) {
+            varA = 1.1620;
+            varB = 0.0630;
+        };
+        if (age >= 20 && age <= 29) {
+            varA = 1.1631;
+            varB = 0.0632;
+        };
+        if (age >= 30 && age <= 39) {
+            varA = 1.1422;
+            varB = 0.0544;
+        };
+        if (age >= 40 && age <= 49) {
+            varA = 1.1620;
+            varB = 0.0700;
+        };
+        if (age >= 50) {
+            varA = 1.1715;
+            varB = 0.0779;
+        };
+
+        var logSkinfolds = Math.log10(supra + tri + bi + sub);
+        var bodyDensity = varA - (varB * logSkinfolds);
+
+        var bf = Math.round((495 / bodyDensity) - 450);
+        $("#dwmcCalcField").val(bf + "%");
+    });
+
+    //Durnin Womersley Female
+    $("#dwfcCalcBtn").on("click", function() {
+        var age = parseInt($("#dwfcAge").val());
+        var supra = parseInt($("#dwfcSupra").val());
+        var tri = parseInt($("#dwfcTri").val());
+        var bi = parseInt($("#dwfcBi").val());
+        var sub = parseInt($("#dwfcSub").val());
+        var varA;
+        var varB;
+
+        if (age < 17) {
+            varA = 1.1369;
+            varB = 0.0598;
+        };
+        if (age >= 17 && age <= 19) {
+            varA = 1.1549;
+            varB = 0.0678;
+        };
+        if (age >= 20 && age <= 29) {
+            varA = 1.1599;
+            varB = 0.0717;
+        };
+        if (age >= 30 && age <= 39) {
+            varA = 1.1423;
+            varB = 0.0632;
+        };
+        if (age >= 40 && age <= 49) {
+            varA = 1.1333;
+            varB = 0.0612;
+        };
+        if (age >= 50) {
+            varA = 1.1339;
+            varB = 0.0645;
+        };
+
+        var logSkinfolds = Math.log10(supra + tri + bi + sub);
+        var bodyDensity = varA - (varB * logSkinfolds);
+        var bf = Math.round((495 / bodyDensity) - 450);
+        $("#dwfcCalcField").val(bf + "%");
+    });
+
+
+</script>
+
 </body>
