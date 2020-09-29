@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <h2>Create Profile</h2>
+    <h2 class="mb-4 col">Create Profile</h2>
 
     @*Without using the using keyword, the form (which is html form type) would remain open as it's not automatically closed.*@
     @using (Html.BeginForm("Create", "Profile"))
@@ -107,7 +107,8 @@
 
         @*@Html.AntiForgeryToken();*@
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <div class="pl-4" ><button type="submit" class="btn btn-primary form-group">Save</button></div>
+        
 
 
 
