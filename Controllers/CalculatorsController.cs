@@ -12,6 +12,7 @@ namespace BodyCompositionCalculator.Controllers
         public ActionResult Index()
         {
             return View();
-        }
+        }        
+ 
     }
 }

@@ -1,15 +1,25 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = null;
 }
 
 
-<head>
-    @Styles.Render("~/Content/my-styles/shared-styles.css")
+    <head>
 
-</head>
+        @Styles.Render("~/Content/my-styles/shared-styles.css")
+        
+        @*@Styles.Render("~/Content/bootstrap.css")
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Styles.Render("~/Content/my-styles/shared-styles.css")*@
+        @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+
+
+    </head>
 <body>
 
+    
 <div class="container">
     <h2 class="mb-4 ">Calculators</h2>
 
@@ -27,12 +37,12 @@
                             <label for="jpmcAge">Age</label>
                         </div>
                         <div class="col-6">
-                            <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpmcAge"class="form-control"></input>
+                            <input  onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpmcAge"class="form-control"></input>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="jpmcAb">Abdominal (mm)</label>
+                            <label  for="jpmcAb">Abdominal (mm)<span style="color:blue" data-popper-arrow id="abdominaljpm"  data-trigger="hover touch" data-placement="top"  data-content="Take a vertical skinfold measurement 2-3cm to the right of belly button"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0" id="jpmcAb" class="form-control"></input>
@@ -40,7 +50,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="jpmcPec">Pectoral (mm)</label>
+                            <label for="jpmcPec">Pectoral (mm)<span style="color:blue" data-popper-arrow id="pectoraljpm" data-trigger="hover touch" data-placement="top" data-content="Take a vertical skinfold measurement on the outer portion of the chest, halfway between the armpit and nipple"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0" id="jpmcPec" class="form-control"></input>
@@ -48,7 +58,7 @@
                     </div>
                     <div class="row mb-4">
                         <div class="col-6">
-                            <label for="jpmcThigh">Thigh (mm)</label>
+                            <label for="jpmcThigh">Thigh (mm)<span style="color:blue" data-popper-arrow id="thighjpm" data-trigger="hover touch" data-placement="top" data-content="Take a vertical skinfold measurement halfway between the knee cap and the connection between your hip and thigh"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0" id="jpmcThigh" class="form-control"></input>
@@ -75,7 +85,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="jpfcSupra">Suprailiac (mm)</label>
+                            <label for="jpfcSupra">Suprailiac (mm)<span style="color:blue" data-popper-arrow id="suprajpf" data-trigger="hover touch" data-placement="top" data-content="Take a diagonal skinfold measurement just above where the hip bone protrudes at the front"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpfcSupra" class="form-control"></input>
@@ -83,7 +93,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="jpfcTri">Tricep (mm)</label>
+                            <label for="jpfcTri">Tricep (mm)<span style="color:blue" data-popper-arrow id="tricepjpf" data-trigger="hover touch" data-placement="top" data-content="Take a vertical skinfold measurement halfway between the elbow and the top portion of the shoulder"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpfcTri" class="form-control"></input>
@@ -91,7 +101,7 @@
                     </div>
                     <div class="row mb-4">
                         <div class="col-6">
-                            <label for="jpfcThigh">Thigh (mm)</label>
+                            <label for="jpfcThigh">Thigh (mm)<span style="color:blue" data-popper-arrow id="thighjpf" data-trigger="hover touch" data-placement="top" data-content="Take a vertical skinfold measurement halfway between the knee cap and the connection between your hip and thigh"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="jpfcThigh" class="form-control"></input>
@@ -128,7 +138,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="dwmcTri">Tricep (mm)</label>
+                            <label for="dwmcTri">Tricep (mm)<span style="color:blue" data-popper-arrow id="tricepdwm" data-trigger="hover touch" data-placement="top" data-content="Take a vertical skinfold measurement halfway between the elbow and the top portion of the shoulder"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwmcTri" class="form-control"></input>
@@ -136,7 +146,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="dwmcBi">Bicep (mm)</label>
+                            <label for="dwmcBi">Bicep (mm)<span style="color:blue" data-popper-arrow id="bicepdwm" data-trigger="hover touch" data-placement="top" data-content="Take a vertical skinfold measurement halfway between the inside elbow and the shoulder"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwmcBi" class="form-control"></input>
@@ -144,7 +154,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="dwmcSub">Subscapular (mm)</label>
+                            <label for="dwmcSub">Subscapular (mm)<span style="color:blue" data-popper-arrow id="subsdwm" data-trigger="hover touch" data-placement="top" data-content="Take a diagonal skinfold measurement 2 cm below the bottom tip of the shoulder blade"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwmcSub" class="form-control"></input>
@@ -152,7 +162,7 @@
                     </div>
                     <div class="row  mb-4">
                         <div class="col-6">
-                            <label for="dwmcSupra">Suprailiac (mm)</label>
+                            <label for="dwmcSupra">Suprailiac (mm)<span style="color:blue" data-popper-arrow id="supradwm" data-trigger="hover touch" data-placement="top" data-content="Take a diagonal skinfold measurement just above where the hip bone protrudes at the front"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwmcSupra" class="form-control"></input>
@@ -181,7 +191,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="dwfcTri">Tricep (mm)</label>
+                            <label for="dwfcTri">Tricep (mm)<span style="color:blue" data-popper-arrow id="tricepdwf" data-trigger="hover touch" data-placement="top" data-content="Take a vertical skinfold measurement halfway between the elbow and the top portion of the shoulder"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwfcTri" class="form-control"></input>
@@ -189,7 +199,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="dwfcBi">Bicep (mm)</label>
+                            <label for="dwfcBi">Bicep (mm)<span style="color:blue" data-popper-arrow id="bicepdwf" data-trigger="hover touch" data-placement="top" data-content="Take a vertical skinfold measurement halfway between the inside elbow and the shoulder"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwfcBi" class="form-control"></input>
@@ -197,7 +207,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="dwfcSub">Subscapular (mm)</label>
+                            <label for="dwfcSub">Subscapular (mm)<span style="color:blue" data-popper-arrow id="subsdwf" data-trigger="hover touch" data-placement="top" data-content="Take a diagonal skinfold measurement 2 cm below the bottom tip of the shoulder blade"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwfcSub" class="form-control"></input>
@@ -205,7 +215,7 @@
                     </div>
                     <div class="row  mb-4">
                         <div class="col-6">
-                            <label for="dwfcSupra">Suprailiac (mm)</label>
+                            <label for="dwfcSupra">Suprailiac (mm)<span style="color:blue" data-popper-arrow id="supradwf" data-trigger="hover touch" data-placement="top" data-content="Take a diagonal skinfold measurement just above where the hip bone protrudes at the front"> ?</span></label>
                         </div>
                         <div class="col-6">
                             <input onkeypress="return event.charCode >= 48" type="number"  min="0"id="dwfcSupra" class="form-control"></input>
@@ -224,9 +234,36 @@
     </div>
 </div>
 
-Work out how to do the guides
+@*<script src="https://unpkg.com/@("@")popperjs/core@("@")2"></script>*@
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+@*<script src="https://unpkg.com/@("@")popperjs/core@("@")2"></script>*@
+@*<script src="https://unpkg.com/@("@")popperjs/core@("@")2.5.2/dist/umd/popper.min.js"></script>*@
+@Scripts.Render("~/bundles/bootstrap")
 
 <script>
+
+    $('#abdominaljpm').popover('enable');  
+    $('#pectoraljpm').popover('enable');  
+    $('#thighjpm').popover('enable');  
+
+    $('#suprajpf').popover('enable');  
+    $('#tricepjpf').popover('enable');  
+    $('#thighjpf').popover('enable');  
+
+    $('#tricepdwm').popover('enable');  
+    $('#bicepdwm').popover('enable');  
+    $('#subsdwm').popover('enable');  
+    $('#supradwm').popover('enable');  
+
+    $('#tricepdwf').popover('enable');  
+    $('#bicepdwf').popover('enable');  
+    $('#subsdwf').popover('enable');  
+    $('#supradwf').popover('enable');  
+
+
+
+
 
     //Jackson Pollock Male
     $("#jpmcCalcBtn").on("click", function () {
