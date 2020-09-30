@@ -14,7 +14,10 @@ namespace BodyCompositionCalculator.Models
         public double? WeightInKg { get; set; }
         [CheckInDateNotInFuture]
         public DateTime Date { get; set; } = DateTime.Today;
-        public byte?[] Photo { get; set; }
+
+        [ForeignKey("UserPhotoId")]
+        public UserPhoto Photo { get; set; }
+        public int? UserPhotoId { get; set; }
 
         public int UserProfileId { get; set; }
 

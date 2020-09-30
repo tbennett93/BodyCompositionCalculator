@@ -552,6 +552,18 @@ namespace BodyCompositionCalculator.Controllers
                 return View("NewCheckInForm", formUserProgressLog);
             }
 
+            if (formUserProgressLog.Photo != null)
+            {
+                //Insert new photo into UserPhotos.Photo and assign UserPhotos.Id to Userprogresslogs.userphoto
+                //byte?[] uploadedFile = new byte?[formUserProgressLog.Photo.InputStream.Length];
+                //byte[] uploadedFile = Array.ConvertAll(uploadedFileNull, x => x ?? 0);
+
+                //formUserProgressLog.Photo.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+                //formUserProgressLog.UserProgressLog.Photo = uploadedFileNull;
+            }
+
+
+
             formUserProgressLog.UserProgressLog.BodyFat = formUserProgressLog.BodyFat;
             UpdateDbWithNewCheckIn(formUserProgressLog);
 

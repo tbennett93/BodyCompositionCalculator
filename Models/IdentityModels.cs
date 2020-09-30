@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.DynamicData;
 using BodyCompositionCalculator.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -35,6 +37,7 @@ namespace BodyCompositionCalculator.Models
         public DbSet <HeightUnit> HeightUnits { get; set; }
         public DbSet <Sex> Sexes { get; set; }
         public DbSet <ActivityLevel> ActivityLevels { get; set; }
+        public DbSet <UserPhoto> UserPhotos { get; set; }
 
 
         public ApplicationDbContext()

@@ -32,9 +32,9 @@
         <div class="form-group row pb-0 mb-4">
             @*<label class="col-form-label col-12 col-sm-2 pb-0 mb-0" for="date">Date</label>*@
             @*<div id="date" class="form-group  col-12 col-sm-6 col-md-4 col-lg-3 date datepicker input-group pb-0 mb-0">*@
-            <label for="dateField"class="col-form-label col-12 col-sm-2" for="date">Date</label>
+            <label for="dateField" class="col-form-label col-12 col-sm-2" for="date">Date</label>
             <div class="col-12 col-sm-6 col-xl-6 date datepicker input-group " id="date">
-                @Html.TextBoxFor(model => model.UserProgressLog.Date, "{0: dd MMM yyyy}", new {@id="dateField" ,@class = "form-control col-11 mr-0 pr-0"})
+                @Html.TextBoxFor(model => model.UserProgressLog.Date, "{0: dd MMM yyyy}", new { @id = "dateField", @class = "form-control col-11 mr-0 pr-0" })
                 <div class="input-group-append input-group-addon ml-0 pl-0 col-1 ">
                     <span class="input-group-text">
                         <span class="fa fa-calendar"></span>
@@ -46,61 +46,63 @@
 
 
 
-    var weightA = Model.WeightInputA == null ? "" : Model.WeightInputA;
-    var weightB = Model.WeightInputB;
+        var weightA = Model.WeightInputA == null ? "" : Model.WeightInputA;
+        var weightB = Model.WeightInputB;
 
-    if (weightA.Equals("0"))
-    {weightA = "";
-        weightB = ""; }
+        if (weightA.Equals("0"))
+        {
+            weightA = "";
+            weightB = "";
+        }
 
-    if (@Model.WeightUnit.Equals(WeightUnits.LbsAndStone))
-    {
-
-
-        //weight input
-                <div class="form-group row">
-                    <label for="weightInputA" class="col-form-label col-2" for="weightInputBox">Weight</label>
-                    <div class="col-sm-6 " id="weightInputBox">
-                        <div class="form-inline">
-                            @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-5", @id = "weightInputA", @min = "0", Value = weightA })
-                            <label for="weightInputA" class=" form-control-plaintext col-1 text-wrap ">st</label>
+        if (@Model.WeightUnit.Equals(WeightUnits.LbsAndStone))
+        {
 
 
-                            @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-5", @id = "weightInputB", @min = "0", @max = "13", Value = weightB })
-                            <label for="weightInputB" class=" form-control-plaintext col-1 text-wrap" disabled="disabled">lbs</label>
-                        </div>
+            //weight input
+            <div class="form-group row">
+                <label for="weightInputA" class="col-form-label col-2" for="weightInputBox">Weight</label>
+                <div class="col-sm-6 " id="weightInputBox">
+                    <div class="form-inline">
+                        @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-5", @id = "weightInputA", @min = "0", Value = weightA })
+                        <label for="weightInputA" class=" form-control-plaintext col-1 text-wrap ">st</label>
 
-                    
-                        @Html.ValidationMessageFor(m => m.WeightInputA)
-                        @Html.ValidationMessageFor(m => m.WeightInputB)
-                    </div>
-                </div>
 
-            }
-            else
-            {
-                //weight input
-                <div class="form-group row mb-2">
-                    <label for="weightInputA" class="col-form-label col-12 col-sm-2" for="weightInputBox">Weight</label>
-                    <div class="form-inline form-group col-12 col-sm-6" id="weightInputBox">
-                        @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-11", @id = "weightInputA", @min = "0", Value = weightA })
-                        @Html.HiddenFor(m=>m.WeightInputB, new{Value=0})
-                        <label for="weightInputA" class="form-control form-control-plaintext  text-wrap col-1 ">@Model.WeightUnit</label>
+                        @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-5", @id = "weightInputB", @min = "0", @max = "13", Value = weightB })
+                        <label for="weightInputB" class=" form-control-plaintext col-1 text-wrap" disabled="disabled">lbs</label>
                     </div>
 
-                    
+
                     @Html.ValidationMessageFor(m => m.WeightInputA)
                     @Html.ValidationMessageFor(m => m.WeightInputB)
                 </div>
+            </div>
 
-            }
-            
+        }
+        else
+        {
+            //weight input
+            <div class="form-group row mb-2">
+                <label for="weightInputA" class="col-form-label col-12 col-sm-2" for="weightInputBox">Weight</label>
+                <div class="form-inline form-group col-12 col-sm-6" id="weightInputBox">
+                    @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-11", @id = "weightInputA", @min = "0", Value = weightA })
+                    @Html.HiddenFor(m => m.WeightInputB, new { Value = 0 })
+                    <label for="weightInputA" class="form-control form-control-plaintext  text-wrap col-1 ">@Model.WeightUnit</label>
+                </div>
+
+
+                @Html.ValidationMessageFor(m => m.WeightInputA)
+                @Html.ValidationMessageFor(m => m.WeightInputB)
+            </div>
+
+        }
+
 
         //BF input
         <div class="form-group row">
             <label for="bodyFatField" class="col-form-label col-2 text-no" for="date">Body Fat</label>
             <div id="date" class="form-group  col-sm-6 col-md-4  input-group">
-                @Html.TextBoxFor(m => m.BodyFat, new { @id="bodyFatField", @class = "form-control col-2", @min = "0", @max = "100" })
+                @Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-2", @min = "0", @max = "100" })
 
                 <div class="form-row">
                     <div class="form-group form-inline">
@@ -110,52 +112,55 @@
                 @Html.ValidationMessageFor(m => m.BodyFat)
             </div>
         </div>
-            
+
+
+        @Html.LabelFor(m => m.Photo)
+        @Html.TextBoxFor(m => m.Photo, new { type = "file" })
+        @Html.ValidationMessageFor(m => m.Photo)
+        <p>Select the image file to upload to the server</p>
+
+
+        @Html.HiddenFor(m => m.UserProgressLog.Id)
+        @Html.HiddenFor(m => m.UserProgressLog.UserProfileId)
+        @Html.HiddenFor(m => m.UserProgressLog.UserProfile)
+        @Html.HiddenFor(m => m.UserProgressLog.Photo)
+        @Html.HiddenFor(m => m.RedirectionPage)
+        @Html.HiddenFor(m => m.WeightUnit)
+        @Html.HiddenFor(m => m.IsBodyFatCalculation)
+        @Html.AntiForgeryToken()
 
 
 
-      
 
+        <container class=" justify-content-around">
+            <button type="submit" class="btn btn-primary ">Save</button>
+        </container>
 
-            @Html.HiddenFor(m => m.UserProgressLog.Id)
-            @Html.HiddenFor(m => m.UserProgressLog.UserProfileId)
-            @Html.HiddenFor(m => m.UserProgressLog.UserProfile)
-            @Html.HiddenFor(m => m.UserProgressLog.Photo)
-            @Html.HiddenFor(m => m.RedirectionPage)
-            @Html.HiddenFor(m => m.WeightUnit)
-            @Html.HiddenFor(m=>m.IsBodyFatCalculation)
-            @Html.AntiForgeryToken()
+    }
+    
 
 
 
-
-            <container class=" justify-content-around">
-                <button type="submit" class="btn btn-primary ">Save</button>
-            </container>
-
-            }
+<p class=" text-muted subtext form-text">*Weight unit can be changed in the profile screen</p>
+    <script>
 
 
-            <p class=" text-muted subtext form-text">*Weight unit can be changed in the profile screen</p>
-            <script>
+        $(document).ready(function () {
 
 
-                $(document).ready(function () {
+            $('#date.datepicker').datepicker({
+                format: 'dd M yyyy',
+                todayBtn: true,
+                autoclose: true,
+                todayHighlight: true
+            });
 
+        });
 
-                    $('#date.datepicker').datepicker({
-                        format: 'dd M yyyy',
-                        todayBtn: true,
-                        autoclose: true,
-                        todayHighlight: true
-                    });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
 
-                });
-
-            </script>
-            @Scripts.Render("~/bundles/jqueryval")
-
-    </body>
+</body>
 
 </html>
 
