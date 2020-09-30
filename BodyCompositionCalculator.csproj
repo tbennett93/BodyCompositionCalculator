@@ -354,6 +354,10 @@
     <Compile Include="Migrations\202009151824333_AddTrackBodyFatToGoals.designer.cs">
       <DependentUpon>202009151824333_AddTrackBodyFatToGoals.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009301852123_DeleteUserProgressLogWithGoalTable.cs" />
+    <Compile Include="Migrations\202009301852123_DeleteUserProgressLogWithGoalTable.designer.cs">
+      <DependentUpon>202009301852123_DeleteUserProgressLogWithGoalTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\CalculationBasis.cs" />
@@ -370,7 +374,6 @@
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UserProgressGraphDataModel.cs" />
     <Compile Include="Models\UserProgressLog.cs" />
-    <Compile Include="Models\UserProgressLogWithGoal.cs" />
     <Compile Include="Models\Validation\RequiredIfBodyFatAsCalcBasis.cs" />
     <Compile Include="Models\Validation\RequiredIfWeightAsCalcBasis.cs" />
     <Compile Include="Models\Validation\StartBodyFatRequiredIfTracked.cs" />
@@ -2573,6 +2576,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009151824333_AddTrackBodyFatToGoals.resx">
       <DependentUpon>202009151824333_AddTrackBodyFatToGoals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009301852123_DeleteUserProgressLogWithGoalTable.resx">
+      <DependentUpon>202009301852123_DeleteUserProgressLogWithGoalTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

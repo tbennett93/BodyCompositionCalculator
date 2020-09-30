@@ -36,7 +36,6 @@ namespace BodyCompositionCalculator.Models
         public DbSet <Sex> Sexes { get; set; }
         public DbSet <ActivityLevel> ActivityLevels { get; set; }
 
-        public DbSet <UserProgressLogWithGoal> UserProgressLogsWithGoal { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
