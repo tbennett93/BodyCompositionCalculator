@@ -561,7 +561,7 @@ namespace BodyCompositionCalculator.Controllers
 
                 var newPhoto = new UserPhoto
                 {
-                    Photo = uploadedFile
+                    Photo = uploadedFile    
                 };
 
                 _context.UserPhotos.Add(newPhoto);

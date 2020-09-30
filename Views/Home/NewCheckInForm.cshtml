@@ -26,7 +26,7 @@
 
 
 
-    @using (Html.BeginForm("AddNewProgressLog", "Home"))
+    @using (Html.BeginForm("AddNewProgressLog", "Home",FormMethod.Post,new{ enctype = "multipart/form-data" }))
     {
         //Date
         <div class="form-group row pb-0 mb-4">
@@ -112,6 +112,20 @@
                 @Html.ValidationMessageFor(m => m.BodyFat)
             </div>
         </div>
+
+
+
+        @*<dl>
+            <dt>
+                <label asp-for="FileUpload.FormFile"></label>
+            </dt>
+            <dd>
+                <input asp-for="FileUpload.FormFile" type="file">
+                <span asp-validation-for="FileUpload.FormFile"></span>
+            </dd>
+        </dl>
+        <input asp-page-handler="Upload" class="btn" type="submit" value="Upload" />*@
+
 
 
         @Html.LabelFor(m => m.Photo)
