@@ -38,6 +38,7 @@ namespace BodyCompositionCalculator.Models
         public DbSet <Sex> Sexes { get; set; }
         public DbSet <ActivityLevel> ActivityLevels { get; set; }
         public DbSet <UserPhoto> UserPhotos { get; set; }
+        public DbSet<UserProgressLogWithGoal> UserProgressLogsWithGoal { get; set; }
 
 
         public ApplicationDbContext()

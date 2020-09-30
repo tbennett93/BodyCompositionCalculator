@@ -554,12 +554,19 @@ namespace BodyCompositionCalculator.Controllers
 
             if (formUserProgressLog.Photo != null)
             {
-                //Insert new photo into UserPhotos.Photo and assign UserPhotos.Id to Userprogresslogs.userphoto
-                //byte?[] uploadedFile = new byte?[formUserProgressLog.Photo.InputStream.Length];
-                //byte[] uploadedFile = Array.ConvertAll(uploadedFileNull, x => x ?? 0);
+                //TODO Insert new photo into UserPhotos.Photo and assign UserPhotos.Id to Userprogresslogs.userphoto. Separation of concerns - don't have this method handle the specifics of the logic
+                byte[] uploadedFile = new byte[formUserProgressLog.Photo.InputStream.Length];
 
-                //formUserProgressLog.Photo.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
-                //formUserProgressLog.UserProgressLog.Photo = uploadedFileNull;
+                formUserProgressLog.Photo.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+
+                var newPhoto = new UserPhoto
+                {
+                    Photo = uploadedFile
+                };
+
+                _context.UserPhotos.Add(newPhoto);
+                _context.SaveChanges();
+
             }
 
 
