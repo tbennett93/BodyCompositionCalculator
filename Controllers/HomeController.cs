@@ -78,7 +78,9 @@ namespace BodyCompositionCalculator.Controllers
                 var startWeight = currentGoal.StartWeightInKg;
 
                 var today = DateTime.Today;
-                var maxLogDate = Helper_Classes.UserHelpers.GetMaxUserLogDate();
+
+
+                var maxLogDate = Helper_Classes.UserHelpers.GetCurrentCheckIn(currentGoal.CalculationBasis.Equals(CalculationBasis.BodyFat)).Date;
                 //var currentWeightDate = _context.UserProgressLogs
                 //    .Where(m => m.UserProfileId == userProfileId && m.Date <= today).Select(m => m.Date).OrderByDescending(m => m.Date).First();
 
@@ -176,7 +178,9 @@ namespace BodyCompositionCalculator.Controllers
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
             var dbGoal = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
-            newGoal.CalculationBasis = new SelectList(new List<string> { "Weight", "Body Fat" }, dbGoal.CalculationBasis);
+            newGoal.CalculationBasis = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null
+                ? new SelectList(new List<string> {"Weight", "Body Fat"}, newGoal.CalculationBasisChoice)
+                : new SelectList(new List<string> {"Weight", "Body Fat"}, dbGoal.CalculationBasis);
             newGoal.Title = "Edit Goal";
 
 
@@ -311,6 +315,8 @@ namespace BodyCompositionCalculator.Controllers
 
             //No existing goal
             if (_context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId) == null)
+
+
                 viewModel = new EditGoalViewModel()
                 {
                     Goal = new Goal
@@ -325,7 +331,7 @@ namespace BodyCompositionCalculator.Controllers
                     TargetWeightInputB = targetWeightInputB,
                     WeightUnit = weightUnit,
                     Title = "New Goal",
-                    CalculationBasis = new SelectList(new List<string>{"Weight", "Body Fat"},dbGoal.CalculationBasis)
+                    CalculationBasis = new SelectList(new List<string>{"Weight", "Body Fat"},"Weight")
                 };
             //Existing goal
             else

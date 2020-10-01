@@ -63,10 +63,8 @@ namespace BodyCompositionCalculator.Helper_Classes
                 var today = DateTime.Today;
                 var userId = GetUserProfile().Id;
                 return new ApplicationDbContext().UserProgressLogs
-                    .Where(m => m.UserProfileId == userId && m.Date.Year <= today.Year && m.Date.Month <= today.Month && m.Date.Day <= today.Day)
-                    .Select(m => m.Date).OrderByDescending(m => m.Year)
-                    .ThenByDescending(m => m.Month)
-                    .ThenByDescending(m => m.Day).First();
+                    .Where(m => m.UserProfileId == userId && m.Date <= today)
+                    .Max(m => m.Date);
             }
 
             //Used for if only max check in where weight or BF populated
@@ -77,17 +75,11 @@ namespace BodyCompositionCalculator.Helper_Classes
                 //If calculating for BF, get max date a BF was recorded, else get max date a weight was recorded
                 return calcForBodyFat
                     ? new ApplicationDbContext().UserProgressLogs
-                        .Where(m => m.UserProfileId == userId && m.Date.Year <= today.Year &&
-                                    m.Date.Month <= today.Month && m.Date.Day <= today.Day && m.BodyFat != null)
-                        .Select(m => m.Date).OrderByDescending(m => m.Year)
-                        .ThenByDescending(m => m.Month)
-                        .ThenByDescending(m => m.Day).First()
+                        .Where(m => m.UserProfileId == userId && m.Date <= today && m.BodyFat != null)
+                        .Max(m => m.Date)
                     : new ApplicationDbContext().UserProgressLogs
-                        .Where(m => m.UserProfileId == userId && m.Date.Year <= today.Year &&
-                                    m.Date.Month <= today.Month && m.Date.Day <= today.Day && m.WeightInKg != null)
-                        .Select(m => m.Date).OrderByDescending(m => m.Year)
-                        .ThenByDescending(m => m.Month)
-                        .ThenByDescending(m => m.Day).First();
+                        .Where(m => m.UserProfileId == userId && m.Date <= today && m.WeightInKg != null)
+                        .Max(m => m.Date);
             }
             //Used for maximum log date regardless of whether weight/bf null on the date
 
