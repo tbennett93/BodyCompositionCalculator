@@ -196,6 +196,7 @@
     <Compile Include="Controllers\GuidesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TrackerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -424,8 +425,8 @@
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\images\5898.jpg" />
     <Content Include="Content\images\hero-img.png" />
-    <Content Include="Content\images\Joe B CV.jpg" />
     <Content Include="Content\images\pexels-pixabay-53404.jpg" />
+    <Content Include="Content\images\pexels-startup-stock-photos-212286.jpg" />
     <Content Include="Content\images\pexels-victor-freitas-841130.jpg" />
     <Content Include="Content\my-styles\home-screen.css" />
     <Content Include="Content\my-styles\link-colour.css" />
@@ -2474,6 +2475,7 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Calculators\Index.cshtml" />
     <Content Include="Views\Tracker\MyPhoto.cshtml" />
+    <Content Include="Views\Photo\Photo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

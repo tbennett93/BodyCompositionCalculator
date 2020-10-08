@@ -7,36 +7,12 @@
 
 
     <body>
-        @*<label for="jpmcAb">Abdominal (mm)<span style="color:blue" data-popper-arrow id="abdominaljpm" data-trigger="hover touch" data-placement="top" data-html="true" data-content=@Model.Photo> ?</span></label>*@
-
-
-
-
-        @*<img src="data:image/*;base64,@Model.Photo">*@
-        @*@Model.Photo*@
-
 
         @{
             var imgSrc = "'" + String.Format("data:image/jpg;base64,{0}", Model.Photo) + "'";
             var img = new HtmlString(String.Format("<img class='img-thumbnail' src={0}/>", imgSrc));
-
-            var img2 = String.Format("<img class='img-thumbnail' src={0}/>", imgSrc);
-            var imgInline = new HtmlString(String.Format("<a  data-toggle=\"popover\" style=\"color: blue\" data-popper-arrow data-trigger=\"hover touch\" id=\"abdominaljpm\" data-placement=\"top\" data-content=\"{0}\" data-html=\"true\"> View</a>\r\n", img2));
         }
-        <a  data-toggle="popover" style="color: blue" data-popper-arrow data-trigger="hover touch" id="abdominaljpm" data-placement="top" data-content="@img" data-html="true"> View</a>
-        @*<a style="color: blue" data-popper-arrow data-trigger="hover touch" data-placement="top" data-content="@img" data-html="true"> View</a>*@
-        @imgInline
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        @img
         @Scripts.Render("~/bundles/bootstrap")
-
-    @*<script>
-        $('.show-popover').popover({
-        });
-    </script>*@
-    
-    <script>
-        $('[data-toggle="popover"]').popover();
-
-    </script>
 
     </body>

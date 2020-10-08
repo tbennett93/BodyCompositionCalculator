@@ -58,13 +58,14 @@ namespace BodyCompositionCalculator.Controllers.API
     //   }
 
     // GET: api/UserProfileLog/5
-    public string ConvertImageToHtml(byte[] photo)
+    public string ConvertImageToHtml(byte[] photo, int id)
     {
-            var dbPhoto =
-                Convert.ToBase64String(photo);
-            var imgSrc = "'" + String.Format("data:image/jpg;base64,{0}", dbPhoto) + "'";
+        var dbPhoto =
+            Convert.ToBase64String(photo);
+        var imgSrc = "'" + String.Format("data:image/jpg;base64,{0}", dbPhoto) + "'";
         var img = new HtmlString(String.Format("<img class='img-thumbnail' src={0}/>", imgSrc));
-        var imgInline = new HtmlString(String.Format("<a data-toggle=\"popover\" style=\"color: blue\"  data-trigger=\"hover touch\"  data-content=\"{0}\" data-html=\"true\">View</a>", img));
+            //var imgInline = new HtmlString(String.Format("<a href=\"\\Photo\\" + GetPhotoFromLogId(id) + "\" data-toggle=\"popover\" style=\"color: blue\"  data-trigger=\"hover touch\"  data-content=\"{0}\" data-html=\"true\">View</a>", img));
+            var imgInline = new HtmlString(String.Format("<a href=\"\\Tracker\\\\MyPhoto\\" + id + "\" data-toggle=\"popover\" style=\"color: blue\"  data-trigger=\"hover touch\"  data-content=\"{0}\" data-html=\"true\">View</a>", img));
 
             return imgInline.ToString();
     }
@@ -72,104 +73,81 @@ namespace BodyCompositionCalculator.Controllers.API
     [HttpGet]
         public IHttpActionResult GetUserProgressLogs(int id)
         {
-            //var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
+            var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
             double weightUnitMultiplier = 1.0;
 
-            var lbStQuery = (from userProgressLog in _context.UserProgressLogs
-                join photo in _context.UserPhotos on userProgressLog.UserPhotoId equals photo.Id into gj
-                from subphoto in gj.DefaultIfEmpty()
-                where userProgressLog.WeightInKg > 0
-                where userProgressLog.UserProfileId == id
+            if (weightUnit == WeightUnits.Lbs)
+                weightUnitMultiplier = 2.20462;
 
-                select new
-                {
-                    ProgressLogId = userProgressLog.Id,
-                    userProgressLog.Date,
-                    userProgressLog.BodyFat,
-                    WeightInKg = Math.Round((double) (userProgressLog.WeightInKg * weightUnitMultiplier)),
-                    //Photo = userProgressLog.UserPhotoId,
-                    //UserPhoto = subphoto.Id,
-                    UserPhoto = subphoto.Photo,
-
-                }).ToList().Select(t => new
+            if (id == Helper_Classes.UserHelpers.GetUserProfile().Id)
             {
-                t.ProgressLogId,
-                t.Date,
-                t.BodyFat,
-                t.WeightInKg,
-                UserPhoto = t.UserPhoto == null ? null : ConvertImageToHtml(t.UserPhoto)
-                //t.UserPhoto 
-                }).ToList();
 
-            return Ok(lbStQuery.ToList());
-            return Ok(
-                        _context.UserProgressLogs.OrderBy(userProgressLog => userProgressLog.Date)
-                            .Where(userProgressLog => userProgressLog.UserProfileId == id)
-                            .Where(userProgressLog => userProgressLog.WeightInKg > 0)
-                            .Select(userProgressLog => new
-                            {
-                                ProgressLogId = userProgressLog.Id,
-                                userProgressLog.Date,
-                                userProgressLog.BodyFat,
-                                WeightInKg = Math.Round((double)(userProgressLog.WeightInKg * weightUnitMultiplier)),
-                                Photo = userProgressLog.UserPhotoId
-                            }).ToList());
+                if (weightUnit == WeightUnits.Kg || weightUnit == WeightUnits.Lbs)
 
+                    return Ok ((from userProgressLog in _context.UserProgressLogs
+                    join photo in _context.UserPhotos on userProgressLog.UserPhotoId equals photo.Id into gj
+                    from subphoto in gj.DefaultIfEmpty()
+                    where userProgressLog.WeightInKg > 0
+                    where userProgressLog.UserProfileId == id
 
+                    select new
+                    {
+                        ProgressLogId = userProgressLog.Id,
+                        userProgressLog.Date,
+                        userProgressLog.BodyFat,
+                        WeightInKg = Math.Round((double) (userProgressLog.WeightInKg * weightUnitMultiplier)),
+                        //Photo = userProgressLog.UserPhotoId,
+                        UserPhoto = subphoto.Photo,
+                        UserPhotoId = (int?)subphoto.Id
 
-            //if (weightUnit == WeightUnits.Lbs)
-            //    weightUnitMultiplier = 2.20462;
-
-
-            //if (id == Helper_Classes.UserHelpers.GetUserProfile().Id)
-            //{
-            //    if (weightUnit == WeightUnits.Kg || weightUnit == WeightUnits.Lbs)
-            //        return Ok(
-            //            _context.UserProgressLogs.OrderBy(userProgressLog => userProgressLog.Date)
-            //                .Where(userProgressLog => userProgressLog.UserProfileId == id)
-            //                .Where(userProgressLog => userProgressLog.WeightInKg > 0)
-            //                .Select(userProgressLog => new
-            //                {
-            //                    ProgressLogId = userProgressLog.Id,
-            //                    userProgressLog.Date,
-            //                    userProgressLog.BodyFat,
-            //                    WeightInKg = Math.Round((double) (userProgressLog.WeightInKg * weightUnitMultiplier)),
-            //                    Photo = userProgressLog.UserPhotoId
-            //                }).ToList());
-            //     if (weightUnit == WeightUnits.LbsAndStone)
+                    }).ToList().Select(t => new
+                {
+                    t.ProgressLogId,
+                    t.Date,
+                    t.BodyFat,
+                    t.WeightInKg,
+                    UserPhoto = t.UserPhoto == null ? null : ConvertImageToHtml(t.UserPhoto, (int)t.UserPhotoId)
+                    //t.UserPhoto 
+                }).ToList());
 
 
+                if (weightUnit == WeightUnits.LbsAndStone)
 
-            //    return Ok((_context.UserProgressLogs.OrderBy(userProgressLog => userProgressLog.Date)
-            //            .Where(userProgressLog => userProgressLog.UserProfileId == id)
-            //            .Where(userProgressLog => (userProgressLog.WeightInKg > 0))
-            //            .Select(userProgressLog => new
-            //            {
-            //                ProgressLogId = userProgressLog.Id,
-            //                userProgressLog.Date,
-            //                userProgressLog.BodyFat,
-            //                WeightInKg =
-            //                    Math.Floor(
-            //                        (double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) +
-            //                    "st" +
-            //                    (((double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) -
-            //                     Math.Floor((double) (userProgressLog.WeightInKg * weightUnitMultiplier) /
-            //                                6.35029318)) * 14 + "lbs",
-            //                Photo = userProgressLog.UserPhotoId
-            //            })).ToList());
-            //}
+                    return Ok( (from userProgressLog in _context.UserProgressLogs
+                    join photo in _context.UserPhotos on userProgressLog.UserPhotoId equals photo.Id into gj
+                    from subphoto in gj.DefaultIfEmpty()
+                    where userProgressLog.WeightInKg > 0
+                    where userProgressLog.UserProfileId == id
 
+                    select new
+                    {
+                        ProgressLogId = userProgressLog.Id,
+                        userProgressLog.Date,
+                        userProgressLog.BodyFat,
+                        WeightInKg = Math.Floor(
+                                         (double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) +
+                                     "st" +
+                                     (((double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) -
+                                      Math.Floor((double) (userProgressLog.WeightInKg * weightUnitMultiplier) /
+                                                 6.35029318)) * 14 + "lbs",
+                        //Photo = userProgressLog.UserPhotoId,
+                        //UserPhoto = subphoto.Id,
+                        UserPhoto = subphoto.Photo,
+                        UserPhotoId = (int?)subphoto.Id
 
-            //if (id == Helper_Classes.UserHelpers.GetUserProfile().Id)
-            //return
-            //    Ok(_context.UserProgressLogs
-            //    .Where(u => u.UserProfileId == id)
-            //    .OrderBy(u => u.Date)
-            //    .Select(m => new { m.BodyFat, m.Date, m.WeightInKg })
-            //    .ToList());
-            //Ok();
+                    }).ToList().Select(t => new
+                {
+                    t.ProgressLogId,
+                    t.Date,
+                    t.BodyFat,
+                    t.WeightInKg,
+                    UserPhoto = t.UserPhoto == null ? null : ConvertImageToHtml(t.UserPhoto, (int)t.UserPhotoId)
+                    //t.UserPhoto 
+                }).ToList());
 
-            //return Unauthorized();
+            }
+
+            return NotFound();
         }
 
         // POST: api/UserProfileLog
