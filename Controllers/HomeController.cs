@@ -572,6 +572,7 @@ namespace BodyCompositionCalculator.Controllers
 
                 _context.UserPhotos.Add(newPhoto);
                 _context.SaveChanges();
+                formUserProgressLog.UserProgressLog.UserPhotoId = newPhoto.Id;
 
             }
 

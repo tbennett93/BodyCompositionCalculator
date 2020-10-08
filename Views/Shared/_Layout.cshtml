@@ -39,20 +39,43 @@
         </nav>*@
 
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-4">
-        <div class="container pl-4">
-            <a class="navbar-brand" href="Home">My Body App</a>
+        <div class="container pl-4 d-flex align-items-center justify-content-center justify-content-md-between">
+            <section data-toggle="collapse navbar-collapse d-flex ">
+                <a class="navbar-brand brand-logo-colour " href="/Home">
+                    <svg class="p-0 m-0" style="height: 70px; width:80px">
+                        <g transform="translate(-52.944263,-56.490274)">
+                            <g transform="matrix(0.26458333,0,0,0.26458333,-10.714628,14.473296)"
+                               id="g23">
+                                <polygon stroke-miterlimit="10"
+                                         points="304.288,409.039 294.55,312.115 321.456,306.777 319.658,294.582 324.561,293.842 329.88,291.222 334.232,287.31 337.487,282.868 340.365,277.036 342.152,271.382 343.108,266.295 343.558,259.489 240.95,159.214 594.391,406.522 429.021,326.869 326.499,326.869 "
+                                         id="polygon10" />
+                                <ellipse stroke-miterlimit="10"
+                                         cx="303.621"
+                                         cy="261.33701"
+                                         rx="20.379"
+                                         ry="19.163"
+                                         id="ellipse12" />
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </section>
+
+            <a class="navbar-brand" href="/Home">BodyTracker</a>
+
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarsExample07XL">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new {@class = "nav-link"})</li>
-                    <li class="nav-item">@Html.ActionLink("Tracker", "Index", "Tracker", null, new {@class = "nav-link"})</li>
-                    <li class="nav-item">@Html.ActionLink("Calculators", "Index", "Calculators", null, new {@class = "nav-link"})</li>
-                    <li class="nav-item">@Html.ActionLink("Guides", "Index", "Guides", null, new {@class = "nav-link"})</li>
-                    <li class="nav-item">@Html.ActionLink("My Profile", "Index", "Profile", null, new {@class = "nav-link"})</li>
-                    <li class="nav-item">@Html.ActionLink("About", "Index", "About", null, new {@class = "nav-link"})</li>
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Tracker", "Index", "Tracker", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Calculators", "Index", "Calculators", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Guides", "Index", "Guides", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("My Profile", "Index", "Profile", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("About", "Index", "About", null, new { @class = "nav-link" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

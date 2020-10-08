@@ -18,8 +18,13 @@
 }
 
 .icon-primary-custom:hover {
-    fill: #F76C6C;
+    fill: #F8E9A1;
     stroke: #F76C6C;
+}
+
+.brand-logo-colour {
+    fill: #374785;
+    stroke: #374785;
 }
 
 
