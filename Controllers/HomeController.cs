@@ -560,19 +560,22 @@ namespace BodyCompositionCalculator.Controllers
 
             if (formUserProgressLog.Photo != null)
             {
+                PhotoManager photoManager = new PhotoManager();
+                
+
                 //TODO Insert new photo into UserPhotos.Photo and assign UserPhotos.Id to Userprogresslogs.userphoto. Separation of concerns - don't have this method handle the specifics of the logic
-                byte[] uploadedFile = new byte[formUserProgressLog.Photo.InputStream.Length];
+                //byte[] uploadedFile = new byte[formUserProgressLog.Photo.InputStream.Length];
 
-                formUserProgressLog.Photo.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+                //formUserProgressLog.Photo.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
 
-                var newPhoto = new UserPhoto
-                {
-                    Photo = uploadedFile    
-                };
+                //var newPhoto = new UserPhoto
+                //{
+                //    Photo = uploadedFile
+                //};
 
-                _context.UserPhotos.Add(newPhoto);
-                _context.SaveChanges();
-                formUserProgressLog.UserProgressLog.UserPhotoId = newPhoto.Id;
+                //_context.UserPhotos.Add(newPhoto);
+                //_context.SaveChanges();
+                formUserProgressLog.UserProgressLog.UserPhotoId = photoManager.UploadProgressPhotoToDb(formUserProgressLog.Photo); 
 
             }
 

@@ -14,7 +14,10 @@ namespace BodyCompositionCalculator.Models
         //Profile Data
         [Required]
         public int Id { get; set; }
-        public byte?[] ProfilePhoto { get; set; }
+        [ForeignKey("UserPhotoId")]
+        public UserPhoto Photo { get; set; }
+        public int? UserPhotoId { get; set; }
+
         [Required]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
@@ -22,7 +25,7 @@ namespace BodyCompositionCalculator.Models
         [DisplayName("Last Name")]
 
         public string LastName { get; set; }
-      
+        
         [Required]
         [DisplayFormat(DataFormatString = "{0: dd MMM yyyy}")]
         [DisplayName("Date of Birth")]

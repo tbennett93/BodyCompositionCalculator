@@ -20,8 +20,8 @@
 }
 
 .profile-img img {
-    width: 70%;
-    height: 100%;
+    width: 20rem;
+    height: auto;
 }
 
 .profile-img .file {

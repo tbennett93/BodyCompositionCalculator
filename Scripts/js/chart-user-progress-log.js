@@ -50,7 +50,7 @@
     });
 
 
-    function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
+    function Buil dChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
         var bodyFatColour = "rgba(247, 108, 108, 1)";
         var weightColour = "rgba(55, 71, 133,1)";
         var bodyFatGoalColour = "rgba(247, 108, 108, 0.3)";

@@ -9,5 +9,8 @@ namespace BodyCompositionCalculator.Models.ViewModels
     {
         public UserProfile UserProfile { get; set; }
         public string HeightToDisplay { get; set; }
+        public string Photo { get; set; }
+        public HttpPostedFileBase PhotoUpload { get; set; }
+
     }
 }

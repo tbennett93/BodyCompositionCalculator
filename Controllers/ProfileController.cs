@@ -33,6 +33,8 @@ namespace BodyCompositionCalculator.Controllers
                 return RedirectToAction("Edit");
 
 
+
+
             var userId = userProfile.Id;
             string heightToDisplay = "";
             string heightUnit = _context.UserProfiles.Where(m=>m.Id==userId).Select(m=>m.HeightUnit.Name).SingleOrDefault();
@@ -55,7 +57,8 @@ namespace BodyCompositionCalculator.Controllers
                     Include(m => m.WeightUnit).
                     Include(m => m.ActivityLevel).
                     ToList().
-                    SingleOrDefault(m => m.Id == userId)
+                    SingleOrDefault(m => m.Id == userId),
+                Photo = Convert.ToBase64String(_context.UserPhotos.SingleOrDefault(m=>m.Id==userProfile.UserPhotoId).Photo) 
             };
 
             return View(viewModel);
@@ -194,6 +197,13 @@ namespace BodyCompositionCalculator.Controllers
 
             return val;
         }
-        
+
+        public ActionResult EditPhoto(ProfileViewModel profileViewModel)
+        {
+            PhotoManager photoManager = new PhotoManager();
+            photoManager.UploadProfilePhotoToDb(profileViewModel.PhotoUpload);
+            return RedirectToAction("Index");
+
+        }
     }
 }

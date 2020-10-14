@@ -15,5 +15,7 @@ namespace BodyCompositionCalculator.Models
         [Column("Photo",TypeName = "varbinary(max)")]
 
         public byte[] Photo { get; set; }
+
+
     }
 }

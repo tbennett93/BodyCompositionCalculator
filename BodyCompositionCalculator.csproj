@@ -375,6 +375,10 @@
     <Compile Include="Migrations\202009302141083_IncreaseDataSizeOfPhotoColumn.designer.cs">
       <DependentUpon>202009302141083_IncreaseDataSizeOfPhotoColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010142021599_AddPhotoNavPropertyToUserProfile.cs" />
+    <Compile Include="Migrations\202010142021599_AddPhotoNavPropertyToUserProfile.designer.cs">
+      <DependentUpon>202010142021599_AddPhotoNavPropertyToUserProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\CalculationBasis.cs" />
@@ -387,6 +391,7 @@
     <Compile Include="Models\Macros.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ActivityLevel.cs" />
+    <Compile Include="Models\PhotoManager.cs" />
     <Compile Include="Models\Sex.cs" />
     <Compile Include="Models\UserPhoto.cs" />
     <Compile Include="Models\UserProfile.cs" />
@@ -2615,6 +2620,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009302141083_IncreaseDataSizeOfPhotoColumn.resx">
       <DependentUpon>202009302141083_IncreaseDataSizeOfPhotoColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010142021599_AddPhotoNavPropertyToUserProfile.resx">
+      <DependentUpon>202010142021599_AddPhotoNavPropertyToUserProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

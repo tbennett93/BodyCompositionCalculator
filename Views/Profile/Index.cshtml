@@ -12,23 +12,67 @@
     </head>
     <h2>Profile</h2>
 
-    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-    </svg>
-    use this icon if possible as from bootstrap and looser license. if deciding to use, remove reference in about
-
     <div class="container emp-profile">
-        <div class="row">
-            <div class="col-md-4">
+        <div class="row justify-content-center">
+            <div class="col-md-4 ">
                 <hr />
+                @using (Html.BeginForm("EditPhoto", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="profile-img   align-content-center">
+                        <div class="mb-5 ">
+                            @{
+                                if(@Model.Photo!=null){
+                                var imgSrc = "'" + String.Format("data:image/jpg;base64,{0}", Model.Photo) + "'";
+                        var img = new HtmlString(String.Format("<img class='img-thumbnail' src={0}/>", imgSrc));
+                        @img
+                    }
+                                else
+                                {
+                                                
+                                    <svg
+                                        viewBox="0 0 100.74507 91.428239"
+                                        height="auto"
+                                        width="75%">
 
-                <div class="profile-img">
-                    <img src="~/Content/images/user-alt-solid.svg" alt="" />
-                    <div class="file btn btn-lg btn-cust-4">
-                        Change Photo
-                        <input type="file" name="file" />
+                                        <g transform="translate(-52.841071,-26.382739)"
+                                           id="layer1"
+                                           inkscape:groupmode="layer"
+                                           inkscape:label="Layer 1">
+                                            <g transform="matrix(8.3954222,0,0,7.6190198,36.050227,11.144699)"
+                                               id="g21"
+                                               style="fill: currentColor">
+                                                <path fill-rule="evenodd"
+                                                      d="m 13,14 c 0,0 1,0 1,-1 0,-1 -1,-4 -6,-4 -5,0 -6,3 -6,4 0,1 1,1 1,1 z M 3.005,13.056 V 13.054 Z M 3.022,13 h 9.956 a 0.274,0.274 0 0 0 0.014,-0.002 L 13,12.996 C 12.999,12.75 12.846,12.01 12.168,11.332 11.516,10.68 10.289,10 8,10 5.71,10 4.484,10.68 3.832,11.332 3.154,12.01 3.002,12.75 3,12.996 A 1.05,1.05 0 0 0 3.022,13 Z m 9.974,0.056 V 13.054 Z M 8,7 A 2,2 0 1 0 8,3 2,2 0 0 0 8,7 Z m 3,-2 a 3,3 0 1 1 -6,0 3,3 0 0 1 6,0 z"
+                                                      id="path10"/>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                }
+
+                            }
+
+                        </div>
+
+                        <div class="file btn btn-lg btn-cust-4 mb-0">
+                            Choose Photo
+                            <input type="file" name="PhotoUpload"/>
+                        </div>
+
+                        <div class="row justify-content-center mt-0">
+                            <div class="edit-profile-container ">
+                                <div class="col ">
+                                    <button type="submit" class="btn btn-cust-1 ">Save</button>
+
+                                    @*@Html.ActionLink("Save Photo", "Edit", new {controller = "Profile"}, new {@class = "btn  btn-cust-1 "})*@
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <container class="row justify-content-center mt-0">
+                        </container>
+
                     </div>
-                </div>
+                }
             </div>
 
             <div class="col-md-8">
@@ -118,8 +162,6 @@
                         </div>
 
                         <hr/>
-                        *add validation on forms containing drop down boxes and don't allow them to be submitted if a reserved value isnt used
-                        *add profile pictures
                         <div class="row">
                             <div class="edit-profile-container">
                                 <div class="col">
@@ -127,7 +169,6 @@
                                 </div>
                             </div>
                         </div>
-                        change text colour to match the button and align button left again
                     </div>
                 </div>
             </div>

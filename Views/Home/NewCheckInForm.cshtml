@@ -82,7 +82,7 @@
         else
         {
             //weight input
-            <div class="form-group row mb-2">
+            <div class="form-group row">
                 <label for="weightInputA" class="col-form-label col-12 col-sm-2" for="weightInputBox">Weight</label>
                 <div class="form-inline form-group col-12 col-sm-6" id="weightInputBox">
                     @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-11", @id = "weightInputA", @min = "0", Value = weightA })
@@ -99,11 +99,10 @@
 
 
         //BF input
-        <div class="form-group row">
-            <label for="bodyFatField" class="col-form-label col-2 text-no" for="date">Body Fat</label>
-            <div id="date" class="form-group  col-sm-6 col-md-4  input-group">
-                @Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-2", @min = "0", @max = "100" })
-
+        <div class="form-group row mb-0">
+            <label for="bodyFatField" class="col-form-label col-12 col-sm-2" >Body Fat</label>
+            <div id="bodyFatField" class="form-group  col-12 col-sm-6  input-group">
+                @Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-11", @min = "0", @max = "100" })
                 <div class="form-row">
                     <div class="form-group form-inline">
                         <p class="form-control">%</p>
@@ -113,27 +112,36 @@
             </div>
         </div>
 
+        <div class="form-group row">
+            <label  class="col-form-label col-12 col-sm-2" for="photo">Photo</label>
+            <div id="photo" class="form-group  col-12 col-sm-6 custom-file">
+                <div class="col-11">
+                    <input type="file" name="Photo" class="custom-file-input form-control" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+                @*@Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-2", @min = "0", @max = "100" })*@
+
+            </div>
+            @Html.ValidationMessageFor(m => m.Photo)
+
+        </div>
 
 
-        @*<dl>
-            <dt>
-                <label asp-for="FileUpload.FormFile"></label>
-            </dt>
-            <dd>
-                <input asp-for="FileUpload.FormFile" type="file">
-                <span asp-validation-for="FileUpload.FormFile"></span>
-            </dd>
-        </dl>
-        <input asp-page-handler="Upload" class="btn" type="submit" value="Upload" />*@
+  
+
+        @*<div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01"Name="Photo"
+                       aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
+        </div>*@
 
 
-
-        @Html.LabelFor(m => m.Photo)
-        @Html.TextBoxFor(m => m.Photo, new { type = "file" })
-        @Html.ValidationMessageFor(m => m.Photo)
-        <p>Select the image file to upload to the server</p>
-
-
+     
         @Html.HiddenFor(m => m.UserProgressLog.Id)
         @Html.HiddenFor(m => m.UserProgressLog.UserProfileId)
         @Html.HiddenFor(m => m.UserProgressLog.UserProfile)
@@ -160,6 +168,9 @@
 
 
         $(document).ready(function () {
+
+            document.querySelectorAll('.custom-file-input')
+                .forEach(el => el.addEventListener('change', e => e.target.parentElement.querySelector('.custom-file-label').innerText = e.target.files[0].name));
 
 
             $('#date.datepicker').datepicker({
