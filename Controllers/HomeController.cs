@@ -527,6 +527,8 @@ namespace BodyCompositionCalculator.Controllers
             }
             else
             {
+                var photoManager = new PhotoManager();
+
                 var progressLogId = _context.UserProgressLogs.SingleOrDefault(g =>
                     g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date).Id;
                 formUserProgressLog.UserProgressLog.Id = progressLogId;
@@ -536,6 +538,10 @@ namespace BodyCompositionCalculator.Controllers
                         SingleOrDefault(g => g.UserProfileId == userProfileId && g.Date == formUserProgressLog.UserProgressLog.Date))
                     .CurrentValues
                     .SetValues(formUserProgressLog.UserProgressLog);
+
+         
+
+
             }
             _context.SaveChanges();
                 
@@ -576,6 +582,7 @@ namespace BodyCompositionCalculator.Controllers
                 //_context.UserPhotos.Add(newPhoto);
                 //_context.SaveChanges();
                 formUserProgressLog.UserProgressLog.UserPhotoId = photoManager.UploadProgressPhotoToDb(formUserProgressLog.Photo); 
+
 
             }
 

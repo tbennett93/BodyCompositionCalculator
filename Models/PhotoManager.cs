@@ -47,9 +47,15 @@ namespace BodyCompositionCalculator.Models
             _context.SaveChanges();
             _context.UserProfiles.SingleOrDefault(m => m.Id == userProfileId).UserPhotoId = newPhoto.Id;
             _context.SaveChanges();
-            _context.UserPhotos.Remove(userProfilePhoto);
-            _context.SaveChanges();
+            DeletePhotoFromDb(userProfilePhoto.Id);
 
+        }
+
+        public void DeletePhotoFromDb(int id)
+        {
+            var photo = _context.UserPhotos.SingleOrDefault(m => m.Id == id);
+            _context.UserPhotos.Remove(photo);
+            _context.SaveChanges();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace BodyCompositionCalculator.Controllers
         }
 
         public ActionResult MyPhoto(int id)
-        {
+        {   
             var userId = Helper_Classes.UserHelpers.GetUserProfile().Id;
 
             var viewModel = new ViewPhotoViewModel();

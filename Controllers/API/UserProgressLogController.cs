@@ -171,8 +171,22 @@ namespace BodyCompositionCalculator.Controllers.API
             if (progressLogInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
+            var userPhotoId = progressLogInDb.UserPhotoId;
+
+
+
             _context.UserProgressLogs.Remove(progressLogInDb);
             _context.SaveChanges();
+
+            if (userPhotoId != null)
+            {
+                var photoManager = new PhotoManager();
+                photoManager.DeletePhotoFromDb((int)userPhotoId);
+                _context.SaveChanges();
+
+            }
+
+
         }
     }
 }

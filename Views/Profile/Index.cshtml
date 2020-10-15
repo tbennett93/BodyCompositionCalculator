@@ -23,8 +23,8 @@
                             @{
                                 if(@Model.Photo!=null){
                                 var imgSrc = "'" + String.Format("data:image/jpg;base64,{0}", Model.Photo) + "'";
-                        var img = new HtmlString(String.Format("<img class='img-thumbnail' src={0}/>", imgSrc));
-                        @img
+                                var img = new HtmlString(String.Format("<img class='img-thumbnail' src={0}/>", imgSrc));
+                                @img
                     }
                                 else
                                 {
