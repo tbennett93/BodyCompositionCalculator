@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using BodyCompositionCalculator.Helper_Classes.Extension_Classes;
 using BodyCompositionCalculator.Models;
 using BodyCompositionCalculator.Models.Calculation_Constants;
 using BodyCompositionCalculator.Models.ViewModels;
@@ -200,9 +202,13 @@ namespace BodyCompositionCalculator.Controllers
 
         public ActionResult EditPhoto(ProfileViewModel profileViewModel)
         {
-            PhotoManager photoManager = new PhotoManager();
-            photoManager.UploadProfilePhotoToDb(profileViewModel.PhotoUpload);
-            return RedirectToAction("Index");
+            if(profileViewModel.PhotoUpload != null & profileViewModel.PhotoUpload.IsImage())
+            {
+                PhotoManager photoManager = new PhotoManager();
+                photoManager.UploadProfilePhotoToDb(profileViewModel.PhotoUpload);
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
 
         }
     }

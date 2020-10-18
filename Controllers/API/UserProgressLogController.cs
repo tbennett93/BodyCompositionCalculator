@@ -65,7 +65,7 @@ namespace BodyCompositionCalculator.Controllers.API
         var imgSrc = "'" + String.Format("data:image/jpg;base64,{0}", dbPhoto) + "'";
         var img = new HtmlString(String.Format("<img class='img-thumbnail' src={0}/>", imgSrc));
             //var imgInline = new HtmlString(String.Format("<a href=\"\\Photo\\" + GetPhotoFromLogId(id) + "\" data-toggle=\"popover\" style=\"color: blue\"  data-trigger=\"hover touch\"  data-content=\"{0}\" data-html=\"true\">View</a>", img));
-            var imgInline = new HtmlString(String.Format("<a href=\"\\Tracker\\\\MyPhoto\\" + id + "\" data-toggle=\"popover\" style=\"color: blue\"  data-trigger=\"hover touch\"  data-content=\"{0}\" data-html=\"true\">View</a>", img));
+            var imgInline = new HtmlString(String.Format("<a href=\"\\Tracker\\MyPhoto\\" + id + "\" data-toggle=\"popover\" style=\"color: blue\"  data-trigger=\"hover touch\"  data-content=\"{0}\" data-html=\"true\">View</a>", img));
 
             return imgInline.ToString();
     }

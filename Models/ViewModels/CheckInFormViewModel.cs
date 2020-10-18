@@ -24,7 +24,6 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public bool IsBodyFatCalculation { get; set; }
         [RequiredIfBodyFatAsCalcBasis]
         public int? BodyFat { get; set; }
-
         public HttpPostedFileBase Photo { get; set; }
 
     }

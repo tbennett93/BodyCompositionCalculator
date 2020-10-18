@@ -202,6 +202,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper_Classes\Extension Classes\HttpPostedFileBaseExtensions.cs" />
     <Compile Include="Helper_Classes\UserHelpers.cs" />
     <Compile Include="Migrations\202007261429289_InitialBuild.cs" />
     <Compile Include="Migrations\202007261429289_InitialBuild.designer.cs">
@@ -383,6 +384,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\CalculationBasis.cs" />
     <Compile Include="Models\Calculation_Constants\CaloriesPerWeightUnit.cs" />
+    <Compile Include="Models\Calculation_Constants\FileSizes.cs" />
     <Compile Include="Models\Calculation_Constants\HeightUnits.cs" />
     <Compile Include="Models\Calculation_Constants\WeightUnits.cs" />
     <Compile Include="Models\Calculators.cs" />

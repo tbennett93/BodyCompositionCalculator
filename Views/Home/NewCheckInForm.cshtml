@@ -26,7 +26,7 @@
 
 
 
-    @using (Html.BeginForm("AddNewProgressLog", "Home",FormMethod.Post,new{ enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("AddNewProgressLog", "Home",FormMethod.Post,new{ enctype = "multipart/form-data" , @id="checkInForm"}))
     {
         //Date
         <div class="form-group row pb-0 mb-4">
@@ -114,6 +114,7 @@
 
         <div class="form-group row">
             <label  class="col-form-label col-12 col-sm-2" for="photo">Photo</label>
+         
             <div id="photo" class="form-group  col-12 col-sm-6 custom-file">
                 <div class="col-11">
                     <input type="file" name="Photo" class="custom-file-input form-control" id="customFile">
@@ -164,26 +165,51 @@
 
 
 <p class=" text-muted subtext form-text">*Weight unit can be changed in the profile screen</p>
-    <script>
 
 
-        $(document).ready(function () {
-
-            document.querySelectorAll('.custom-file-input')
-                .forEach(el => el.addEventListener('change', e => e.target.parentElement.querySelector('.custom-file-label').innerText = e.target.files[0].name));
+<script>
 
 
-            $('#date.datepicker').datepicker({
-                format: 'dd M yyyy',
-                todayBtn: true,
-                autoclose: true,
-                todayHighlight: true
-            });
+    $(document).ready(function () {
 
+        document.querySelectorAll('.custom-file-input')
+            .forEach(el => el.addEventListener('change', e => e.target.parentElement.querySelector('.custom-file-label').innerText = e.target.files[0].name));
+
+
+        $('#date.datepicker').datepicker({
+            format: 'dd M yyyy',
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: true
         });
 
-    </script>
-    @Scripts.Render("~/bundles/jqueryval")
+
+
+        $.validator.addMethod('filesize', function (value, element, param) {
+
+            var size = element.files[0].size;
+
+            size = size / 1024;
+            size = Math.round(size);
+            param = param * 1024;
+            return this.optional(element) || size <= param;
+
+        }, 'File size must be less than {0} mb');
+
+        $("#checkInForm").validate({
+            rules: {
+                Photo: {
+                    filesize: 4
+                }
+            }
+        });
+    });
+
+
+</script>
+    
+@Scripts.Render("~/bundles/jqueryval")
+
 
 </body>
 

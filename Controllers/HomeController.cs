@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Net;
 using BodyCompositionCalculator.Controllers.API;
+using BodyCompositionCalculator.Helper_Classes.Extension_Classes;
 using BodyCompositionCalculator.Models;
 using BodyCompositionCalculator.Models.Calculation_Constants;
 using BodyCompositionCalculator.Models.ViewModels;
@@ -564,7 +565,7 @@ namespace BodyCompositionCalculator.Controllers
                 return View("NewCheckInForm", formUserProgressLog);
             }
 
-            if (formUserProgressLog.Photo != null)
+            if (formUserProgressLog.Photo != null && formUserProgressLog.Photo.IsImage() )
             {
                 PhotoManager photoManager = new PhotoManager();
                 
