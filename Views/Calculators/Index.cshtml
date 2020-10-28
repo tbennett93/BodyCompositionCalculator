@@ -241,137 +241,143 @@
 @*<script src="https://unpkg.com/@("@")popperjs/core@("@")2.5.2/dist/umd/popper.min.js"></script>*@
 @Scripts.Render("~/bundles/bootstrap")
 
+
+
 <script>
 
-    $('#abdominaljpm').popover('enable');  
-    $('#pectoraljpm').popover('enable');  
-    $('#thighjpm').popover('enable');  
+    $(document).ready(function() {
 
-    $('#suprajpf').popover('enable');  
-    $('#tricepjpf').popover('enable');  
-    $('#thighjpf').popover('enable');  
+        $('#abdominaljpm').popover('enable');
+        $('#pectoraljpm').popover('enable');
+        $('#thighjpm').popover('enable');
 
-    $('#tricepdwm').popover('enable');  
-    $('#bicepdwm').popover('enable');  
-    $('#subsdwm').popover('enable');  
-    $('#supradwm').popover('enable');  
+        $('#suprajpf').popover('enable');
+        $('#tricepjpf').popover('enable');
+        $('#thighjpf').popover('enable');
 
-    $('#tricepdwf').popover('enable');  
-    $('#bicepdwf').popover('enable');  
-    $('#subsdwf').popover('enable');  
-    $('#supradwf').popover('enable');  
+        $('#tricepdwm').popover('enable');
+        $('#bicepdwm').popover('enable');
+        $('#subsdwm').popover('enable');
+        $('#supradwm').popover('enable');
 
-
-
-
-
-    //Jackson Pollock Male
-    $("#jpmcCalcBtn").on("click", function () {
-        var age = parseInt($("#jpmcAge").val());
-        var ab = parseInt($("#jpmcAb").val());
-        var pec = parseInt($("#jpmcPec").val());
-        var thigh = parseInt($("#jpmcThigh").val());
-        var sumSkinfolds = ab + pec + thigh;
-        var bodyDensity = (1.10938 - (0.0008267 * sumSkinfolds)) + (0.0000016 * Math.sqrt(sumSkinfolds)) - (0.0002574 * age);
-        var bf = Math.round((495 / bodyDensity) - 450);
-        $("#jpmcCalcField").val(bf + "%");
-    });
-
-    //Jackson Pollock Female
-    $("#jpfcCalcBtn").on("click", function () {
-        var age = parseInt($("#jpfcAge").val());
-        var supra = parseInt($("#jpfcSupra").val());
-        var tri = parseInt($("#jpfcTri").val());
-        var thigh = parseInt($("#jpfcThigh").val());
-        var sumSkinfolds = supra + tri + thigh;
-        var bodyDensity = (1.0994921 - (0.0009929 * sumSkinfolds)) + (0.0000023  * Math.sqrt(sumSkinfolds)) - (0.0002574 * age);
-        var bf = Math.round((495 / bodyDensity) - 450);
-        $("#jpfcCalcField").val(bf + "%");
-    });
+        $('#tricepdwf').popover('enable');
+        $('#bicepdwf').popover('enable');
+        $('#subsdwf').popover('enable');
+        $('#supradwf').popover('enable');
 
 
+        //Jackson Pollock Male
+        $("#jpmcCalcBtn").on("click",
+            function() {
+                var age = parseInt($("#jpmcAge").val());
+                var ab = parseInt($("#jpmcAb").val());
+                var pec = parseInt($("#jpmcPec").val());
+                var thigh = parseInt($("#jpmcThigh").val());
+                var sumSkinfolds = ab + pec + thigh;
+                var bodyDensity = (1.10938 - (0.0008267 * sumSkinfolds)) + (0.0000016 * Math.sqrt(sumSkinfolds)) - (0.0002574 * age);
+                var bf = Math.round((495 / bodyDensity) - 450);
+                $("#jpmcCalcField").val(bf + "%");
+            });
 
-    //Durnin Womersley Male
-    $("#dwmcCalcBtn").on("click", function() {
-        var age = parseInt($("#dwmcAge").val());
-        var supra = parseInt($("#dwmcSupra").val());
-        var tri = parseInt($("#dwmcTri").val());
-        var bi = parseInt($("#dwmcBi").val());
-        var sub = parseInt($("#dwmcSub").val());
-        var varA;
-        var varB;
+        //Jackson Pollock Female
+        $("#jpfcCalcBtn").on("click",
+            function() {
+                var age = parseInt($("#jpfcAge").val());
+                var supra = parseInt($("#jpfcSupra").val());
+                var tri = parseInt($("#jpfcTri").val());
+                var thigh = parseInt($("#jpfcThigh").val());
+                var sumSkinfolds = supra + tri + thigh;
+                var bodyDensity = (1.0994921 - (0.0009929 * sumSkinfolds)) + (0.0000023 * Math.sqrt(sumSkinfolds)) - (0.0002574 * age);
+                var bf = Math.round((495 / bodyDensity) - 450);
+                $("#jpfcCalcField").val(bf + "%");
+            });
 
-        if (age < 17) {
-            varA = 1.1533;
-            varB = 0.0643;
-        };
-        if (age >= 17 && age <= 19) {
-            varA = 1.1620;
-            varB = 0.0630;
-        };
-        if (age >= 20 && age <= 29) {
-            varA = 1.1631;
-            varB = 0.0632;
-        };
-        if (age >= 30 && age <= 39) {
-            varA = 1.1422;
-            varB = 0.0544;
-        };
-        if (age >= 40 && age <= 49) {
-            varA = 1.1620;
-            varB = 0.0700;
-        };
-        if (age >= 50) {
-            varA = 1.1715;
-            varB = 0.0779;
-        };
 
-        var logSkinfolds = Math.log10(supra + tri + bi + sub);
-        var bodyDensity = varA - (varB * logSkinfolds);
+        //Durnin Womersley Male
+        $("#dwmcCalcBtn").on("click",
+            function() {
+                var age = parseInt($("#dwmcAge").val());
+                var supra = parseInt($("#dwmcSupra").val());
+                var tri = parseInt($("#dwmcTri").val());
+                var bi = parseInt($("#dwmcBi").val());
+                var sub = parseInt($("#dwmcSub").val());
+                var varA;
+                var varB;
 
-        var bf = Math.round((495 / bodyDensity) - 450);
-        $("#dwmcCalcField").val(bf + "%");
-    });
+                if (age < 17) {
+                    varA = 1.1533;
+                    varB = 0.0643;
+                };
+                if (age >= 17 && age <= 19) {
+                    varA = 1.1620;
+                    varB = 0.0630;
+                };
+                if (age >= 20 && age <= 29) {
+                    varA = 1.1631;
+                    varB = 0.0632;
+                };
+                if (age >= 30 && age <= 39) {
+                    varA = 1.1422;
+                    varB = 0.0544;
+                };
+                if (age >= 40 && age <= 49) {
+                    varA = 1.1620;
+                    varB = 0.0700;
+                };
+                if (age >= 50) {
+                    varA = 1.1715;
+                    varB = 0.0779;
+                };
 
-    //Durnin Womersley Female
-    $("#dwfcCalcBtn").on("click", function() {
-        var age = parseInt($("#dwfcAge").val());
-        var supra = parseInt($("#dwfcSupra").val());
-        var tri = parseInt($("#dwfcTri").val());
-        var bi = parseInt($("#dwfcBi").val());
-        var sub = parseInt($("#dwfcSub").val());
-        var varA;
-        var varB;
+                var logSkinfolds = Math.log10(supra + tri + bi + sub);
+                var bodyDensity = varA - (varB * logSkinfolds);
 
-        if (age < 17) {
-            varA = 1.1369;
-            varB = 0.0598;
-        };
-        if (age >= 17 && age <= 19) {
-            varA = 1.1549;
-            varB = 0.0678;
-        };
-        if (age >= 20 && age <= 29) {
-            varA = 1.1599;
-            varB = 0.0717;
-        };
-        if (age >= 30 && age <= 39) {
-            varA = 1.1423;
-            varB = 0.0632;
-        };
-        if (age >= 40 && age <= 49) {
-            varA = 1.1333;
-            varB = 0.0612;
-        };
-        if (age >= 50) {
-            varA = 1.1339;
-            varB = 0.0645;
-        };
+                var bf = Math.round((495 / bodyDensity) - 450);
+                $("#dwmcCalcField").val(bf + "%");
+            });
 
-        var logSkinfolds = Math.log10(supra + tri + bi + sub);
-        var bodyDensity = varA - (varB * logSkinfolds);
-        var bf = Math.round((495 / bodyDensity) - 450);
-        $("#dwfcCalcField").val(bf + "%");
+        //Durnin Womersley Female
+        $("#dwfcCalcBtn").on("click",
+            function() {
+                var age = parseInt($("#dwfcAge").val());
+                var supra = parseInt($("#dwfcSupra").val());
+                var tri = parseInt($("#dwfcTri").val());
+                var bi = parseInt($("#dwfcBi").val());
+                var sub = parseInt($("#dwfcSub").val());
+                var varA;
+                var varB;
+
+                if (age < 17) {
+                    varA = 1.1369;
+                    varB = 0.0598;
+                };
+                if (age >= 17 && age <= 19) {
+                    varA = 1.1549;
+                    varB = 0.0678;
+                };
+                if (age >= 20 && age <= 29) {
+                    varA = 1.1599;
+                    varB = 0.0717;
+                };
+                if (age >= 30 && age <= 39) {
+                    varA = 1.1423;
+                    varB = 0.0632;
+                };
+                if (age >= 40 && age <= 49) {
+                    varA = 1.1333;
+                    varB = 0.0612;
+                };
+                if (age >= 50) {
+                    varA = 1.1339;
+                    varB = 0.0645;
+                };
+
+                var logSkinfolds = Math.log10(supra + tri + bi + sub);
+                var bodyDensity = varA - (varB * logSkinfolds);
+                var bf = Math.round((495 / bodyDensity) - 450);
+                $("#dwfcCalcField").val(bf + "%");
+            });
+
     });
 
 

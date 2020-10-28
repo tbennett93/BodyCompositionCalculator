@@ -212,7 +212,7 @@
                                 targetBfText.prop('readonly', bool);
                             }
 
-                            if (calculationBasis.val() == "Weight" && !checked) {
+                            if (calculationBasis.val() === "Weight" && !checked) {
                                 setBfReadOnly(true);
                             } else {
                                 setBfReadOnly(false);
@@ -240,9 +240,9 @@
                                 targetWeightB.prop('readonly', bool);
                             }
 
-                            if (calculationBasis.val() == "Weight") {
+                            if (calculationBasis.val() === "Weight") {
                                 changeTargetWeight(false);
-                            } else if (calculationBasis.val() == "Body Fat") {
+                            } else if (calculationBasis.val() === "Body Fat") {
                                 changeTargetWeight(true);
                             }
                         }
@@ -292,7 +292,7 @@
                         greyCheckBox(startDate);
 
 
-                        if (startDate.getFullYear() == 0) {
+                        if (startDate.getFullYear() === 0) {
                             $('#startDate').datepicker('clearDates');
                             $('#endDate').datepicker('clearDates');
                         }

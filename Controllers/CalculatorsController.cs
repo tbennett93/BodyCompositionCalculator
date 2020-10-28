@@ -5,7 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace BodyCompositionCalculator.Controllers
-{
+
+
+
+{   
+    [Authorize]
     public class CalculatorsController : Controller
     {
         // GET: Calculators
