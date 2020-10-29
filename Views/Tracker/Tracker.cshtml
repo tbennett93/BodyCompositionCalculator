@@ -65,7 +65,10 @@
 
 
             var table = $('#dataTable').DataTable({
-      
+
+                drawCallback: function() {
+                    $('[data-toggle="popover"]').popover();
+                }  ,
                 ajax: {
                     url: "/api/UserProgressLog/" + @Model.Id,
                     //This must call the GET at the above URL, which allows access to an array of customers, of which the types can be used as per the below
@@ -94,11 +97,12 @@
                     },
                     { data: "BodyFat" },
                     {
+                        
                         data: "UserPhoto",
                         orderable: false,
                         render: function (data) {
-
-                            $('[data-toggle="popover"]').popover();
+                      
+                            //$('[data-toggle="popover"]').popover();
                             return data;
                         }
                     },

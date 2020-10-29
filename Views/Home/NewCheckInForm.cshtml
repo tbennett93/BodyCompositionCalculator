@@ -26,7 +26,7 @@
 
 
 
-    @using (Html.BeginForm("AddNewProgressLog", "Home",FormMethod.Post,new{ enctype = "multipart/form-data" , @id="checkInForm"}))
+    @using (Html.BeginForm("AddNewProgressLog", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id = "checkInForm" }))
     {
         //Date
         <div class="form-group row pb-0 mb-4">
@@ -34,11 +34,13 @@
             @*<div id="date" class="form-group  col-12 col-sm-6 col-md-4 col-lg-3 date datepicker input-group pb-0 mb-0">*@
             <label for="dateField" class="col-form-label col-12 col-sm-2" for="date">Date</label>
             <div class="col-12 col-sm-6 col-xl-6 date datepicker input-group " id="date">
-                @Html.TextBoxFor(model => model.UserProgressLog.Date, "{0: dd MMM yyyy}", new { @id = "dateField", @class = "form-control col-11 mr-0 pr-0" })
-                <div class="input-group-append input-group-addon ml-0 pl-0 col-1 ">
-                    <span class="input-group-text">
-                        <span class="fa fa-calendar"></span>
-                    </span>
+                <div class="row">
+                    @Html.TextBoxFor(model => model.UserProgressLog.Date, "{0: dd MMM yyyy}", new { @id = "dateField", @class = "form-control col-11 mr-0 pr-0" })
+                    <div class="input-group-append input-group-addon ml-0 pl-0 col-1 ">
+                        <span class="input-group-text">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
                 </div>
                 @Html.ValidationMessageFor(m => m.UserProgressLog.Date)
             </div>
@@ -61,21 +63,31 @@
 
             //weight input
             <div class="form-group row">
-                <label for="weightInputA" class="col-form-label col-2" for="weightInputBox">Weight</label>
+                <label for="weightInputA" class="col-form-label col-sm-2" for="weightInputBox">Weight</label>
                 <div class="col-sm-6 " id="weightInputBox">
-                    <div class="form-inline">
-                        @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-5", @id = "weightInputA", @min = "0", Value = weightA })
-                        <label for="weightInputA" class=" form-control-plaintext col-1 text-wrap ">st</label>
-
-
-                        @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-5", @id = "weightInputB", @min = "0", @max = "13", Value = weightB })
-                        <label for="weightInputB" class=" form-control-plaintext col-1 text-wrap" disabled="disabled">lbs</label>
+                    <div class="row">
+                        <div class="col-6 ">
+                            <div class="row">
+                                @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-11", @id = "weightInputA", @min = "0", Value = weightA, @type = "number" })
+                                <label for="weightInputA" class=" form-control-plaintext col-1 text-wrap ">st</label>
+                            </div>
+                            <div class="row">
+                                @Html.ValidationMessageFor(m => m.WeightInputA)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-11", @id = "weightInputB", @min = "0", @max = "13", Value = weightB, @type = "number" })
+                                <label for="weightInputB" class=" form-control-plaintext col-1 text-wrap" disabled="disabled">lbs</label>
+                            </div>
+                            <div class="row">
+                                @Html.ValidationMessageFor(m => m.WeightInputB)
+                            </div>
+                        </div>
                     </div>
 
-
-                    @Html.ValidationMessageFor(m => m.WeightInputA)
-                    @Html.ValidationMessageFor(m => m.WeightInputB)
                 </div>
+
             </div>
 
         }
@@ -85,64 +97,79 @@
             <div class="form-group row">
                 <label for="weightInputA" class="col-form-label col-12 col-sm-2" for="weightInputBox">Weight</label>
                 <div class="form-inline form-group col-12 col-sm-6" id="weightInputBox">
-                    @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-11", @id = "weightInputA", @min = "0", Value = weightA })
-                    @Html.HiddenFor(m => m.WeightInputB, new { Value = 0 })
-                    <label for="weightInputA" class="form-control form-control-plaintext  text-wrap col-1 ">@Model.WeightUnit</label>
+                    <div class="row">
+                        @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-11", @id = "weightInputA", @min = "0", Value = weightA, @type = "number" })
+                        <label for="weightInputA" class="form-control form-control-plaintext  text-wrap col-1 ">@Model.WeightUnit</label>
+
+                    </div>
+                    <div class="row">
+                        @Html.HiddenFor(m => m.WeightInputB, new { Value = 0 })
+                    </div>
                 </div>
 
 
-                @Html.ValidationMessageFor(m => m.WeightInputA)
-                @Html.ValidationMessageFor(m => m.WeightInputB)
             </div>
 
+            <div style="margin-top:-1rem" class="mb-4">
+
+                @Html.ValidationMessageFor(m => m.WeightInputA)
+
+            </div>
         }
 
 
         //BF input
         <div class="form-group row mb-0">
             <label for="bodyFatField" class="col-form-label col-12 col-sm-2" >Body Fat</label>
-            <div id="bodyFatField" class="form-group  col-12 col-sm-6  input-group">
-                @Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-11", @min = "0", @max = "100" })
-                <div class="form-row">
-                    <div class="form-group form-inline">
-                        <p class="form-control">%</p>
+            <div id="bodyFatField" class="form-group  col-12 col-sm-6 ">
+        
+                <div class="row">
+                    @Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-11", @min = "0", @max = "100", @type = "number" })
+                    <div class="col-1 form-control">
+                        %
                     </div>
                 </div>
-                @Html.ValidationMessageFor(m => m.BodyFat)
+                <div class="row">
+                    @Html.ValidationMessageFor(m => m.BodyFat)
+                </div>
             </div>
         </div>
+
 
         <div class="form-group row">
-            <label  class="col-form-label col-12 col-sm-2" for="photo">Photo</label>
-         
+            <label class="col-form-label col-12 col-sm-2" for="photo">Photo</label>
+
             <div id="photo" class="form-group  col-12 col-sm-6 custom-file">
-                <div class="col-11">
-                    <input type="file" name="Photo" class="custom-file-input form-control" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+                <div class="row">
+                    <div class="col-11">
+                        <input type="file" name="Photo" class="custom-file-input form-control" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.ValidationMessageFor(m => m.Photo)
                 </div>
                 @*@Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-2", @min = "0", @max = "100" })*@
-
             </div>
-            @Html.ValidationMessageFor(m => m.Photo)
 
         </div>
 
 
-  
+
 
         @*<div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-            </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01"Name="Photo"
-                       aria-describedby="inputGroupFileAddon01">
-                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-            </div>
-        </div>*@
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"Name="Photo"
+                           aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>*@
 
 
-     
+
         @Html.HiddenFor(m => m.UserProgressLog.Id)
         @Html.HiddenFor(m => m.UserProgressLog.UserProfileId)
         @Html.HiddenFor(m => m.UserProgressLog.UserProfile)
@@ -160,55 +187,55 @@
         </container>
 
     }
-    
 
 
 
-<p class=" text-muted subtext form-text">*Weight unit can be changed in the profile screen</p>
+
+    <p class=" text-muted subtext form-text">*Weight unit can be changed in the profile screen</p>
 
 
-<script>
+    <script>
 
 
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        document.querySelectorAll('.custom-file-input')
-            .forEach(el => el.addEventListener('change', e => e.target.parentElement.querySelector('.custom-file-label').innerText = e.target.files[0].name));
-
-
-        $('#date.datepicker').datepicker({
-            format: 'dd M yyyy',
-            todayBtn: true,
-            autoclose: true,
-            todayHighlight: true
-        });
+            document.querySelectorAll('.custom-file-input')
+                .forEach(el => el.addEventListener('change', e => e.target.parentElement.querySelector('.custom-file-label').innerText = e.target.files[0].name));
 
 
+            $('#date.datepicker').datepicker({
+                format: 'dd M yyyy',
+                todayBtn: true,
+                autoclose: true,
+                todayHighlight: true
+            });
 
-        $.validator.addMethod('filesize', function (value, element, param) {
 
-            var size = element.files[0].size;
 
-            size = size / 1024;
-            size = Math.round(size);
-            param = param * 1024;
-            return this.optional(element) || size <= param;
+            $.validator.addMethod('filesize', function (value, element, param) {
 
-        }, 'File size must be less than {0} mb');
+                var size = element.files[0].size;
 
-        $("#checkInForm").validate({
-            rules: {
-                Photo: {
-                    filesize: 4
+                size = size / 1024;
+                size = Math.round(size);
+                param = param * 1024;
+                return this.optional(element) || size <= param;
+
+            }, 'File size must be less than {0} mb');
+
+            $("#checkInForm").validate({
+                rules: {
+                    Photo: {
+                        filesize: 4
+                    }
                 }
-            }
+            });
         });
-    });
 
 
-</script>
-    
-@Scripts.Render("~/bundles/jqueryval")
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
 
 
 </body>

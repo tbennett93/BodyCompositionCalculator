@@ -12,10 +12,12 @@ namespace BodyCompositionCalculator.Models.ViewModels
     {
         public UserProgressLog UserProgressLog { get; set; }
         [Required]
-        [DisplayName("weight")]
+        [DisplayName("weight field")]
+        [Range(0,10000)]
         public string WeightInputA { get; set; }
         [Required]
-        [DisplayName("weight")]
+        [DisplayName("weight field 2")]
+        [Range(0,13)]
         public string WeightInputB { get; set; }
         public string WeightUnit { get; set; }
         public string PageTitlePrefix { get; set; } = "New";
@@ -23,6 +25,7 @@ namespace BodyCompositionCalculator.Models.ViewModels
 
         public bool IsBodyFatCalculation { get; set; }
         [RequiredIfBodyFatAsCalcBasis]
+        [Range(0,100)]
         public int? BodyFat { get; set; }
         public HttpPostedFileBase Photo { get; set; }
 
