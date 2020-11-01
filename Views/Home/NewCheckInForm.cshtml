@@ -64,24 +64,36 @@
             //weight input
             <div class="form-group row">
                 <label for="weightInputA" class="col-form-label col-sm-2" for="weightInputBox">Weight</label>
-                <div class="col-sm-6 " id="weightInputBox">
+                <div class="col-sm-6 ml-0 pl-0" id="weightInputBox">
                     <div class="row">
                         <div class="col-6 ">
                             <div class="row">
-                                @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-11", @id = "weightInputA", @min = "0", Value = weightA, @type = "number" })
-                                <label for="weightInputA" class=" form-control-plaintext col-1 text-wrap ">st</label>
+                                <div class="col-8 m-0 ">
+                                    @Html.TextBoxFor(m => m.WeightInputA, new {@class = "form-control mr-0 pr-0", @id = "weightInputA",  Value = weightA, @type = "number"})
+                                </div>
+                                <div class="col m-0 p-0">
+                                    <label for="weightInputA" class="form-control-plaintext">st</label>
+                                </div>
                             </div>
                             <div class="row">
-                                @Html.ValidationMessageFor(m => m.WeightInputA)
+                                <div class="col-8">
+                                    @Html.ValidationMessageFor(m => m.WeightInputA)
+                                </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 ">
                             <div class="row">
-                                @Html.TextBoxFor(m => m.WeightInputB, new { @class = "form-control col-11", @id = "weightInputB", @min = "0", @max = "13", Value = weightB, @type = "number" })
-                                <label for="weightInputB" class=" form-control-plaintext col-1 text-wrap" disabled="disabled">lbs</label>
+                                <div class="col-8 m-0 ">
+                                    @Html.TextBoxFor(m => m.WeightInputB, new {@class = "form-control", @id = "weightInputB",  Value = weightB, @type = "number"})
+                                </div>
+                                <div class="col m-0 p-0">
+                                    <label for="weightInputB" class="form-control-plaintext">lbs</label>
+                                </div>
                             </div>
                             <div class="row">
-                                @Html.ValidationMessageFor(m => m.WeightInputB)
+                                <div class="col-8">
+                                    @Html.ValidationMessageFor(m => m.WeightInputB)
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,25 +108,26 @@
             //weight input
             <div class="form-group row">
                 <label for="weightInputA" class="col-form-label col-12 col-sm-2" for="weightInputBox">Weight</label>
-                <div class="form-inline form-group col-12 col-sm-6" id="weightInputBox">
+                <div class=" form-group col-12 col-sm-6 pl-0" id="weightInputBox">
                     <div class="row">
-                        @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control col-11", @id = "weightInputA", @min = "0", Value = weightA, @type = "number" })
-                        <label for="weightInputA" class="form-control form-control-plaintext  text-wrap col-1 ">@Model.WeightUnit</label>
+                        <div class="col">
+                            @Html.TextBoxFor(m => m.WeightInputA, new { @class = "form-control", @id = "weightInputA", Value = weightA, @type = "number" })
+                        </div>
+                        <div class="col text-left">
+                            <label for="weightInputA" class="form-control form-control-plaintext  text-wrap ">@Model.WeightUnit</label>
+                        </div>
 
                     </div>
                     <div class="row">
-                        @Html.HiddenFor(m => m.WeightInputB, new { Value = 0 })
+                        <div class="col">
+                            @Html.ValidationMessageFor(m => m.WeightInputA)
+                        </div>
                     </div>
                 </div>
-
-
+                @Html.HiddenFor(m => m.WeightInputB, new { Value = 0 })
             </div>
 
-            <div style="margin-top:-1rem" class="mb-4">
-
-                @Html.ValidationMessageFor(m => m.WeightInputA)
-
-            </div>
+      
         }
 
 
@@ -124,7 +137,7 @@
             <div id="bodyFatField" class="form-group  col-12 col-sm-6 ">
         
                 <div class="row">
-                    @Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-11", @min = "0", @max = "100", @type = "number" })
+                    @Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-11", @type = "number" })
                     <div class="col-1 form-control">
                         %
                     </div>
