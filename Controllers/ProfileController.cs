@@ -60,8 +60,13 @@ namespace BodyCompositionCalculator.Controllers
                     Include(m => m.ActivityLevel).
                     ToList().
                     SingleOrDefault(m => m.Id == userId),
-                Photo = Convert.ToBase64String(_context.UserPhotos.SingleOrDefault(m=>m.Id==userProfile.UserPhotoId).Photo) 
+
             };
+
+            if(_context.UserPhotos.SingleOrDefault(m => m.Id == userProfile.UserPhotoId)?.Photo != null)
+                viewModel.Photo =
+                    Convert.ToBase64String(_context.UserPhotos.SingleOrDefault(m => m.Id == userProfile.UserPhotoId)?.Photo);
+
 
             return View(viewModel);
         }

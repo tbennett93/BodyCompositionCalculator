@@ -308,39 +308,40 @@
             </div>
         </div>
 
-@*<div class="col chart-container">*@
-<div class="card-body card shadow col mb-4" >
+        @*<div class="col chart-container">*@
+        <div class="card-body card shadow col mb-4">
 
 
-    <div style="   position: relative;height: 25rem;"> <canvas id="progressGraphData"></canvas></div>
-    
+            <div style="   position: relative;height: 25rem;"> <canvas id="progressGraphData"></canvas></div>
 
-    <div class="container row justify-content-around">
-        <div class="col-md-3 col-5 " >
-            <div class="btn-group-toggle row justify-content-center" data-toggle="buttons">
-                <label class="btn btn-outline-cust-5  btn-sm active col-12 col-md-6">
-                    <input type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked=checked checked=checked/>Goal Data
-                </label>
-                <label class="btn btn-outline-cust-5  btn-sm col-12 col-md-6">
-                    <input type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off" />All Data
-                </label>
+
+            <div class="container row justify-content-around">
+                <div class="col-md-3 col-5 ">
+                    <div class="btn-group-toggle row justify-content-center" data-toggle="buttons">
+                        <label class="btn btn-outline-cust-5  btn-sm active col-12 col-md-6">
+                            <input type="radio" name="options" id="buttonDiplayGraphRelevant" autocomplete="off" checked=checked checked=checked checked=checked checked=checked />Goal Data
+                        </label>
+                        <label class="btn btn-outline-cust-5  btn-sm col-12 col-md-6">
+                            <input type="radio" name="options" id="buttonDisplayGraphAll" autocomplete="off" />All Data
+                        </label>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3 col-5    ">
+                    <div class="btn-group-toggle row justify-content-center">
+                        <label class="btn btn-cust-4  btn-sm  ">
+                            <input id="buttonToggleBodyFat" type='checkbox' autocomplete="off" data-toggle="button" /><span id="buttonToggleBodyFatText">Display Body Fat %</span>
+                            @*<label id='buttonToggleBodyFatText' for="buttonToggleBodyFat">Display Body Fat %</label>*@
+
+                        </label>
+                    </div>
+                </div>
+
             </div>
 
         </div>
-
-
-        <div class="col-md-3 col-5    ">
-            <div class="btn-group-toggle row justify-content-center">
-                <label class="btn btn-cust-4  btn-sm  ">
-                    <input id="buttonToggleBodyFat" type='checkbox' autocomplete="off" data-toggle="button"/><span id="buttonToggleBodyFatText">Display Body Fat %</span>
-                    @*<label id='buttonToggleBodyFatText' for="buttonToggleBodyFat">Display Body Fat %</label>*@
-
-                </label></div>
-        </div>
-
-    </div>
-
-</div>
 
 
 
@@ -365,18 +366,19 @@
 
         <script src="~/Scripts/js/chart-user-progress-log.js">
         </script>
-
+        
         <script src="https://code.jquery.com/jquery-3.3.1.min.js">
         </script>
 
 
         <script>
 
+
             $(document).ready(function() {
 
-            if ('@Model.TrackBodyFat' == "True") {
-            $("#buttonToggleBodyFat").click();
-            };
+                if ('@Model.TrackBodyFat' == "True") {
+                    $("#buttonToggleBodyFat").click();
+                };
 
             });
 

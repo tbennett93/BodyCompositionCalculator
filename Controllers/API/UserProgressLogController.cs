@@ -127,9 +127,9 @@ namespace BodyCompositionCalculator.Controllers.API
                         WeightInKg = Math.Floor(
                                          (double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) +
                                      "st" +
-                                     (((double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) -
+                                     Math.Round((((double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) -
                                       Math.Floor((double) (userProgressLog.WeightInKg * weightUnitMultiplier) /
-                                                 6.35029318)) * 14 + "lbs",
+                                                 6.35029318)) * 14) + "lbs",
                         //Photo = userProgressLog.UserPhotoId,
                         //UserPhoto = subphoto.Id,
                         UserPhoto = subphoto.Photo,
