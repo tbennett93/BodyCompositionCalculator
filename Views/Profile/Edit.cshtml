@@ -57,24 +57,26 @@
                 new { @class = "form-control col" }
                 )
 
-            @Html.ValidationMessageFor(c => c.UserProfile.Sex)
         </div>
+        @Html.ValidationMessageFor(c => c.UserProfile.Sex)
 
         <div class="form-group pl-0">
                 <label class="col-12">Height</label>
-                <div class="form-group form-inline col-sm-7 col-md-5 col-lg-4 col-xl-3 col-11">
-                    @Html.TextBoxFor(m => m.HeightInputA, new { @class = "form-control col", @id = "heightInputA", @min = "0" })
-                    @Html.TextBoxFor(m => m.HeightInputB, new { @class = "form-control col", @id = "heightInputB", @min = "0" })
-                    @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
-                        new SelectList(Model.HeightUnits, "Id", "Name"),
-                        "Select Height Unit",
-                        new { @class = "form-control col", @id = "selectorHeightUnit" }
-                        )
-                </div>
+            <div class="form-group form-inline col-sm-7 col-md-5 col-lg-4 col-xl-3 col-11">
+                @Html.TextBoxFor(m => m.HeightInputA, new { @class = "form-control col", @id = "heightInputA", @min = "0" })
+                @Html.TextBoxFor(m => m.HeightInputB, new { @class = "form-control col", @id = "heightInputB", @min = "0" })
+                @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
+                    new SelectList(Model.HeightUnits, "Id", "Name"),
+                    "Select Height Unit",
+                    new { @class = "form-control col", @id = "selectorHeightUnit" }
+                    )
+                @Html.ValidationMessageFor(c => c.HeightInputA)
+                @Html.ValidationMessageFor(c => c.HeightInputB)
+                @Html.ValidationMessageFor(c => c.UserProfile.HeightUnit)
+            </div>
+  
         </div>
-        @Html.ValidationMessageFor(c => c.HeightInputA)
-        @Html.ValidationMessageFor(c => c.HeightInputB)
-        @Html.ValidationMessageFor(c => c.UserProfile.HeightUnit)
+    
 
         <div class="form-group col-sm-7 col-md-5 col-lg-4 col-xl-3 col-11">
             @Html.LabelFor(m => m.UserProfile.ActivityLevel) <span style="color:blue" data-popper-arrow id="activityInfo" data-html="true" data-trigger="hover touch" data-placement="top" data-content="<p>•Sedentary (most common) - little to no daily exercise</p><p>•Lightly Active - light exercise 1-3 days per week</p><p>•Moderately Active - moderate exercise 3-5 days per week</p><p>•Very Active - hard exercise 6-7 days per week</p><p>•Extra Active - hard exercise twice or more per day/very physical job</p>">*</span>

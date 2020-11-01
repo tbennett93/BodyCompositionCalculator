@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +14,8 @@ namespace BodyCompositionCalculator.Models.ViewModels
 
 
         public int HeightInputA { get; set; }
+        [Range(0,11)]
+        [DisplayName("inches")]
         public int HeightInputB { get; set; }
         public IEnumerable<WeightUnit> WeightUnits { get; set; }
         public IEnumerable<HeightUnit> HeightUnits { get; set; }
