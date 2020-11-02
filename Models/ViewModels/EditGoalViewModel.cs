@@ -15,18 +15,23 @@ namespace BodyCompositionCalculator.Models.ViewModels
 
         [DisplayName("weight")]
         [Required]
+        [Range(0,10000)]
         public string StartWeightInputA { get; set; }
 
         [DisplayName("weight")]
         [Required]
+        [Range(0,13)]
         public string StartWeightInputB { get; set; }
 
         [DisplayName("weight")]
         [RequiredIfWeightAsCalcBasis]
+        [Range(0, 10000)]
         public string TargetWeightInputA { get; set; }
 
         [DisplayName("weight")]
         [RequiredIfWeightAsCalcBasis]
+        [Range(0, 13)]
+
         public string TargetWeightInputB { get; set; }
 
         public string WeightUnit { get; set; }
@@ -36,9 +41,14 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public SelectList CalculationBasis { get; set; }
 
         [StartBodyFatRequiredIfTracked]
+        [Range(0,100)]
+        [DisplayName("body fat")]
         public int? StartBodyFat { get; set; }
+        [Range(0, 100)]
 
         [TargetBodyFatRequiredIfTracked]
+        [DisplayName("body fat")]
+
         public int? TargetBodyFat { get; set; }
 
         public bool TrackBodyFat { get; set; }

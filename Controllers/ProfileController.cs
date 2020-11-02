@@ -81,6 +81,7 @@ namespace BodyCompositionCalculator.Controllers
         // POST: Profile/Create
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(EditProfileFormViewModel newUserProfile)
         {
             var heightUnitId = newUserProfile.UserProfile.HeightUnitId;

@@ -172,7 +172,7 @@ namespace BodyCompositionCalculator.Controllers
             return "Weight Unit Not Found";
         }
 
-
+        [ValidateAntiForgeryToken]
         public ActionResult AddNewGoal(EditGoalViewModel newGoal)
         {
 
@@ -549,7 +549,7 @@ namespace BodyCompositionCalculator.Controllers
             //Update
 
         }
-
+        [ValidateAntiForgeryToken]
         public ActionResult AddNewProgressLog(CheckInFormViewModel formUserProgressLog)
         {
 

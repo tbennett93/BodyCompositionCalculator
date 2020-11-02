@@ -42,7 +42,9 @@
                         </span>
                     </div>
                 </div>
-                @Html.ValidationMessageFor(m => m.UserProgressLog.Date)
+                <div class="text-danger">
+                    @Html.ValidationMessageFor(m => m.UserProgressLog.Date)
+                </div>
             </div>
         </div>
 
@@ -76,7 +78,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-8 text-danger">
                                     @Html.ValidationMessageFor(m => m.WeightInputA)
                                 </div>
                             </div>
@@ -91,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-8 text-danger">
                                     @Html.ValidationMessageFor(m => m.WeightInputB)
                                 </div>
                             </div>
@@ -119,7 +121,7 @@
 
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col text-danger">
                             @Html.ValidationMessageFor(m => m.WeightInputA)
                         </div>
                     </div>
@@ -142,7 +144,7 @@
                         %
                     </div>
                 </div>
-                <div class="row">
+                <div class="row text-danger">
                     @Html.ValidationMessageFor(m => m.BodyFat)
                 </div>
             </div>
@@ -159,7 +161,7 @@
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row text-danger">
                     @Html.ValidationMessageFor(m => m.Photo)
                 </div>
                 @*@Html.TextBoxFor(m => m.BodyFat, new { @id = "bodyFatField", @class = "form-control col-2", @min = "0", @max = "100" })*@
