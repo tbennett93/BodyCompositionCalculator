@@ -90,9 +90,9 @@
                 <div class="col-sm-12 col-md-6 mb-4 ">
                     <div class="row align-items-center">
                         <label for="startWeightInputA" class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Weight</label>
-                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0", Value = startWeightA })
+                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0", Value = startWeightA, @type = "number" })
                         <label for="startWeightInputA" class=" form-text col-1 pl-0 ">st</label>
-                        @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col", @id = "startWeightInputB", @min = "0", @max = "13", Value = startWeightB })
+                        @Html.TextBoxFor(m => m.StartWeightInputB, new { @class = "form-control col", @id = "startWeightInputB", @min = "0", @max = "13", Value = startWeightB, @type = "number" })
                         <label for="startWeightInputB" class=" form-text col-md-1 col-2 pl-0">lbs</label>
                     </div>
                     <div class="row ">
@@ -111,9 +111,9 @@
                 <div class="col-sm-12  col-md-6 mb-4">
                     <div class="row align-items-center">
                         <label for="targetWeightInputA" class="col-12 col-md-4 nowrap col-lg-3 pl-0">Target Weight</label>
-                        @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0", Value = targetWeightA })
+                        @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0", Value = targetWeightA, @type = "number" })
                         <label for="targetWeightInputA" class=" form-text col-1 pl-0 ">st</label>
-                        @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col", @id = "targetWeightInputB", @min = "0", @max = "13", Value = targetWeightB })
+                        @Html.TextBoxFor(m => m.TargetWeightInputB, new { @class = "form-control col", @id = "targetWeightInputB", @min = "0", @max = "13", Value = targetWeightB, @type = "number" })
                         <label for="targetWeightInputB" class=" form-text col-md-1 col-2 pl-0">lbs</label>
                     </div>
                     <div class="row ">
@@ -141,7 +141,7 @@
                 <div class="col-sm-12 col-md-6 mb-4 ">
                     <div class="row align-items-center">
                         <label for="startWeightInputA"class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Weight</label>
-                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0", Value = startWeightA })
+                        @Html.TextBoxFor(m => m.StartWeightInputA, new { @class = "form-control col", @id = "startWeightInputA", @min = "0", Value = startWeightA, @type = "number" })
                         @Html.HiddenFor(m => m.StartWeightInputB, new { Value = 0 })
                         <label for="startWeightInputA" class=" form-text col-2 col-md-1 pl-0 ">@Model.WeightUnit</label>
                     </div>
@@ -156,7 +156,7 @@
                 <div class="col-sm-12  col-md-6 mb-4">
                     <div class="row align-items-center">
                         <label for="targetWeightInputA"class="col-12 col-md-4 nowrap col-lg-3 pl-0">Target Weight</label>
-                        @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0", Value = targetWeightA })
+                        @Html.TextBoxFor(m => m.TargetWeightInputA, new { @class = "form-control col", @id = "targetWeightInputA", @min = "0", Value = targetWeightA, @type = "number" })
                         @Html.HiddenFor(m => m.TargetWeightInputB, new { Value = 0 })
                         <label for="targetWeightInputA" class=" form-text col-2 col-md-1 pl-0 ">@Model.WeightUnit</label>
                     </div>
@@ -176,7 +176,7 @@
             <div class="col-sm-12  col-md-6  mb-4">
                 <div class="row align-items-center">
                     <label for="startBfText"class="col-12 col-md-4 nowrap col-lg-3 pl-0">Start Body Fat</label>
-                    @Html.TextBoxFor(m => m.StartBodyFat, new { @id = "startBfText", @class = "form-control col", @min = "0" })
+                    @Html.TextBoxFor(m => m.StartBodyFat, new { @id = "startBfText", @class = "form-control col", @min = "0", @type = "number" })
                     <label class=" col-2 col-md-1 pl-0">%</label>
                 </div>
                 <div class="row">
@@ -190,7 +190,7 @@
             <div class="col-sm-12  col-md-6  mb-4">
                 <div class="row align-items-center">
                     <label for="targetBfText" class="col-12 col-md-4 col-lg-3 pl-0">Target Body Fat</label>
-                    @Html.TextBoxFor(m => m.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col", @min = "0" })
+                    @Html.TextBoxFor(m => m.TargetBodyFat, new { @id = "targetBfText", @class = "form-control col", @min = "0", @type = "number" })
                     <label class=" col-2 col-md-1 pl-0">%</label>
                 </div>
                 <div class="row">

@@ -14,7 +14,7 @@ namespace BodyCompositionCalculator.Models.ViewModels
 
 
         public int HeightInputA { get; set; }
-        [Range(0,11)]
+        [Range(0,11, ErrorMessage = "Must be a whole number between 0 and 11")]
         [DisplayName("inches")]
         public int HeightInputB { get; set; }
         public IEnumerable<WeightUnit> WeightUnits { get; set; }

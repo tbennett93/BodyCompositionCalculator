@@ -15,22 +15,22 @@ namespace BodyCompositionCalculator.Models.ViewModels
 
         [DisplayName("weight")]
         [Required]
-        [Range(0,10000)]
+        [Range(0,10000, ErrorMessage = "Must be a whole number above 0")]
         public string StartWeightInputA { get; set; }
 
         [DisplayName("weight")]
         [Required]
-        [Range(0,13)]
+        [Range(0,13, ErrorMessage = "Must be a whole number between 0 and 13")]
         public string StartWeightInputB { get; set; }
 
         [DisplayName("weight")]
         [RequiredIfWeightAsCalcBasis]
-        [Range(0, 10000)]
+        [Range(0, 10000, ErrorMessage = "Must be a whole number above 0")]
         public string TargetWeightInputA { get; set; }
 
         [DisplayName("weight")]
         [RequiredIfWeightAsCalcBasis]
-        [Range(0, 13)]
+        [Range(0, 13, ErrorMessage = "Must be a whole number between 0 and 13")]
 
         public string TargetWeightInputB { get; set; }
 
@@ -41,11 +41,11 @@ namespace BodyCompositionCalculator.Models.ViewModels
         public SelectList CalculationBasis { get; set; }
 
         [StartBodyFatRequiredIfTracked]
-        [Range(0,100)]
+        [Range(0,100, ErrorMessage = "Must be a whole number between 0 and 100")]
         [DisplayName("body fat")]
         public int? StartBodyFat { get; set; }
-        [Range(0, 100)]
 
+        [Range(0, 100, ErrorMessage = "Must be a whole number between 0 and 100")]
         [TargetBodyFatRequiredIfTracked]
         [DisplayName("body fat")]
 

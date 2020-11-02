@@ -23,7 +23,7 @@
     @*Without using the using keyword, the form (which is html form type) would remain open as it's not automatically closed.*@
     @using (Html.BeginForm("Create", "Profile"))
     {
-        @Html.ValidationSummary(true, "Please fix the following errors:")
+        @*@Html.ValidationSummary(true, "Please fix the following errors:")*@
         <div class="col-sm-7 col-md-5 col-lg-4 col-xl-3 col-11 form-group">
             @Html.LabelFor(m => m.UserProfile.FirstName)
             @Html.TextBoxFor(m => m.UserProfile.FirstName, new { @class = "form-control col" })
@@ -74,8 +74,8 @@
         <div class="form-group pl-0">
                 <label class="col-12">Height</label>
             <div class="form-group form-inline col-sm-7 col-md-5 col-lg-4 col-xl-3 col-11">
-                @Html.TextBoxFor(m => m.HeightInputA, new { @class = "form-control col", @id = "heightInputA", @min = "0" })
-                @Html.TextBoxFor(m => m.HeightInputB, new { @class = "form-control col", @id = "heightInputB", @min = "0" })
+                @Html.TextBoxFor(m => m.HeightInputA, new { @class = "form-control col", @id = "heightInputA", @min = "0", @type="number" })
+                @Html.TextBoxFor(m => m.HeightInputB, new { @class = "form-control col", @id = "heightInputB", @min = "0", @type = "number" })
                 @Html.DropDownListFor(m => m.UserProfile.HeightUnitId,
                     new SelectList(Model.HeightUnits, "Id", "Name"),
                     "Select Height Unit",
