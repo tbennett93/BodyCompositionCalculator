@@ -22,10 +22,10 @@ namespace BodyCompositionCalculator.Models
         public double StartWeightInKg { get; set; }
         [Required]
         public double TargetWeightInKg { get; set; }
-        public double? FinalWeightInKg { get; set; }
+        //public double? FinalWeightInKg { get; set; }
         public int? StartBodyFat { get; set; }
         public int? TargetBodyFat { get; set; }
-        public int? FinalBodyFat { get; set; }
+        //public int? FinalBodyFat { get; set; }
  
         [ForeignKey("UserProfile")]
         public int UserProfileId { get; set; }

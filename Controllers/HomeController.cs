@@ -62,10 +62,10 @@ namespace BodyCompositionCalculator.Controllers
                 
 
                 //Goal exists for current user, if the ETD is less than today, return No Goal and populate the page with New Goal button and previous summary
-                if (_context.Goals.SingleOrDefault(g => g.UserProfileId == currentUserProfile.Id).EndDate < DateTime.Today)
-                {
-                    return View("HomeEndedGoal");
-                }
+                //if (_context.Goals.SingleOrDefault(g => g.UserProfileId == currentUserProfile.Id).EndDate < DateTime.Today)
+                //{
+                //    return View("HomeEndedGoal");
+                //}
 
 
                 var userProfile = Helper_Classes.UserHelpers.GetUserProfile();
