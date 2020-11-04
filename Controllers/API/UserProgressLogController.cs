@@ -58,7 +58,8 @@ namespace BodyCompositionCalculator.Controllers.API
     //   }
 
     // GET: api/UserProfileLog/5
-    public string ConvertImageToHtml(byte[] photo, int id)
+    [NonAction]
+    private string ConvertImageToHtml(byte[] photo, int id)
     {
         var dbPhoto =
             Convert.ToBase64String(photo);
@@ -71,122 +72,116 @@ namespace BodyCompositionCalculator.Controllers.API
     }
 
     [HttpGet]
-        public IHttpActionResult GetUserProgressLogs(int id)
+    [Authorize]
+    public IHttpActionResult GetUserProgressLogs(int id)
+    {
+        var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
+        double weightUnitMultiplier = 1.0;
+
+        if (weightUnit == WeightUnits.Lbs)
+            weightUnitMultiplier = 2.20462;
+
+        if (id == Helper_Classes.UserHelpers.GetUserProfile().Id)
         {
-            var weightUnit = Helper_Classes.UserHelpers.GetWeightUnit();
-            double weightUnitMultiplier = 1.0;
 
-            if (weightUnit == WeightUnits.Lbs)
-                weightUnitMultiplier = 2.20462;
+            if (weightUnit == WeightUnits.Kg || weightUnit == WeightUnits.Lbs)
 
-            if (id == Helper_Classes.UserHelpers.GetUserProfile().Id)
+                return Ok ((from userProgressLog in _context.UserProgressLogs
+                join photo in _context.UserPhotos on userProgressLog.UserPhotoId equals photo.Id into gj
+                from subphoto in gj.DefaultIfEmpty()
+                where userProgressLog.WeightInKg > 0
+                where userProgressLog.UserProfileId == id
+
+                select new
+                {
+                    ProgressLogId = userProgressLog.Id,
+                    userProgressLog.Date,
+                    userProgressLog.BodyFat,
+                    WeightInKg = Math.Round((double) (userProgressLog.WeightInKg * weightUnitMultiplier)),
+                    //Photo = userProgressLog.UserPhotoId,
+                    UserPhoto = subphoto.Photo,
+                    UserPhotoId = (int?)subphoto.Id
+
+                }).ToList().Select(t => new
             {
+                t.ProgressLogId,
+                t.Date,
+                t.BodyFat,
+                t.WeightInKg,
+                UserPhoto = t.UserPhoto == null ? null : ConvertImageToHtml(t.UserPhoto, (int)t.UserPhotoId)
+                //t.UserPhoto 
+            }).ToList());
 
-                if (weightUnit == WeightUnits.Kg || weightUnit == WeightUnits.Lbs)
 
-                    return Ok ((from userProgressLog in _context.UserProgressLogs
-                    join photo in _context.UserPhotos on userProgressLog.UserPhotoId equals photo.Id into gj
-                    from subphoto in gj.DefaultIfEmpty()
-                    where userProgressLog.WeightInKg > 0
-                    where userProgressLog.UserProfileId == id
+            if (weightUnit == WeightUnits.LbsAndStone)
 
-                    select new
-                    {
-                        ProgressLogId = userProgressLog.Id,
-                        userProgressLog.Date,
-                        userProgressLog.BodyFat,
-                        WeightInKg = Math.Round((double) (userProgressLog.WeightInKg * weightUnitMultiplier)),
-                        //Photo = userProgressLog.UserPhotoId,
-                        UserPhoto = subphoto.Photo,
-                        UserPhotoId = (int?)subphoto.Id
+                return Ok( (from userProgressLog in _context.UserProgressLogs
+                join photo in _context.UserPhotos on userProgressLog.UserPhotoId equals photo.Id into gj
+                from subphoto in gj.DefaultIfEmpty()
+                where userProgressLog.WeightInKg > 0
+                where userProgressLog.UserProfileId == id
 
-                    }).ToList().Select(t => new
+                select new
                 {
-                    t.ProgressLogId,
-                    t.Date,
-                    t.BodyFat,
-                    t.WeightInKg,
-                    UserPhoto = t.UserPhoto == null ? null : ConvertImageToHtml(t.UserPhoto, (int)t.UserPhotoId)
-                    //t.UserPhoto 
-                }).ToList());
+                    ProgressLogId = userProgressLog.Id,
+                    userProgressLog.Date,
+                    userProgressLog.BodyFat,
+                    WeightInKg = Math.Floor(
+                                     (double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) +
+                                 "st" +
+                                 Math.Round((((double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) -
+                                  Math.Floor((double) (userProgressLog.WeightInKg * weightUnitMultiplier) /
+                                             6.35029318)) * 14) + "lbs",
+                    //Photo = userProgressLog.UserPhotoId,
+                    //UserPhoto = subphoto.Id,
+                    UserPhoto = subphoto.Photo,
+                    UserPhotoId = (int?)subphoto.Id
 
+                }).ToList().Select(t => new
+            {
+                t.ProgressLogId,
+                t.Date,
+                t.BodyFat,
+                t.WeightInKg,
+                UserPhoto = t.UserPhoto == null ? null : ConvertImageToHtml(t.UserPhoto, (int)t.UserPhotoId)
+                //t.UserPhoto 
+            }).ToList());
 
-                if (weightUnit == WeightUnits.LbsAndStone)
-
-                    return Ok( (from userProgressLog in _context.UserProgressLogs
-                    join photo in _context.UserPhotos on userProgressLog.UserPhotoId equals photo.Id into gj
-                    from subphoto in gj.DefaultIfEmpty()
-                    where userProgressLog.WeightInKg > 0
-                    where userProgressLog.UserProfileId == id
-
-                    select new
-                    {
-                        ProgressLogId = userProgressLog.Id,
-                        userProgressLog.Date,
-                        userProgressLog.BodyFat,
-                        WeightInKg = Math.Floor(
-                                         (double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) +
-                                     "st" +
-                                     Math.Round((((double) (userProgressLog.WeightInKg * weightUnitMultiplier) / 6.35029318) -
-                                      Math.Floor((double) (userProgressLog.WeightInKg * weightUnitMultiplier) /
-                                                 6.35029318)) * 14) + "lbs",
-                        //Photo = userProgressLog.UserPhotoId,
-                        //UserPhoto = subphoto.Id,
-                        UserPhoto = subphoto.Photo,
-                        UserPhotoId = (int?)subphoto.Id
-
-                    }).ToList().Select(t => new
-                {
-                    t.ProgressLogId,
-                    t.Date,
-                    t.BodyFat,
-                    t.WeightInKg,
-                    UserPhoto = t.UserPhoto == null ? null : ConvertImageToHtml(t.UserPhoto, (int)t.UserPhotoId)
-                    //t.UserPhoto 
-                }).ToList());
-
-            }
-
-            return NotFound();
         }
 
-        // POST: api/UserProfileLog
-        public void Post([FromBody]string value)
+        return NotFound();
+    }
+
+   
+    [HttpDelete]
+    [Authorize]
+    // DELETE: api/UserProfileLog/5
+    public void Delete(int id)
+    {
+        var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
+        //var userCheck = _context.UserProfiles.Include(m=>m.UserProgressLog).SingleOrDefault(m=>m.);
+        var progressLogInDb = _context.UserProgressLogs.SingleOrDefault(c => c.Id == id && c.UserProfileId == userProfileId);
+
+        if (progressLogInDb == null)
+            throw new HttpResponseException(HttpStatusCode.NotFound);
+
+        var userPhotoId = progressLogInDb.UserPhotoId;
+
+
+
+        _context.UserProgressLogs.Remove(progressLogInDb);
+        _context.SaveChanges();
+
+        if (userPhotoId != null)
         {
-        }
-
-        // PUT: api/UserProfileLog/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        [HttpDelete]
-        // DELETE: api/UserProfileLog/5
-        public void Delete(int id)
-        {
-            var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
-            //var userCheck = _context.UserProfiles.Include(m=>m.UserProgressLog).SingleOrDefault(m=>m.);
-            var progressLogInDb = _context.UserProgressLogs.SingleOrDefault(c => c.Id == id && c.UserProfileId == userProfileId);
-
-            if (progressLogInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-
-            var userPhotoId = progressLogInDb.UserPhotoId;
-
-
-
-            _context.UserProgressLogs.Remove(progressLogInDb);
+            var photoManager = new PhotoManager();
+            photoManager.DeletePhotoFromDb((int)userPhotoId);
             _context.SaveChanges();
 
-            if (userPhotoId != null)
-            {
-                var photoManager = new PhotoManager();
-                photoManager.DeletePhotoFromDb((int)userPhotoId);
-                _context.SaveChanges();
-
-            }
-
-
         }
+
+
     }
+    }
+
 }

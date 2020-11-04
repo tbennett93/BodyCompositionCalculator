@@ -27,6 +27,7 @@ namespace BodyCompositionCalculator.Controllers.API
         }
 
         [HttpGet]
+        [Authorize]
         public IHttpActionResult GetUserProfiles()
         {
             return Ok(_context.UserProfiles.ToList());
@@ -41,7 +42,7 @@ namespace BodyCompositionCalculator.Controllers.API
 
 
         [HttpPost]
-
+        [Authorize]
         public IHttpActionResult AddUserProfile(UserProfile userProfile)
         {
             _context.UserProfiles.Add(userProfile);

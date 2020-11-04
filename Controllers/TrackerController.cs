@@ -28,6 +28,7 @@ namespace BodyCompositionCalculator.Controllers
             return View("Tracker", viewModel);
         }
 
+        [Authorize]
         public ActionResult MyPhoto(int id)
         {   
             var userId = Helper_Classes.UserHelpers.GetUserProfile().Id;

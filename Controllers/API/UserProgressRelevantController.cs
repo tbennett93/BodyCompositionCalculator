@@ -25,7 +25,7 @@ namespace BodyCompositionCalculator.Controllers.API
         }
         // GET: UserProgressLogWithGoal
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public List<UserProgressGraphDataModel> GetUserProgressLogWithGoals()
         {
 

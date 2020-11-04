@@ -71,11 +71,7 @@ namespace BodyCompositionCalculator.Controllers
             return View(viewModel);
         }
 
-        // GET: Profile/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+
 
 
         // POST: Profile/Create
@@ -206,6 +202,7 @@ namespace BodyCompositionCalculator.Controllers
             return val;
         }
 
+        [Authorize]
         public ActionResult EditPhoto(ProfileViewModel profileViewModel)
         {
             if(profileViewModel.PhotoUpload != null & profileViewModel.PhotoUpload.IsImage())

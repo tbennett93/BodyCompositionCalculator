@@ -11,6 +11,7 @@ namespace BodyCompositionCalculator.Controllers
     public class PhotoController : Controller
     {
         // GET: Photo
+        [Authorize]
         public ActionResult Photo(int id)
         {
 

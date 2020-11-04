@@ -8,7 +8,7 @@ namespace BodyCompositionCalculator.Controllers.API
 {
     public class PhotoController : ApiController
     {
-
+        [Authorize]
         public IHttpActionResult GetPhoto(int id)
         {
 

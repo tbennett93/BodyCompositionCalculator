@@ -39,6 +39,7 @@ namespace BodyCompositionCalculator.Controllers
 
 
         }
+
         public ActionResult Index()
         {
 
@@ -173,9 +174,9 @@ namespace BodyCompositionCalculator.Controllers
         }
 
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult AddNewGoal(EditGoalViewModel newGoal)
         {
-
             currentUserProfile = Helper_Classes.UserHelpers.GetUserProfile();
             var userProfileId = Helper_Classes.UserHelpers.GetUserProfile().Id;
             var dbGoal = _context.Goals.SingleOrDefault(g => g.UserProfileId == userProfileId);
@@ -183,7 +184,6 @@ namespace BodyCompositionCalculator.Controllers
                 ? new SelectList(new List<string> {"Weight", "Body Fat"}, newGoal.CalculationBasisChoice)
                 : new SelectList(new List<string> {"Weight", "Body Fat"}, dbGoal.CalculationBasis);
             newGoal.Title = "Edit Goal";
-
 
             if (!ModelState.IsValid)
             {
@@ -196,8 +196,6 @@ namespace BodyCompositionCalculator.Controllers
                 }
                 return View("NewGoalForm", newGoal);
             }
-
- 
 
             newGoal.Goal.StartBodyFat = newGoal.StartBodyFat;
             newGoal.Goal.TargetBodyFat = newGoal.TargetBodyFat;
@@ -226,11 +224,6 @@ namespace BodyCompositionCalculator.Controllers
                 };
                 UpdateDbWithNewCheckIn(checkInModel);
             }
-
-
-
-
-
 
 
             if (Helper_Classes.UserHelpers.GetWeightUnit().Equals(WeightUnits.Kg))
@@ -298,7 +291,7 @@ namespace BodyCompositionCalculator.Controllers
         }
 
 
-
+        [Authorize]
         public ActionResult NewGoalForm()
         {
             //If no goal found, fetch blank goal page. If existing goal found, fetch existing info into page
@@ -380,20 +373,13 @@ namespace BodyCompositionCalculator.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
 
         //[Route("Home/NewCheckInForm")]
-
+        [Authorize]
         public ActionResult NewCheckInForm(string pageFrom)
         {
             //Used when creating a new check in
@@ -448,6 +434,8 @@ namespace BodyCompositionCalculator.Controllers
             return View(viewModel);
         }
 
+
+        [Authorize]
         [Route("Home/NewCheckInForm/{id:int}")]
         //Used when 'editing' a check in from the tracker
         public ActionResult NewCheckInForm(int id)
@@ -549,6 +537,8 @@ namespace BodyCompositionCalculator.Controllers
             //Update
 
         }
+
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult AddNewProgressLog(CheckInFormViewModel formUserProgressLog)
         {
@@ -598,6 +588,7 @@ namespace BodyCompositionCalculator.Controllers
 
         [HttpDelete]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteUserProgressLog(int id)
         {
 
