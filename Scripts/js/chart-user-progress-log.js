@@ -4,14 +4,13 @@
     var toDisplayBf = false;
     var toHideBf = !toDisplayBf;
 
+    var progressDataAll;
 
     $("#buttonDisplayGraphAll").click(function () {
-        // redraw chart with stanza data
         generateChartData("/api/UserProgressAll/");
     });
 
     $("#buttonDiplayGraphRelevant").click(function () {
-        // redraw chart with stanza data
         generateChartData("/api/UserProgressRelevant/");
     });
 
@@ -45,9 +44,27 @@
         else $("#buttonToggleBodyFatText").text("Show Body Fat %");
         toDisplayBf = this.checked;
 
-        if ($('#buttonDiplayGraphRelevant').is(':checked')) { generateChartData("/api/UserProgressRelevant/"); }
-        else { generateChartData("/api/UserProgressAll/"); }
+
+        progressDataAll.destroy();
+
+
+        if ($('#buttonDiplayGraphRelevant').is(':checked')) {
+            generateChartData("/api/UserProgressRelevant/");
+            
+        } else {
+            generateChartData("/api/UserProgressAll/");
+       
+        }
+
+        //progressDataAll.data.labels.pop();
+        //progressDataAll.data.datasets.forEach((dataset) => {
+        //    dataset.data.pop();
+        //});
+
+
     });
+
+
 
 
     function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
@@ -57,12 +74,10 @@
         var weightGoalColour = "rgba(55, 71, 133,0.3)";
         var todayLineColour = "#A8D0E6";
         var weightLabel = "Weight (" + weightUnit[0] + ")";
-
         var toHideBf = !toDisplayBf;
-
-
-    var data = {
+        var data = {
             labels: dates,
+
             datasets: [
                 {
                     data: progressWeight,
@@ -79,9 +94,10 @@
                     pointHoverBorderColor: weightColour,
                     pointHitRadius: 5,
                     pointBorderWidth: 5,
-                    yAxisID: 'y-axis-1',
-                    borderWidth:3, 
-                    spanGaps: true
+                    yAxisID: "y-axis-1",
+                    borderWidth: 3,
+                    spanGaps: true,
+
                 },
                 {
                     data: goalWeight,
@@ -98,9 +114,9 @@
                     pointHoverBorderColor: weightGoalColour,
                     pointHitRadius: 5,
                     spanGaps: true,
-                    pointStyle: 'star',
+                    pointStyle: "star",
                     borderWidth: 3,
-                    yAxisID: 'y-axis-1',
+                    yAxisID: "y-axis-1",
                     borderDash: [20]
                 },
                 {
@@ -116,14 +132,15 @@
                     pointHoverRadius: 15,
                     pointHoverBackgroundColor: bodyFatColour,
                     pointHoverBorderColor: bodyFatColour,
-                    pointHitRadius: 5,
+                    pointRadius: 4,
                     pointBorderWidth: 5,
-                    yAxisID: 'y-axis-2',
-                    borderWidth: 3,
+                    yAxisID: "y-axis-2",
                     spanGaps: true,
                     hidden: toHideBf
+
+                    
+
                 },
-                
                 {
                     data: goalBodyFat,
                     label: "Goal Body Fat %",
@@ -131,34 +148,30 @@
                     fill: false,
                     backgroundColor: bodyFatGoalColour,
                     borderColor: bodyFatGoalColour,
-                    pointRadius: 7,
+                    pointRadius: 4,
                     pointBackgroundColor: bodyFatColour,
                     pointBorderColor: bodyFatColour,
                     pointHoverRadius: 2,
                     pointHoverBackgroundColor: bodyFatGoalColour,
                     pointHoverBorderColor: bodyFatGoalColour,
-                    pointHitRadius: 5,
-                    yAxisID: 'y-axis-2',
+                    pointHitRadius: 0,
+                    yAxisID: "y-axis-2",
                     spanGaps: true,
-                    pointStyle: 'star',
-                    borderWidth: 3,
+                    pointStyle: "star",
                     borderDash: [20],
                     hidden: toHideBf
-
                 }
-            ],
+            ]
         };
 
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
-
         today = mm + '/' + dd + '/' + yyyy;
-
-
         var ctx = document.getElementById("progressGraphData").getContext("2d");
-        var progressDataAll = new Chart(ctx,
+
+        progressDataAll = new Chart(ctx,
             {
                 type: "line",
                 data: data,
@@ -172,10 +185,12 @@
 
                                 // Logic to remove a particular legend item goes here
                             }
-                        }
+                        },
+                        
 
                     },
-                
+                    //events:[],
+
                     annotation: {
                         annotations: [
                             {
@@ -263,8 +278,7 @@
 
                                     //min: minBodyFat,
                                     //max: maxBodyFat
-                                    //suggestedMin: minBodyFat,
-                                    suggestedMax: maxBodyFat,
+                                    max: 100,
                                     fontFamily: "Helvetica"
                                 }
                             },
@@ -319,6 +333,8 @@
                 var maxBodyFat = maxBodyFatInArray + ((maxBodyFatInArray - minBodyFatInArray) * 0.1); // 1
 
 
+            
+
                 BuildChart(progressWeight,
                     progressBodyFat,
                     goalWeight,
@@ -326,12 +342,13 @@
                     dates,
                     maxBodyFat,
                     weightUnit); // Pass in data and call the chart
+
             }
         };
 
         xhttp.open("GET", apiString, false);
         xhttp.send();
-    }
+    };
 
     //Auto load the relevant goal data
     generateChartData("/api/UserProgressRelevant/");
