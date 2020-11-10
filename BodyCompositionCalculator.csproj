@@ -384,6 +384,10 @@
     <Compile Include="Migrations\202011031946516_RemoveFinalWeightAndBodyFatFromGoal.designer.cs">
       <DependentUpon>202011031946516_RemoveFinalWeightAndBodyFatFromGoal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011092316573_UpdateUserProgressGraphDataViewWithCheckInId.cs" />
+    <Compile Include="Migrations\202011092316573_UpdateUserProgressGraphDataViewWithCheckInId.designer.cs">
+      <DependentUpon>202011092316573_UpdateUserProgressGraphDataViewWithCheckInId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation_Constants\CalculationBasis.cs" />
@@ -2632,6 +2636,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011031946516_RemoveFinalWeightAndBodyFatFromGoal.resx">
       <DependentUpon>202011031946516_RemoveFinalWeightAndBodyFatFromGoal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011092316573_UpdateUserProgressGraphDataViewWithCheckInId.resx">
+      <DependentUpon>202011092316573_UpdateUserProgressGraphDataViewWithCheckInId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

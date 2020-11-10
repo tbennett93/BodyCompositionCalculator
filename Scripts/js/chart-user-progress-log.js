@@ -5,6 +5,9 @@
     var toHideBf = !toDisplayBf;
 
     var progressDataAll;
+    var ctx;
+
+
 
     $("#buttonDisplayGraphAll").click(function () {
         generateChartData("/api/UserProgressAll/");
@@ -13,6 +16,11 @@
     $("#buttonDiplayGraphRelevant").click(function () {
         generateChartData("/api/UserProgressRelevant/");
     });
+
+
+
+
+    // var url = ... make link with data from activePoint
 
 
     //$(document).ready(function () {
@@ -34,6 +42,7 @@
 
 
     //});
+
 
 
 
@@ -67,7 +76,7 @@
 
 
 
-    function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit) {
+    function BuildChart(progressWeight, progressBodyFat, goalWeight, goalBodyFat, dates, maxBodyFat, weightUnit, checkInId) {
         var bodyFatColour = "rgba(247, 108, 108, 1)";
         var weightColour = "rgba(55, 71, 133,1)";
         var bodyFatGoalColour = "rgba(247, 108, 108, 0.3)";
@@ -160,6 +169,30 @@
                     pointStyle: "star",
                     borderDash: [20],
                     hidden: toHideBf
+                },
+                {
+                    data: checkInId,
+                    label: '',
+                    lineTension: 0.3,
+                    fill: false,
+                    backgroundColor: weightColour,
+                    borderColor: weightColour,
+                    pointRadius: 3,
+                    pointBackgroundColor: weightColour,
+                    pointBorderColor: weightColour,
+                    pointHoverRadius: 15,
+                    pointHoverBackgroundColor: weightColour,
+                    pointHoverBorderColor: weightColour,
+                    pointHitRadius: 5,
+                    pointBorderWidth: 5,
+                    borderWidth: 3,
+                    spanGaps: true,
+                    hidden: true,
+                    legend: {
+                        display: false,
+                    }
+
+
                 }
             ]
         };
@@ -169,7 +202,8 @@
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
-        var ctx = document.getElementById("progressGraphData").getContext("2d");
+        ctx = document.getElementById("progressGraphData");
+
 
         progressDataAll = new Chart(ctx,
             {
@@ -184,8 +218,12 @@
                                 return true;
 
                                 // Logic to remove a particular legend item goes here
+                            },
+                            filter: function (item, chart) {
+                                return item.datasetIndex !== 4 ;
                             }
                         },
+
                         
 
                     },
@@ -282,12 +320,36 @@
                                     fontFamily: "Helvetica"
                                 }
                             },
+                            {
+                                id: 'y-axis-3',
+                                type: 'linear',
+                                position: 'right',
+                                display: false,
+                                legend: {
+                                    display: false
+                                },
+                                scaleLabel: {
+                                    display: false,
+               
+                                },
+                                ticks: {
+                                    display: false,
+
+                                    //min: minBodyFat,
+                                    //max: maxBodyFat
+                                    max: 100,
+                                    fontFamily: "Helvetica"
+                                }
+                            }
                         ]
                     },
                 }
             });
+
+       
         return progressDataAll;
     }
+
 
 
     var generateChartData = function (apiString) {
@@ -310,6 +372,9 @@
                 });
                 var weightUnit = json.map(function (e) {
                     return e.WeightUnit;
+                });
+                var checkInId = json.map(function (e) {
+                    return e.CheckInId;
                 });
 
                 // Map JSON values back to values array
@@ -341,7 +406,8 @@
                     goalBodyFat,
                     dates,
                     maxBodyFat,
-                    weightUnit); // Pass in data and call the chart
+                    weightUnit,
+                    checkInId); // Pass in data and call the chart
 
             }
         };
@@ -350,8 +416,27 @@
         xhttp.send();
     };
 
+
     //Auto load the relevant goal data
     generateChartData("/api/UserProgressRelevant/");
+
+
+    ctx.onclick = function (evt) {
+        var activePoints = progressDataAll.getElementsAtEvent(evt);
+        if (activePoints[0]) {
+            var chartData = activePoints[0]['_chart'].config.data;
+            var idx = activePoints[0]['_index'];
+            var value = chartData.datasets[4].data[idx];
+            var url = "/home/newcheckinform/" + value;
+
+            //console.log(url);
+            //console.log(chartData.datasets[4].data[idx]);
+            //console.log(chartData);
+            window.location.href = url;
+        }
+    };
+
+
 
 
 });

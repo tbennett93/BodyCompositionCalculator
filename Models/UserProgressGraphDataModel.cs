@@ -20,6 +20,7 @@ namespace BodyCompositionCalculator.Models
         public int userprofileid { get; set; }
 
         public string WeightUnit { get; set; }
+        public int? CheckInId { get; set; }
 
 
     }
