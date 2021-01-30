@@ -205,13 +205,18 @@ namespace BodyCompositionCalculator.Controllers
         [Authorize]
         public ActionResult EditPhoto(ProfileViewModel profileViewModel)
         {
-            if(profileViewModel.PhotoUpload != null & profileViewModel.PhotoUpload.IsImage())
+            if(profileViewModel.PhotoUpload != null )
             {
-                PhotoManager photoManager = new PhotoManager();
-                photoManager.UploadProfilePhotoToDb(profileViewModel.PhotoUpload);
-                return RedirectToAction("Index");
+                if (profileViewModel.PhotoUpload.IsImage())
+                {
+                    PhotoManager photoManager = new PhotoManager();
+                    photoManager.UploadProfilePhotoToDb(profileViewModel.PhotoUpload);
+                }
+
+
             }
-            return HttpNotFound();
+            return RedirectToAction("Index");
+
 
         }
     }
